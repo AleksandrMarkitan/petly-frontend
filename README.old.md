@@ -1,1 +1,0 @@
-# petly_frontend
