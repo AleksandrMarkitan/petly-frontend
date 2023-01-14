@@ -9,11 +9,12 @@ export const App = () => {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Header />}>
+        <Route path="/" element={<Layout />}>
           <Route
+            index
             path="register"
             element={
-              <PublicRoute>
+              <PublicRoute redirectTo="/" restricted>
                 <RegisterPage />
               </PublicRoute>
             }
@@ -21,7 +22,7 @@ export const App = () => {
           <Route
             path="login"
             element={
-              <PublicRoute>
+              <PublicRoute redirectTo="/" restricted>
                 <LoginPage />
               </PublicRoute>
             }
@@ -29,7 +30,7 @@ export const App = () => {
           <Route
             path="friends"
             element={
-              <PublicRoute>
+              <PublicRoute redirectTo="/" restricted>
                 <OurFriendsPage />
               </PublicRoute>
             }
@@ -37,7 +38,7 @@ export const App = () => {
           <Route
             path="news"
             element={
-              <PublicRoute>
+              <PublicRoute redirectTo="/" restricted>
                 <NewsPage />
               </PublicRoute>
             }
@@ -45,7 +46,7 @@ export const App = () => {
           <Route
             path="user"
             element={
-              <PrivateRoute>
+              <PrivateRoute redirectTo="/login">
                 <UserPage />
               </PrivateRoute>
             }
