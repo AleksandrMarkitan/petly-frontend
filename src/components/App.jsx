@@ -6,5 +6,9 @@
 // import { PrivateRoute } from 'HOCs/PrivateRoute';
 
 export const App = () => {
-  return <></>;
+  return (
+    <>
+      <h1>Hello in Petly App</h1>
+    </>
+  );
 };
