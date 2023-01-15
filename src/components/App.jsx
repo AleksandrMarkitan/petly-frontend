@@ -5,6 +5,11 @@
 // import { PublicRoute } from 'HOCs/PublicRoute';
 // import { PrivateRoute } from 'HOCs/PrivateRoute';
 
+import { CategoryBtn } from "./CommonButtons/CategoryBtn/CategoryBtn";
+
 export const App = () => {
-  return <></>;
+	return <>
+		<CategoryBtn text="looking for/found" />
+		<CategoryBtn text="see" />
+	</>;
 };
