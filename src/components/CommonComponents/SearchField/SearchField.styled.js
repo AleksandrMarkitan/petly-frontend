@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const LabelSearch = styled.label`
 	position: relative;
 	display: block;
+	margin-top: 28px;
 
 	svg{
 		position: absolute;
@@ -13,7 +14,7 @@ export const LabelSearch = styled.label`
 
 	@media (min-width: 768px) {
 		width: 608px;
-		margin: 0 auto;
+		margin: 40px auto 0;
 	}
 `
 
@@ -32,6 +33,11 @@ export const InputSearch = styled.input`
 	letter-spacing: 0.04em;
 	color: #535353;
 	outline: none;
+	transition: box-shadow 300ms linear;
+
+	:focus{
+		box-shadow: 7px 4px 14px #F59256;
+	}
 `
 
 export const RemoveBtn = styled.button`
