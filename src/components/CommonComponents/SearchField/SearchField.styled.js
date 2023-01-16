@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const LabelSearch = styled.label`
 	position: relative;
 	display: block;
+	margin-top: 28px;
 
 	svg{
 		position: absolute;
@@ -13,7 +14,7 @@ export const LabelSearch = styled.label`
 
 	@media (min-width: 768px) {
 		width: 608px;
-		margin: 0 auto;
+		margin: 40px auto 0;
 	}
 `
 
