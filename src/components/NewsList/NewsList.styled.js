@@ -44,8 +44,6 @@ export const NewsTitle = styled.h3`
 	line-height: calc(33 / 24);
 	letter-spacing: -0.01em;
 	color: #111111;
-	max-height: 66px;
-	overflow: hidden;
 `
 
 export const Description = styled.p`

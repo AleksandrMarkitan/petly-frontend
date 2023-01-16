@@ -2,8 +2,9 @@ import { Routes, Route } from "react-router-dom";
 import { useEffect, Suspense } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { PublicRoute } from "../HOCs/PublicRoute";
-import { PrivateRoute } from "../HOCs/PrivateRoute";
+// import { PublicRoute } from "../HOCs/PublicRoute";
+// import { PrivateRoute } from "../HOCs/PrivateRoute";
+import { NewsPage } from "../pages/NewsPage/NewsPage";
 
 export const App = () => {
 	return (

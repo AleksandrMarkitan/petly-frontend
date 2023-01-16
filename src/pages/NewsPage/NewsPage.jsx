@@ -9,23 +9,17 @@ import { getNews } from "../../serveсes/getNews"
 
 export const NewsPage = () => {
 	const [news, setNews] = useState([]);
-	// const [page, setPage] = useState(1);
-	// const [maxPage, setMaxPage] = useState(0);
 
 	useEffect(() => {
 		async function fetch() {
 			try {
-				const response = await getNews({ page: 1, limit: 6 });
+				const response = await getNews({});
 
 				if (response.length === 0) {
 					throw new Error();
 				}
 
-				// const allNews = await getNews({ page: 1, limit: 0 });
-				// setMaxPage(Math.ceil(allNews.length / 6))
-
-
-				setNews(response)
+				sortByDate(response)
 			}
 			catch (error) {
 				console.log(error);
@@ -34,33 +28,28 @@ export const NewsPage = () => {
 		fetch()
 	}, [])
 
-	// const loadMoreHandler = () => {
-	// 	setPage(prevValue => prevValue + 1);
+	const searchNews = async (query) => {
+		const searchQuery = query.toLowerCase();
+		const response = await getNews({});
+		const foundNews = response.filter(news => news.title.toLowerCase().includes(searchQuery) || news.description.toLowerCase().includes(searchQuery));
+		sortByDate(foundNews)
+	}
 
-	// 	async function fetch() {
-	// 		try {
-	// 			const response = await getNews({ page, limit: 6 });
+	const sortByDate = (array) => {
+		const addDateForSort = array.map(news => {
+			return { ...news, dateForSort: Date.parse(new Date(news.date)) }
+		})
 
-	// 			if (response.length === 0) {
-	// 				throw new Error();
-	// 			}
-	// 			setNews([...news, ...response])
-	// 		}
-	// 		catch (error) {
-	// 			console.log(error);
-	// 		}
-	// 	}
-	// 	fetch()
-	// }
+		const sortedByDateNews = addDateForSort.sort((a, b) => b.dateForSort - a.dateForSort)
 
-	// console.log(maxPage);
+		setNews(sortedByDateNews)
+	}
 
 	return <Section>
 		<Container>
 			<SectionTitle text="News" />
-			<SearchField />
+			<SearchField searchNews={searchNews} />
 			<NewsList news={news} />
-			{/* <button type="button" onClick={loadMoreHandler}>Load more</button> */}
 		</Container>
 	</Section>
 }
