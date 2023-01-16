@@ -1,16 +1,17 @@
 import { Routes, Route } from "react-router-dom";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+// import { useEffect } from "react";
+// import { useDispatch, useSelector } from "react-redux";
 
-import { PublicRoute } from "HOCs/PublicRoute";
-import { PrivateRoute } from "HOCs/PrivateRoute";
+// import { PublicRoute } from "HOCs/PublicRoute";
+// import { PrivateRoute } from "HOCs/PrivateRoute";
+import { Layout } from "./Layout/Layout";
 
 export const App = () => {
   return (
     <>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route
+          {/* <Route
             index
             path="register"
             element={
@@ -50,7 +51,7 @@ export const App = () => {
                 <UserPage />
               </PrivateRoute>
             }
-          />
+          /> */}
         </Route>
       </Routes>
     </>
