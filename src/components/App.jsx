@@ -2,15 +2,13 @@ import { Routes, Route } from "react-router-dom";
 import { useEffect, Suspense } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-// import { PublicRoute } from "../HOCs/PublicRoute";
-// import { PrivateRoute } from "../HOCs/PrivateRoute";
-import { NewsPage } from "../pages/NewsPage/NewsPage";
+import { PublicRoute } from "../HOCs/PublicRoute";
+import { PrivateRoute } from "../HOCs/PrivateRoute";
 
 export const App = () => {
 	return (
 		<>
-			<NewsPage />
-			{/* <Routes>
+			<Routes>
 				<Route path="/" element={<Layout />}>
 					<Route
 						index
@@ -54,7 +52,7 @@ export const App = () => {
 						}
 					/>
 				</Route>
-			</Routes> */}
+			</Routes>
 		</>
 	);
 };

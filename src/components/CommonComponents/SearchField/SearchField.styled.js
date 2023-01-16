@@ -33,6 +33,11 @@ export const InputSearch = styled.input`
 	letter-spacing: 0.04em;
 	color: #535353;
 	outline: none;
+	transition: box-shadow 300ms linear;
+
+	:focus{
+		box-shadow: 7px 4px 14px #F59256;
+	}
 `
 
 export const RemoveBtn = styled.button`

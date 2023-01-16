@@ -14,6 +14,12 @@ export const List = styled.ul`
 		column-gap: 32px;
 	}
 `
+export const Wrapper = styled.div`
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 100%;
+`
 
 export const ListItem = styled.li`
 	position: relative;
@@ -31,7 +37,7 @@ export const ListItem = styled.li`
 		position: absolute;
 		top: -4px;
 		left: 0;
-		width: 200px;
+		width: 85%;
 		height: 4px;
 		background: linear-gradient(90deg, #FF634E 0%, #FFDF48 105.44%);
 		border-radius: 40px;
