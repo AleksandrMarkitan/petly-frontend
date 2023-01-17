@@ -7,11 +7,11 @@ import { Routes, Route } from "react-router-dom";
 import { Layout } from "./Layout/Layout";
 
 export const App = () => {
-  return (
-    <>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          {/* <Route
+	return (
+		<>
+			<Routes>
+				<Route path="/" element={<Layout />}>
+					{/* <Route
             index
             path="register"
             element={
@@ -52,8 +52,8 @@ export const App = () => {
               </PrivateRoute>
             }
           /> */}
-        </Route>
-      </Routes>
-    </>
-  );
+				</Route>
+			</Routes>
+		</>
+	);
 };
