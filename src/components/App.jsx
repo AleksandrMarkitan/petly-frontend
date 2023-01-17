@@ -2,9 +2,11 @@ import { Routes, Route } from "react-router-dom";
 // import { useEffect, Suspense } from "react";
 // import { useDispatch, useSelector } from "react-redux";
 
-// import { PublicRoute } from "HOCs/PublicRoute";
-// import { PrivateRoute } from "HOCs/PrivateRoute";
+import { PublicRoute } from "../HOCs/PublicRoute";
+// import { PrivateRoute } from "../HOCs/PrivateRoute";
+
 import { Layout } from "./Layout/Layout";
+import { NewsPage } from "../pages/NewsPage/NewsPage";
 
 export const App = () => {
 	return (
@@ -12,46 +14,46 @@ export const App = () => {
 			<Routes>
 				<Route path="/" element={<Layout />}>
 					{/* <Route
-            index
-            path="register"
-            element={
-              <PublicRoute redirectTo="/" restricted>
-                <RegisterPage />
-              </PublicRoute>
-            }
-          />
-          <Route
-            path="login"
-            element={
-              <PublicRoute redirectTo="/" restricted>
-                <LoginPage />
-              </PublicRoute>
-            }
-          />
-          <Route
-            path="friends"
-            element={
-              <PublicRoute redirectTo="/" restricted>
-                <OurFriendsPage />
-              </PublicRoute>
-            }
-          />
-          <Route
-            path="news"
-            element={
-              <PublicRoute redirectTo="/" restricted>
-                <NewsPage />
-              </PublicRoute>
-            }
-          />
-          <Route
-            path="user"
-            element={
-              <PrivateRoute redirectTo="/login">
-                <UserPage />
-              </PrivateRoute>
-            }
-          /> */}
+						index
+						path="register"
+						element={
+							<PublicRoute redirectTo="/" restricted>
+								<RegisterPage />
+							</PublicRoute>
+						}
+					/>
+					<Route
+						path="login"
+						element={
+							<PublicRoute redirectTo="/" restricted>
+								<LoginPage />
+							</PublicRoute>
+						}
+					/>
+					<Route
+						path="friends"
+						element={
+							<PublicRoute redirectTo="/" restricted>
+								<OurFriendsPage />
+							</PublicRoute>
+						}
+					/> */}
+					<Route
+						path="news"
+						element={
+							<PublicRoute redirectTo="/" restricted>
+								<NewsPage />
+							</PublicRoute>
+						}
+					/>
+					{/* <Route
+						path="user"
+						element={
+							<PrivateRoute redirectTo="/login">
+								<UserPage />
+							</PrivateRoute>
+						}
+					/> */}
 				</Route>
 			</Routes>
 		</>
