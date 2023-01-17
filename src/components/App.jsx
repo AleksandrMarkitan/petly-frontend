@@ -1,16 +1,19 @@
 import { Routes, Route } from "react-router-dom";
-import { useEffect, Suspense } from "react";
-import { useDispatch, useSelector } from "react-redux";
+// import { useEffect, Suspense } from "react";
+// import { useDispatch, useSelector } from "react-redux";
 
 import { PublicRoute } from "../HOCs/PublicRoute";
-import { PrivateRoute } from "../HOCs/PrivateRoute";
+// import { PrivateRoute } from "../HOCs/PrivateRoute";
+
+import { Layout } from "./Layout/Layout";
+import { NewsPage } from "../pages/NewsPage/NewsPage";
 
 export const App = () => {
   return (
     <>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route
+          {/* <Route
             index
             path="register"
             element={
@@ -34,7 +37,7 @@ export const App = () => {
                 <OurFriendsPage />
               </PublicRoute>
             }
-          />
+          /> */}
           <Route
             path="news"
             element={
@@ -43,7 +46,7 @@ export const App = () => {
               </PublicRoute>
             }
           />
-          <Route
+          {/* <Route
             path="user"
             element={
               <PublicRoute redirectTo="/" restricted>
@@ -58,7 +61,7 @@ export const App = () => {
                 <NoticesPage />
               </PrivateRoute>
             }
-          />
+          /> */}
         </Route>
       </Routes>
     </>

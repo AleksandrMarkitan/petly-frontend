@@ -50,6 +50,7 @@ export const NewsPage = () => {
 			<SectionTitle text="News" />
 			<SearchField searchNews={searchNews} />
 			<NewsList news={news} />
+			{news.length === 0 && <div style={{ textAlign: "center" }}>Новин за вашим запитом не знайдено.</div>}
 		</Container>
 	</Section>
 }
