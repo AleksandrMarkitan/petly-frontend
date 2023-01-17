@@ -20,4 +20,4 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 	</React.StrictMode>
 );
 
-// basename = "/petly-frontend/";
+
