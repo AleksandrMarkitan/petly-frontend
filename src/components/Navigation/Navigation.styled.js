@@ -1,11 +1,6 @@
 import styled from "styled-components";
 
-export const NavStyled = styled.nav`
-  display: flex;
-  align-items: center;
-`;
-
-export const Div = styled.div`
+export const DivNav = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -13,5 +8,6 @@ export const Div = styled.div`
 
 export const DivAuth = styled.div`
   display: flex;
+  align-items: center;
   gap: 20px;
 `;
