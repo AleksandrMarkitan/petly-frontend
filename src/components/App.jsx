@@ -3,17 +3,18 @@ import { Routes, Route } from "react-router-dom";
 // import { useDispatch, useSelector } from "react-redux";
 
 import { PublicRoute } from "../HOCs/PublicRoute";
-// import { PrivateRoute } from "../HOCs/PrivateRoute";
+import { PrivateRoute } from "../HOCs/PrivateRoute";
 
 import { Layout } from "./Layout/Layout";
 import { NewsPage } from "../pages/NewsPage/NewsPage";
+import { UserPage } from "../pages/UserPage/UserPage";
 
 export const App = () => {
-	return (
-		<>
-			<Routes>
-				<Route path="/" element={<Layout />}>
-					{/* <Route
+  return (
+    <>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          {/* <Route
 						index
 						path="register"
 						element={
@@ -38,24 +39,24 @@ export const App = () => {
 							</PublicRoute>
 						}
 					/> */}
-					<Route
-						path="news"
-						element={
-							<PublicRoute redirectTo="/" restricted>
-								<NewsPage />
-							</PublicRoute>
-						}
-					/>
-					{/* <Route
-						path="user"
-						element={
-							<PrivateRoute redirectTo="/login">
-								<UserPage />
-							</PrivateRoute>
-						}
-					/> */}
-				</Route>
-			</Routes>
-		</>
-	);
+          <Route
+            path="news"
+            element={
+              <PublicRoute redirectTo="/" restricted>
+                <NewsPage />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="user"
+            element={
+              <PrivateRoute redirectTo="/login">
+                <UserPage />
+              </PrivateRoute>
+            }
+          />
+        </Route>
+      </Routes>
+    </>
+  );
 };
