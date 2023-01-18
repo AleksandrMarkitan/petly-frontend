@@ -1,7 +1,7 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
 
-axios.defaults.baseURL = 'http://127.0.0.1:3000/api';
+axios.defaults.baseURL = "http://localhost:4000/api/v1";
 
 const token = {
   set(token) {
@@ -12,11 +12,11 @@ const token = {
   },
 };
 
-export const registration = createAsyncThunk(
-  'auth/registration',
+export const register = createAsyncThunk(
+  "auth/register",
   async (userData, { rejectWithValue }) => {
     try {
-      const { data } = await axios.post('/auth/users/signup', userData);
+      const { data } = await axios.post("/auth/register", userData);
       token.set(data.token);
       return data;
     } catch (error) {
@@ -26,10 +26,10 @@ export const registration = createAsyncThunk(
 );
 
 export const login = createAsyncThunk(
-  'auth/login',
+  "auth/login",
   async (userData, { rejectWithValue }) => {
     try {
-      const { data } = await axios.post('/auth/users/login', userData);
+      const { data } = await axios.post("/auth/login", userData);
       token.set(data.token);
       return data;
     } catch (error) {
@@ -39,10 +39,10 @@ export const login = createAsyncThunk(
 );
 
 export const logout = createAsyncThunk(
-  'auth/logout',
+  "auth/logout",
   async (_, { rejectWithValue }) => {
     try {
-      await axios.get('/auth/users/logout');
+      await axios.get("/auth/logout");
       token.unset();
     } catch (error) {
       return rejectWithValue(error.message);
@@ -51,15 +51,15 @@ export const logout = createAsyncThunk(
 );
 
 export const fetchCurrentUser = createAsyncThunk(
-  'auth/refresh',
+  "auth/refresh",
   async (_, { rejectWithValue, getState }) => {
-    const tokenFromStorage = getState().auth.token;
-    if (!tokenFromStorage) {
+    const tokenCurrent = getState().auth.token;
+    if (!tokenCurrent) {
       return rejectWithValue();
     }
-    token.set(tokenFromStorage);
+    token.set(tokenCurrent);
     try {
-      const { data } = await axios('/auth/users/current');
+      const { data } = await axios("/users/current");
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
