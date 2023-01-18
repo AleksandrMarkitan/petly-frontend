@@ -1,7 +1,5 @@
 import { useState } from "react";
 import { useMedia } from "react-use";
-import { RxHamburgerMenu } from "react-icons/rx";
-// import { CgClose } from "react-icons/cg";
 import { useSelector } from "react-redux";
 import { selectToken } from "../../redux/auth/authSelectors";
 import { BtnMenu } from "./BtnBurgerMenu/BtnBurgerMenu";
@@ -18,19 +16,36 @@ export const Navigation = () => {
   const isDesctop = useMedia("(min-width: 1280px)");
   const isMobile = useMedia("(max-width: 767px)");
 
+  const onOpen = () => {
+    setIsMenuOpen(true);
+  };
+
+  const onClose = () => {
+    setIsMenuOpen(false);
+  };
+
   return (
     <nav>
-      <DivNav>
-        {isDesctop && <Nav />}
+      {!isMenuOpen && (
+        <DivNav>
+          {isDesctop && <Nav />}
 
-        <DivAuth>
-          {!isMobile && token && <UserNav />}
-          {!isMobile && !token && <AuthNav />}
-          {!isDesctop && <BtnMenu />}
-        </DivAuth>
-      </DivNav>
+          <DivAuth>
+            {!isMobile && token && <UserNav />}
+            {!isMobile && !token && <AuthNav />}
+            {!isDesctop && <BtnMenu onClick={onOpen} />}
+          </DivAuth>
+        </DivNav>
+      )}
 
-      {isMenuOpen && <Menu token={token} />}
+      {isMenuOpen && (
+        <Menu
+          token={token}
+          onClose={onClose}
+          isDesctop={isDesctop}
+          isMobile={isMobile}
+        />
+      )}
     </nav>
   );
 };

@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
 import { AccountBtn } from "../../CommonButtons/AccountBtn/AccountBtn";
+import { LinkStyled } from "./UserNav.styled";
 // import { UserCircleStyled } from "./UserNav.styled";
 
 // const Content = () => {
@@ -14,9 +14,9 @@ import { AccountBtn } from "../../CommonButtons/AccountBtn/AccountBtn";
 export const UserNav = () => {
   return (
     <>
-      <Link to="/user">
+      <LinkStyled to="/user">
         <AccountBtn text="Account" />
-      </Link>
+      </LinkStyled>
     </>
   );
 };
