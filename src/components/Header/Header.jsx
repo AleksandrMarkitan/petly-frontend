@@ -1,4 +1,4 @@
-import { Logo } from "../Logo/Logo";
+import { Container } from "../CommonComponents/Container/Container";
 import { Navigation } from "../Navigation/Navigation";
 
 import { HeaderStyled } from "./Header.styled";
@@ -6,8 +6,9 @@ import { HeaderStyled } from "./Header.styled";
 export const Header = () => {
   return (
     <HeaderStyled>
-      <Logo />
-      <Navigation />
+      <Container>
+        <Navigation />
+      </Container>
     </HeaderStyled>
   );
 };

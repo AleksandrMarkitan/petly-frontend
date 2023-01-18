@@ -4,7 +4,7 @@ import { Nav } from "../Nav/Nav";
 import { UserNav } from "../UserNav/UserNav";
 import { DivBox, Div1, DivAuth, CloseIcon } from "./BurgerMenu.styled";
 
-export const Menu = ({ token, onClose, isDesctop, isMobile }) => {
+export const BurgerMenu = ({ token, onClose, isDesctop, isMobile }) => {
   if (isDesctop) {
     onClose();
   }

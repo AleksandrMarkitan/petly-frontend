@@ -8,7 +8,7 @@ import { PublicRoute } from "../HOCs/PublicRoute";
 import { Layout } from "./Layout/Layout";
 import { NewsPage } from "../pages/NewsPage/NewsPage";
 
-import Layout from "./Layout/Layout";
+// import Layout from "./Layout/Layout";
 
 export const App = () => {
   return (

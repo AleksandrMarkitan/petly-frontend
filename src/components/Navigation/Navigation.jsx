@@ -4,11 +4,12 @@ import { useSelector } from "react-redux";
 import { selectToken } from "../../redux/auth/authSelectors";
 import { BtnMenu } from "./BtnBurgerMenu/BtnBurgerMenu";
 import { AuthNav } from "./AuthNav/AuthNav";
-import { Menu } from "./BurgerMenu/BurgerMenu";
+import { BurgerMenu } from "./BurgerMenu/BurgerMenu";
 import { Nav } from "./Nav/Nav";
 import { UserNav } from "./UserNav/UserNav";
 
-import { DivNav, DivAuth } from "./Navigation.styled";
+import { DivNav, DivAuth, DivLogoNav, NavStyled } from "./Navigation.styled";
+import { Logo } from "../Logo/Logo";
 
 export const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -25,27 +26,32 @@ export const Navigation = () => {
   };
 
   return (
-    <nav>
-      {!isMenuOpen && (
-        <DivNav>
-          {isDesctop && <Nav />}
+    <>
+      <NavStyled>
+        {!isMenuOpen && (
+          <DivNav>
+            <DivLogoNav>
+              <Logo />
+              {isDesctop && <Nav />}
+            </DivLogoNav>
 
-          <DivAuth>
-            {!isMobile && token && <UserNav />}
-            {!isMobile && !token && <AuthNav />}
-            {!isDesctop && <BtnMenu onClick={onOpen} />}
-          </DivAuth>
-        </DivNav>
-      )}
+            <DivAuth>
+              {!isMobile && token && <UserNav />}
+              {!isMobile && !token && <AuthNav />}
+              {!isDesctop && <BtnMenu onClick={onOpen} />}
+            </DivAuth>
+          </DivNav>
+        )}
 
-      {isMenuOpen && (
-        <Menu
-          token={token}
-          onClose={onClose}
-          isDesctop={isDesctop}
-          isMobile={isMobile}
-        />
-      )}
-    </nav>
+        {isMenuOpen && (
+          <BurgerMenu
+            token={token}
+            onClose={onClose}
+            isDesctop={isDesctop}
+            isMobile={isMobile}
+          />
+        )}
+      </NavStyled>
+    </>
   );
 };

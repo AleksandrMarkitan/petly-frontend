@@ -1,22 +1,12 @@
 import { AccountBtn } from "../../CommonButtons/AccountBtn/AccountBtn";
-import { LinkStyled } from "./UserNav.styled";
-// import { UserCircleStyled } from "./UserNav.styled";
-
-// const Content = () => {
-//   return (
-//     <>
-//       <UserCircleStyled />
-//       <span>Account</span>
-//     </>
-//   );
-// };
+import { Link } from "react-router-dom";
 
 export const UserNav = () => {
   return (
     <>
-      <LinkStyled to="/user">
+      <Link to="/user">
         <AccountBtn text="Account" />
-      </LinkStyled>
+      </Link>
     </>
   );
 };

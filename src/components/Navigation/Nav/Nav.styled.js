@@ -34,13 +34,16 @@ export const Ul = styled.ul`
   flex-direction: column;
   align-items: center;
   gap: 40px;
+  margin-bottom: 46px;
 
   @media (min-width: 768px) {
     gap: 60px;
+    margin-bottom: 88;
   }
 
   @media (min-width: 1280px) {
     flex-direction: row;
     gap: 80px;
+    margin-bottom: 0;
   }
 `;

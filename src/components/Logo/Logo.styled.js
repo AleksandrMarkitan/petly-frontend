@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
-export const P = styled.p`
+export const LogoText = styled.span`
+  display: block;
+  margin-right: auto;
   font-family: "Poppins";
   font-style: normal;
   font-weight: 700;
@@ -10,14 +12,16 @@ export const P = styled.p`
 
   color: rgba(17, 17, 17, 1);
 
-  margin-right: auto;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Chrome/Safari/Opera */
+  -khtml-user-select: none; /* Konqueror */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                                  not supported by any browser */
 
   @media (min-width: 768px) {
     font-size: 32px;
-  }
-
-  @media (min-width: 1280px) {
-    margin-right: 80px;
   }
 `;
 

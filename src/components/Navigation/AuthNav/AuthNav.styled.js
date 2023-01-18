@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { CategoryBtn } from "../../CommonButtons/CategoryBtn/CategoryBtn";
+import { LoginBtn } from "../../CommonButtons/LoginBtn/LoginBtn";
 
 export const UlStyled = styled.ul`
   display: flex;
@@ -13,12 +14,14 @@ export const UlStyled = styled.ul`
 
 export const BtnReg = styled(CategoryBtn)``;
 
-export const BtnLog = styled(CategoryBtn)`
-  background-color: #f59256;
-  color: #fff;
-  :hover,
-  :focus {
-    background-color: #fff;
-    color: #f59256;
-  }
-`;
+export const BtnLog = styled(LoginBtn)``;
+
+// export const BtnLog = styled(CategoryBtn)`
+//   background-color: #f59256;
+//   color: #fff;
+//   :hover,
+//   :focus {
+//     background-color: #fff;
+//     color: #f59256;
+//   }
+// `;
