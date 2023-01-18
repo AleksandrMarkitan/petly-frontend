@@ -72,5 +72,4 @@ const userSlice = createSlice({
   },
 });
 
-//export default contactsSlice.reducer;
 export const userReducer = userSlice.reducer;

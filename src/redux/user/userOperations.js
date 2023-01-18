@@ -2,11 +2,9 @@ import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 const token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYzMwN2E1MGM1NTc3ODYxN2RmOWRjYSIsImlhdCI6MTY3NDA2MjM1NSwiZXhwIjoxNjc0MTQ1MTU1fQ.WLbu6I6lK54NdjyS-DGRWyyX3Hhh2vFNtjhU9z3XyDU";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYzg0MjNiMzMwNTdmZTc5ZTZkYzNkNyIsImlhdCI6MTY3NDA2ODU3MCwiZXhwIjoxNjc0MTUxMzcwfQ.zJ573neN-3HKihDENOlTXTjDDiipaxkVCGZD6fJVIbM";
 axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 axios.defaults.baseURL = "http://localhost:5000/api/v1";
-
-console.log("uuu");
 
 export const fetchUserPets = createAsyncThunk(
   "/auth/current",
