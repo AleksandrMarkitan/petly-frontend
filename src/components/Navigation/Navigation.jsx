@@ -1,34 +1,56 @@
 import { useState } from "react";
-import { RxHamburgerMenu } from "react-icons/rx";
-import { CgClose } from "react-icons/cg";
+import { useMedia } from "react-use";
 import { useSelector } from "react-redux";
 import { selectToken } from "../../redux/auth/authSelectors";
 import { BtnMenu } from "./BtnBurgerMenu/BtnBurgerMenu";
 import { AuthNav } from "./AuthNav/AuthNav";
-import { Menu } from "./BurgerMenu/BurgerMenu";
+import { BurgerMenu } from "./BurgerMenu/BurgerMenu";
 import { Nav } from "./Nav/Nav";
 import { UserNav } from "./UserNav/UserNav";
 
-import { NavStyled, Div, DivAuth } from "./Navigation.styled";
+import { DivNav, DivAuth, DivLogoNav, NavStyled } from "./Navigation.styled";
+import { Logo } from "../Logo/Logo";
 
 export const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const token = useSelector(selectToken);
+  const isDesctop = useMedia("(min-width: 1280px)");
+  const isMobile = useMedia("(max-width: 767px)");
+
+  const onOpen = () => {
+    setIsMenuOpen(true);
+  };
+
+  const onClose = () => {
+    setIsMenuOpen(false);
+  };
 
   return (
     <>
-      {/* desctop */}
       <NavStyled>
-        <Div>
-          <Nav /> {/* desctop */}
-          <DivAuth>
-            {token && <UserNav />} {/* !mobile */}
-            {!token && <AuthNav />} {/* !mobile */}
-            {<BtnMenu />} {/* !desctop */}
-          </DivAuth>
-        </Div>
+        {!isMenuOpen && (
+          <DivNav>
+            <DivLogoNav>
+              <Logo />
+              {isDesctop && <Nav />}
+            </DivLogoNav>
 
-        {isMenuOpen && <Menu token={token} />}
+            <DivAuth>
+              {!isMobile && token && <UserNav />}
+              {!isMobile && !token && <AuthNav />}
+              {!isDesctop && <BtnMenu onClick={onOpen} />}
+            </DivAuth>
+          </DivNav>
+        )}
+
+        {isMenuOpen && (
+          <BurgerMenu
+            token={token}
+            onClose={onClose}
+            isDesctop={isDesctop}
+            isMobile={isMobile}
+          />
+        )}
       </NavStyled>
     </>
   );
