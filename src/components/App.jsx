@@ -15,11 +15,12 @@ export const App = () => {
     <>
       <Routes>
         <Route path="/" element={<Layout />}>
+          <Route index element={<HomePage />} />
           {/* <Route
-            index
+            
             path="register"
             element={
-              <PublicRoute redirectTo="/" restricted>
+              <PublicRoute  restricted>
                 <RegisterPage />
               </PublicRoute>
             }
@@ -27,7 +28,7 @@ export const App = () => {
           <Route
             path="login"
             element={
-              <PublicRoute redirectTo="/" restricted>
+              <PublicRoute  restricted>
                 <LoginPage />
               </PublicRoute>
             }
@@ -35,7 +36,7 @@ export const App = () => {
           <Route
             path="friends"
             element={
-              <PublicRoute redirectTo="/" restricted>
+              <PublicRoute  restricted>
                 <OurFriendsPage />
               </PublicRoute>
             }
@@ -43,7 +44,7 @@ export const App = () => {
           <Route
             path="news"
             element={
-              <PublicRoute redirectTo="/" restricted>
+              <PublicRoute restricted>
                 <NewsPage />
               </PublicRoute>
             }
@@ -51,18 +52,19 @@ export const App = () => {
           {/* <Route
             path="user"
             element={
-              <PublicRoute redirectTo="/" restricted>
+              <PrivateRoute  restricted>
                 <UserPage />
-              </PublicRoute>
+              </PrivateRoute>
             }
           />
           <Route
             path="notices/:categoryName"
             element={
-              <PrivateRoute redirectTo="/login">
+              <PublicRoute resticred>
                 <NoticesPage />
-              </PrivateRoute>
+              </PublicRoute>
             }
+            <Route path="*" element={<Navigate to="/"} replace/>
           /> */}
         </Route>
       </Routes>
