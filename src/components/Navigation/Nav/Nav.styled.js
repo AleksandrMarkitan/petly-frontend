@@ -12,7 +12,7 @@ export const NavLinkStyled = styled(NavLink)`
     text-decoration-line: underline;
   }
 
-  &:active {
+  &.active {
     color: rgba(245, 146, 86, 1);
     font-weight: 700;
     text-decoration-line: underline;
