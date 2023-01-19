@@ -7,14 +7,18 @@ import { Container } from "../../components/CommonComponents/Container/Container
 import { SectionTitle } from "../../components/CommonComponents/SectionTitle/SectionTitle";
 import { UserData } from "../../components/UserData/UserData";
 import { fetchUserPets } from "../../redux/user/userOperations";
+import { fetchCurrentUser } from "../../redux/auth/authOperations";
+import { PetsData } from "../../components/PetsData/PetsData";
 
 export const UserPage = () => {
   const user = useSelector(selectUser);
+  const { pets } = user;
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchUserPets());
+    // dispatch(fetchCurrentUser());
   }, [dispatch]);
-
+  //console.log(user);
   return (
     <Section>
       <SectionTitle text="My information:" />
@@ -22,7 +26,9 @@ export const UserPage = () => {
         <UserData user={user} />
       </Container>
       <SectionTitle text="My pets" />
-      <Container></Container>
+      <Container>
+        <PetsData pets={pets} />
+      </Container>
     </Section>
   );
 };
