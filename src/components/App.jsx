@@ -3,10 +3,11 @@ import { Routes, Route } from "react-router-dom";
 // import { useDispatch, useSelector } from "react-redux";
 
 import { PublicRoute } from "../HOCs/PublicRoute";
-// import { PrivateRoute } from "../HOCs/PrivateRoute";
+import { PrivateRoute } from "../HOCs/PrivateRoute";
 
 import { Layout } from "./Layout/Layout";
 import { NewsPage } from "../pages/NewsPage/NewsPage";
+import { UserPage } from "../pages/UserPage/UserPage";
 
 export const App = () => {
   return (
@@ -38,6 +39,7 @@ export const App = () => {
               </PublicRoute>
             }
           /> */}
+          
           <Route
             path="news"
             element={
@@ -46,14 +48,17 @@ export const App = () => {
               </PublicRoute>
             }
           />
-          {/* <Route
+
+          <Route
             path="user"
             element={
-              <PublicRoute redirectTo="/" restricted>
+              <PrivateRoute redirectTo="/login">
                 <UserPage />
-              </PublicRoute>
+              </PrivateRoute>
             }
           />
+
+          {/* 
           <Route
             path="notices/:categoryName"
             element={
@@ -62,6 +67,7 @@ export const App = () => {
               </PrivateRoute>
             }
           /> */}
+
         </Route>
       </Routes>
     </>
