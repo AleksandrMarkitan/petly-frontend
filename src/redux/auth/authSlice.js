@@ -12,6 +12,7 @@ const initialState = {
     birthday: "",
     phone: "",
     pets: [],
+    favoriteNotices: [],
   },
   token: null,
   isLoading: false,
@@ -81,9 +82,21 @@ const authSlice = createSlice({
         state.isFetching = false;
       });
   },
+  reducers: {
+    updateFavoriteNotices(state, { payload }) {
+      const indexId = state.favoriteNotices.indexOf(payload);
+      if (indexId === -1) {
+        state.favoriteNotices.push(payload);
+      } else {
+        state.favoriteNotices.splice(indexId, 1);
+      }
+    },
+  },
 });
 
 export const authPersistedReducer = persistReducer(
   authPersistConfig,
   authSlice.reducer
 );
+
+export const { updateFavoriteNotices } = authSlice.actions;
