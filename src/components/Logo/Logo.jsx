@@ -1,9 +1,9 @@
-import { P, Span } from "./Logo.styled";
+import { LogoText, Span } from "./Logo.styled";
 
 export const Logo = () => {
   return (
-    <P>
+    <LogoText>
       pe<Span>t</Span>ly
-    </P>
+    </LogoText>
   );
 };

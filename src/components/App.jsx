@@ -7,6 +7,9 @@ import { PrivateRoute } from "../HOCs/PrivateRoute";
 
 import { Layout } from "./Layout/Layout";
 import { NewsPage } from "../pages/NewsPage/NewsPage";
+
+// import Layout from "./Layout/Layout";
+
 import { UserPage } from "../pages/UserPage/UserPage";
 
 export const App = () => {

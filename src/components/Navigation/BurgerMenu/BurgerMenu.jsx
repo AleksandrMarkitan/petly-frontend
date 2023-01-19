@@ -2,21 +2,30 @@ import { Logo } from "../../Logo/Logo";
 import { AuthNav } from "../AuthNav/AuthNav";
 import { Nav } from "../Nav/Nav";
 import { UserNav } from "../UserNav/UserNav";
+import { DivBox, Div1, DivAuth, CloseIcon } from "./BurgerMenu.styled";
 
-export const Menu = ({ token }) => {
+export const BurgerMenu = ({ token, onClose, isDesctop, isMobile }) => {
+  if (isDesctop) {
+    onClose();
+  }
+
   return (
-    <div>
-      <div>
+    <DivBox>
+      <Div1>
         <Logo />
-        <button>x</button>
-      </div>
+        <button type="button" onClick={onClose}>
+          <CloseIcon />
+        </button>
+      </Div1>
       <div>
-        <Nav /> {/* !desctop */}
-        <div>
-          {token && <UserNav />} {/* mobile */}
-          {!token && <AuthNav />} {/* mobile */}
-        </div>
+        {isMobile && (
+          <DivAuth>
+            {token && <UserNav />}
+            {!token && <AuthNav />}
+          </DivAuth>
+        )}
+        {!isDesctop && <Nav />}
       </div>
-    </div>
+    </DivBox>
   );
 };
