@@ -16,7 +16,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <ThemeProvider theme={theme}>
       <Provider store={store}>
         <PersistGate persistor={persistor}>
-          <BrowserRouter>
+          <BrowserRouter basename="/petly-frontend/">
             <App />
           </BrowserRouter>
         </PersistGate>
