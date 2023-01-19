@@ -36,8 +36,9 @@ const userSlice = createSlice({
         state.error = null;
       })
       .addCase(updateUserData.fulfilled, (state, { payload }) => {
-        const index = state.items.findIndex(({ id }) => id === payload.id);
-        state.items[index] = payload;
+        // const index = state.items.findIndex(({ id }) => id === payload.id);
+        // state.items[index] = payload;
+        state.items = payload;
         state.isLoading = false;
         state.error = null;
       })
@@ -61,7 +62,9 @@ const userSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(deletePet.fulfilled, (state, { payload }) => {
-        state.items = state.items.filter(({ id }) => id !== payload);
+        state.items.pets = state.items.pets.filter(
+          ({ _id }) => _id !== payload
+        );
         state.isLoading = false;
         state.error = null;
       })

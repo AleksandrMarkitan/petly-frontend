@@ -19,13 +19,13 @@ export const fetchUserPets = createAsyncThunk(
 );
 
 export const updateUserData = createAsyncThunk(
-  "contacts/updateUserData",
+  "users/update",
   async (
     { name, email, birthday, phone, city, avatarURL },
     { rejectWithValue }
   ) => {
     try {
-      const { data } = await axios.patch(`/auth/update`, {
+      const { data } = await axios.patch("/users/update", {
         name,
         email,
         birthday,
