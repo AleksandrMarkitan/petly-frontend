@@ -1,7 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import { register, login, logout, fetchCurrentUser } from "./authOperations";
+import { deletePet } from "../user/userOperations";
+import {
+  register,
+  login,
+  logout,
+  fetchCurrentUser,
+  updateUserData,
+} from "./authOperations";
 
 const initialState = {
   user: {
@@ -80,6 +87,27 @@ const authSlice = createSlice({
         state.error = payload;
         state.isLoading = false;
         state.isFetching = false;
+      })
+      .addCase(updateUserData.pending, handlePending)
+      .addCase(updateUserData.fulfilled, (state, { payload }) => {
+        // const index = state.items.findIndex(({ id }) => id === payload.id);
+        // state.items[index] = payload;
+        state.user = payload;
+        state.isLoading = false;
+        state.error = null;
+      })
+      .addCase(updateUserData.rejected, handleRejected)
+      .addCase(deletePet.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(deletePet.fulfilled, (state, { payload }) => {
+        state.user.pets = state.user.pets.filter(({ _id }) => _id !== payload);
+        state.isLoading = false;
+        state.error = null;
+      })
+      .addCase(deletePet.rejected, (state, { payload }) => {
+        state.error = payload;
+        state.isLoading = false;
       });
   },
   reducers: {

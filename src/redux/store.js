@@ -1,8 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
 
 import { authPersistedReducer } from "./auth/authSlice";
-import { userReducer } from "./user/userSlice";
-import noticesReduser  from "./notices/noticesSlice";
+import { petsReducer, userReducer } from "./user/userSlice";
+import noticesReduser from "./notices/noticesSlice";
 
 import {
   persistStore,
@@ -17,7 +17,8 @@ import {
 export const store = configureStore({
   reducer: {
     auth: authPersistedReducer,
-    user: userReducer,
+    // user: userReducer,
+    // pets: petsReducer,
     notices: noticesReduser,
   },
   middleware: (getDefaultMiddleware) =>

@@ -1,15 +1,20 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
+// axios.defaults.baseURL = "http://localhost:4000/api/v1";
+// const token = {
+//   set(token) {
+//     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+//   },
+//   unset() {
+//     axios.defaults.headers.common.Authorization = ``;
+//   },
+// };
+
+const token =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYzg0MjNiMzMwNTdmZTc5ZTZkYzNkNyIsImlhdCI6MTY3NDA2ODU3MCwiZXhwIjoxNjc0MTUxMzcwfQ.zJ573neN-3HKihDENOlTXTjDDiipaxkVCGZD6fJVIbM";
+axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 axios.defaults.baseURL = "http://localhost:4000/api/v1";
-const token = {
-  set(token) {
-    axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-  },
-  unset() {
-    axios.defaults.headers.common.Authorization = ``;
-  },
-};
 
 export const register = createAsyncThunk(
   "auth/register",
@@ -52,13 +57,36 @@ export const logout = createAsyncThunk(
 export const fetchCurrentUser = createAsyncThunk(
   "auth/refresh",
   async (_, { rejectWithValue, getState }) => {
-    const tokenCurrent = getState().auth.token;
-    if (!tokenCurrent) {
-      return rejectWithValue();
-    }
-    token.set(tokenCurrent);
+    // const tokenCurrent = getState().auth.token;
+    // if (!tokenCurrent) {
+    //   return rejectWithValue();
+    // }
+    //token.set(tokenCurrent);
     try {
       const { data } = await axios("/users/current");
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const updateUserData = createAsyncThunk(
+  "users/update",
+  async (
+    { name, email, birthday, phone, city, avatarURL, pets },
+    { rejectWithValue }
+  ) => {
+    try {
+      const { data } = await axios.patch("/users/update", {
+        name,
+        email,
+        birthday,
+        phone,
+        city,
+        avatarURL,
+        pets,
+      });
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
