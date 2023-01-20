@@ -1,18 +1,16 @@
 import { Routes, Route } from "react-router-dom";
 // import { useEffect, Suspense } from "react";
-import { lazy } from "react";
-// import { useDispatch, useSelector } from "react-redux";
-
+// import { useSelector } from "react-redux";
 import { PublicRoute } from "../HOCs/PublicRoute";
 import { PrivateRoute } from "../HOCs/PrivateRoute";
 
+import HomePage from "../pages/HomePage/HomePage";
 import { Layout } from "./Layout/Layout";
 import { NewsPage } from "../pages/NewsPage/NewsPage";
-import HomePage from "../pages/HomePage/HomePage";
-import UserPage from "../pages/UserPage/UserPage";
-// import Layout from "./Layout/Layout";
-// const HomePage = lazy(() => import("../pages/HomePage/HomePage"));
-// const UserPage = lazy(() => import("../pages/UserPage/UserPage"));
+import { UserPage } from "../pages/UserPage/UserPage";
+import { OurFriendsPage } from "../pages/OurFriendsPage/OurFriendsPage";
+
+// import { Loader } from "../components/Loader/Loader";
 
 export const App = () => {
   return (
@@ -36,15 +34,15 @@ export const App = () => {
                 <LoginPage />
               </PublicRoute>
             }
-          />
+          /> */}
           <Route
             path="friends"
             element={
-              <PublicRoute  restricted>
+              <PublicRoute restricted>
                 <OurFriendsPage />
               </PublicRoute>
             }
-          /> */}
+          />
 
           <Route
             path="news"
