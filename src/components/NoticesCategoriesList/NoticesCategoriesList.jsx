@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { NoticeCategoryItem } from '../NoticeCategoryItem/NoticeCategoryItem';
+// import { NoticeCategoryItem } from '../NoticeCategoryItem/NoticeCategoryItem';
 import { List } from "./NoticesCategoriesList.styled";
 
 import axios from "axios";

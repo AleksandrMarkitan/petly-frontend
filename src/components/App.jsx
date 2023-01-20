@@ -12,7 +12,6 @@ import { NewsPage } from "../pages/NewsPage/NewsPage";
 import { UserPage } from "../pages/UserPage/UserPage";
 import { OurFriendsPage } from "../pages/OurFriendsPage/OurFriendsPage";
 import { NoticesPage } from "../pages/NoticesPage/NoticesPage";
-import { NoticesCategoriesList } from "./NoticesCategoriesList/NoticesCategoriesList";
 
 // import { Loader } from "../components/Loader/Loader";
 
@@ -54,38 +53,14 @@ export const App = () => {
             }
           />
           <Route
-            path="notices"
+            path="notices/:route"
             element={
               <PublicRoute>
                 <NoticesPage />
               </PublicRoute>
             }
-          >
-            <Route
-              path="favorites"
-              element={
-                // <PrivateRoute>
-                  <NoticesCategoriesList />
-                // </PrivateRoute>
-              }
-            />
-            <Route
-              path="owner"
-              element={
-                // <PrivateRoute>
-                  <NoticesCategoriesList />
-                // </PrivateRoute>
-              }
-            />
-            <Route
-              path=":category"
-              element={
-                <PublicRoute>
-                  <NoticesCategoriesList />
-                </PublicRoute>
-              }
-            />
-          </Route>
+          />
+
           <Route
             path="friends"
             element={
