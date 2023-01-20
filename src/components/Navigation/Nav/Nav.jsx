@@ -10,7 +10,7 @@ export const Nav = ({ onClose }) => {
           </NavLinkStyled>
         </li>
         <li>
-          <NavLinkStyled to="/notices" onClick={onClose}>
+          <NavLinkStyled to="/notices/sell" onClick={onClose}>
             Find pet
           </NavLinkStyled>
         </li>
