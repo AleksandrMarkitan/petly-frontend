@@ -1,25 +1,27 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
-export const AuthBtn = styled(Link)`
+export const AuthBtn = styled(NavLink)`
   display: flex;
   align-items: center;
   gap: 12px;
   padding: 8px 37px;
-  background-color: #f59256;
+  background-color: #ffffff;
   border: 2px solid #f59256;
   border-radius: 40px;
   font-size: 14px;
   line-height: calc(19 / 14);
   letter-spacing: 0.04em;
-  color: #fff;
+  color: #111111;
   transition: color 300ms linear, background-color 300ms linear,
     text-decoration 300ms linear;
 
   &:hover {
-    background-color: #fff;
-    color: rgba(0, 0, 0, 1);
     text-decoration: underline;
+  }
+  &.active {
+    background-color: #f59256;
+    color: #fff;
   }
 
   @media (min-width: 768px) {
