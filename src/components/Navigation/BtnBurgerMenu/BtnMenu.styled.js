@@ -1,4 +1,6 @@
-.BtnMenuBox {
+import styled from "styled-components";
+
+export const BtnMenuBox = styled.button`
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -9,11 +11,15 @@
   background: none;
   border: 0;
   cursor: pointer;
-}
 
-.BtnMenuLine {
+  @media (min-width: 768px) {
+    margin-left: 25px;
+  }
+`;
+
+export const BtnMenuLine = styled.div`
   width: 100%;
   height: 3px;
   border-radius: 3px;
   background-color: rgba(33, 33, 33, 1);
-}
+`;

@@ -1,11 +1,11 @@
-import css from "./BtnMenu.module.css";
+import { BtnMenuBox, BtnMenuLine } from "./BtnMenu.styled";
 
-export const BtnMenu = () => {
+export const BtnMenu = ({ onClick }) => {
   return (
-    <button className={css.BtnMenuBox}>
-      <div className={css.BtnMenuLine}></div>
-      <div className={css.BtnMenuLine}></div>
-      <div className={css.BtnMenuLine}></div>
-    </button>
+    <BtnMenuBox onClick={onClick}>
+      <BtnMenuLine />
+      <BtnMenuLine />
+      <BtnMenuLine />
+    </BtnMenuBox>
   );
 };

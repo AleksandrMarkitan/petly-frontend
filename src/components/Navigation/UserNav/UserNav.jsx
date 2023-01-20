@@ -1,11 +1,12 @@
-import { Link } from 'react-router-dom';
+import { AccountBtn, UserCircle } from "./UserNav.styled";
 
-export const UserNav = () => {
+export const UserNav = ({ onClose }) => {
   return (
     <>
-      <Link to="/user">
-        <button>Account</button>
-      </Link>
+      <AccountBtn to="/user" onClick={onClose}>
+        <UserCircle />
+        Account
+      </AccountBtn>
     </>
   );
 };

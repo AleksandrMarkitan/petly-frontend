@@ -1,19 +1,18 @@
-import { Link } from "react-router-dom";
-import { UlStyled } from "./AuthNav.styled";
+import { UlStyled, BtnReg, BtnLog } from "./AuthNav.styled";
 
-export const AuthNav = () => {
+export const AuthNav = ({ onClose }) => {
   return (
     <>
       <UlStyled>
         <li>
-          <Link to="/register">
-            <button>Registration</button>
-          </Link>
+          <BtnLog to="/login" onClick={onClose}>
+            Login
+          </BtnLog>
         </li>
         <li>
-          <Link to="/login">
-            <button>Login</button>
-          </Link>
+          <BtnReg to="/register" onClick={onClose}>
+            Registration
+          </BtnReg>
         </li>
       </UlStyled>
     </>
