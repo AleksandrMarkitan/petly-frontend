@@ -2,7 +2,7 @@
   "name": "petly_frontend",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://AleksandrMarkitan.github.io/petly-frontend/",
+  // "homepage": "https://AleksandrMarkitan.github.io/petly-frontend/",
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.1",
     "@testing-library/jest-dom": "^5.16.5",
