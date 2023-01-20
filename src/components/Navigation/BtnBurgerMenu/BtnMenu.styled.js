@@ -11,6 +11,10 @@ export const BtnMenuBox = styled.button`
   background: none;
   border: 0;
   cursor: pointer;
+
+  @media (min-width: 768px) {
+    margin-left: 25px;
+  }
 `;
 
 export const BtnMenuLine = styled.div`

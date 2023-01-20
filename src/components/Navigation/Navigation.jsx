@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useMedia } from "react-use";
 import { useSelector } from "react-redux";
 import { selectToken } from "../../redux/auth/authSelectors";
@@ -8,14 +8,19 @@ import { BurgerMenu } from "./BurgerMenu/BurgerMenu";
 import { Nav } from "./Nav/Nav";
 import { UserNav } from "./UserNav/UserNav";
 
-import { DivNav, DivAuth, DivLogoNav, NavStyled } from "./Navigation.styled";
-import { Logo } from "../Logo/Logo";
+import { NavStyled } from "./Navigation.styled";
+import { useLocation } from "react-router";
 
 export const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const token = useSelector(selectToken);
   const isDesctop = useMedia("(min-width: 1280px)");
   const isMobile = useMedia("(max-width: 767px)");
+  const location = useLocation();
+
+  useEffect(() => {
+    onClose();
+  }, [location.pathname]);
 
   const onOpen = () => {
     setIsMenuOpen(true);
@@ -27,31 +32,23 @@ export const Navigation = () => {
 
   return (
     <>
-      <NavStyled>
-        {!isMenuOpen && (
-          <DivNav>
-            <DivLogoNav>
-              <Logo />
-              {isDesctop && <Nav />}
-            </DivLogoNav>
+      {!isMenuOpen && (
+        <NavStyled>
+          {isDesctop && <Nav />}
+          {!isMobile && token && <UserNav />}
+          {!isMobile && token && <AuthNav />}
+          {!isDesctop && <BtnMenu onClick={onOpen} />}
+        </NavStyled>
+      )}
 
-            <DivAuth>
-              {!isMobile && token && <UserNav />}
-              {!isMobile && !token && <AuthNav />}
-              {!isDesctop && <BtnMenu onClick={onOpen} />}
-            </DivAuth>
-          </DivNav>
-        )}
-
-        {isMenuOpen && (
-          <BurgerMenu
-            token={token}
-            onClose={onClose}
-            isDesctop={isDesctop}
-            isMobile={isMobile}
-          />
-        )}
-      </NavStyled>
+      {isMenuOpen && (
+        <BurgerMenu
+          token={token}
+          onClose={onClose}
+          isDesctop={isDesctop}
+          isMobile={isMobile}
+        />
+      )}
     </>
   );
 };

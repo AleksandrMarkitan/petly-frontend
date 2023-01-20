@@ -43,7 +43,7 @@ export const App = () => {
           <Route
             path="news"
             element={
-              <PublicRoute redirectTo="/" restricted>
+              <PublicRoute>
                 <NewsPage />
               </PublicRoute>
             }

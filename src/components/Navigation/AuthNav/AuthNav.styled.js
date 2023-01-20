@@ -15,13 +15,3 @@ export const UlStyled = styled.ul`
 export const BtnReg = styled(CategoryBtn)``;
 
 export const BtnLog = styled(LoginBtn)``;
-
-// export const BtnLog = styled(CategoryBtn)`
-//   background-color: #f59256;
-//   color: #fff;
-//   :hover,
-//   :focus {
-//     background-color: #fff;
-//     color: #f59256;
-//   }
-// `;

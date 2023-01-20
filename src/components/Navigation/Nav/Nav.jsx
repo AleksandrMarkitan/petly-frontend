@@ -1,6 +1,6 @@
 import { NavLinkStyled, Ul } from "./Nav.styled";
 
-export const Nav = () => {
+export const Nav = ({ onClose }) => {
   return (
     <>
       <Ul>

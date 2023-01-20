@@ -2,7 +2,7 @@ import { Logo } from "../../Logo/Logo";
 import { AuthNav } from "../AuthNav/AuthNav";
 import { Nav } from "../Nav/Nav";
 import { UserNav } from "../UserNav/UserNav";
-import { DivBox, Div1, DivAuth, CloseIcon } from "./BurgerMenu.styled";
+import { NavStyled, Div1, DivAuth, CloseIcon } from "./BurgerMenu.styled";
 
 export const BurgerMenu = ({ token, onClose, isDesctop, isMobile }) => {
   if (isDesctop) {
@@ -10,7 +10,7 @@ export const BurgerMenu = ({ token, onClose, isDesctop, isMobile }) => {
   }
 
   return (
-    <DivBox>
+    <NavStyled>
       <Div1>
         <Logo />
         <button type="button" onClick={onClose}>
@@ -24,8 +24,8 @@ export const BurgerMenu = ({ token, onClose, isDesctop, isMobile }) => {
             {!token && <AuthNav />}
           </DivAuth>
         )}
-        {!isDesctop && <Nav />}
+        {!isDesctop && <Nav onClose />}
       </div>
-    </DivBox>
+    </NavStyled>
   );
 };

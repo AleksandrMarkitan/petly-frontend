@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { CgClose } from "react-icons/cg";
 
-export const DivBox = styled.div`
+export const NavStyled = styled.nav`
   position: absolute;
   background-color: #fff;
   z-index: 5;
