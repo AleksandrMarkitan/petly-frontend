@@ -6,9 +6,12 @@ import { PrivateRoute } from "../HOCs/PrivateRoute";
 
 import HomePage from "../pages/HomePage/HomePage";
 import { Layout } from "./Layout/Layout";
+import { LoginPage } from "../pages/LoginPage/LoginPage";
+import { RegisterPage } from "../pages/RegisterPage/RegisterPage";
 import { NewsPage } from "../pages/NewsPage/NewsPage";
 import { UserPage } from "../pages/UserPage/UserPage";
 import { OurFriendsPage } from "../pages/OurFriendsPage/OurFriendsPage";
+import { NoticesPage } from "../pages/NoticesPage/NoticesPage";
 
 // import { Loader } from "../components/Loader/Loader";
 
@@ -17,12 +20,18 @@ export const App = () => {
     <>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<HomePage />} />
-          {/* <Route
-            
+          <Route
+            index
+            element={
+              <PublicRoute>
+                <HomePage />
+              </PublicRoute>
+            }
+          />
+          <Route
             path="register"
             element={
-              <PublicRoute  restricted>
+              <PublicRoute restricted>
                 <RegisterPage />
               </PublicRoute>
             }
@@ -30,25 +39,32 @@ export const App = () => {
           <Route
             path="login"
             element={
-              <PublicRoute  restricted>
+              <PublicRoute restricted>
                 <LoginPage />
               </PublicRoute>
             }
-          /> */}
-          <Route
-            path="friends"
-            element={
-              <PublicRoute restricted>
-                <OurFriendsPage />
-              </PublicRoute>
-            }
           />
-
           <Route
             path="news"
             element={
               <PublicRoute restricted>
                 <NewsPage />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="notices"
+            element={
+              <PublicRoute restricted>
+                <NoticesPage />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="friends"
+            element={
+              <PublicRoute restricted>
+                <OurFriendsPage />
               </PublicRoute>
             }
           />
@@ -62,15 +78,6 @@ export const App = () => {
             }
           />
 
-          {/* 
-          <Route
-            path="notices/:categoryName"
-            element={
-              <PublicRoute resticred>
-                <NoticesPage />
-              </PublicRoute>
-            }
-          /> */}
           <Route path="*" element={<HomePage />} />
         </Route>
       </Routes>
