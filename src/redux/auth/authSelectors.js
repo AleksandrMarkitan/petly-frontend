@@ -1,21 +1,13 @@
-export const selectUserName = state => {
-  return state?.auth?.user?.name;
-};
-export const selectUserEmail = state => {
-  return state?.auth?.user?.email;
-};
-export const selectUserAvatar = state => {
-  return state?.auth?.user?.avatarURL;
-};
-export const selectToken = state => {
-  return state.auth.token;
-};
-export const selectIsLoading = state => {
-  return state.auth.isLoading;
-};
-export const selectError = state => {
-  return state.auth.error;
-};
-export const selectIsFetchingCurrentUser = state => {
-  return state.auth.isFetchingCurrentUser;
-};
+export const selectUserName = (state) => state.auth.user.name;
+export const selectUserEmail = (state) => state.auth.user.email;
+export const selectUserAvatar = (state) => state.auth.user.avatarURL;
+export const selectUserCity = (state) => state.auth.user.city;
+export const selectUserBirthday = (state) => state.auth.user.birthday;
+export const selectUserPhone = (state) => state.auth.user.phone;
+export const selectUserPets = (state) => state.auth.user.pets;
+
+export const selectToken = (state) => state.auth.token;
+export const selectIsLoading = (state) => state.auth.isLoading;
+export const selectError = (state) => state.auth.error;
+export const selectIsFetchingCurrentUser = (state) =>
+  state.auth.isFetchingCurrentUser;
