@@ -13,17 +13,11 @@ export const UlStyled = styled.ul`
 
 export const BtnLog = styled(AuthBtn)`
   padding: 8px 28px;
+
   @media (min-width: 768px) {
     padding: 10px 28px;
     font-size: 20px;
   }
 `;
 
-export const BtnReg = styled(BtnLog)`
-  background-color: #ffffff;
-  color: #111111;
-  :hover {
-    background-color: #f59256;
-    color: #fff;
-  }
-`;
+export const BtnReg = styled(BtnLog)``;
