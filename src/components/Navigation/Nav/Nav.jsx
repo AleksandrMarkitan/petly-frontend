@@ -5,13 +5,19 @@ export const Nav = ({ onClose }) => {
     <>
       <Ul>
         <li>
-          <NavLinkStyled to="/news">News</NavLinkStyled>
+          <NavLinkStyled to="/news" onClick={onClose}>
+            News
+          </NavLinkStyled>
         </li>
         <li>
-          <NavLinkStyled to="/notices">Find pet</NavLinkStyled>
+          <NavLinkStyled to="/notices" onClick={onClose}>
+            Find pet
+          </NavLinkStyled>
         </li>
         <li>
-          <NavLinkStyled to="/friends">Our friends</NavLinkStyled>
+          <NavLinkStyled to="/friends" onClick={onClose}>
+            Our friends
+          </NavLinkStyled>
         </li>
       </Ul>
     </>

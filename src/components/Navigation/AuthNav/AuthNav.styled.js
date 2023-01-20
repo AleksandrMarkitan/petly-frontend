@@ -6,6 +6,7 @@ export const UlStyled = styled.ul`
   display: flex;
   gap: 12px;
   align-items: center;
+  
 
   @media (min-width: 768px) {
     gap: 20px;
