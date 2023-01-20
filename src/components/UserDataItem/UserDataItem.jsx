@@ -4,7 +4,7 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUserData } from "../../redux/user/userOperations";
 import { selectUser } from "../../redux/user/userSelectors";
-import { selectIsFetchingCurrentUser } from "../../redux/auth/authSelectors";
+//import { selectIsFetchingCurrentUser } from "../../redux/auth/authSelectors";
 axios.defaults.baseURL = "http://localhost:5000/api/v1";
 //---------------testApi---------------
 const token =
@@ -16,7 +16,7 @@ export const UserDataItem = ({
   valueLabel,
   value,
   nameInput,
-  handleUpdate,
+  //handleUpdate,
   // handleButtonUpdate,
   //changeUserData,
   // handleChange,
@@ -34,16 +34,10 @@ export const UserDataItem = ({
 
   const handleChange = (evt) => {
     evt.preventDefault();
-    // setEditButton(false);
     setInputValue(evt.target.value);
     setInputName(evt.target.name);
-
-    console.log(inputValue);
-    console.log(inputName);
   };
 
-  //   //   const user = useSelector(selectUser);
-  //   //console.log(user);
   const handleButtonUpdate = (e) => {
     e.preventDefault();
     // if (inputValue === value) {
@@ -78,13 +72,6 @@ export const UserDataItem = ({
     setInputActive(false);
   };
 
-  //   const handleButtonUpdate = (e) => {
-  //     e.preventDefault();
-  //     console.log(inputValue);
-  //     console.log(user);
-  //     dispatch(updateUserData({ ...user, inputValue }));
-  //     // dispatch(updateUserData({ city: inputValue }));
-  //   };
   return (
     <>
       <form>

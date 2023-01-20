@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { file } from "../../assets/icons/fluent_delete-16-filled.svg";
+//import { file } from "../../assets/icons/fluent_delete-16-filled.svg";
 
 export const List = styled.ul`
   position: relative;

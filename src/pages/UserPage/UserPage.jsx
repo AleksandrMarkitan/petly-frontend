@@ -7,15 +7,15 @@ import { Container } from "../../components/CommonComponents/Container/Container
 import { SectionTitle } from "../../components/CommonComponents/SectionTitle/SectionTitle";
 import { UserData } from "../../components/UserData/UserData";
 import { fetchUserPets } from "../../redux/user/userOperations";
-import { fetchCurrentUser } from "../../redux/auth/authOperations";
+//import { fetchCurrentUser } from "../../redux/auth/authOperations";
 import { PetsData } from "../../components/PetsData/PetsData";
-import { selectUserPets } from "../../redux/auth/authSelectors";
+//import { selectUserPets } from "../../redux/auth/authSelectors";
 
 export const UserPage = () => {
   const user = useSelector(selectUser);
   const pets = useSelector(selectPets);
   // const { pets } = user;
-  console.log(user);
+  //console.log(user);
   // console.log(pets2);
   const dispatch = useDispatch();
   useEffect(() => {

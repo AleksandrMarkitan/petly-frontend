@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { formatDate } from "../../helpers/formatDate";
 import { deletePet } from "../../redux/user/userOperations";
 import {
