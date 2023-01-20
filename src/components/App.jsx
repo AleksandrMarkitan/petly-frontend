@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 // import { useEffect, Suspense } from "react";
+import { lazy } from "react";
 // import { useDispatch, useSelector } from "react-redux";
 
 import { PublicRoute } from "../HOCs/PublicRoute";
@@ -7,10 +8,11 @@ import { PrivateRoute } from "../HOCs/PrivateRoute";
 
 import { Layout } from "./Layout/Layout";
 import { NewsPage } from "../pages/NewsPage/NewsPage";
-
+import HomePage from "../pages/HomePage/HomePage";
+import UserPage from "../pages/UserPage/UserPage";
 // import Layout from "./Layout/Layout";
-
-import { UserPage } from "../pages/UserPage/UserPage";
+// const HomePage = lazy(() => import("../pages/HomePage/HomePage"));
+// const UserPage = lazy(() => import("../pages/UserPage/UserPage"));
 
 export const App = () => {
   return (
