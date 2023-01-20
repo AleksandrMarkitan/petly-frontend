@@ -11,3 +11,7 @@ export const HeaderStyled = styled.header`
     padding-top: 20px;
   }
 `;
+
+export const Div = styled.div`
+  display: flex;
+`;

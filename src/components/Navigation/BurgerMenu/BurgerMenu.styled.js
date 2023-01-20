@@ -1,13 +1,18 @@
 import styled from "styled-components";
 import { CgClose } from "react-icons/cg";
 
-export const DivBox = styled.div`
+export const NavStyled = styled.nav`
   position: absolute;
   background-color: #fff;
-  z-index: 5;
+  z-index: 50;
+  padding: 16px 20px;
   width: 100%;
   top: 0;
   left: 0;
+
+  @media (min-width: 768px) {
+    padding: 24px 32px;
+  }
 `;
 
 export const Div1 = styled.div`
@@ -16,14 +21,20 @@ export const Div1 = styled.div`
   margin-bottom: 46px;
 
   @media (min-width: 768px) {
-    margin-bottom: 88;
+    margin-bottom: 88px;
   }
 `;
 
-export const DivAuth = styled.div`
+export const Div2 = styled.div`
   display: flex;
-  justify-content: center;
-  margin-bottom: 60px;
+  flex-direction: column;
+  align-items: center;
+  gap: 60px;
+  margin-bottom: 46px;
+
+  @media (min-width: 768px) {
+    margin-bottom: 88px;
+  }
 `;
 
 export const CloseIcon = styled(CgClose)`

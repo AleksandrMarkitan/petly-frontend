@@ -7,9 +7,7 @@ import { AuthNav } from "./AuthNav/AuthNav";
 import { BurgerMenu } from "./BurgerMenu/BurgerMenu";
 import { Nav } from "./Nav/Nav";
 import { UserNav } from "./UserNav/UserNav";
-
-import { DivNav, DivAuth, DivLogoNav, NavStyled } from "./Navigation.styled";
-import { Logo } from "../Logo/Logo";
+import { NavStyled } from "./Navigation.styled";
 
 export const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -27,31 +25,23 @@ export const Navigation = () => {
 
   return (
     <>
-      <NavStyled>
-        {!isMenuOpen && (
-          <DivNav>
-            <DivLogoNav>
-              <Logo />
-              {isDesctop && <Nav />}
-            </DivLogoNav>
+      {!isMenuOpen && (
+        <NavStyled>
+          {isDesctop && <Nav />}
+          {!isMobile && token && <UserNav />}
+          {!isMobile && !token && <AuthNav />}
+          {!isDesctop && <BtnMenu onClick={onOpen} />}
+        </NavStyled>
+      )}
 
-            <DivAuth>
-              {!isMobile && token && <UserNav />}
-              {!isMobile && !token && <AuthNav />}
-              {!isDesctop && <BtnMenu onClick={onOpen} />}
-            </DivAuth>
-          </DivNav>
-        )}
-
-        {isMenuOpen && (
-          <BurgerMenu
-            token={token}
-            onClose={onClose}
-            isDesctop={isDesctop}
-            isMobile={isMobile}
-          />
-        )}
-      </NavStyled>
+      {isMenuOpen && (
+        <BurgerMenu
+          token={token}
+          onClose={onClose}
+          isDesctop={isDesctop}
+          isMobile={isMobile}
+        />
+      )}
     </>
   );
 };

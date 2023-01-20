@@ -12,7 +12,7 @@ export const NavLinkStyled = styled(NavLink)`
     text-decoration-line: underline;
   }
 
-  &:active {
+  &.active {
     color: rgba(245, 146, 86, 1);
     font-weight: 700;
     text-decoration-line: underline;
@@ -38,12 +38,13 @@ export const Ul = styled.ul`
 
   @media (min-width: 768px) {
     gap: 60px;
-    margin-bottom: 88;
+    margin-bottom: 88px;
   }
 
   @media (min-width: 1280px) {
     flex-direction: row;
     gap: 80px;
     margin-bottom: 0;
+    margin-right: 365px;
   }
 `;
