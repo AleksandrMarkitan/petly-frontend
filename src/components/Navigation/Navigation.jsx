@@ -36,7 +36,7 @@ export const Navigation = () => {
         <NavStyled>
           {isDesctop && <Nav />}
           {!isMobile && token && <UserNav />}
-          {!isMobile && token && <AuthNav />}
+          {!isMobile && !token && <AuthNav />}
           {!isDesctop && <BtnMenu onClick={onOpen} />}
         </NavStyled>
       )}
