@@ -12,6 +12,9 @@ import { NewsPage } from "../pages/NewsPage/NewsPage";
 import { UserPage } from "../pages/UserPage/UserPage";
 import { OurFriendsPage } from "../pages/OurFriendsPage/OurFriendsPage";
 import { NoticesPage } from "../pages/NoticesPage/NoticesPage";
+import { NoticesFavoritesList } from "./NoticesFavoritesList/NoticesFavoritesList";
+import { NoticesOwnerList } from "./NoticesOwnerList/NoticesOwnerList";
+import { NoticesCategoriesList } from "./NoticesCategoriesList/NoticesCategoriesList";
 
 // import { Loader } from "../components/Loader/Loader";
 
@@ -47,23 +50,48 @@ export const App = () => {
           <Route
             path="news"
             element={
-              <PublicRoute restricted>
+              <PublicRoute>
                 <NewsPage />
               </PublicRoute>
             }
           />
           <Route
-            path="notices/:categoryName"
+            path="notices"
             element={
-              <PublicRoute restricted>
+              <PublicRoute>
                 <NoticesPage />
               </PublicRoute>
             }
-          />
+          >
+            <Route
+              path="favorites"
+              element={
+                // <PrivateRoute>
+                  <NoticesFavoritesList />
+                // </PrivateRoute>
+              }
+            />
+            <Route
+              path="owner"
+              element={
+                // <PrivateRoute>
+                  <NoticesOwnerList />
+                // </PrivateRoute>
+              }
+            />
+            <Route
+              path=":category"
+              element={
+                <PublicRoute>
+                  <NoticesCategoriesList />
+                </PublicRoute>
+              }
+            />
+          </Route>
           <Route
             path="friends"
             element={
-              <PublicRoute restricted>
+              <PublicRoute>
                 <OurFriendsPage />
               </PublicRoute>
             }
