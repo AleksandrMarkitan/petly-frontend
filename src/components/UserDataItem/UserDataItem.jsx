@@ -27,14 +27,14 @@ export const UserDataItem = ({
   const dispatch = useDispatch();
   const [inputValue, setInputValue] = useState(value);
   const [inputName, setInputName] = useState(nameInput);
-  const [editButton, setEditButton] = useState(true);
-
+  //const [editButton, setEditButton] = useState(true);
+  const [inputActive, setInputActive] = useState(false);
   console.log(user);
   //const { name, city } = inputName;
 
   const handleChange = (evt) => {
     evt.preventDefault();
-    setEditButton(false);
+    // setEditButton(false);
     setInputValue(evt.target.value);
     setInputName(evt.target.name);
 
@@ -46,8 +46,13 @@ export const UserDataItem = ({
   //   //console.log(user);
   const handleButtonUpdate = (e) => {
     e.preventDefault();
+    // if (inputValue === value) {
+    //   setEditButton(true);
+    //   return;
+
     if (inputValue === value) {
-      setEditButton(true);
+      setInputActive(true);
+      //setEditButton(true);
       return;
     }
     // const { name, value } = e.target;
@@ -70,7 +75,7 @@ export const UserDataItem = ({
       default:
         return;
     }
-    setEditButton(true);
+    setInputActive(false);
   };
 
   //   const handleButtonUpdate = (e) => {
@@ -90,11 +95,12 @@ export const UserDataItem = ({
             name={nameInput}
             value={inputValue}
             onChange={handleChange}
+            readOnly={!inputActive ? true : false}
             // onChange={changeUserData}
           />
         </label>
-        {editButton && <button onClick={handleButtonUpdate}>edit</button>}
-        {!editButton && <button onClick={handleButtonUpdate}>update</button>}
+        {!inputActive && <button onClick={handleButtonUpdate}>edit</button>}
+        {inputActive && <button onClick={handleButtonUpdate}>update</button>}
       </form>
     </>
   );
