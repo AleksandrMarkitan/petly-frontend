@@ -19,7 +19,7 @@ export const NoticesPage = () => {
   const { route } = useParams();
 
   useEffect(() => {
-    dispatch(fetchNotices({ route }));
+    dispatch(fetchNotices({ category: route }));
   }, [dispatch, route]);
 
   return (
