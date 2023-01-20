@@ -4,6 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import { PublicRoute } from "../HOCs/PublicRoute";
 import { PrivateRoute } from "../HOCs/PrivateRoute";
 
+import HomePage from "../pages/HomePage/HomePage";
 import { Layout } from "./Layout/Layout";
 import { NewsPage } from "../pages/NewsPage/NewsPage";
 import { UserPage } from "../pages/UserPage/UserPage";
@@ -16,11 +17,12 @@ export const App = () => {
     <>
       <Routes>
         <Route path="/" element={<Layout />}>
+          <Route index element={<HomePage />} />
           {/* <Route
-            index
+            
             path="register"
             element={
-              <PublicRoute redirectTo="/" restricted>
+              <PublicRoute  restricted>
                 <RegisterPage />
               </PublicRoute>
             }
@@ -28,7 +30,7 @@ export const App = () => {
           <Route
             path="login"
             element={
-              <PublicRoute redirectTo="/" restricted>
+              <PublicRoute  restricted>
                 <LoginPage />
               </PublicRoute>
             }
@@ -36,7 +38,7 @@ export const App = () => {
           <Route
             path="friends"
             element={
-              <PublicRoute>
+              <PublicRoute restricted>
                 <OurFriendsPage />
               </PublicRoute>
             }
@@ -45,7 +47,7 @@ export const App = () => {
           <Route
             path="news"
             element={
-              <PublicRoute redirectTo="/" restricted>
+              <PublicRoute restricted>
                 <NewsPage />
               </PublicRoute>
             }
@@ -64,11 +66,12 @@ export const App = () => {
           <Route
             path="notices/:categoryName"
             element={
-              <PrivateRoute redirectTo="/login">
+              <PublicRoute resticred>
                 <NoticesPage />
-              </PrivateRoute>
+              </PublicRoute>
             }
           /> */}
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Route>
       </Routes>
     </>
