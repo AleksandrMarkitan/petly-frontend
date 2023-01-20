@@ -1,6 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
+const baseURL = "http://localhost:4000/api/v1";
+
 // отримання оголошень по категоріям
 export const fetchNotices = createAsyncThunk(
   "notices/fetchNotices",
@@ -8,7 +10,7 @@ export const fetchNotices = createAsyncThunk(
   async ({ category, page = 1, limit = 8 }, { rejectWithValue }) => {
     try {
       const { data } = await axios(
-        `/notices?category=${category}&page=${page}&limit=${limit}`
+        `${baseURL}/notices?category=${category}&page=${page}&limit=${limit}`
       );
       return data;
     } catch (error) {
@@ -23,7 +25,7 @@ export const fetchOneNotice = createAsyncThunk(
 
   async ({ noticeId }, { rejectWithValue }) => {
     try {
-      const { data } = await axios(`/notices/${noticeId}`);
+      const { data } = await axios(`${baseURL}/notices/${noticeId}`);
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -49,10 +51,10 @@ export const updateFavoriteNotice = createAsyncThunk(
 export const fetchFavorites = createAsyncThunk(
   "notices/fetchFavorites",
 
-  async ({ noticeId, page = 1, limit = 8 }, { rejectWithValue }) => {
+  async ({ page = 1, limit = 8 }, { rejectWithValue }) => {
     try {
       const { data } = await axios(
-        `/notices/${noticeId}?page=${page}&limit=${limit}`
+        `/notices/favorites?page=${page}&limit=${limit}`
       );
       return data;
     } catch (error) {
