@@ -18,8 +18,8 @@ export const BurgerMenu = ({ token, onClose, isDesctop, isMobile }) => {
         </button>
       </Div1>
       <Div2>
-        {isMobile && token && <UserNav />}
-        {isMobile && !token && <AuthNav />}
+        {isMobile && token && <UserNav onClose={onClose} />}
+        {isMobile && !token && <AuthNav onClose={onClose} />}
 
         {!isDesctop && <Nav onClose={onClose} />}
       </Div2>

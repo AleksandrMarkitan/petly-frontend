@@ -1,7 +1,7 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { FaUserCircle } from "react-icons/fa";
 
-export const Button = styled.button`
+export const AuthBtn = styled(Link)`
   display: flex;
   align-items: center;
   gap: 12px;
@@ -13,26 +13,17 @@ export const Button = styled.button`
   line-height: calc(19 / 14);
   letter-spacing: 0.04em;
   color: #fff;
-  transition: color 300ms linear, background-color 300ms linear;
+  transition: color 300ms linear, background-color 300ms linear,
+    text-decoration 300ms linear;
 
-  :hover,
-  :focus {
+  &:hover {
     background-color: #fff;
     color: rgba(0, 0, 0, 1);
+    text-decoration: underline;
   }
 
   @media (min-width: 768px) {
     padding: 11px 28px;
     font-size: 16px;
-  }
-`;
-
-export const UserCircle = styled(FaUserCircle)`
-  width: 17px;
-  height: 17px;
-
-  @media (min-width: 768px) {
-    width: 23px;
-    height: 23px;
   }
 `;
