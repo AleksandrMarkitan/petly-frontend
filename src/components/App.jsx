@@ -53,7 +53,7 @@ export const App = () => {
             }
           />
           <Route
-            path="notices"
+            path="notices/:categoryName"
             element={
               <PublicRoute restricted>
                 <NoticesPage />
@@ -68,7 +68,6 @@ export const App = () => {
               </PublicRoute>
             }
           />
-
           <Route
             path="user"
             element={
@@ -77,7 +76,6 @@ export const App = () => {
               </PrivateRoute>
             }
           />
-
           <Route path="*" element={<HomePage />} />
         </Route>
       </Routes>
