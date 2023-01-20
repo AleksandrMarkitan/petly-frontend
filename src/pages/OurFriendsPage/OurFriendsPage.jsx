@@ -1,1 +1,37 @@
+import { useEffect, useState } from "react";
 
+import { Section } from "../../components/CommonComponents/Section/Section";
+import { Container } from "../../components/CommonComponents/Container/Container";
+import { SectionTitle } from "../../components/CommonComponents/SectionTitle/SectionTitle";
+import { OurFriendsList } from "../../components/OurFriends/OurFriends";
+import { getOurFriends } from "../../serveсes/getOurFriends";
+
+export const OurFriendsPage = () => {
+  const [friends, setFriends] = useState([]);
+
+  useEffect(() => {
+    async function fetch() {
+      try {
+        const response = await getOurFriends({});
+
+        if (response.length === 0) {
+          throw new Error();
+        }
+
+        setFriends(response);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetch();
+  }, []);
+
+  return (
+    <Section>
+      <Container>
+        <SectionTitle text="Our friends" />
+        <OurFriendsList friends={friends} />
+      </Container>
+    </Section>
+  );
+};

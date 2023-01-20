@@ -1,27 +1,28 @@
 import { Routes, Route } from "react-router-dom";
 // import { useEffect, Suspense } from "react";
-// import { useDispatch, useSelector } from "react-redux";
-
+// import { useSelector } from "react-redux";
 import { PublicRoute } from "../HOCs/PublicRoute";
 import { PrivateRoute } from "../HOCs/PrivateRoute";
 
+import HomePage from "../pages/HomePage/HomePage";
 import { Layout } from "./Layout/Layout";
 import { NewsPage } from "../pages/NewsPage/NewsPage";
-
-// import Layout from "./Layout/Layout";
-
 import { UserPage } from "../pages/UserPage/UserPage";
+import { OurFriendsPage } from "../pages/OurFriendsPage/OurFriendsPage";
+
+// import { Loader } from "../components/Loader/Loader";
 
 export const App = () => {
   return (
     <>
       <Routes>
         <Route path="/" element={<Layout />}>
+          <Route index element={<HomePage />} />
           {/* <Route
-            index
+            
             path="register"
             element={
-              <PublicRoute redirectTo="/" restricted>
+              <PublicRoute  restricted>
                 <RegisterPage />
               </PublicRoute>
             }
@@ -29,24 +30,24 @@ export const App = () => {
           <Route
             path="login"
             element={
-              <PublicRoute redirectTo="/" restricted>
+              <PublicRoute  restricted>
                 <LoginPage />
               </PublicRoute>
             }
-          />
+          /> */}
           <Route
             path="friends"
             element={
-              <PublicRoute redirectTo="/" restricted>
+              <PublicRoute restricted>
                 <OurFriendsPage />
               </PublicRoute>
             }
-          /> */}
-          
+          />
+
           <Route
             path="news"
             element={
-              <PublicRoute>
+              <PublicRoute restricted>
                 <NewsPage />
               </PublicRoute>
             }
@@ -55,7 +56,7 @@ export const App = () => {
           <Route
             path="user"
             element={
-              <PrivateRoute redirectTo="/login">
+              <PrivateRoute>
                 <UserPage />
               </PrivateRoute>
             }
@@ -65,12 +66,12 @@ export const App = () => {
           <Route
             path="notices/:categoryName"
             element={
-              <PrivateRoute redirectTo="/login">
+              <PublicRoute resticred>
                 <NoticesPage />
-              </PrivateRoute>
+              </PublicRoute>
             }
           /> */}
-
+          <Route path="*" element={<HomePage />} />
         </Route>
       </Routes>
     </>
