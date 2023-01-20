@@ -9,6 +9,7 @@ import { SearchField } from "../../components/CommonComponents/SearchField/Searc
 import { NoticesCategoriesNav } from "../../components/NoticesCategoriesNav/NoticesCategoriesNav";
 import { Section } from "../../components/CommonComponents/Section/Section";
 import { Container } from "../../components/CommonComponents/Container/Container";
+import { AddNoticeButton } from "../../components/CommonButtons/AddNoticeButton/AddNoticeButton";
 // -----------------------------------------------------------
 
 export const NoticesPage = () => {
@@ -26,6 +27,7 @@ export const NoticesPage = () => {
         <SectionTitle text={"Find your favorite pet"} />
         <SearchField />
         <NoticesCategoriesNav />
+        <AddNoticeButton/>
 
         <Suspense fallback={null}>
           <Outlet />

@@ -12,8 +12,6 @@ import { NewsPage } from "../pages/NewsPage/NewsPage";
 import { UserPage } from "../pages/UserPage/UserPage";
 import { OurFriendsPage } from "../pages/OurFriendsPage/OurFriendsPage";
 import { NoticesPage } from "../pages/NoticesPage/NoticesPage";
-import { NoticesFavoritesList } from "./NoticesFavoritesList/NoticesFavoritesList";
-import { NoticesOwnerList } from "./NoticesOwnerList/NoticesOwnerList";
 import { NoticesCategoriesList } from "./NoticesCategoriesList/NoticesCategoriesList";
 
 // import { Loader } from "../components/Loader/Loader";
@@ -67,7 +65,7 @@ export const App = () => {
               path="favorites"
               element={
                 // <PrivateRoute>
-                  <NoticesFavoritesList />
+                  <NoticesCategoriesList />
                 // </PrivateRoute>
               }
             />
@@ -75,7 +73,7 @@ export const App = () => {
               path="owner"
               element={
                 // <PrivateRoute>
-                  <NoticesOwnerList />
+                  <NoticesCategoriesList />
                 // </PrivateRoute>
               }
             />
