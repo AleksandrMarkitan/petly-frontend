@@ -70,8 +70,8 @@ export const App = () => {
                 <NoticesPage />
               </PublicRoute>
             }
-            <Route path="*" element={<Navigate to="/"} replace/>
           /> */}
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Route>
       </Routes>
     </>
