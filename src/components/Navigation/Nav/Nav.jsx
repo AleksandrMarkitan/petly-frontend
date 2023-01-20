@@ -8,7 +8,7 @@ export const Nav = () => {
           <NavLinkStyled to="/news">News</NavLinkStyled>
         </li>
         <li>
-          <NavLinkStyled to="/notices">Find pet</NavLinkStyled>
+          <NavLinkStyled to="/notices/sell">Find pet</NavLinkStyled>
         </li>
         <li>
           <NavLinkStyled to="/friends">Our friends</NavLinkStyled>
