@@ -56,7 +56,7 @@ export const App = () => {
           <Route
             path="user"
             element={
-              <PrivateRoute redirectTo="/login">
+              <PrivateRoute>
                 <UserPage />
               </PrivateRoute>
             }
@@ -71,7 +71,7 @@ export const App = () => {
               </PublicRoute>
             }
           /> */}
-          <Route path="*" element={<Navigate to="/" replace />} />
+          <Route path="*" element={<HomePage />} />
         </Route>
       </Routes>
     </>
