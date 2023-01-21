@@ -1,20 +1,19 @@
 import { nanoid } from "nanoid";
-import { Div } from "./OurFriends.styled";
+import { Div, Button } from "./OurFriends.styled";
 import { useState } from "react";
 export const WorkTime = ({ workDays }) => {
-  const days = ["MN ", "TU ", "WE ", "TH ", "FR ", "SA ", "SU "];
+  const days = ["MN: ", "TU: ", "WE: ", "TH: ", "FR: ", "SA: ", "SU: "];
   const [modalOpened, setModalOpened] = useState(false);
   const handleClick = () => {
     setModalOpened(!modalOpened);
   };
-  console.log(workDays);
   return (
     <>
-      <button type="click" onClick={handleClick}>
+      <Button type="click" onClick={handleClick}>
         {workDays[0].from && workDays[0].to
           ? `${workDays[0]?.from} - ${workDays[0]?.to}`
           : "Closed"}
-      </button>
+      </Button>
 
       {modalOpened && (
         <>
@@ -27,7 +26,7 @@ export const WorkTime = ({ workDays }) => {
                     {from}-{to}
                   </p>
                 ) : (
-                  <p>Closed</p>
+                  <p>{days[index]}Closed</p>
                 )}
               </li>
             ))}
