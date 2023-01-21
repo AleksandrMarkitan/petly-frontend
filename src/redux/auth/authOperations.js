@@ -74,3 +74,17 @@ export const fetchCurrentUser = createAsyncThunk(
     }
   }
 );
+
+// додавання та видалення оголошення з обраних
+export const updateFavoriteNotice = createAsyncThunk(
+  "notices/updateFavoriteNotice",
+
+  async ({ noticeId }, { rejectWithValue }) => {
+    try {
+      const {data} = await axios.patch(`/notices/${noticeId}/favorites`);
+      return data.favoriteNotices;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
