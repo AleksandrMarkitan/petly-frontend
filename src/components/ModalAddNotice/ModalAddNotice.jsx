@@ -29,6 +29,8 @@ export const ModalAddNotice = ({ onClose }) => {
 
 	const [preview, setPreview] = useState("");
 
+	console.log(location, imgURL);
+
 	useEffect(() => {
 		const query = city.split(',')[0].toLowerCase();
 
