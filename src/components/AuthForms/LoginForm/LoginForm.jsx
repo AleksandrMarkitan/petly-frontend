@@ -7,7 +7,6 @@ import {
   Input,
   TitleLogin,
   Wrapper,
-  AuthContainer,
   Paragraph,
   FormLink,
   FormCustom,
@@ -15,6 +14,7 @@ import {
   Label,
 } from "../../AuthForms/Forms.styled";
 import { LoginBtn } from "../../CommonButtons/LoginBtn/LoginBtn";
+import { Container } from "../../CommonComponents/Container/Container";
 
 export const LoginForm = () => {
   const dispatch = useDispatch();
@@ -50,7 +50,7 @@ export const LoginForm = () => {
     );
   };
   return (
-    <AuthContainer>
+    <Container>
       <Wrapper>
         <TitleLogin>Login</TitleLogin>
         <Formik
@@ -83,6 +83,6 @@ export const LoginForm = () => {
           <FormLink to="/register">Register</FormLink>
         </Paragraph>
       </Wrapper>
-    </AuthContainer>
+    </Container>
   );
 };

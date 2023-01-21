@@ -1,10 +1,22 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Form, Field } from "formik";
-import { MainContainer } from "../CommonComponents/Container/Container.styled";
+import { SectionTag } from "../CommonComponents/Section/Section.styled";
 
-export const AuthContainer = styled(MainContainer)`
-  padding-top: 80px;
+export const AuthSection = styled(SectionTag)`
+  @media screen and (max-width: 767px) {
+    height: 100vh;
+  }
+
+  @media screen and (min-width: 768px) {
+    padding-top: 168px;
+    padding-bottom: 250px;
+  }
+
+  @media screen and (min-width: 1280px) {
+    padding-top: 80px;
+    padding-bottom: 100px;
+  }
 `;
 
 export const ErrorText = styled.p`
@@ -30,24 +42,31 @@ export const Wrapper = styled.div`
 
     margin-left: auto;
     margin-right: auto;
-    padding: 60px 80px;
+    padding: 60px 80px 40px;
   }
 
   @media screen and (min-width: 1280px) {
     width: 618px;
+    padding: 60px 80px;
   }
 `;
 
 export const TitleLogin = styled.h2`
   text-align: center;
   font-family: "Manrope";
-  font-weight: 500;
-  font-size: 36px;
-  line-height: 49px;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 33px;
   letter-spacing: 0.04em;
 
   color: #111111;
   margin-bottom: 40px;
+
+  @media screen and (min-width: 768px) {
+    font-weight: 500;
+    font-size: 36px;
+    line-height: 49px;
+  }
 `;
 
 export const FormCustom = styled(Form)`
@@ -74,13 +93,21 @@ export const Input = styled(Field)`
     line-height: 25px;
   }
 
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 25px;
+
   ::placeholder {
     font-weight: 400;
-    font-size: 18px;
-    line-height: 25px;
+    font-size: 14px;
+    line-height: 19px;
     letter-spacing: 0.04em;
-
     color: rgba(17, 17, 17, 0.6);
+
+    @media screen and (min-width: 768px) {
+      font-size: 18px;
+      line-height: 25px;
+    }
   }
 
   &:hover,
