@@ -1,7 +1,6 @@
 // import { Item, Image } from "./NoticeCategoryItem.styled";
 
-export const NoticeCategoryItem = ({ data, openModal = () => { } }) => {
-
+export const NoticeCategoryItem = ({ data, openModal = () => {} }) => {
   // const openModal = data => {
   //   setCurrentCategory(data);
   // }
@@ -34,8 +33,8 @@ export const NoticeCategoryItem = ({ data, openModal = () => { } }) => {
         />
       </Item> */}
     </>
-  )
-}
+  );
+};
 // return (
 //   <>
 //     <List>
