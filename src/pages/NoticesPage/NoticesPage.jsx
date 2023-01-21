@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 
@@ -11,27 +11,37 @@ import { Section } from "../../components/CommonComponents/Section/Section";
 import { Container } from "../../components/CommonComponents/Container/Container";
 import { AddNoticeButton } from "../../components/CommonButtons/AddNoticeButton/AddNoticeButton";
 import { NoticesCategoriesList } from "../../components/NoticesCategoriesList/NoticesCategoriesList";
+import { MenuWrap } from "./NoticesPage.styled";
 // -----------------------------------------------------------
+import { ModalAddNotice } from "../../components/ModalAddNotice/ModalAddNotice";
 
 export const NoticesPage = () => {
-  const dispatch = useDispatch();
+	const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const { route } = useParams();
+	const closeModal = () => {
+		setIsModalOpen(!isModalOpen);
+	}
 
-  useEffect(() => {
-    dispatch(fetchNotices({ category: route }));
-  }, [dispatch, route]);
+	const dispatch = useDispatch();
 
-  return (
-    <Section>
-      <Container>
-        <SectionTitle text={"Find your favorite pet"} />
-        <SearchField />
-        <NoticesCategoriesNav />
-        <AddNoticeButton />
+	const { route } = useParams();
 
-        <NoticesCategoriesList />
-      </Container>
-    </Section>
-  );
+	useEffect(() => {
+		dispatch(fetchNotices({ route }));
+	}, [dispatch, route]);
+
+	return (
+		<Section>
+			<Container>
+				<SectionTitle text={"Find your favorite pet"} />
+				<SearchField />
+				<MenuWrap>
+					<NoticesCategoriesNav />
+					<AddNoticeButton onClick={closeModal} />
+				</MenuWrap>
+				<NoticesCategoriesList />
+				{isModalOpen && <ModalAddNotice onClose={closeModal} />}
+			</Container>
+		</Section>
+	);
 };
