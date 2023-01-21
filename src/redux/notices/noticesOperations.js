@@ -1,7 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const baseURL = "http://localhost:4000/api/v1";
+// const baseURL = "http://localhost:4000/api/v1";
+const baseURL = "https://pets-support-backend.onrender.com/api/v1";
 
 // отримання оголошень по категоріям
 export const fetchNotices = createAsyncThunk(
