@@ -1,7 +1,10 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { toast } from "react-toastify";
+import { toastStyled } from "../../components/AuthForms/Forms.styled";
 
-axios.defaults.baseURL = "http://localhost:4000/api/v1";
+axios.defaults.baseURL = "https://pets-support-backend.onrender.com/api/v1";
+
 const token = {
   set(token) {
     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
@@ -32,6 +35,12 @@ export const login = createAsyncThunk(
       token.set(data.token);
       return data;
     } catch (error) {
+      if (error.response.status === 401) {
+        toast.error("Email or password is wrong!", toastStyled);
+      } else {
+        toast.error("Validation error!", toastStyled);
+      }
+
       return rejectWithValue(error.message);
     }
   }
