@@ -14,6 +14,7 @@ import {
 } from "./OurFriends.styled";
 import { WorkTime } from "./WorkTime";
 import image from "../../img/cat.png";
+
 export const OurFriendsList = ({ friends }) => {
   return (
     <Box>
@@ -28,6 +29,7 @@ export const OurFriendsList = ({ friends }) => {
           workDays,
           phone,
           email,
+          week,
         }) => (
           <ListItem key={_id}>
             <Title>

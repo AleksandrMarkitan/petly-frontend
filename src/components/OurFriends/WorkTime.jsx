@@ -1,46 +1,39 @@
 import { nanoid } from "nanoid";
 import { Div } from "./OurFriends.styled";
-
-export const WorkTime = (workDays) => {
+import { useState } from "react";
+export const WorkTime = ({ workDays }) => {
+  const days = ["MN ", "TU ", "WE ", "TH ", "FR ", "SA ", "SU "];
+  const [modalOpened, setModalOpened] = useState(false);
+  const handleClick = () => {
+    setModalOpened(!modalOpened);
+  };
+  console.log(workDays);
   return (
-    <Div>
-      <span>
-        <ul>
-          {workDays.workDays.map(({ day, from, to, isOpen }) => (
-            <li key={nanoid()}>
-              {isOpen ? (
-                <p>
-                  <small>{day}&nbsp;&nbsp;</small>
-                  {from} - {to}
-                </p>
-              ) : (
-                <p>
-                  <small>{day}</small> Closed
-                </p>
-              )}
-            </li>
-          ))}
-        </ul>
-      </span>
+    <>
+      <button type="click" onClick={handleClick}>
+        {workDays[0].from && workDays[0].to
+          ? `${workDays[0]?.from} - ${workDays[0]?.to}`
+          : "Closed"}
+      </button>
 
-      <>
-        <ul>
-          {workDays.workDays.map(({ day, from, to, isOpen }) => (
-            <li key={nanoid()}>
-              {isOpen ? (
-                <p>
-                  <small>{day}&nbsp;&nbsp;</small>
-                  {from} - {to}
-                </p>
-              ) : (
-                <p>
-                  <small>{day}</small> Closed
-                </p>
-              )}
-            </li>
-          ))}
-        </ul>
-      </>
-    </Div>
+      {modalOpened && (
+        <>
+          <Div>
+            {workDays.map(({ from, to, isOpen }, index) => (
+              <li key={nanoid()}>
+                {isOpen ? (
+                  <p>
+                    {days[index]}
+                    {from}-{to}
+                  </p>
+                ) : (
+                  <p>Closed</p>
+                )}
+              </li>
+            ))}
+          </Div>
+        </>
+      )}
+    </>
   );
 };

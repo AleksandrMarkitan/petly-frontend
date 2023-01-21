@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
-// import { useEffect, Suspense } from "react";
-// import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { PublicRoute } from "../HOCs/PublicRoute";
 import { PrivateRoute } from "../HOCs/PrivateRoute";
 
@@ -13,10 +13,23 @@ import { UserPage } from "../pages/UserPage/UserPage";
 import { OurFriendsPage } from "../pages/OurFriendsPage/OurFriendsPage";
 import { NoticesPage } from "../pages/NoticesPage/NoticesPage";
 
-// import { Loader } from "../components/Loader/Loader";
+import { Loader } from "../components/Loader/Loader";
 
+import {
+  selectIsFetchingCurrentUser,
+  selectIsLoading,
+} from "../redux/auth/authSelectors";
+import { fetchCurrentUser } from "../redux/auth/authOperations";
 export const App = () => {
-  return (
+  const dispatch = useDispatch();
+  const isFetchingCurrentUser = useSelector(selectIsFetchingCurrentUser);
+  const isLoading = useSelector(selectIsLoading);
+  useEffect(() => {
+    dispatch(fetchCurrentUser());
+  }, [dispatch]);
+  return isFetchingCurrentUser || isLoading ? (
+    <Loader />
+  ) : (
     <>
       <Routes>
         <Route path="/" element={<Layout />}>
