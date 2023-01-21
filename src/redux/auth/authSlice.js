@@ -1,7 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import { register, login, logout, fetchCurrentUser } from "./authOperations";
+import {
+  register,
+  login,
+  logout,
+  fetchCurrentUser,
+  updateFavoriteNotice,
+} from "./authOperations";
 
 const initialState = {
   user: {
@@ -47,6 +53,8 @@ const authSlice = createSlice({
       .addCase(register.rejected, handleRejected)
       .addCase(login.rejected, handleRejected)
       .addCase(logout.rejected, handleRejected)
+      .addCase(updateFavoriteNotice.rejected, handleRejected)
+      .addCase(updateFavoriteNotice.pending, handlePending)
 
       .addCase(register.fulfilled, (state, { payload: { user, token } }) => {
         state.token = token;
@@ -76,17 +84,11 @@ const authSlice = createSlice({
         state.error = payload;
         state.isLoading = false;
         state.isFetching = false;
+      })
+      .addCase(updateFavoriteNotice.fulfilled, (state, { payload }) => {
+        state.user.favoriteNotices = payload;
+        state.isLoading = false;
       });
-  },
-  reducers: {
-    updateFavoriteNotices(state, { payload }) {
-      const indexId = state.favoriteNotices.indexOf(payload);
-      if (indexId === -1) {
-        state.favoriteNotices.push(payload);
-      } else {
-        state.favoriteNotices.splice(indexId, 1);
-      }
-    },
   },
 });
 
@@ -94,5 +96,3 @@ export const authPersistedReducer = persistReducer(
   authPersistConfig,
   authSlice.reducer
 );
-
-export const { updateFavoriteNotices } = authSlice.actions;
