@@ -22,25 +22,20 @@ export const Label = styled.label`
 `;
 
 export const Wrapper = styled.div`
-  width: 618px;
-  background: #ffffff;
-  box-shadow: 7px 4px 14px rgba(0, 0, 0, 0.11);
-  border-radius: 40px;
+  @media screen and (min-width: 768px) {
+    width: 608px;
+    background: #ffffff;
+    box-shadow: 7px 4px 14px rgba(0, 0, 0, 0.11);
+    border-radius: 40px;
 
-  margin-left: auto;
-  margin-right: auto;
-  padding: 60px 80px;
-
-  /* @media screen and (min-width: 768px) {
-    width: 533px;
     margin-left: auto;
     margin-right: auto;
-    padding: 40px 58.5px 62px 65px;
-  } */
+    padding: 60px 80px;
+  }
 
-  /* @media screen and (min-width: 1280px) {
-    margin-right: 91px;
-  } */
+  @media screen and (min-width: 1280px) {
+    width: 618px;
+  }
 `;
 
 export const TitleLogin = styled.h2`
@@ -63,24 +58,23 @@ export const FormCustom = styled(Form)`
 
 export const Input = styled(Field)`
   width: 100%;
+  padding: 14px 10px 13px 32px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 19px;
+  letter-spacing: 0.04em;
+  color: rgba(17, 17, 17, 0.6);
   background: #fdf7f2;
   border: 1px solid rgba(245, 146, 86, 0.5);
   border-radius: 40px;
   outline: none;
 
-  font-family: "Manrope";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 25px;
-  letter-spacing: 0.04em;
-
-  color: rgba(17, 17, 17, 0.6);
-
-  padding: 14px 10px 13px 32px;
+  @media screen and (min-width: 768px) {
+    font-size: 18px;
+    line-height: 25px;
+  }
 
   ::placeholder {
-    font-family: "Manrope";
     font-weight: 400;
     font-size: 18px;
     line-height: 25px;
