@@ -8,6 +8,7 @@ import {
   Btn,
   Category,
   Comments,
+  Heart,
   Img,
   ListOfValues,
   ThumbImg,
@@ -37,10 +38,14 @@ export const ModalNotice = ({
     <>
       <button onClick={closeModal}>ВІДКРИТИ МОДАЛКУ</button>
       {isModalOpen && (
-        <ModalWindow onClose={closeModal} modalType={"addPet"}>
+        <ModalWindow onClose={closeModal}>
           <Box>
             <ThumbImg>
-              <Img src="" alt="" />
+              <Img
+                src="https://cdn.lifehacker.ru/wp-content/uploads/2020/01/1119-white-flower-2_1579261223.jpg"
+                alt=""
+              />
+              <Category>In good hands</Category>
             </ThumbImg>
 
             <BoxTitleList>
@@ -49,15 +54,15 @@ export const ModalNotice = ({
               <ListOfValues>
                 <BoxValue>
                   <TitleValue>Name:</TitleValue>
-                  <Value>{name}</Value>
+                  <Value>{name}Hello World</Value>
                 </BoxValue>
                 <BoxValue>
                   <TitleValue>Birthday:</TitleValue>
-                  <Value>{birthdate}</Value>
+                  <Value>{birthdate}Hello World</Value>
                 </BoxValue>
                 <BoxValue>
                   <TitleValue>Breed:</TitleValue>
-                  <Value>{breed}</Value>
+                  <Value>{breed}Hello World</Value>
                 </BoxValue>
                 <BoxValue>
                   <TitleValue>Place:</TitleValue>
@@ -83,8 +88,6 @@ export const ModalNotice = ({
             </BoxTitleList>
           </Box>
 
-          <Category>In good hands</Category>
-
           <Comments>
             <b>Comments: </b>
             Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet,
@@ -92,7 +95,10 @@ export const ModalNotice = ({
           </Comments>
 
           <BoxBtns>
-            <Btn type="button">Add to </Btn>
+            <Btn type="button">
+              Add to
+              <Heart />
+            </Btn>
             <Btn type="button">Contact</Btn>
           </BoxBtns>
         </ModalWindow>
