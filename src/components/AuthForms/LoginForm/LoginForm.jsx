@@ -15,6 +15,7 @@ import {
 } from "../../AuthForms/Forms.styled";
 import { LoginBtn } from "../../CommonButtons/LoginBtn/LoginBtn";
 import { Container } from "../../CommonComponents/Container/Container";
+import { emailRegexp, passwordRegexp } from "../RegisterForm/RegisterForm";
 
 export const FormError = ({ name }) => {
   return (
@@ -31,12 +32,14 @@ export const LoginForm = () => {
   const validationSchema = yup.object({
     email: yup
       .string()
-      .email("Please, enter a valid e-mail")
+      .max(63)
+      .matches(emailRegexp, "Please, enter a valid e-mail")
       .required("E-mail is required"),
     password: yup
       .string()
       .min(7, "Password must consist of at least 7 symbols")
       .max(32, "Password must contain no more than 32 symbols")
+      .matches(passwordRegexp, "Please, enter a valid password")
       .required("Password is required"),
   });
 
