@@ -28,12 +28,17 @@ export const ModalNotice = ({
   comments,
   imgURL,
   owner,
+  sell,
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const closeModal = () => {
     setIsModalOpen(!isModalOpen);
   };
+
+  const hrefMail = `mailto:${owner}`;
+  const hrefTel = `tel:/* +380991111111 */${owner}`;
+
   return (
     <>
       <button onClick={closeModal}>ВІДКРИТИ МОДАЛКУ</button>
@@ -41,28 +46,25 @@ export const ModalNotice = ({
         <ModalWindow onClose={closeModal}>
           <Box>
             <ThumbImg>
-              <Img
-                src="https://cdn.lifehacker.ru/wp-content/uploads/2020/01/1119-white-flower-2_1579261223.jpg"
-                alt=""
-              />
-              <Category>In good hands</Category>
+              <Img src={imgURL} alt={name} />
+              <Category>{category}</Category>
             </ThumbImg>
 
             <BoxTitleList>
-              <Title>Сute dog looking for a home</Title>
+              <Title>{title}</Title>
 
               <ListOfValues>
                 <BoxValue>
                   <TitleValue>Name:</TitleValue>
-                  <Value>{name}Hello World</Value>
+                  <Value>{name}</Value>
                 </BoxValue>
                 <BoxValue>
                   <TitleValue>Birthday:</TitleValue>
-                  <Value>{birthdate}Hello World</Value>
+                  <Value>{birthdate}</Value>
                 </BoxValue>
                 <BoxValue>
                   <TitleValue>Breed:</TitleValue>
-                  <Value>{breed}Hello World</Value>
+                  <Value>{breed}</Value>
                 </BoxValue>
                 <BoxValue>
                   <TitleValue>Place:</TitleValue>
@@ -74,24 +76,29 @@ export const ModalNotice = ({
                 </BoxValue>
                 <BoxValue>
                   <TitleValue>Email:</TitleValue>
-                  <Value>{}</Value>
+                  <Value>
+                    <a href={hrefMail}>{}Email</a>
+                  </Value>
                 </BoxValue>
                 <BoxValue>
                   <TitleValue>Phone:</TitleValue>
-                  <Value>{}</Value>
+                  <Value>
+                    <a href={hrefTel}>{}Phone</a>
+                  </Value>
                 </BoxValue>
-                <BoxValue>
-                  <TitleValue>Sell:</TitleValue>
-                  <Value>{}</Value>
-                </BoxValue>
+                {sell && (
+                  <BoxValue>
+                    <TitleValue>Sell:</TitleValue>
+                    <Value>{sell}</Value>
+                  </BoxValue>
+                )}
               </ListOfValues>
             </BoxTitleList>
           </Box>
 
           <Comments>
             <b>Comments: </b>
-            Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet,
-            consectetur Lorem ipsum dolor sit amet, consectetur Lorem
+            {comments}
           </Comments>
 
           <BoxBtns>

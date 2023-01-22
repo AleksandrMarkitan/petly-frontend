@@ -43,7 +43,8 @@ export const Category = styled.p`
   position: absolute;
   top: 20px;
   left: 0;
-  padding: 6px 53px 6px 20px;
+  width: 158px;
+  padding: 6px 0px 6px 20px;
   background: rgba(255, 255, 255, 0.6);
   backdrop-filter: blur(50px);
   border-radius: 0 14px 14px 0;
