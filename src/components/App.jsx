@@ -1,8 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import { useEffect } from "react";
-// import { useEffect, Suspense } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import { useSelector } from "react-redux";
+
 import { PublicRoute } from "../HOCs/PublicRoute";
 import { PrivateRoute } from "../HOCs/PrivateRoute";
 
@@ -22,15 +21,15 @@ import {
 } from "../redux/auth/authSelectors";
 
 export const App = () => {
-  const dispatch = useDispatch();
-  const isFetching = useSelector(selectIsFetchingCurrentUser);
+  const isFetchingCurrentUser = useSelector(selectIsFetchingCurrentUser);
   const isLoading = useSelector(selectIsLoading);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchCurrentUser());
   }, [dispatch]);
 
-  return isFetching || isLoading ? (
+  return isFetchingCurrentUser || isLoading ? (
     <Loader />
   ) : (
     <>
@@ -88,9 +87,9 @@ export const App = () => {
           <Route
             path="user"
             element={
-              <PrivateRoute>
+              <PublicRoute>
                 <UserPage />
-              </PrivateRoute>
+              </PublicRoute>
             }
           />
           <Route path="*" element={<HomePage />} />

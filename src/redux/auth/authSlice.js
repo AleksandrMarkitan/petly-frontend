@@ -1,7 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import { register, login, logout, fetchCurrentUser } from "./authOperations";
+import { deletePet, addPet } from "../user/userOperations";
+import {
+  register,
+  login,
+  logout,
+  fetchCurrentUser,
+  updateUserData,
+  updateFavoriteNotice,
+  updateUserAvatar,
+} from "./authOperations";
 
 const initialState = {
   user: {
@@ -14,6 +23,7 @@ const initialState = {
     pets: [],
     favoriteNotices: [],
   },
+  items: [],
   token: null,
   isLoading: false,
   isAuth: false,
@@ -48,6 +58,8 @@ const authSlice = createSlice({
       .addCase(register.rejected, handleRejected)
       .addCase(login.rejected, handleRejected)
       .addCase(logout.rejected, handleRejected)
+      .addCase(updateFavoriteNotice.rejected, handleRejected)
+      .addCase(updateFavoriteNotice.pending, handlePending)
 
       .addCase(register.fulfilled, (state, { payload: { user, token } }) => {
         state.token = token;
@@ -86,17 +98,46 @@ const authSlice = createSlice({
         state.isAuth = false;
         state.isLoading = false;
         state.isFetching = false;
+      })
+      .addCase(updateUserData.pending, handlePending)
+      .addCase(updateUserData.fulfilled, (state, { payload }) => {
+        // const index = state.items.findIndex(({ id }) => id === payload.id);
+        // state.items[index] = payload;
+        state.user = payload;
+        state.isLoading = false;
+        state.error = null;
+      })
+      .addCase(updateUserData.rejected, handleRejected)
+      .addCase(updateUserAvatar.pending, handlePending)
+      .addCase(updateUserAvatar.fulfilled, (state, { payload }) => {
+        // const index = state.items.findIndex(({ id }) => id === payload.id);
+        // state.items[index] = payload;
+        state.user = payload;
+        state.isLoading = false;
+        state.error = null;
+      })
+      .addCase(updateUserAvatar.rejected, handleRejected)
+      .addCase(deletePet.pending, handlePending)
+      .addCase(deletePet.fulfilled, (state, { payload }) => {
+        state.user.pets = state.user.pets.filter(({ _id }) => _id !== payload);
+        state.isLoading = false;
+        state.error = null;
+      })
+      .addCase(deletePet.rejected, (state, { payload }) => {
+        state.error = payload;
+        state.isLoading = false;
+      })
+      .addCase(addPet.pending, handlePending)
+      .addCase(addPet.fulfilled, (state, { payload }) => {
+        state.items = [...state.items, payload];
+        state.isLoading = false;
+        state.error = null;
+      })
+      .addCase(addPet.rejected, handleRejected)
+      .addCase(updateFavoriteNotice.fulfilled, (state, { payload }) => {
+        state.user.favoriteNotices = payload;
+        state.isLoading = false;
       });
-  },
-  reducers: {
-    updateFavoriteNotices(state, { payload }) {
-      const indexId = state.favoriteNotices.indexOf(payload);
-      if (indexId === -1) {
-        state.favoriteNotices.push(payload);
-      } else {
-        state.favoriteNotices.splice(indexId, 1);
-      }
-    },
   },
 });
 
@@ -104,5 +145,3 @@ export const authPersistedReducer = persistReducer(
   authPersistConfig,
   authSlice.reducer
 );
-
-export const { updateFavoriteNotices } = authSlice.actions;
