@@ -133,13 +133,29 @@ export const Btn = styled(Button)`
   align-items: center;
   justify-content: center;
   width: 100%;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  font-size: 16px;
+  line-height: calc(22 / 16);
+
+  :hover {
+  }
   @media (min-width: 768px) {
     width: 160px;
+  }
+  span {
+    display: flex;
+    align-items: center;
+    color: #f59256;
+    transition: color 400ms linear;
+  }
+  :hover span {
+    color: #fff;
   }
 `;
 
 export const Heart = styled(AiFillHeart)`
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
   margin-left: 8px;
 `;

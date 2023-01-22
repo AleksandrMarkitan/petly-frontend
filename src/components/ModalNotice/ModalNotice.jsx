@@ -104,7 +104,9 @@ export const ModalNotice = ({
           <BoxBtns>
             <Btn type="button">
               Add to
-              <Heart />
+              <span>
+                <Heart />
+              </span>
             </Btn>
             <Btn type="button">Contact</Btn>
           </BoxBtns>
