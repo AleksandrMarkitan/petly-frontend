@@ -136,7 +136,7 @@ export const ModalAddPet = () => {
       >
         {/* <FieldArray> */}
 
-        <Form autoComplete="off">
+        <Form autoComplete="off" encType="multipart/form-data">
           {/* <FieldsWrapper> */}
           {backFormShow && (
             <div>

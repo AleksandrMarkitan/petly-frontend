@@ -2,7 +2,10 @@ import { useState } from "react";
 
 //import axios from "axios";
 import { useDispatch } from "react-redux";
-import { updateUserData } from "../../redux/auth/authOperations";
+import {
+  updateUserAvatar,
+  updateUserData,
+} from "../../redux/auth/authOperations";
 //import { selectUser } from "../../redux/auth/authSelectors";
 //import { selectUser } from "../../redux/user/userSelectors";
 //import { selectIsFetchingCurrentUser } from "../../redux/auth/authSelectors";
@@ -66,6 +69,9 @@ export const UserDataItem = ({
         break;
       case "city":
         dispatch(updateUserData({ city: inputValue }));
+        break;
+        //   case "city":
+        //     dispatch(updateUserAvatar({ avatarURL: data }));
         break;
       default:
         return;

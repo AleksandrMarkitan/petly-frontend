@@ -1,15 +1,16 @@
 import { useRef, useState } from "react";
 import { InputHidden } from "./UserData.styled";
 import { UserDataItem } from "../UserDataItem/UserDataItem";
-import axios from "axios";
-import { updateUserData } from "../../redux/auth/authOperations";
+//import axios from "axios";
+import {
+  updateUserAvatar,
+  updateUserData,
+} from "../../redux/auth/authOperations";
 import { useDispatch, useSelector } from "react-redux";
-//import { fetchUserPets } from "../../redux/user/userOperations";
 
-axios.defaults.baseURL = "http://localhost:4000/api/v1";
 const token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYzkzMDc0Nzc4MDA3ZDg1NmVlZDhiOCIsImlhdCI6MTY3NDE2NDQ3NSwiZXhwIjoxNjc0OTkyNDc1fQ.pGsU7-qWoeUAQS8l3qzUqVLV876F1d48tpeoC8vwAfQ";
-axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzY2QwZDE4OWYyYzE5MjI4ZTU1M2Y0ZiIsImlhdCI6MTY3NDM4MjcxOSwiZXhwIjoxNjc1MjEwNzE5fQ.kONMeCBrIJcPokziKvTGWUsPwXewg04H1RTgG3H6CyE";
+// axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 
 export const UserData = ({ user }) => {
   const dispatch = useDispatch();
@@ -29,6 +30,8 @@ export const UserData = ({ user }) => {
 
   // для отправки на бек
   const handleAvatar = async (e) => {
+    //e.preventDefault();
+    e.preventDefault();
     const data = new FormData();
     data.append(
       "avatarURL",
@@ -38,24 +41,28 @@ export const UserData = ({ user }) => {
     console.log(data);
     console.log(e.target.files[0]);
     //добавляет картинку на бек
-    // const res = await fetch("Http://localhost:4000/api/v1/users/update", {
-    //   method: "PATCH",
-    //   headers: {
-    //     Authorization: `Bearer ${token}`,
-    //   },
-    //   body: data,
-    // });
-    //console.log(data);
-    //const res1 = dispatch(updateUserData({ avatarURL: data }));
-    //console.log(res1);
+    // const res = await fetch(
+    //   "https://pets-support-backend.onrender.com/api/v1/users/update",
+    //   {
+    //     method: "PATCH",
+    //     headers: {
+    //       Authorization: `Bearer ${token}`,
+    //     },
+    //     body: data,
+    //   }
+    // );
+    // console.log(data);
+    //const res1 = dispatch(updateUserData(data));
+
     // const result = await res.json();
-    // //console.log(result);
+
     // setUploaded(result.avatarURL);
 
-    dispatch(updateUserData(data));
+    dispatch(updateUserAvatar({ avatarURL: data }));
   };
 
-  const handlePick = () => {
+  const handlePick = (e) => {
+    e.preventDefault();
     filePicker.current.click();
   };
 
@@ -76,7 +83,8 @@ export const UserData = ({ user }) => {
           />
         </InputHidden>
         {avatarURL && (
-          <img src={uploaded ? uploaded : avatarURL} alt="avatar" />
+          <img src={avatarURL} alt="avatar" />
+          //  <img src={uploaded ? uploaded : avatarURL} alt="avatar" />
         )}
       </form>
 
@@ -100,9 +108,6 @@ export const UserData = ({ user }) => {
         <UserDataItem valueLabel="City:" nameInput="city" value={city} />
       )}
       {/* <LogOut /> */}
-      {/* <form>
-        <input />
-      </form> */}
       {/* </WrapperDataUser> */}
     </>
   );

@@ -14,22 +14,15 @@ import { selectUser, selectUserPets } from "../../redux/auth/authSelectors";
 //import { selectUserPets } from "../../redux/auth/authSelectors";
 
 export const UserPage = () => {
-  //const userName = useSelector(selectUserName);
   const user = useSelector(selectUser);
-  // const pets = useSelector(selectPets);
-  //const { pets } = user;
+  console.log(user);
   const pets = useSelector(selectUserPets);
-  //   console.log(user);
-  //   console.log(pets);
-  // const { pets } = user;
-  //console.log(user);
-  // console.log(pets2);
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(fetchCurrentUser());
-    // dispatch(fetchCurrentUser());
   }, [dispatch]);
-  //console.log(user);
+
   return (
     <Section>
       <Container>

@@ -9,6 +9,7 @@ import {
   fetchCurrentUser,
   updateUserData,
   updateFavoriteNotice,
+  updateUserAvatar,
 } from "./authOperations";
 
 const initialState = {
@@ -97,6 +98,15 @@ const authSlice = createSlice({
         state.error = null;
       })
       .addCase(updateUserData.rejected, handleRejected)
+      .addCase(updateUserAvatar.pending, handlePending)
+      .addCase(updateUserAvatar.fulfilled, (state, { payload }) => {
+        // const index = state.items.findIndex(({ id }) => id === payload.id);
+        // state.items[index] = payload;
+        state.user = payload;
+        state.isLoading = false;
+        state.error = null;
+      })
+      .addCase(updateUserAvatar.rejected, handleRejected)
       .addCase(deletePet.pending, handlePending)
       .addCase(deletePet.fulfilled, (state, { payload }) => {
         state.user.pets = state.user.pets.filter(({ _id }) => _id !== payload);

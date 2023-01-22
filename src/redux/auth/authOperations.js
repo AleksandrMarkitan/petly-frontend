@@ -3,16 +3,23 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { toastStyled } from "../../components/AuthForms/Forms.styled";
 
-axios.defaults.baseURL = "https://pets-support-backend.onrender.com/api/v1";
+const { REACT_APP_API_URL } = process.env;
+const BASE_URL = REACT_APP_API_URL;
 
-const token = {
-  set(token) {
-    axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-  },
-  unset() {
-    axios.defaults.headers.common.Authorization = ``;
-  },
-};
+axios.defaults.baseURL = BASE_URL;
+const token =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzY2QwZDE4OWYyYzE5MjI4ZTU1M2Y0ZiIsImlhdCI6MTY3NDM4MjcxOSwiZXhwIjoxNjc1MjEwNzE5fQ.kONMeCBrIJcPokziKvTGWUsPwXewg04H1RTgG3H6CyE";
+axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+//axios.defaults.baseURL = "http://localhost:4000/api/v1";
+
+// const token = {
+//   set(token) {
+//     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+//   },
+//   unset() {
+//     axios.defaults.headers.common.Authorization = ``;
+//   },
+// };
 
 export const register = createAsyncThunk(
   "auth/register",
@@ -61,11 +68,11 @@ export const logout = createAsyncThunk(
 export const fetchCurrentUser = createAsyncThunk(
   "auth/refresh",
   async (_, { rejectWithValue, getState }) => {
-    const tokenCurrent = getState().auth.token;
-    if (!tokenCurrent) {
-      return rejectWithValue();
-    }
-    token.set(tokenCurrent);
+    // const tokenCurrent = getState().auth.token;
+    // if (!tokenCurrent) {
+    //   return rejectWithValue();
+    // }
+    // token.set(tokenCurrent);
     try {
       const { data } = await axios("/users/current");
       return data;
@@ -81,6 +88,7 @@ export const updateUserData = createAsyncThunk(
     { name, email, birthday, phone, city, avatarURL, pets },
     { rejectWithValue }
   ) => {
+    avatarURL && console.log(123, avatarURL);
     try {
       const { data } = await axios.patch("/users/update", {
         name,
@@ -88,9 +96,21 @@ export const updateUserData = createAsyncThunk(
         birthday,
         phone,
         city,
-        avatarURL,
         pets,
       });
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+// оновлення картинки
+export const updateUserAvatar = createAsyncThunk(
+  "users/updateAvatar",
+  async ({ avatarURL }, { rejectWithValue }) => {
+    avatarURL && console.log(123, avatarURL);
+    try {
+      const { data } = await axios.patch("/users/update", avatarURL);
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -104,7 +124,7 @@ export const updateFavoriteNotice = createAsyncThunk(
 
   async ({ noticeId }, { rejectWithValue }) => {
     try {
-      const {data} = await axios.patch(`/notices/${noticeId}/favorites`);
+      const { data } = await axios.patch(`/notices/${noticeId}/favorites`);
       return data.favoriteNotices;
     } catch (error) {
       return rejectWithValue(error.message);
