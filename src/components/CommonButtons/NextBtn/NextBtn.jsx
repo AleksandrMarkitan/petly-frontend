@@ -7,5 +7,7 @@ export const NextBtn = ({ onClick, type = "button", text = "Next" }) => {
 		onClick();
 	}
 
-	return <Button type={type} onClick={clickHandler}>{text}</Button>
+	return <Button type={type} onClick={clickHandler} >{text}</Button>
 }
+
+// disabled={true}
