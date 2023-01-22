@@ -2,7 +2,7 @@ import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 const token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYzg0MjNiMzMwNTdmZTc5ZTZkYzNkNyIsImlhdCI6MTY3NDA2ODU3MCwiZXhwIjoxNjc0MTUxMzcwfQ.zJ573neN-3HKihDENOlTXTjDDiipaxkVCGZD6fJVIbM";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzY2QxZmJkOWYyYzE5MjI4ZTU1M2ZmOCIsImlhdCI6MTY3NDM5ODQ5OSwiZXhwIjoxNjc1MjI2NDk5fQ.5lZzGdStLVfeG2C9RmQ2p1YprlBFxG-CCjKWE4tr0dA";
 axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 // axios.defaults.baseURL = "http://localhost:5000/api/v1";
 
