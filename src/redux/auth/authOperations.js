@@ -12,7 +12,7 @@ import axios from "axios";
 // };
 
 const token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYzg0MjNiMzMwNTdmZTc5ZTZkYzNkNyIsImlhdCI6MTY3NDA2ODU3MCwiZXhwIjoxNjc0MTUxMzcwfQ.zJ573neN-3HKihDENOlTXTjDDiipaxkVCGZD6fJVIbM";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYzkzMDc0Nzc4MDA3ZDg1NmVlZDhiOCIsImlhdCI6MTY3NDIzODgxNiwiZXhwIjoxNjc1MDY2ODE2fQ.wQ92xAMifrRnJLbkPhYiBUMzGYewGrxIZBwMu5gPaVg";
 axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 axios.defaults.baseURL = "http://localhost:4000/api/v1";
 

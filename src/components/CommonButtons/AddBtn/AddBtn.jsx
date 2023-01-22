@@ -1,5 +1,9 @@
 import { Button } from "./AddBtn.styled";
 
-export const AddBtn = () => {
-  return <Button type="button">+</Button>;
+export const AddBtn = ({ closeModal }) => {
+  return (
+    <Button type="button" onClick={closeModal}>
+      +
+    </Button>
+  );
 };

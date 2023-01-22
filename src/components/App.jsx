@@ -72,9 +72,9 @@ export const App = () => {
           <Route
             path="user"
             element={
-              <PrivateRoute>
+              <PublicRoute>
                 <UserPage />
-              </PrivateRoute>
+              </PublicRoute>
             }
           />
           <Route path="*" element={<HomePage />} />

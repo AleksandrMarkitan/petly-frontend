@@ -2,19 +2,17 @@ import { useRef, useState } from "react";
 import { InputHidden } from "./UserData.styled";
 import { UserDataItem } from "../UserDataItem/UserDataItem";
 import axios from "axios";
-// import { useDispatch, useSelector } from "react-redux";
-// import { selectUser } from "../../redux/user/userSelectors";
-// import { fetchUserPets, updateUserData } from "../../redux/user/userOperations";
-// import { useDispatch, useSelector } from "react-redux";
-// import { selectUser } from "../../redux/user/userSelectors";
+import { updateUserData } from "../../redux/auth/authOperations";
+import { useDispatch, useSelector } from "react-redux";
 //import { fetchUserPets } from "../../redux/user/userOperations";
-axios.defaults.baseURL = "http://localhost:5000/api/v1";
+
+axios.defaults.baseURL = "http://localhost:4000/api/v1";
 const token =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYzkzMDc0Nzc4MDA3ZDg1NmVlZDhiOCIsImlhdCI6MTY3NDE2NDQ3NSwiZXhwIjoxNjc0OTkyNDc1fQ.pGsU7-qWoeUAQS8l3qzUqVLV876F1d48tpeoC8vwAfQ";
 axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 
 export const UserData = ({ user }) => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   //  ------------Update Avatar----------
   const filePicker = useRef(null);
@@ -37,18 +35,24 @@ export const UserData = ({ user }) => {
       e.target.files[0]
       //selectedFile
     );
-
+    console.log(data);
+    console.log(e.target.files[0]);
     //добавляет картинку на бек
-    const res = await fetch("Http://localhost:5000/api/v1/users/update", {
-      method: "PATCH",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      body: data,
-    });
-    const result = await res.json();
-    setUploaded(result.avatarURL);
-    // dispatch(updateUserData(data));
+    // const res = await fetch("Http://localhost:4000/api/v1/users/update", {
+    //   method: "PATCH",
+    //   headers: {
+    //     Authorization: `Bearer ${token}`,
+    //   },
+    //   body: data,
+    // });
+    //console.log(data);
+    //const res1 = dispatch(updateUserData({ avatarURL: data }));
+    //console.log(res1);
+    // const result = await res.json();
+    // //console.log(result);
+    // setUploaded(result.avatarURL);
+
+    dispatch(updateUserData(data));
   };
 
   const handlePick = () => {

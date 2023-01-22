@@ -1,5 +1,9 @@
 import { Button } from "./NextBtn.styled";
 
-export const NextBtn = () => {
-	return <Button type="button">Next</Button>
-}
+export const NextBtn = ({ handleBtn }) => {
+  return (
+    <Button type="button" onClick={handleBtn}>
+      Next
+    </Button>
+  );
+};

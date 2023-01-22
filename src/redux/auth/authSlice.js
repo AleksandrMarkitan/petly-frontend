@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import { deletePet } from "../user/userOperations";
+import { deletePet, addPet } from "../user/userOperations";
 import {
   register,
   login,
@@ -97,9 +97,7 @@ const authSlice = createSlice({
         state.error = null;
       })
       .addCase(updateUserData.rejected, handleRejected)
-      .addCase(deletePet.pending, (state) => {
-        state.isLoading = true;
-      })
+      .addCase(deletePet.pending, handlePending)
       .addCase(deletePet.fulfilled, (state, { payload }) => {
         state.user.pets = state.user.pets.filter(({ _id }) => _id !== payload);
         state.isLoading = false;
@@ -108,7 +106,14 @@ const authSlice = createSlice({
       .addCase(deletePet.rejected, (state, { payload }) => {
         state.error = payload;
         state.isLoading = false;
-      });
+      })
+      .addCase(addPet.pending, handlePending)
+      .addCase(addPet.fulfilled, (state, { payload }) => {
+        state.items = [...state.items, payload];
+        state.isLoading = false;
+        state.error = null;
+      })
+      .addCase(addPet.rejected, handleRejected);
   },
   reducers: {
     updateFavoriteNotices(state, { payload }) {

@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
   addPet,
-  deletePet,
+  //deletePet,
   //   fetchUserPets,
   //   updateUserData,
 } from "./userOperations";
