@@ -10,14 +10,15 @@ export const BackDrop = styled.div`
 	padding: 0 20px;
 	background-color: rgba(17, 17, 17, 0.6);
 	backdrop-filter: blur(10px);
+	overflow: auto;
 `
 
 export const Modal = styled.div`
 	position: absolute;
-	top: 50%;
+	top: 0%;
 	left: 50%;
 	z-index: 5;
-	transform: translate(-50%, -50%);
+	transform: translateX(-50%);
 	background-color: #fff;
 	width: 280px;
 	border-radius: 20px;
@@ -31,7 +32,7 @@ export const Modal = styled.div`
 	@media (min-width: 768px) {
 		padding: ${p => {
 		if (p.modalType === 'addPet') {
-			return "40px 20px"
+			return "40px 80px"
 		}
 		return "32px 20px"
 	}};

@@ -1,9 +1,13 @@
 import { Button } from "./CancelBtn.styled";
 
-export const CancelBtn = ({ handleBtn }) => {
+export const CancelBtn = ({ onClick, text = "Cancel" }) => {
+  const clickHandler = () => {
+    onClick();
+  };
+
   return (
-    <Button type="button" onClick={handleBtn}>
-      Cancel
+    <Button type="button" onClick={clickHandler}>
+      {text}
     </Button>
   );
 };

@@ -1,9 +1,14 @@
 import { Button } from "./NextBtn.styled";
 
-export const NextBtn = ({ handleBtn }) => {
+export const NextBtn = ({ onClick, type = "button", text = "Next" }) => {
+  const clickHandler = (e) => {
+    e.preventDefault();
+    onClick();
+  };
+
   return (
-    <Button type="button" onClick={handleBtn}>
-      Next
+    <Button type={type} onClick={clickHandler}>
+      {text}
     </Button>
   );
 };
