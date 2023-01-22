@@ -9,7 +9,30 @@ box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2),
 
 export const Wrap = styled.div`
 `;
+export const ImgWrap = styled.div`
+  position: relative;
+`;
 export const CategoryLabel = styled.p`
+  position: absolute;
+	top: 20px;
+	left: 0;
+  z-index: 1;
+  padding: 6px 0;
+  width: 158px;
+  font-size: 12px;
+  line-height: calc(16 / 12);
+  letter-spacing: 0.04em;
+  text-align: center;
+  color: #111111;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(2px);
+  border-radius: 0px 40px 40px 0px;
+
+  @media screen and (min-width: 768px) {
+    padding: 6px 0;
+    font-size: 12px;
+    line-height: calc(16 / 12);
+  }
 `;
 
 export const Img = styled.img`

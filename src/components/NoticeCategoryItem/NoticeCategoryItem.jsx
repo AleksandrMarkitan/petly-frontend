@@ -6,7 +6,7 @@ import { FavoriteBtn } from '../CommonButtons/FavoriteBtn/FavoriteBtn';
 import { LearnMoreBtn } from '../CommonButtons/LearnMoreBtn/LearnMoreBtn';
 import { DeletePetBtn } from '../CommonButtons/DeletePetBtn/DeletePetBtn';
 import { ModalWindow } from "../CommonComponents/ModalWindow/ModalWindow";
-import { Item, Wrap, CategoryLabel, Img, Inner, Title, Ul, Li, Lable, Text } from "./NoticeCategoryItem.styled";
+import { Item, Wrap, ImgWrap, CategoryLabel, Img, Inner, Title, Ul, Li, Lable, Text } from "./NoticeCategoryItem.styled";
 
 export const NoticeCategoryItem = ({ notices }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -40,9 +40,11 @@ export const NoticeCategoryItem = ({ notices }) => {
       }) => (
         <Item key={_id} >
           <Wrap>
-            <CategoryLabel>{category}</CategoryLabel>
-            <Img src={imgURL} alt={name} />
-            <FavoriteBtn />
+            <ImgWrap>
+              <CategoryLabel>{category}</CategoryLabel>
+              <Img src={imgURL} alt={name} />
+              <FavoriteBtn />
+            </ImgWrap>
             <Inner>
               <Title>{title}</Title>
               <Ul>
