@@ -7,7 +7,7 @@ import { SearchField } from "../../components/CommonComponents/SearchField/Searc
 import { NewsList } from "../../components/NewsList/NewsList"
 import { getNews } from "../../serveсes/getNews"
 
-export const NewsPage = () => {
+ const NewsPage = () => {
 	const [news, setNews] = useState([]);
 
 	useEffect(() => {
@@ -54,3 +54,5 @@ export const NewsPage = () => {
 		</Container>
 	</Section>
 }
+
+export default NewsPage;

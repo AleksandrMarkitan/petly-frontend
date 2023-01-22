@@ -8,7 +8,7 @@ import { SectionTitle } from "../../components/CommonComponents/SectionTitle/Sec
 import { UserData } from "../../components/UserData/UserData";
 import { fetchUserPets } from "../../redux/user/userOperations";
 
-export const UserPage = () => {
+const UserPage = () => {
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -26,3 +26,5 @@ export const UserPage = () => {
     </Section>
   );
 };
+
+export default UserPage;

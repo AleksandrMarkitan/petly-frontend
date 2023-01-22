@@ -1,14 +1,24 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
+import { lazy } from "react";
 // import { useEffect, Suspense } from "react";
 // import { useSelector } from "react-redux";
 import { PublicRoute } from "../HOCs/PublicRoute";
 import { PrivateRoute } from "../HOCs/PrivateRoute";
 
-import HomePage from "../pages/HomePage/HomePage";
 import { Layout } from "./Layout/Layout";
-import { NewsPage } from "../pages/NewsPage/NewsPage";
-import { UserPage } from "../pages/UserPage/UserPage";
-import { OurFriendsPage } from "../pages/OurFriendsPage/OurFriendsPage";
+
+// const OurFriendsPage = lazy(() =>
+//   import("../pages/OurFriendsPage/OurFriendsPage")
+// );
+// const UserPage = lazy(() => import("../pages/UserPage/UserPage"));
+
+// const NewsPage = lazy(() => import("../pages/NewsPage/NewsPage"));
+
+import OurFriendsPage from "../pages/UserPage/UserPage";
+import NewsPage from "../pages/NewsPage/NewsPage";
+import UserPage from "../pages/UserPage/UserPage";
+import HomePage from "../pages/HomePage/HomePage";
+// const HomePage = lazy(() => import("../pages/HomePage/HomePage"));
 
 // import { Loader } from "../components/Loader/Loader";
 
@@ -56,7 +66,7 @@ export const App = () => {
           <Route
             path="user"
             element={
-              <PrivateRoute redirectTo="/login">
+              <PrivateRoute>
                 <UserPage />
               </PrivateRoute>
             }
