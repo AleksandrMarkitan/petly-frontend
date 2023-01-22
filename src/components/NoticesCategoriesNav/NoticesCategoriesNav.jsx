@@ -21,12 +21,12 @@ export const NoticesCategoriesNav = () => {
 
           {token &&
             <>
-            <Item>
-              <LinkNav to="/notices/favorite">favorite ads</LinkNav>
-            </Item>
-            <Item>
-              <LinkNav to="/notices/owner">my ads</LinkNav>
-            </Item>
+              <Item>
+                <LinkNav to="/notices/favorite">favorite ads</LinkNav>
+              </Item>
+              <Item>
+                <LinkNav to="/notices/owner">my ads</LinkNav>
+              </Item>
             </>}
         </List>
       </Nav>

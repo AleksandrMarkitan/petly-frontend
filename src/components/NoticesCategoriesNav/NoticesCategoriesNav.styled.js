@@ -2,14 +2,14 @@ import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 
 export const Nav = styled.nav`
-  /* display: flex;
-  flex-direction: column; */
+  display: flex;
+  flex-direction: column;
   
   @media screen and (min-width: 768px) {
-    /* flex-direction: row;
+    flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    gap: 12px; */
+    gap: 12px;
   }
 `;
 
@@ -19,23 +19,17 @@ export const List = styled.ul`
   gap: 12px;
   
   @media screen and (min-width: 768px) {
-    justify-content: space-between;
-
-  }
-
-  @media screen and (min-width: 1280px) {
-    flex-direction: row;
-    justify-content: space-between;
-
+    flex-direction: row;;
   }
 `;
 
 export const Item = styled.li`
+  position: relative;
   list-style: none;
 `;
 
 export const LinkNav = styled(NavLink)`
-  padding: 8px 28px;
+padding: 8px 28px;
   background-color: #ffffff;
   border: 2px solid #f59256;
   border-radius: 40px;
@@ -45,11 +39,11 @@ export const LinkNav = styled(NavLink)`
   color: #111111;
   transition: color 300ms linear, background-color 300ms linear;  
   
+  // transition: color var(--animation);
   
   @media screen and (min-width: 768px) {
     padding: 10px 28px;
     font-size: 20px;
-    line-height: calc(27 / 20);
   }
 
   &.active,
