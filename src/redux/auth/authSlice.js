@@ -16,6 +16,7 @@ const initialState = {
   },
   token: null,
   isLoading: false,
+  isAuth: false,
   error: null,
   isFetchingCurrentUser: false,
 };
@@ -51,16 +52,22 @@ const authSlice = createSlice({
       .addCase(register.fulfilled, (state, { payload: { user, token } }) => {
         state.token = token;
         state.user = user;
+        state.isAuth = true;
+
         state.isLoading = false;
       })
       .addCase(login.fulfilled, (state, { payload: { user, token } }) => {
         state.token = token;
         state.user = user;
+        state.isAuth = true;
+
         state.isLoading = false;
       })
       .addCase(logout.fulfilled, (state) => {
         state.token = null;
         state = initialState;
+        state.isAuth = false;
+
         state.isLoading = false;
       })
       .addCase(fetchCurrentUser.pending, (state) => {
@@ -69,11 +76,14 @@ const authSlice = createSlice({
       })
       .addCase(fetchCurrentUser.fulfilled, (state, { payload }) => {
         state.user = payload;
+        state.isAuth = true;
+
         state.isLoading = false;
         state.isFetching = false;
       })
       .addCase(fetchCurrentUser.rejected, (state, { payload }) => {
         state.error = payload;
+        state.isAuth = false;
         state.isLoading = false;
         state.isFetching = false;
       });

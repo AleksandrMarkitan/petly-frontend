@@ -22,6 +22,12 @@ export const register = createAsyncThunk(
       token.set(data.token);
       return data;
     } catch (error) {
+      if (error.response.status === 409) {
+        toast.error("User with such email already exists!", toastStyled);
+      } else {
+        toast.error("Validation error.", toastStyled);
+      }
+
       return rejectWithValue(error.message);
     }
   }
