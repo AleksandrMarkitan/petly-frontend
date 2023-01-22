@@ -12,3 +12,4 @@ export const selectError = (state) => state.auth.error;
 export const selectIsFetchingCurrentUser = (state) =>
   state.auth.isFetchingCurrentUser;
 export const selectFavoriteNotices = (state) => state.auth.favoriteNotices;
+export const selectUser = (state) => state.auth.user;
