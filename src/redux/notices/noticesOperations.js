@@ -1,7 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const baseURL = "http://localhost:4000/api/v1";
+// const baseURL = "http://localhost:4000/api/v1";
+const baseURL = "https://pets-support-backend.onrender.com/api/v1";
 
 // отримання оголошень по категоріям
 export const fetchNotices = createAsyncThunk(
@@ -39,7 +40,7 @@ export const updateFavoriteNotice = createAsyncThunk(
 
   async ({ noticeId }, { rejectWithValue }) => {
     try {
-      await axios.patch(`/notices/${noticeId}/favorites`);
+      await axios.patch(`${baseURL}/notices/${noticeId}/favorites`);
       return { noticeId };
     } catch (error) {
       return rejectWithValue(error.message);
@@ -54,7 +55,7 @@ export const fetchFavorites = createAsyncThunk(
   async ({ page = 1, limit = 8 }, { rejectWithValue }) => {
     try {
       const { data } = await axios(
-        `/notices/favorites?page=${page}&limit=${limit}`
+        `${baseURL}/notices/favorites?page=${page}&limit=${limit}`
       );
       return data;
     } catch (error) {
@@ -69,7 +70,7 @@ export const addNotice = createAsyncThunk(
 
   async (newNotice, { rejectWithValue }) => {
     try {
-      const { data } = await axios.post("/notices", newNotice);
+      const { data } = await axios.post(`${baseURL}/notices`, newNotice);
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -84,7 +85,7 @@ export const fetchOwnerNotices = createAsyncThunk(
   async ({ page = 1, limit = 8 }, { rejectWithValue }) => {
     try {
       const { data } = await axios(
-        `/notices/owner?page=${page}&limit=${limit}`
+        `${baseURL}/notices/owner?page=${page}&limit=${limit}`
       );
       return data;
     } catch (error) {
@@ -99,7 +100,7 @@ export const deleteNotice = createAsyncThunk(
 
   async ({ noticeId }, { rejectWithValue }) => {
     try {
-      await axios.delete(`/notices/${noticeId}`);
+      await axios.delete(`${baseURL}/notices/${noticeId}`);
       return noticeId;
     } catch (error) {
       return rejectWithValue(error.message);

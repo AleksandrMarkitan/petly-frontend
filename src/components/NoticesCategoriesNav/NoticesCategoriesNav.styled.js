@@ -4,15 +4,12 @@ import { NavLink } from 'react-router-dom';
 export const Nav = styled.nav`
   display: flex;
   flex-direction: column;
-  margin-top: 40px;
-  padding: 0 12px;
   
   @media screen and (min-width: 768px) {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
     gap: 12px;
-    padding-bottom: 8px;
   }
 `;
 
