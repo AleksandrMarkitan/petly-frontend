@@ -42,6 +42,7 @@ export const RegisterForm = () => {
 
   const passwordRegexp = /^[A-Za-z0-9!?#$%^&_\-*]{7,32}$/;
   const nameRegexp = /^[a-zA-Z]{2,20}$/;
+  const cityRegexp = /^([^0-9][A-Za-z-\s]{2,})*,([^0-9][A-Za-z-\s]{2,})*/;
   const phoneRegexp = /^\+\d{12}$/;
 
   const schemaStepOne = yup.object({
@@ -72,7 +73,14 @@ export const RegisterForm = () => {
       .max(20, "Name must contain no more than 20 symbols")
       .matches(nameRegexp, "Please, enter a valid name")
       .required("Name is required"),
-    city: yup.string().required("City is required"),
+    city: yup
+      .string()
+      .max(50, "Too long.")
+      .matches(
+        cityRegexp,
+        "Please, enter a valid city. For example, Ivano-Frankivsk, Ivano-Frankivsk Oblast"
+      )
+      .required("City is required"),
     phone: yup
       .string()
       .matches(
