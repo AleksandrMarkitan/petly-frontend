@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -86,12 +86,12 @@ export const App = () => {
         <Route
           path="user"
           element={
-            <PublicRoute>
+            <PrivateRoute>
               <UserPage />
-            </PublicRoute>
+            </PrivateRoute>
           }
         />
-        <Route path="*" element={<HomePage />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Route>
     </Routes>
   );

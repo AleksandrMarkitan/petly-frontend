@@ -1,9 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-// const baseURL = "http://localhost:4000/api/v1";
-const baseURL = "https://pets-support-backend.onrender.com/api/v1";
-
 // отримання оголошень по категоріям
 export const fetchNotices = createAsyncThunk(
   "notices/fetchNotices",
@@ -11,7 +8,7 @@ export const fetchNotices = createAsyncThunk(
   async ({ category, page = 1, limit = 8 }, { rejectWithValue }) => {
     try {
       const { data } = await axios(
-        `${baseURL}/notices?category=${category}&page=${page}&limit=${limit}`
+        `/notices?category=${category}&page=${page}&limit=${limit}`
       );
       return data;
     } catch (error) {
@@ -26,22 +23,8 @@ export const fetchOneNotice = createAsyncThunk(
 
   async ({ noticeId }, { rejectWithValue }) => {
     try {
-      const { data } = await axios(`${baseURL}/notices/${noticeId}`);
+      const { data } = await axios(`/notices/${noticeId}`);
       return data;
-    } catch (error) {
-      return rejectWithValue(error.message);
-    }
-  }
-);
-
-// додавання та видалення оголошення з обраних
-export const updateFavoriteNotice = createAsyncThunk(
-  "notices/updateFavoriteNotice",
-
-  async ({ noticeId }, { rejectWithValue }) => {
-    try {
-      await axios.patch(`${baseURL}/notices/${noticeId}/favorites`);
-      return { noticeId };
     } catch (error) {
       return rejectWithValue(error.message);
     }
@@ -55,7 +38,7 @@ export const fetchFavorites = createAsyncThunk(
   async ({ page = 1, limit = 8 }, { rejectWithValue }) => {
     try {
       const { data } = await axios(
-        `${baseURL}/notices/favorites?page=${page}&limit=${limit}`
+        `/notices/favorites?page=${page}&limit=${limit}`
       );
       return data;
     } catch (error) {
@@ -70,7 +53,7 @@ export const addNotice = createAsyncThunk(
 
   async (newNotice, { rejectWithValue }) => {
     try {
-      const { data } = await axios.post(`${baseURL}/notices`, newNotice);
+      const { data } = await axios.post(`/notices`, newNotice);
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -85,7 +68,7 @@ export const fetchOwnerNotices = createAsyncThunk(
   async ({ page = 1, limit = 8 }, { rejectWithValue }) => {
     try {
       const { data } = await axios(
-        `${baseURL}/notices/owner?page=${page}&limit=${limit}`
+        `/notices/owner?page=${page}&limit=${limit}`
       );
       return data;
     } catch (error) {
@@ -100,7 +83,7 @@ export const deleteNotice = createAsyncThunk(
 
   async ({ noticeId }, { rejectWithValue }) => {
     try {
-      await axios.delete(`${baseURL}/notices/${noticeId}`);
+      await axios.delete(`/notices/${noticeId}`);
       return noticeId;
     } catch (error) {
       return rejectWithValue(error.message);
