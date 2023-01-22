@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 //import { selectPets, selectUser } from "../../redux/user/userSelectors";
 import {
   UserPageContainer,
@@ -23,11 +23,6 @@ export const UserPage = () => {
   const user = useSelector(selectUser);
   console.log(user);
   const pets = useSelector(selectUserPets);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchCurrentUser());
-  }, [dispatch]);
 
   return (
     <UserPageContainer>
