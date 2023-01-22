@@ -181,7 +181,7 @@ export const Button = styled.button`
     cursor: pointer;
   }
 `;
-export const Div = styled.ul`
+export const List = styled.ul`
   position: absolute;
   left: 0px;
   top: 25%;

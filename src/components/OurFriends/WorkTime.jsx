@@ -1,5 +1,5 @@
 import { nanoid } from "nanoid";
-import { Div, Button } from "./OurFriends.styled";
+import { List, Button } from "./OurFriends.styled";
 import { useState } from "react";
 export const WorkTime = ({ workDays }) => {
   const days = ["MN: ", "TU: ", "WE: ", "TH: ", "FR: ", "SA: ", "SU: "];
@@ -17,7 +17,7 @@ export const WorkTime = ({ workDays }) => {
 
       {modalOpened && (
         <>
-          <Div>
+          <List>
             {workDays.map(({ from, to, isOpen }, index) => (
               <li key={nanoid()}>
                 {isOpen ? (
@@ -30,7 +30,7 @@ export const WorkTime = ({ workDays }) => {
                 )}
               </li>
             ))}
-          </Div>
+          </List>
         </>
       )}
     </>

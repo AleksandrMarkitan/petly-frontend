@@ -18,7 +18,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <ThemeProvider theme={theme}>
       <Provider store={store}>
         <PersistGate persistor={persistor}>
-          <BrowserRouter basename="/petly-frontend/">
+          <BrowserRouter>
             <App />
             <ToastContainer
               position="top-right"
