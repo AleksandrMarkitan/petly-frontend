@@ -11,12 +11,11 @@ axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 
 export const NoticesCategoriesList = () => {
   // eslint-disable-next-line no-unused-vars
-  const [currentCategory, setCurrentCategory] = useState('sell');
+  const [currentCategory, setCurrentCategory] = useState("sell");
 
   return (
     <List>
       {/* {currentCategory.map(item => <NoticeCategoryItem data={item} />)} */}
     </List>
-  )
-}
-
+  );
+};

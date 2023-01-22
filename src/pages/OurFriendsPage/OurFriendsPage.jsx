@@ -20,7 +20,7 @@ export const OurFriendsPage = () => {
 
         setFriends(response);
       } catch (error) {
-        console.log(error);
+        console.log(error.message);
       }
     }
     fetch();
