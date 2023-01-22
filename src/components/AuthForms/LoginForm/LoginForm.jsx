@@ -5,7 +5,7 @@ import { login } from "../../../redux/auth/authOperations";
 
 import {
   Input,
-  TitleLogin,
+  TitleAuth,
   Wrapper,
   Paragraph,
   FormLink,
@@ -15,6 +15,15 @@ import {
 } from "../../AuthForms/Forms.styled";
 import { LoginBtn } from "../../CommonButtons/LoginBtn/LoginBtn";
 import { Container } from "../../CommonComponents/Container/Container";
+
+export const FormError = ({ name }) => {
+  return (
+    <ErrorMessage
+      name={name}
+      render={(message) => <ErrorText>{message}</ErrorText>}
+    />
+  );
+};
 
 export const LoginForm = () => {
   const dispatch = useDispatch();
@@ -41,18 +50,10 @@ export const LoginForm = () => {
     resetForm();
   };
 
-  const FormError = ({ name }) => {
-    return (
-      <ErrorMessage
-        name={name}
-        render={(message) => <ErrorText>{message}</ErrorText>}
-      />
-    );
-  };
   return (
     <Container>
       <Wrapper>
-        <TitleLogin>Login</TitleLogin>
+        <TitleAuth>Login</TitleAuth>
         <Formik
           initialValues={initialValues}
           onSubmit={handleSubmit}
