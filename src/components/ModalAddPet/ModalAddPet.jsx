@@ -1,7 +1,7 @@
-import { ModalWindow } from "../CommonComponents/ModalWindow/ModalWindow";
-import { Formik, Form, Field, ErrorMessage, FieldArray } from "formik";
-import * as Yup from "yup";
-import { FieldsWrapper } from "./ModalAddPet.styled";
+//import { ModalWindow } from "../CommonComponents/ModalWindow/ModalWindow";
+import { Formik, Form, Field } from "formik";
+//import * as Yup from "yup";
+//import { FieldsWrapper } from "./ModalAddPet.styled";
 import { CancelBtn } from "../CommonButtons/CancelBtn/CancelBtn";
 import { NextBtn } from "../CommonButtons/NextBtn/NextBtn";
 import { useDispatch } from "react-redux";
@@ -9,22 +9,22 @@ import { addPet } from "../../redux/user/userOperations";
 
 import { useRef, useState } from "react";
 //import { InputHidden } from "./UserData.styled";
-import { UserDataItem } from "../UserDataItem/UserDataItem";
+//import { UserDataItem } from "../UserDataItem/UserDataItem";
 
 export const ModalAddPet = () => {
   const dispatch = useDispatch();
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  //const [isModalOpen, setIsModalOpen] = useState(false);
   const [nextFormShow, setNextFormShow] = useState(false);
   const [backFormShow, setBackFormShow] = useState(true);
   const filePicker = useRef(null);
-  const [uploaded, setUploaded] = useState(null);
+  //const [uploaded, setUploaded] = useState(null);
 
-  const closeModal = () => {
-    setIsModalOpen(!isModalOpen);
-  };
+  //   const closeModal = () => {
+  //     setIsModalOpen(!isModalOpen);
+  //   };
 
-  const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYzkzMDc0Nzc4MDA3ZDg1NmVlZDhiOCIsImlhdCI6MTY3NDE2NDQ3NSwiZXhwIjoxNjc0OTkyNDc1fQ.pGsU7-qWoeUAQS8l3qzUqVLV876F1d48tpeoC8vwAfQ";
+  //   const token =
+  //     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYzkzMDc0Nzc4MDA3ZDg1NmVlZDhiOCIsImlhdCI6MTY3NDE2NDQ3NSwiZXhwIjoxNjc0OTkyNDc1fQ.pGsU7-qWoeUAQS8l3qzUqVLV876F1d48tpeoC8vwAfQ";
 
   /////////----------------------
 
@@ -59,7 +59,7 @@ export const ModalAddPet = () => {
 
   //---------PICTURE---------
   const [selectedFile, setSelectedFile] = useState(null);
-  const [selectedFile1, setSelectedFile1] = useState(null);
+  //const [selectedFile1, setSelectedFile1] = useState(null);
 
   //при изменении инпута добавляем выбранную картинку в селектедфайл
   const selectAvatar = (e) => {
@@ -96,7 +96,6 @@ export const ModalAddPet = () => {
 
     dispatch(addPet({ data }));
   };
-
   const handlePick = () => {
     filePicker.current.click();
   };
@@ -179,7 +178,7 @@ export const ModalAddPet = () => {
                 onChange={selectAvatar}
               />
               {/* </InputHidden> */}
-              {uploaded && <img src={uploaded} alt="avatar" />}
+              <img src="" alt="avatar" />
               {/* <label>
                 Date of birth
                 <Field name="avatar" /> */}

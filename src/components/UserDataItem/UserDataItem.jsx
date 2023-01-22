@@ -3,7 +3,7 @@ import { useState } from "react";
 //import axios from "axios";
 import { useDispatch } from "react-redux";
 import {
-  updateUserAvatar,
+  //updateUserAvatar,
   updateUserData,
 } from "../../redux/auth/authOperations";
 //import { selectUser } from "../../redux/auth/authSelectors";
@@ -72,7 +72,7 @@ export const UserDataItem = ({
         break;
         //   case "city":
         //     dispatch(updateUserAvatar({ avatarURL: data }));
-        break;
+       
       default:
         return;
     }

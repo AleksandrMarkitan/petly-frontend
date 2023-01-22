@@ -3,14 +3,13 @@ import { formatDate } from "../../helpers/formatDate";
 import { deletePet } from "../../redux/user/userOperations";
 import { DeletePetBtn } from "../../../src/components/CommonButtons/DeletePetBtn/DeletePetBtn";
 import {
-  DeleteBtn,
-  DeleteBtn2,
+  //   DeleteBtn,
+  //   DeleteBtn2,
   DescriptionUl,
   List,
   ListItem,
   WrapperPicDiv,
 } from "./PetsList.styled";
-import { Icon } from "@iconify/react";
 
 export const PetsList = ({ pets }) => {
   const dispatch = useDispatch();

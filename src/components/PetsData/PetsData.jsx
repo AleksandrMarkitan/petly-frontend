@@ -4,11 +4,11 @@ import { ModalWindow } from "../CommonComponents/ModalWindow/ModalWindow";
 import { useState } from "react";
 import { ModalAddPet } from "../ModalAddPet/ModalAddPet";
 
-import { Formik, Form, Field, ErrorMessage, FieldArray } from "formik";
-import * as Yup from "yup";
-import { FieldsWrapper } from "./ModalAddPet.styled";
-import { CancelBtn } from "../CommonButtons/CancelBtn/CancelBtn";
-import { NextBtn } from "../CommonButtons/NextBtn/NextBtn";
+// import { Formik, Form, Field, ErrorMessage, FieldArray } from "formik";
+// import * as Yup from "yup";
+// import { FieldsWrapper } from "./ModalAddPet.styled";
+// import { CancelBtn } from "../CommonButtons/CancelBtn/CancelBtn";
+// import { NextBtn } from "../CommonButtons/NextBtn/NextBtn";
 
 // import { useEffect } from "react";
 // import { useDispatch, useSelector } from "react-redux";
@@ -18,8 +18,8 @@ import { NextBtn } from "../CommonButtons/NextBtn/NextBtn";
 export const PetsData = ({ pets }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const [nextFormShow, setNextFormShow] = useState(false);
-  const [backFormShow, setBackFormShow] = useState(true);
+  //   const [nextFormShow, setNextFormShow] = useState(false);
+  //   const [backFormShow, setBackFormShow] = useState(true);
   const closeModal = () => {
     setIsModalOpen(!isModalOpen);
   };
@@ -31,17 +31,17 @@ export const PetsData = ({ pets }) => {
   //   console.log(pets);
 
   /////////----------------------
-  const handleNext = () => {
-    setNextFormShow(true);
-    setBackFormShow(false);
-  };
-  const handleBack = () => {
-    setBackFormShow(false);
-    setBackFormShow(true);
-  };
-  const handleSubmit = () => {
-    console.log(777);
-  };
+  //   const handleNext = () => {
+  //     setNextFormShow(true);
+  //     setBackFormShow(false);
+  //   };
+  //   const handleBack = () => {
+  //     setBackFormShow(false);
+  //     setBackFormShow(true);
+  //   };
+  //   const handleSubmit = () => {
+  //     console.log(777);
+  //   };
 
   return (
     <>

@@ -1,15 +1,15 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { InputHidden } from "./UserData.styled";
 import { UserDataItem } from "../UserDataItem/UserDataItem";
 //import axios from "axios";
 import {
   updateUserAvatar,
-  updateUserData,
+  // updateUserData,
 } from "../../redux/auth/authOperations";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
-const token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzY2QwZDE4OWYyYzE5MjI4ZTU1M2Y0ZiIsImlhdCI6MTY3NDM4MjcxOSwiZXhwIjoxNjc1MjEwNzE5fQ.kONMeCBrIJcPokziKvTGWUsPwXewg04H1RTgG3H6CyE";
+// const token =
+//   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzY2QwZDE4OWYyYzE5MjI4ZTU1M2Y0ZiIsImlhdCI6MTY3NDM4MjcxOSwiZXhwIjoxNjc1MjEwNzE5fQ.kONMeCBrIJcPokziKvTGWUsPwXewg04H1RTgG3H6CyE";
 // axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 
 export const UserData = ({ user }) => {
@@ -17,7 +17,7 @@ export const UserData = ({ user }) => {
 
   //  ------------Update Avatar----------
   const filePicker = useRef(null);
-  const [uploaded, setUploaded] = useState(null);
+  //const [uploaded, setUploaded] = useState(null);
   // const [selectedFile, setSelectedFile] = useState(null);
   //const [selectedFile1, setSelectedFile1] = useState(null);
 
