@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { PublicRoute } from "../HOCs/PublicRoute";
-import { PrivateRoute } from "../HOCs/PrivateRoute";
+// import { PrivateRoute } from "../HOCs/PrivateRoute";
 
 import HomePage from "../pages/HomePage/HomePage";
 import { Layout } from "./Layout/Layout";
@@ -15,7 +15,7 @@ import { OurFriendsPage } from "../pages/OurFriendsPage/OurFriendsPage";
 import { NoticesPage } from "../pages/NoticesPage/NoticesPage";
 import { fetchCurrentUser } from "../redux/auth/authOperations";
 
-import { Loader } from "../components/Loader/Loader";
+// import { Loader } from "../components/Loader/Loader";
 
 import {
   selectIsFetchingCurrentUser,
@@ -31,9 +31,10 @@ export const App = () => {
     dispatch(fetchCurrentUser());
   }, [dispatch]);
 
-  return isFetchingCurrentUser || isLoading ? (
-    <Loader />
-  ) : (
+  return (
+    // isFetchingCurrentUser || isLoading ? (
+    // <Loader />
+    // ) : (
     <>
       <Routes>
         <Route path="/" element={<Layout />}>

@@ -1,4 +1,13 @@
 import { useState } from "react";
+import {
+  Div,
+  Title,
+  Block,
+  Input,
+  Button,
+  EditTextBtnIcon,
+  IconCheck,
+} from "./UserDataItem.styled";
 
 //import axios from "axios";
 import { useDispatch } from "react-redux";
@@ -70,9 +79,9 @@ export const UserDataItem = ({
       case "city":
         dispatch(updateUserData({ city: inputValue }));
         break;
-        //   case "city":
-        //     dispatch(updateUserAvatar({ avatarURL: data }));
-       
+      //   case "city":
+      //     dispatch(updateUserAvatar({ avatarURL: data }));
+
       default:
         return;
     }
@@ -80,22 +89,28 @@ export const UserDataItem = ({
   };
 
   return (
-    <>
-      <form>
-        <label>
-          {valueLabel}
-          <input
-            type="text"
-            name={nameInput}
-            value={inputValue}
-            onChange={handleChange}
-            readOnly={!inputActive ? true : false}
-            // onChange={changeUserData}
-          />
-        </label>
-        {!inputActive && <button onClick={handleButtonUpdate}>edit</button>}
-        {inputActive && <button onClick={handleButtonUpdate}>update</button>}
-      </form>
-    </>
+    <Div>
+      <Title>{valueLabel}</Title>
+      <Block>
+        <Input
+          type="text"
+          name={nameInput}
+          value={inputValue}
+          onChange={handleChange}
+          readOnly={!inputActive ? true : false}
+          // onChange={changeUserData}
+        />
+        {!inputActive && (
+          <Button onClick={handleButtonUpdate}>
+            <EditTextBtnIcon />
+          </Button>
+        )}
+        {inputActive && (
+          <Button onClick={handleButtonUpdate}>
+            <IconCheck />
+          </Button>
+        )}
+      </Block>
+    </Div>
   );
 };

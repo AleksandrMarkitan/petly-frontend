@@ -8,7 +8,7 @@ const BASE_URL = REACT_APP_API_URL;
 
 axios.defaults.baseURL = BASE_URL;
 const token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzY2QwZDE4OWYyYzE5MjI4ZTU1M2Y0ZiIsImlhdCI6MTY3NDM4MjcxOSwiZXhwIjoxNjc1MjEwNzE5fQ.kONMeCBrIJcPokziKvTGWUsPwXewg04H1RTgG3H6CyE";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzY2QxZmJkOWYyYzE5MjI4ZTU1M2ZmOCIsImlhdCI6MTY3NDQyNTk3MSwiZXhwIjoxNjc1MjUzOTcxfQ.nEByqMu-4t14rtj7J-afH7FhAI0NzOJsTQek-dwuw9E";
 axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 //axios.defaults.baseURL = "http://localhost:4000/api/v1";
 
