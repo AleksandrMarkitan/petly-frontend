@@ -1,5 +1,5 @@
 import { nanoid } from "nanoid";
-import { List, Button } from "./OurFriends.styled";
+import { List, Button, Days, Hours, Dr, Rr } from "./OurFriends.styled";
 import { useState } from "react";
 export const WorkTime = ({ workDays }) => {
   const days = ["MN: ", "TU: ", "WE: ", "TH: ", "FR: ", "SA: ", "SU: "];
@@ -21,12 +21,17 @@ export const WorkTime = ({ workDays }) => {
             {workDays.map(({ from, to, isOpen }, index) => (
               <li key={nanoid()}>
                 {isOpen ? (
-                  <p>
-                    {days[index]}
-                    {from}-{to}
-                  </p>
+                  <Dr>
+                    <Hours>{days[index]} </Hours>
+                    <Hours>
+                      {from}-{to}
+                    </Hours>
+                  </Dr>
                 ) : (
-                  <p>{days[index]}Closed</p>
+                  <Days>
+                    <Hours>{days[index]} </Hours>
+                    <Hours>Closed</Hours>
+                  </Days>
                 )}
               </li>
             ))}

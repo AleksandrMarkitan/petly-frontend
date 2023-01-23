@@ -34,10 +34,8 @@ export const ListItem = styled.li`
     padding: 16px 11px 18px;
     margin-bottom: 32px;
     margin-left: 32px;
-    &:nth-media (min-width: 1279px) {
-    width: calc((100% - 64px) / 3);
-    padding: 16px 11px 18px;
-    margichild(3n + 1) {
+
+    &:nth-child(3n + 1) {
       margin-left: 0px;
     }
   }
@@ -46,9 +44,9 @@ export const Title = styled.h3`
   position: sticky;
   text-align: center;
   margin-bottom: 10px;
-    font-weight: ${(p) => p.theme.fontWeight.fw700};
-    font-size: ${(p) => p.theme.fontSize.fs12};
-    line-height: calc(16 / 12);
+  font-weight: ${(p) => p.theme.fontWeight.fw700};
+  font-size: ${(p) => p.theme.fontSize.fs12};
+  line-height: calc(16 / 12);
   color:${(p) => p.theme.colors.accent};
   z-index: 2;
   cursor: pointer;
@@ -58,6 +56,7 @@ export const Title = styled.h3`
     line-height: calc(22 / 16);
   :hover {
     cursor: pointer;
+    transition:  ${(p) => p.theme.transition.first};
   }
   @media (min-width: 1280px) {
     font-size:  ${(p) => p.theme.fontSize.fs20};
@@ -91,6 +90,7 @@ export const Hr = styled.hr`
   width: 70%;
   :hover {
     color: ${(p) => p.theme.colors.accent};
+    transition: ${(p) => p.theme.transition.first};
   }
 `;
 
@@ -106,8 +106,8 @@ export const Time = styled.li`
   &:nth-child(1) {
     margin-top: 0px;
   }
-  :hover {
-    color: ${(p) => p.theme.colors.accent};
+  :hover,
+  :focus {
     cursor: pointer;
   }
 
@@ -181,6 +181,7 @@ export const Button = styled.button`
   }
   :hover {
     color: ${(p) => p.theme.colors.accent};
+    transition: ${(p) => p.theme.transition.first};
     cursor: pointer;
   }
 `;
@@ -191,6 +192,7 @@ export const List = styled.ul`
   display: inline-block;
   padding: 12px 12px 12px 12px;
   border: 1px solid #f59256;
+  min-width: 120px;
   cursor: pointer;
   font-size: ${(p) => p.theme.fontSize.fs12};
   color: ${(p) => p.theme.colors.mainText};
@@ -202,4 +204,23 @@ export const List = styled.ul`
   @media (min-width: 1280px) {
     top: 20%;
   }
+  :hover,
+  :focus {
+    color: ${(p) => p.theme.colors.accent};
+    cursor: pointer;
+  }
+`;
+export const Days = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+export const Dr = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+export const Hours = styled.p`
+  display: block;
+`;
+export const Rr = styled.p`
+  display: block;
 `;
