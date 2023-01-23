@@ -15,7 +15,7 @@ import { Logout } from "../Logout/Logout";
 //import axios from "axios";
 // import { Wrapper } from "../AuthForms/Forms.styled";
 
-import { logout, updateUserAvatar } from "../../redux/auth/authOperations";
+import { updateUserAvatar } from "../../redux/auth/authOperations";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "../../redux/auth/authSelectors";
 
@@ -126,12 +126,12 @@ export const UserData = () => {
 // {city && (
 //   <UserDataItem valueLabel="City:" nameInput="city" value={city} />
 // )}
-{
-  /* <LogOut
-        onClick={() => {
-          dispatch(logout());
-        }}
-      /> */
-}
+// {
+//   /* <LogOut
+//         onClick={() => {
+//           dispatch(logout());
+//         }}
+//       /> */
+// }
 
 // </>

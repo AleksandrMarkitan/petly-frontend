@@ -1,27 +1,34 @@
-import { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { selectUser, selectFavoriteNotices } from '../../redux/auth/authSelectors';
+import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  selectUser,
+  selectFavoriteNotices,
+} from "../../redux/auth/authSelectors";
 import { deleteNotice } from "../../redux/notices/noticesOperations";
 import { updateFavoriteNotice } from "../../redux/auth/authOperations";
 
-import { FavoriteBtn } from '../CommonButtons/FavoriteBtn/FavoriteBtn';
-import { LearnMoreBtn } from '../CommonButtons/LearnMoreBtn/LearnMoreBtn';
-import { DeletePetNoticesBtn } from '../CommonButtons/DeletePetNoticesBtn/DeletePetNoticesBtn';
+import { FavoriteBtn } from "../CommonButtons/FavoriteBtn/FavoriteBtn";
+import { LearnMoreBtn } from "../CommonButtons/LearnMoreBtn/LearnMoreBtn";
+// import { DeletePetNoticesBtn } from '../CommonButtons/DeletePetNoticesBtn/DeletePetNoticesBtn';
 import { ModalWindow } from "../CommonComponents/ModalWindow/ModalWindow";
 import { ModalNotice } from "../ModalNotice/ModalNotice";
-import { Item, Wrap, ImgWrap, CategoryLabel, Img, Inner, Title, Ul, Li, Lable, Text } from "./NoticeCategoryItem.styled";
+import {
+  Item,
+  Wrap,
+  ImgWrap,
+  CategoryLabel,
+  Img,
+  Inner,
+  Title,
+  Ul,
+  Li,
+  Lable,
+  Text,
+} from "./NoticeCategoryItem.styled";
 
 export const NoticeCategoryItem = ({ data }) => {
-  const {
-    _id,
-    title,
-    category,
-    name,
-    birthdate,
-    breed,
-    location,
-    imgURL,
-  } = data;
+  const { _id, title, category, name, birthdate, breed, location, imgURL } =
+    data;
 
   const dispatch = useDispatch();
 
@@ -31,7 +38,7 @@ export const NoticeCategoryItem = ({ data }) => {
 
   const [isFavorite, setIsFavorite] = useState(false);
 
-  const currentUser = useSelector(selectUser);
+  // const currentUser = useSelector(selectUser);
 
   // setIsFavorite(currentUser.favoriteNotices
   //   .includes(_id));
@@ -40,23 +47,22 @@ export const NoticeCategoryItem = ({ data }) => {
   // console.log(currentUser);
   // console.log(favorites);
 
-
-  const getAge = birthdate => {
+  const getAge = (birthdate) => {
     // const age = now Date() - birthdate;
-  }
+  };
 
   const deletePet = (noticeId) => {
     dispatch(deleteNotice({ noticeId }));
-  }
+  };
 
   const closeModal = () => {
     setIsModalOpen(!isModalOpen);
-  }
+  };
 
   const favoriteHandler = () => {
     setIsFavorite(!isFavorite);
     dispatch(updateFavoriteNotice);
-  }
+  };
 
   // const getFavorite = NoticeId => favorites.includes(NoticeId);
 
@@ -64,14 +70,12 @@ export const NoticeCategoryItem = ({ data }) => {
 
   return (
     <>
-      <Item key={_id} >
+      <Item key={_id}>
         <Wrap>
           <ImgWrap>
             <CategoryLabel>{category}</CategoryLabel>
             <Img src={imgURL} alt={name} />
-            <FavoriteBtn
-              isFavorite={isFavorite}
-              onClick={favoriteHandler} />
+            <FavoriteBtn isFavorite={isFavorite} onClick={favoriteHandler} />
           </ImgWrap>
           <Inner>
             <Title>{title}</Title>
@@ -93,12 +97,13 @@ export const NoticeCategoryItem = ({ data }) => {
           <LearnMoreBtn onClick={closeModal} />
           {/* {&&
             <DeletePetNoticesBtn onClick={deletePet(_id)} />} */}
-          {isModalOpen &&
+          {isModalOpen && (
             <ModalWindow onClose={closeModal}>
               <ModalNotice data={data} />
-            </ModalWindow>}
+            </ModalWindow>
+          )}
         </Wrap>
       </Item>
     </>
-  )
-}
+  );
+};

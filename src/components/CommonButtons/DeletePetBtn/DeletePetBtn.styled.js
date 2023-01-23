@@ -1,26 +1,35 @@
 import styled from "styled-components";
+import { HiTrash } from "react-icons/hi2";
 
-export const Button = styled.button`
+export const DeleteBtn = styled.button`
   position: absolute;
-  top: 272px;
-  right: 20px;
-  width: 44px;
-  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  right: 0;
+  width: 20px;
+  height: 20px;
+  border: none;
+  background-color: #fdf7f2;
+  cursor: pointer;
   border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.6);
-  backdrop-filter: blur(2px);
-
-  svg {
-    margin-left: 13px;
-    fill: #111111;
-    fill-opacity: 0.6;
-    transition: fill 300ms linear;
+  border: none;
+  @media (min-width: 768px) {
+    width: 32px;
+    height: 32px;
   }
-
+`;
+export const DelIcon = styled(HiTrash)`
+  width: 22px;
+  height: 22px;
+  fill: rgba(17, 17, 17, 0.6);
+  @media (min-width: 768px) {
+    width: 24px;
+    height: 24px;
+  }
   :hover,
   :focus {
-    svg {
-      fill: #f59256;
-    }
+    fill: #f59256;
   }
 `;
