@@ -10,7 +10,7 @@ export const Logout = () => {
   };
 
   return (
-    <LogOut onClick={handleLogOut}>
+    <LogOut type="button" onClick={handleLogOut}>
       <LogOutIcon />
       Log Out
     </LogOut>

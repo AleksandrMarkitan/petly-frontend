@@ -47,25 +47,27 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 // );
 
 export const addPet = createAsyncThunk(
-  "pets/addPet",
-  async (pet, { rejectWithValue }) => {
-    try {
-      const { data } = await axios.post("/pets", pet);
-      return data;
-    } catch (error) {
-      return rejectWithValue(error.message);
-    }
-  }
+	"pets/addPet",
+	async (pet, { rejectWithValue }) => {
+		pet && console.log(123, pet);
+		console.log(pet);
+		try {
+			const { data } = await axios.post("/pets", pet);
+			return data;
+		} catch (error) {
+			return rejectWithValue(error.message);
+		}
+	}
 );
 
 export const deletePet = createAsyncThunk(
-  "pets/deletePet",
-  async (id, { rejectWithValue }) => {
-    try {
-      await axios.delete(`/pets/${id}`);
-      return id;
-    } catch (error) {
-      return rejectWithValue(error.message);
-    }
-  }
+	"pets/deletePet",
+	async (id, { rejectWithValue }) => {
+		try {
+			await axios.delete(`/pets/${id}`);
+			return id;
+		} catch (error) {
+			return rejectWithValue(error.message);
+		}
+	}
 );

@@ -1,10 +1,9 @@
-import { ReactComponent as DeleteBtn } from "../../../icons/trash_basket.svg";
-import { Button } from "./DeletePetBtn.styled";
+import { DeleteBtn, DelIcon } from "./DeletePetBtn.styled";
 
-export const DeletePetBtn = ({ onDelete = () => { } }) => {
+export const DeletePetBtn = ({ onDelete = () => {} }) => {
   return (
-    <Button type="button" onClick={onDelete}>
-      <DeleteBtn />
-    </Button>
+    <DeleteBtn type="button" onClick={onDelete}>
+      <DelIcon />
+    </DeleteBtn>
   );
 };

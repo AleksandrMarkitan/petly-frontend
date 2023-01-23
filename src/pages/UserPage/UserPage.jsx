@@ -9,7 +9,7 @@ import {
 } from "../../components/UserData/UserData.styled";
 import {
   BoxPet,
-  BoxTitlePet,
+  // BoxTitlePet,
 } from "../../components/PetsData/ModalAddPet.styled";
 import { UserData } from "../../components/UserData/UserData";
 //import { fetchUserPets } from "../../redux/user/userOperations";
@@ -21,7 +21,8 @@ import { selectUser, selectUserPets } from "../../redux/auth/authSelectors";
 
 const UserPage = () => {
   const user = useSelector(selectUser);
-  console.log(user);
+  // console.log(user);
+  // console.log(user.avatarURL);
   const pets = useSelector(selectUserPets);
 
   return (
@@ -33,12 +34,7 @@ const UserPage = () => {
 
         <UserData user={user} />
       </BoxUser>
-      <BoxPet>
-        <BoxTitlePet>
-          <TitleUser>My pets:</TitleUser>
-        </BoxTitlePet>
-        {pets && <PetsData pets={pets} />}
-      </BoxPet>
+      <BoxPet>{pets && <PetsData pets={pets} />}</BoxPet>
     </UserPageContainer>
   );
 };

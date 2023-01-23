@@ -11,6 +11,8 @@ import theme from "../components/utils/theme";
 import { PublicRoute } from "../HOCs/PublicRoute";
 import { PrivateRoute } from "../HOCs/PrivateRoute";
 
+import { Loader } from "./Loader/Loader";
+
 import { Layout } from "./Layout/Layout";
 import { fetchCurrentUser } from "../redux/auth/authOperations";
 const NoticesPage = lazy(() => import("../pages/NoticesPage/NoticesPage"));
@@ -45,75 +47,72 @@ export const App = () => {
     dispatch(fetchCurrentUser());
   }, [dispatch]);
 
-  return (
-    // isFetchingCurrentUser || isLoading ? (
-    // <Loader />
-    // ) : (
-    <>
-      <ThemeProvider theme={theme}>
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route
-              index
-              element={
-                <PublicRoute>
-                  <HomePage />
-                </PublicRoute>
-              }
-            />
-            <Route
-              path="register"
-              element={
-                <PublicRoute restricted>
-                  <RegisterPage />
-                </PublicRoute>
-              }
-            />
-            <Route
-              path="login"
-              element={
-                <PublicRoute restricted>
-                  <LoginPage />
-                </PublicRoute>
-              }
-            />
-            <Route
-              path="news"
-              element={
-                <PublicRoute>
-                  <NewsPage />
-                </PublicRoute>
-              }
-            />
-            <Route
-              path="notices/:route"
-              element={
-                <PublicRoute>
-                  <NoticesPage />
-                </PublicRoute>
-              }
-            />
+  return isFetchingCurrentUser || isLoading ? (
+    <Loader />
+  ) : (
+    <ThemeProvider theme={theme}>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route
+            index
+            element={
+              <PublicRoute>
+                <HomePage />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="register"
+            element={
+              <PublicRoute restricted>
+                <RegisterPage />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="login"
+            element={
+              <PublicRoute restricted>
+                <LoginPage />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="news"
+            element={
+              <PublicRoute>
+                <NewsPage />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="notices/:route"
+            element={
+              <PublicRoute>
+                <NoticesPage />
+              </PublicRoute>
+            }
+          />
 
-            <Route
-              path="friends"
-              element={
-                <PublicRoute>
-                  <OurFriendsPage />
-                </PublicRoute>
-              }
-            />
-            <Route
-              path="user"
-              element={
-                <PrivateRoute>
-                  <UserPage />
-                </PrivateRoute>
-              }
-            />
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Route>
-        </Routes>
-      </ThemeProvider>
-    </>
+          <Route
+            path="friends"
+            element={
+              <PublicRoute>
+                <OurFriendsPage />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="user"
+            element={
+              <PrivateRoute>
+                <UserPage />
+              </PrivateRoute>
+            }
+          />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Route>
+      </Routes>
+    </ThemeProvider>
   );
 };
