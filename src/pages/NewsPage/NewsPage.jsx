@@ -6,11 +6,15 @@ import { SectionTitle } from "../../components/CommonComponents/SectionTitle/Sec
 import { SearchField } from "../../components/CommonComponents/SearchField/SearchField"
 import { NewsList } from "../../components/NewsList/NewsList"
 import { getNews } from "../../serveсes/getNews"
+import { Loader } from "../../components/Loader/Loader"
 
 export const NewsPage = () => {
 	const [news, setNews] = useState([]);
+	const [isLoading, setIsLoading] = useState(false);
 
 	useEffect(() => {
+		setIsLoading(true);
+
 		async function fetch() {
 			try {
 				const response = await getNews({});
@@ -43,14 +47,21 @@ export const NewsPage = () => {
 		const sortedByDateNews = addDateForSort.sort((a, b) => b.dateForSort - a.dateForSort)
 
 		setNews(sortedByDateNews)
+		setIsLoading(false)
 	}
 
 	return <Section>
 		<Container>
 			<SectionTitle text="News" />
-			<SearchField searchFunction={searchNews} />
-			<NewsList news={news} />
-			{news.length === 0 && <div style={{ textAlign: "center" }}>Новин за вашим запитом не знайдено.</div>}
+			{isLoading ?
+				<Loader />
+				:
+				<>
+					<SearchField searchFunction={searchNews} />
+					<NewsList news={news} />
+				</>
+			}
+			{news.length === 0 && !isLoading && <div style={{ textAlign: "center" }}>Новин за вашим запитом не знайдено.</div>}
 		</Container>
 	</Section>
 }

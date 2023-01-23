@@ -37,8 +37,8 @@ export const NoticesPage = () => {
     }
     if (route === "owner") {
       if (searchTitleQwery !== "") {
-        dispatch(fetchOwnerNotices({qwery: searchTitleQwery}));
-      }else{
+        dispatch(fetchOwnerNotices({ qwery: searchTitleQwery }));
+      } else {
         dispatch(fetchOwnerNotices({}));
       }
     }
@@ -69,9 +69,6 @@ export const NoticesPage = () => {
           <AddNoticeButton onClick={closeModal} />
         </MenuWrap>
         <NoticesCategoriesList data={notices} />
-        {/* <NoticesCategoriesList>
-          <NoticeCategoryItem notices={notices} />
-        </NoticesCategoriesList> */}
         {isModalOpen && <ModalAddNotice onClose={closeModal} />}
       </Container>
     </Section>

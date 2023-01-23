@@ -15,7 +15,7 @@ export const Div = styled.div`
 export const Title = styled.label`
   width: 64px;
   font-size: ${(p) => p.theme.fontSize.fs12};
-  font-weight: 500px;
+  font-weight: ${(p) => p.theme.fontWeight.fw500};
   @media (min-width: 768px) {
     width: 107px;
     font-size: ${(p) => p.theme.fontSize.fs18};
