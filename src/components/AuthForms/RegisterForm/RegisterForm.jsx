@@ -128,7 +128,7 @@ export const RegisterForm = () => {
           <TitleAuth>Registration</TitleAuth>
           <FormCustom>
             {renderComponent()}
-            <Button type="button" onClick={handleNext}>
+            <Button onClick={handleNext}>
               {isLastStep ? "Register" : "Next"}
             </Button>
             {isLastStep && (
