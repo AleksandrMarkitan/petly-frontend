@@ -5,10 +5,13 @@ import axios from "axios";
 export const fetchNotices = createAsyncThunk(
   "notices/fetchNotices",
 
-  async ({ category, page = 1, limit = 8 }, { rejectWithValue }) => {
+  async (
+    { category, qwery = "", page = 1, limit = 8 },
+    { rejectWithValue }
+  ) => {
     try {
       const { data } = await axios(
-        `/notices?category=${category}&page=${page}&limit=${limit}`
+        `/notices?category=${category}&page=${page}&limit=${limit}&qwery=${qwery}`
       );
       return data;
     } catch (error) {
@@ -35,10 +38,10 @@ export const fetchOneNotice = createAsyncThunk(
 export const fetchFavorites = createAsyncThunk(
   "notices/fetchFavorites",
 
-  async ({ page = 1, limit = 8 }, { rejectWithValue }) => {
+  async ({ qwery="",page = 1, limit = 8 }, { rejectWithValue }) => {
     try {
       const { data } = await axios(
-        `/notices/favorites?page=${page}&limit=${limit}`
+        `/notices/favorites?page=${page}&limit=${limit}&qwery=${qwery}`
       );
       return data;
     } catch (error) {
@@ -65,10 +68,10 @@ export const addNotice = createAsyncThunk(
 export const fetchOwnerNotices = createAsyncThunk(
   "notices/fetchOwnerNotices",
 
-  async ({ page = 1, limit = 8 }, { rejectWithValue }) => {
+  async ({qwery="", page = 1, limit = 8 }, { rejectWithValue }) => {
     try {
       const { data } = await axios(
-        `/notices/owner?page=${page}&limit=${limit}`
+        `/notices/owner?page=${page}&limit=${limit}&qwery=${qwery}`
       );
       return data;
     } catch (error) {
