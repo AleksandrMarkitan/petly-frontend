@@ -7,7 +7,7 @@ const BASE_URL = REACT_APP_API_URL;
 
 axios.defaults.baseURL = BASE_URL;
 const token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzY2QwZDE4OWYyYzE5MjI4ZTU1M2Y0ZiIsImlhdCI6MTY3NDM4MjcxOSwiZXhwIjoxNjc1MjEwNzE5fQ.kONMeCBrIJcPokziKvTGWUsPwXewg04H1RTgG3H6CyE";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzY2Q2NzhlYmZmN2YxODM2ZDg4ZmJmMiIsImlhdCI6MTY3NDQwOTEzNywiZXhwIjoxNjc1MjM3MTM3fQ.2Ejp1wqGmA6zTpgJoe829bgz2EInYIVuNEg1haSXrN8";
 axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 
 //axios.defaults.baseURL = "http://localhost:4000/api/v1";
@@ -49,6 +49,8 @@ axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 export const addPet = createAsyncThunk(
   "pets/addPet",
   async (pet, { rejectWithValue }) => {
+    pet && console.log(123, pet);
+    console.log(pet);
     try {
       const { data } = await axios.post("/pets", pet);
       return data;
