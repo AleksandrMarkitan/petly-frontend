@@ -10,7 +10,6 @@ import { Section } from "../../components/CommonComponents/Section/Section";
 import { Container } from "../../components/CommonComponents/Container/Container";
 import { AddNoticeButton } from "../../components/CommonButtons/AddNoticeButton/AddNoticeButton";
 import { NoticesCategoriesList } from "../../components/NoticesCategoriesList/NoticesCategoriesList";
-import { NoticeCategoryItem } from "../../components/NoticeCategoryItem/NoticeCategoryItem";
 import { ModalAddNotice } from "../../components/ModalAddNotice/ModalAddNotice";
 import { MenuWrap } from "./NoticesPage.styled";
 
@@ -24,14 +23,14 @@ export const NoticesPage = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    if (['sell', 'lost-found', 'in-good-hands'].includes(route)) {
+      dispatch(fetchNotices({ category: route }));
+    }
     if (route === 'favorite') {
       dispatch(fetchFavorites({}));
     }
     if (route === 'owner') {
       dispatch(fetchOwnerNotices({}));
-    }
-    if (['sell', 'lost-found', 'in-good-hands'].includes(route)) {
-      dispatch(fetchNotices({ category: route }));
     }
   }, [dispatch, route]);
 
@@ -48,9 +47,10 @@ export const NoticesPage = () => {
           <NoticesCategoriesNav />
           <AddNoticeButton onClick={closeModal} />
         </MenuWrap>
-        <NoticesCategoriesList>
+        <NoticesCategoriesList data={notices} />
+        {/* <NoticesCategoriesList>
           <NoticeCategoryItem notices={notices} />
-        </NoticesCategoriesList>
+        </NoticesCategoriesList> */}
         {isModalOpen && <ModalAddNotice onClose={closeModal} />}
       </Container>
     </Section>

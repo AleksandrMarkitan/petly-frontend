@@ -29,7 +29,7 @@ export const Item = styled.li`
 `;
 
 export const LinkNav = styled(NavLink)`
-padding: 8px 28px;
+  padding: 8px 28px;
   background-color: #ffffff;
   border: 2px solid #f59256;
   border-radius: 40px;

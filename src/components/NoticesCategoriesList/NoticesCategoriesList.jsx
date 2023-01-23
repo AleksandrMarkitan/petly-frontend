@@ -1,10 +1,13 @@
+import { NoticeCategoryItem } from "../../components/NoticeCategoryItem/NoticeCategoryItem";
 import { List } from "./NoticesCategoriesList.styled";
 
-export const NoticesCategoriesList = ({ children }) => {
+export const NoticesCategoriesList = ({ data }) => {
 
   return (
     <List>
-      {children}
+      {data.map((item) =>
+        <NoticeCategoryItem key={item._id} data={item} />
+      )}
     </List>
   )
 }
