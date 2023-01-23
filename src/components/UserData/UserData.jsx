@@ -13,11 +13,6 @@ import {
 import { Logout } from "../Logout/Logout";
 
 //import axios from "axios";
-import {
-  updateUserAvatar,
-  // updateUserData,
-} from "../../redux/auth/authOperations";
-import { useDispatch } from "react-redux";
 // import { Wrapper } from "../AuthForms/Forms.styled";
 
 import { logout, updateUserAvatar } from "../../redux/auth/authOperations";
