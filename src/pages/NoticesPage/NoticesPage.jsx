@@ -48,9 +48,6 @@ export const NoticesPage = () => {
           <AddNoticeButton onClick={closeModal} />
         </MenuWrap>
         <NoticesCategoriesList data={notices} />
-        {/* <NoticesCategoriesList>
-          <NoticeCategoryItem notices={notices} />
-        </NoticesCategoriesList> */}
         {isModalOpen && <ModalAddNotice onClose={closeModal} />}
       </Container>
     </Section>
