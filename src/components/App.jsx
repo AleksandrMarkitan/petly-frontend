@@ -17,7 +17,7 @@ import { OurFriendsPage } from "../pages/OurFriendsPage/OurFriendsPage";
 import { NoticesPage } from "../pages/NoticesPage/NoticesPage";
 import { fetchCurrentUser } from "../redux/auth/authOperations";
 
-// import { Loader } from "../components/Loader/Loader";
+import { Loader } from "../components/Loader/Loader";
 
 import {
   selectIsFetchingCurrentUser,
@@ -33,10 +33,9 @@ export const App = () => {
     dispatch(fetchCurrentUser());
   }, [dispatch]);
 
-  return (
-    // isFetchingCurrentUser || isLoading ? (
-    // <Loader />
-    // ) : (
+  return isFetchingCurrentUser || isLoading ? (
+    <Loader />
+  ) : (
     <>
       <ThemeProvider theme={theme}>
         <Routes>
