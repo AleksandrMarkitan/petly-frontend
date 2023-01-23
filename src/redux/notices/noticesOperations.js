@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-
+// "http://localhost:4000/api/v1"
 // отримання оголошень по категоріям
 export const fetchNotices = createAsyncThunk(
   "notices/fetchNotices",
