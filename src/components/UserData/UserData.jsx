@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { InputHidden } from "./UserData.styled";
 import { UserDataItem } from "../UserDataItem/UserDataItem";
 
-import { updateUserAvatar } from "../../redux/auth/authOperations";
+import { logout, updateUserAvatar } from "../../redux/auth/authOperations";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "../../redux/auth/authSelectors";
 
@@ -65,7 +65,11 @@ export const UserData = () => {
       {city && (
         <UserDataItem valueLabel="City:" nameInput="city" value={city} />
       )}
-      {/* <LogOut /> */}
+      {/* <LogOut
+        onClick={() => {
+          dispatch(logout());
+        }}
+      /> */}
       {/* </WrapperDataUser> */}
     </>
   );

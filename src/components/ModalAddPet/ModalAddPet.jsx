@@ -114,11 +114,11 @@ export const ModalAddPet = () => {
 
     dispatch(
       addPet(
-        // data.append("avatarURL", selectedFile),
-        data.append("name", name.name),
-        data.append("breed", name.breed)
+        //data.append("avatarURL", selectedFile)
+        // data.append("name", name.name),
+        // data.append("breed", name.breed)
         // data
-        // { breed: name.breed, name: name.name }
+        { breed: name.breed, name: name.name }
       )
     );
     console.log(data);
