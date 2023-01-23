@@ -31,13 +31,17 @@ export const NoticesPage = () => {
   useEffect(() => {
     if (route === "favorite") {
       if (searchTitleQwery !== "") {
-        dispatch(fetchFavorites({qwery: searchTitleQwery}));
-      } else{
+        dispatch(fetchFavorites({ qwery: searchTitleQwery }));
+      } else {
         dispatch(fetchFavorites({}));
       }
     }
     if (route === "owner") {
-      dispatch(fetchOwnerNotices({}));
+      if (searchTitleQwery !== "") {
+        dispatch(fetchOwnerNotices({qwery: searchTitleQwery}));
+      }else{
+        dispatch(fetchOwnerNotices({}));
+      }
     }
     if (["sell", "lost-found", "in-good-hands"].includes(route)) {
       if (searchTitleQwery !== "") {
