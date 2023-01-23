@@ -37,8 +37,8 @@ export const NoticesPage = () => {
     }
     if (route === "owner") {
       if (searchTitleQwery !== "") {
-        dispatch(fetchOwnerNotices({qwery: searchTitleQwery}));
-      }else{
+        dispatch(fetchOwnerNotices({ qwery: searchTitleQwery }));
+      } else {
         dispatch(fetchOwnerNotices({}));
       }
     }
