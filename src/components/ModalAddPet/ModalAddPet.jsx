@@ -5,9 +5,10 @@ import { Formik, Form, Field } from "formik";
 import { CancelBtn } from "../CommonButtons/CancelBtn/CancelBtn";
 import { NextBtn } from "../CommonButtons/NextBtn/NextBtn";
 import { useDispatch } from "react-redux";
-import { addPet } from "../../redux/user/userOperations";
+//import { addPet } from "../../redux/user/userOperations";
 
 import { useRef, useState } from "react";
+import { addPet } from "../../redux/user/userOperations";
 //import { InputHidden } from "./UserData.styled";
 //import { UserDataItem } from "../UserDataItem/UserDataItem";
 
@@ -17,6 +18,7 @@ export const ModalAddPet = () => {
   const [nextFormShow, setNextFormShow] = useState(false);
   const [backFormShow, setBackFormShow] = useState(true);
   const filePicker = useRef(null);
+  const [selectedFile, setSelectedFile] = useState(null);
   //const [uploaded, setUploaded] = useState(null);
 
   //   const closeModal = () => {
@@ -32,7 +34,7 @@ export const ModalAddPet = () => {
     name: "",
     date: "",
     breed: "",
-    avatarURL: "",
+    avatarURL: {},
     comments: "",
     //   comment: "",
 
@@ -58,7 +60,7 @@ export const ModalAddPet = () => {
   };
 
   //---------PICTURE---------
-  const [selectedFile, setSelectedFile] = useState(null);
+
   //const [selectedFile1, setSelectedFile1] = useState(null);
 
   //при изменении инпута добавляем выбранную картинку в селектедфайл
@@ -94,7 +96,7 @@ export const ModalAddPet = () => {
     // console.log(result.avatarURL);
     //dispatch(updateUserData(data));
 
-    dispatch(addPet({ data }));
+    dispatch(addPet(data));
   };
   const handlePick = () => {
     filePicker.current.click();
@@ -102,23 +104,30 @@ export const ModalAddPet = () => {
 
   const onAddPet = (name) => {
     const data = new FormData();
-    data.append(
-      "avatarURL",
-      // e.target.files[0]
-      selectedFile
-    );
+    // data.append(
+    //   "avatarURL",
+    //   // e.target.files[0]
+    //   selectedFile
+    // );
+    // data.append("name", name.name);
+    // console.log(data);
+
     dispatch(
-      addPet({
-        name: name.name,
-        breed: name.breed,
-        comments: name.comments,
-        avatarURL: data,
-      })
+      addPet(
+        // data.append("avatarURL", selectedFile),
+        data.append("name", name.name),
+        data.append("breed", name.breed)
+        // data
+        // { breed: name.breed, name: name.name }
+      )
     );
+    console.log(data);
     console.log(name.name);
-    console.log(name.avatarURL);
-    console.log(name.date);
-    //handleAvatar();
+    //addPet(data)  //працю окрем
+    // addPet({ breed: name.breed, name: name.name }) //працю окремо
+    // avatarURL: data,
+
+    //handleAvatar();  отправляет но одно поле
     // { name: "oopppp", breed: "oooooo" }
   };
 
@@ -163,40 +172,40 @@ export const ModalAddPet = () => {
           )}
           {/* </Form> */}
           {/* )} */}
-          {nextFormShow && (
-            <div>
-              <button type="button" onClick={handlePick}>
-                Edit photo
-              </button>
-              {/* <InputHidden> */}
-              <input
-                type="file"
-                name="avatarURL"
-                // value={selectedFile}
-                // onChange={handleAvatar}
-                // ref={filePicker}
-                onChange={selectAvatar}
-              />
-              {/* </InputHidden> */}
-              <img src="" alt="avatar" />
-              {/* <label>
+          {/* {nextFormShow && ( */}
+          <div>
+            <button type="button" onClick={handlePick}>
+              Edit photo
+            </button>
+            {/* <InputHidden> */}
+            <input
+              type="file"
+              name="avatarURL"
+              // value={selectedFile}
+              // onChange={handleAvatar}
+              // ref={filePicker}
+              onChange={selectAvatar}
+            />
+            {/* </InputHidden> */}
+            <img src="" alt="avatar" />
+            {/* <label>
                 Date of birth
                 <Field name="avatar" /> */}
-              {/* <ErrorMessage name="date" component="span" /> */}
-              {/* </label> */}
+            {/* <ErrorMessage name="date" component="span" /> */}
+            {/* </label> */}
 
-              <label>
-                Comments
-                <Field name="comments" />
-                {/* <ErrorMessage name="breed" component="span" /> */}
-              </label>
-              <NextBtn handleBtn={handleSubmit}>Done</NextBtn>
-              <CancelBtn type="button" handleBtn={handleBack}>
-                Back
-              </CancelBtn>
-              <button type="submit">добавить</button>
-            </div>
-          )}
+            <label>
+              Comments
+              <Field name="comments" />
+              {/* <ErrorMessage name="breed" component="span" /> */}
+            </label>
+            <NextBtn handleBtn={handleSubmit}>Done</NextBtn>
+            <CancelBtn type="button" handleBtn={handleBack}>
+              Back
+            </CancelBtn>
+            <button type="submit">добавить</button>
+          </div>
+          {/* )} */}
         </Form>
         {/* )} */}
         {/* </FieldArray> */}
