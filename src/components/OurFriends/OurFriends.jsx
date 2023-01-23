@@ -14,7 +14,6 @@ import {
 } from "./OurFriends.styled";
 import { WorkTime } from "./WorkTime";
 import image from "../../img/cat.png";
-
 export const OurFriendsList = ({ friends }) => {
   return (
     <Box>
@@ -38,6 +37,7 @@ export const OurFriendsList = ({ friends }) => {
                 </a>
               </span>
             </Title>
+
             <Wrapper>
               <Picture>
                 {imageUrl ? (

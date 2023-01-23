@@ -1,9 +1,17 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Form, Field } from "formik";
+import bgLoginDesc from "../../img/bgLoginDesc.png";
+import bgLoginTab from "../../img/bgLoginTab.png";
+import bgLoginMob from "../../img/bgLoginMob.png";
+
 import { SectionTag } from "../CommonComponents/Section/Section.styled";
 
 export const AuthSection = styled(SectionTag)`
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-image: url(${bgLoginMob});
+
   @media screen and (max-width: 767px) {
     height: 100vh;
   }
@@ -11,11 +19,13 @@ export const AuthSection = styled(SectionTag)`
   @media screen and (min-width: 768px) {
     padding-top: 168px;
     padding-bottom: 250px;
+    background-image: url(${bgLoginTab});
   }
 
   @media screen and (min-width: 1280px) {
     padding-top: 80px;
     padding-bottom: 100px;
+    background-image: url(${bgLoginDesc});
   }
 `;
 
@@ -51,7 +61,7 @@ export const Wrapper = styled.div`
   }
 `;
 
-export const TitleLogin = styled.h2`
+export const TitleAuth = styled.h2`
   text-align: center;
   font-family: "Manrope";
   font-weight: 700;

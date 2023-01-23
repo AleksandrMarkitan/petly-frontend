@@ -1,39 +1,67 @@
-import { useState } from "react";
-import { WrapperDataUser } from "./UserPage.styled";
-// import { useDispatch, useSelector } from "react-redux";
-// import { selectUser } from "../../redux/user/userSelectors";
-
+import { useRef } from "react";
+import { InputHidden } from "./UserData.styled";
 import { UserDataItem } from "../UserDataItem/UserDataItem";
+import {
+	Form,
+	UserBlock,
+	ImageContainer,
+	IconEditImgBtn,
+	Img,
+	ImageBox,
+	EditButton,
+} from "./UserData.styled";
+import { Logout } from "../Logout/Logout";
 
-// import axios from "axios";
-//import { fetchUserPets } from "../../redux/user/userOperations";
-// axios.defaults.baseURL = "http://localhost:4000/api/v1";
-// const token =
-//   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYzg0MjNiMzMwNTdmZTc5ZTZkYzNkNyIsImlhdCI6MTY3NDA2ODU3MCwiZXhwIjoxNjc0MTUxMzcwfQ.zJ573neN-3HKihDENOlTXTjDDiipaxkVCGZD6fJVIbM";
-// axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+//import axios from "axios";
+// import { Wrapper } from "../AuthForms/Forms.styled";
 
-export const UserData = ({ user }) => {
-	console.log(user.pets);
-	const [inputValue, setInputValue] = useState();
+import { updateUserAvatar } from "../../redux/auth/authOperations";
+import { useDispatch, useSelector } from "react-redux";
+import { selectUser } from "../../redux/auth/authSelectors";
 
-	const handleChange = (evt) => {
-		setInputValue(evt.target.value);
-		console.log(inputValue);
+export const UserData = () => {
+	const dispatch = useDispatch();
+	const user = useSelector(selectUser);
+	//  ------------Update Avatar----------
+	const filePicker = useRef(null);
+
+	const handleAvatar = async (e) => {
+		e.preventDefault();
+		const data = new FormData();
+		data.append("avatarURL", e.target.files[0]);
+		dispatch(updateUserAvatar({ avatarURL: data }));
+	};
+
+	const handlePick = (e) => {
+		e.preventDefault();
+		filePicker.current.click();
 	};
 
 	const { name, email, birthday, phone, city, avatarURL } = user;
 	return (
-		<>
-			<WrapperDataUser>
-				<label>
-					<input type="file" name="avatar" onChange={handleChange} />
-					<input
-						type="image"
-						src={avatarURL}
-						alt="avatar"
-					// src="https://res.cloudinary.com/dgne23at6/image/upload/v1674052318/f64cacccea6511bba2ae40b5383e3e47_ajipj3.jpg"
-					/>
-				</label>
+		<UserBlock>
+			<ImageContainer>
+				<form action="" id="avatar-add" encType="multipart/form-data">
+					<InputHidden>
+						<input
+							type="file"
+							name="avatarURL"
+							onChange={handleAvatar}
+							ref={filePicker}
+						/>
+					</InputHidden>
+					{avatarURL && (
+						<ImageBox>
+							<Img src={avatarURL} alt="avatar" />
+						</ImageBox>
+						//  <img src={uploaded ? uploaded : avatarURL} alt="avatar" />
+					)}
+					<EditButton type="button" onClick={handlePick}>
+						<IconEditImgBtn /> Edit photo
+					</EditButton>
+				</form>
+			</ImageContainer>
+			<Form>
 				{name && (
 					<UserDataItem valueLabel="Name:" nameInput="name" value={name} />
 				)}
@@ -53,11 +81,57 @@ export const UserData = ({ user }) => {
 				{city && (
 					<UserDataItem valueLabel="City:" nameInput="city" value={city} />
 				)}
-				{/* <LogOut /> */}
-				{/* <form>
-        <input />
-      </form> */}
-			</WrapperDataUser>
-		</>
+			</Form>
+			<Logout />
+		</UserBlock>
 	);
 };
+
+// <>
+// <WrapperDataUser>
+// <form action="" id="avatar-add" encType="multipart/form-data">
+//   <button type="button" onClick={handlePick}>
+//     Edit photo
+//   </button>
+//   <InputHidden>
+//     <input
+//       type="file"
+//       name="avatarURL"
+//       onChange={handleAvatar}
+//       ref={filePicker}
+//     />
+//   </InputHidden>
+//   {avatarURL && (
+//     <img src={avatarURL} alt="avatar" />
+//     // <img src={uploaded ? uploaded : avatarURL} alt="avatar" />
+//   )}
+// </form>
+
+// {name && (
+//   <UserDataItem valueLabel="Name:" nameInput="name" value={name} />
+// )}
+// {email && (
+//   <UserDataItem valueLabel="Email:" nameInput="email" value={email} />
+// )}
+// {birthday && (
+//   <UserDataItem
+//     valueLabel="Birthday:"
+//     nameInput="birthday"
+//     value={birthday}
+//   />
+// )}
+// {phone && (
+//   <UserDataItem valueLabel="Phone:" nameInput="phone" value={phone} />
+// )}
+// {city && (
+//   <UserDataItem valueLabel="City:" nameInput="city" value={city} />
+// )}
+// {
+//   /* <LogOut
+//         onClick={() => {
+//           dispatch(logout());
+//         }}
+//       /> */
+// }
+
+// </>

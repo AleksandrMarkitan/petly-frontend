@@ -23,3 +23,17 @@ export const Button = styled.button`
     padding: 10px 28px;
   }
 `;
+
+export const BackBtn = styled(Button)`
+  margin-top: 0;
+  background: #fff;
+  color: #000000;
+
+  border: 2px solid #f59256;
+
+  :hover,
+  :focus {
+    background-color: #f59256;
+    color: #fff;
+  }
+`;

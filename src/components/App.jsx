@@ -1,6 +1,8 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { ThemeProvider } from "styled-components";
+import theme from "../components/utils/theme";
 
 import { PublicRoute } from "../HOCs/PublicRoute";
 import { PrivateRoute } from "../HOCs/PrivateRoute";
@@ -14,8 +16,7 @@ import { UserPage } from "../pages/UserPage/UserPage";
 import { OurFriendsPage } from "../pages/OurFriendsPage/OurFriendsPage";
 import { NoticesPage } from "../pages/NoticesPage/NoticesPage";
 import { fetchCurrentUser } from "../redux/auth/authOperations";
-
-import { Loader } from "../components/Loader/Loader";
+import { Loader } from "./Loader/Loader";
 
 import {
   selectIsFetchingCurrentUser,
@@ -34,7 +35,7 @@ export const App = () => {
   return isFetchingCurrentUser || isLoading ? (
     <Loader />
   ) : (
-    <>
+    <ThemeProvider theme={theme}>
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route
@@ -94,9 +95,9 @@ export const App = () => {
               </PrivateRoute>
             }
           />
-          <Route path="*" element={<HomePage />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Route>
       </Routes>
-    </>
+    </ThemeProvider>
   );
 };

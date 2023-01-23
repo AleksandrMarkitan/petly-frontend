@@ -3,36 +3,35 @@ import { NavLink } from 'react-router-dom';
 
 export const Nav = styled.nav`
   display: flex;
-  flex-direction: column;
-  margin-top: 40px;
-  padding: 0 12px;
+  flex-direction: row;
   
   @media screen and (min-width: 768px) {
-    flex-direction: row;
+    /* flex-direction: row; */
     align-items: center;
     justify-content: space-between;
     gap: 12px;
-    padding-bottom: 8px;
   }
 `;
 
 export const List = styled.ul`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 12px;
+  flex-wrap: wrap;
   
   @media screen and (min-width: 768px) {
-    flex-direction: row;;
+    /* flex-direction: row; */
   }
 `;
 
 export const Item = styled.li`
-  position: relative;
-  list-style: none;
+  /* position: relative;
+  list-style: none; */
 `;
 
 export const LinkNav = styled(NavLink)`
-padding: 8px 28px;
+  display:inline-block;
+  padding: 8px 28px;
   background-color: #ffffff;
   border: 2px solid #f59256;
   border-radius: 40px;

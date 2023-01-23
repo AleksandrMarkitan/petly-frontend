@@ -1,53 +1,92 @@
 import { useState } from "react";
+import {
+	Div,
+	Title,
+	Block,
+	Input,
+	Button,
+	EditTextBtnIcon,
+	IconCheck,
+} from "./UserDataItem.styled";
 
-// import axios from "axios";
-// axios.defaults.baseURL = "http://localhost:4000/api/v1";
-//---------------testApi---------------
-// const token =
-//   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYzg0MjNiMzMwNTdmZTc5ZTZkYzNkNyIsImlhdCI6MTY3NDA2ODU3MCwiZXhwIjoxNjc0MTUxMzcwfQ.zJ573neN-3HKihDENOlTXTjDDiipaxkVCGZD6fJVIbM";
-// axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+//import axios from "axios";
+import { useDispatch } from "react-redux";
+import { updateUserData } from "../../redux/auth/authOperations";
 
-// const loginData = {
-//   email: "user3@gmail.com",
-//   password: "1231237",
-// };
-// export const login = async () => {
-//   try {
-//     const { data } = await axios.post("/auth/login", loginData);
-//     console.log(data);
-//   } catch (error) {
-//     return error.message;
-//   }
-// };
-
-// export const fetchContacts = axios("/users/current")
-//   .then((data) => {
-//     console.log(data);
-//   })
-//   .catch((err) => console.log(err));
-//--------------------------
 export const UserDataItem = ({ valueLabel, value, nameInput }) => {
+	const dispatch = useDispatch();
 	const [inputValue, setInputValue] = useState(value);
+	const [inputName, setInputName] = useState(nameInput);
+	const [inputActive, setInputActive] = useState(false);
+	//const [editButton, setEditButton] = useState(true);
+	//console.log(user);
+	//const { name, city } = inputName;
 
 	const handleChange = (evt) => {
+		evt.preventDefault();
 		setInputValue(evt.target.value);
+		setInputName(evt.target.name);
 	};
-	//   const user = useSelector(selectUser);
-	//   console.log(user);
+
+	const handleButtonUpdate = (e) => {
+		e.preventDefault();
+		// if (inputValue === value) {
+		//   setEditButton(true);
+		//   return;
+
+		if (inputValue === value) {
+			setInputActive(true);
+			return;
+		}
+		switch (inputName) {
+			case "name":
+				dispatch(updateUserData({ name: inputValue }));
+				break;
+			case "email":
+				dispatch(updateUserData({ email: inputValue }));
+				break;
+			case "birthday":
+				dispatch(updateUserData({ birthday: inputValue }));
+				break;
+			case "phone":
+				dispatch(updateUserData({ phone: inputValue }));
+				break;
+			case "city":
+				dispatch(updateUserData({ city: inputValue }));
+				break;
+			//   case "city":
+			//     dispatch(updateUserAvatar({ avatarURL: data }));
+
+			default:
+				return;
+		}
+		setInputActive(false);
+	};
+
 	return (
-		<>
-			<form>
-				<label>
-					{valueLabel}
-					<input
-						type="text"
-						name={nameInput}
-						value={inputValue}
-						onChange={handleChange}
-					/>
-				</label>
-				<button>edit</button>
-			</form>
-		</>
+		<Div>
+			<Title>{valueLabel}</Title>
+			<Block>
+				<Input
+					type="text"
+					name={nameInput}
+					value={inputValue}
+					onChange={handleChange}
+					readOnly={!inputActive ? true : false}
+					disabled={!inputActive}
+				// onChange={changeUserData}
+				/>
+				{!inputActive && (
+					<Button onClick={handleButtonUpdate}>
+						<EditTextBtnIcon />
+					</Button>
+				)}
+				{inputActive && (
+					<Button onClick={handleButtonUpdate}>
+						<IconCheck />
+					</Button>
+				)}
+			</Block>
+		</Div>
 	);
 };

@@ -1,3 +1,10 @@
+import { AuthSection } from "../../components/AuthForms/Forms.styled";
+import { RegisterForm } from "../../components/AuthForms/RegisterForm/RegisterForm";
+
 export const RegisterPage = () => {
-  return <h1>RegisterPage</h1>;
+  return (
+    <AuthSection>
+      <RegisterForm />
+    </AuthSection>
+  );
 };

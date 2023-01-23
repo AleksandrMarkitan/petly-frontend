@@ -3,8 +3,10 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { toastStyled } from "../../components/AuthForms/Forms.styled";
 
-// axios.defaults.baseURL = "https://pets-support-backend.onrender.com/api/v1";
-axios.defaults.baseURL = "http://localhost:4000/api/v1"
+const { REACT_APP_API_URL } = process.env;
+const BASE_URL = REACT_APP_API_URL;
+
+axios.defaults.baseURL = BASE_URL;
 
 const token = {
 	set(token) {
@@ -23,6 +25,12 @@ export const register = createAsyncThunk(
 			token.set(data.token);
 			return data;
 		} catch (error) {
+			if (error.response.status === 409) {
+				toast.error("User with such email already exists!", toastStyled);
+			} else {
+				toast.error("Validation error.", toastStyled);
+			}
+
 			return rejectWithValue(error.message);
 		}
 	}
@@ -36,7 +44,9 @@ export const login = createAsyncThunk(
 			token.set(data.token);
 			return data;
 		} catch (error) {
-			if (error.response.status === 401) {
+			if (error.response.status === 404) {
+				toast.error("User with such email not found!", toastStyled);
+			} else if (error.response.status === 401) {
 				toast.error("Email or password is wrong!", toastStyled);
 			} else {
 				toast.error("Validation error!", toastStyled);
@@ -69,6 +79,39 @@ export const fetchCurrentUser = createAsyncThunk(
 		token.set(tokenCurrent);
 		try {
 			const { data } = await axios("/users/current");
+			return data;
+		} catch (error) {
+			return rejectWithValue(error.message);
+		}
+	}
+);
+
+export const updateUserData = createAsyncThunk(
+	"users/update",
+	async ({ name, email, birthday, phone, city, pets }, { rejectWithValue }) => {
+		//avatarURL && console.log(123, avatarURL);
+		try {
+			const { data } = await axios.patch("/users/update", {
+				name,
+				email,
+				birthday,
+				phone,
+				city,
+				pets,
+			});
+			return data;
+		} catch (error) {
+			return rejectWithValue(error.message);
+		}
+	}
+);
+// оновлення картинки
+export const updateUserAvatar = createAsyncThunk(
+	"users/updateAvatar",
+	async ({ avatarURL }, { rejectWithValue }) => {
+		avatarURL && console.log(123, avatarURL);
+		try {
+			const { data } = await axios.patch("/users/update", avatarURL);
 			return data;
 		} catch (error) {
 			return rejectWithValue(error.message);

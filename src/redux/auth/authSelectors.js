@@ -7,8 +7,10 @@ export const selectUserPhone = (state) => state.auth.user.phone;
 export const selectUserPets = (state) => state.auth.user.pets;
 
 export const selectToken = (state) => state.auth.token;
+export const selectIsAuth = (state) => state.auth.isAuth;
 export const selectIsLoading = (state) => state.auth.isLoading;
 export const selectError = (state) => state.auth.error;
 export const selectIsFetchingCurrentUser = (state) =>
   state.auth.isFetchingCurrentUser;
 export const selectFavoriteNotices = (state) => state.auth.favoriteNotices;
+export const selectUser = (state) => state.auth.user;
