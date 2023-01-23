@@ -20,7 +20,8 @@ import { selectUser, selectUserPets } from "../../redux/auth/authSelectors";
 //import { selectUserPets } from "../../redux/auth/authSelectors";
 export const UserPage = () => {
   const user = useSelector(selectUser);
-  console.log(user);
+  // console.log(user);
+  // console.log(user.avatarURL);
   const pets = useSelector(selectUserPets);
 
   return (
