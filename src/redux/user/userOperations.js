@@ -49,6 +49,8 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 export const addPet = createAsyncThunk(
   "pets/addPet",
   async (pet, { rejectWithValue }) => {
+    pet && console.log(123, pet);
+    console.log(pet);
     try {
       const { data } = await axios.post("/pets", pet);
       return data;

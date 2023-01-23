@@ -88,11 +88,8 @@ export const fetchCurrentUser = createAsyncThunk(
 
 export const updateUserData = createAsyncThunk(
   "users/update",
-  async (
-    { name, email, birthday, phone, city, avatarURL, pets },
-    { rejectWithValue }
-  ) => {
-    avatarURL && console.log(123, avatarURL);
+  async ({ name, email, birthday, phone, city, pets }, { rejectWithValue }) => {
+    //avatarURL && console.log(123, avatarURL);
     try {
       const { data } = await axios.patch("/users/update", {
         name,
