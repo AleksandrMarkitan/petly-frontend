@@ -5,7 +5,7 @@ export const WrapperPicDiv = styled.img`
   width: 240px;
   height: 240px;
   border-radius: ${(p) => p.theme.borderRadius.br20};
-  background-color: #e1e1e1;
+  background-color: ${(p) => p.theme.colors.background};
   @media (min-width: 768px) {
     margin-right: 32px;
     margin-bottom: 0;
@@ -67,7 +67,7 @@ export const Date = styled.p`
   font-weight: ${(p) => p.theme.fontWeight.fw400};
   font-size: ${(p) => p.theme.fontSize.fs16};
   line-height: calc(22 / 16);
-  color: rgba(17, 17, 17, 0.6);
+  color: ${(p) => p.theme.colors.inputText};
 `;
 
 export const Link = styled.a`
