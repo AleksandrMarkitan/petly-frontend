@@ -34,7 +34,10 @@ export const ListItem = styled.li`
     padding: 16px 11px 18px;
     margin-bottom: 32px;
     margin-left: 32px;
-    &:nth-child(3n + 1) {
+    &:nth-media (min-width: 1279px) {
+    width: calc((100% - 64px) / 3);
+    padding: 16px 11px 18px;
+    margichild(3n + 1) {
       margin-left: 0px;
     }
   }
