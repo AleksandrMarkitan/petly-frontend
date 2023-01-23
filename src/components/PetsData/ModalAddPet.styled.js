@@ -24,12 +24,6 @@ export const FieldsWrapper = styled.div`
 
 export const BoxPet = styled.section`
   width: 100%;
-  @media (min-width: 768px) {
-    padding-left: 32px;
-  }
-  @media (min-width: 1280px) {
-    padding-left: 0px;
-  }
 `;
 
 export const BoxTitlePet = styled.div`
