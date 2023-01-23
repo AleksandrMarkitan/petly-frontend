@@ -46,7 +46,7 @@ export const PetsData = ({ pets }) => {
   return (
     <>
       <AddBtn closeModal={closeModal} />
-      <button onClick={closeModal}>ВІДКРИТИ МОДАЛКУ</button>
+      {/* <button onClick={closeModal}>ВІДКРИТИ МОДАЛКУ</button> */}
       {isModalOpen && (
         <ModalWindow onClose={closeModal} modalType={"addPet"}>
           {/* <div>jjjjj</div>
