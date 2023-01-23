@@ -136,7 +136,7 @@ const authSlice = createSlice({
       })
       .addCase(addPet.pending, handlePending)
       .addCase(addPet.fulfilled, (state, { payload }) => {
-        state.items = [...state.items, payload];
+        state.user.pets = [...state.user.pets, payload];
         state.isLoading = false;
         state.error = null;
       })
