@@ -132,23 +132,22 @@ export const ModalAddNotice = ({ onClose }) => {
 		setBirthdate(e.format("DD.MM.YYYY"))
 	}
 
-	// 	{
-	// 		"title": "Good dog",
-	// 		"category": "in-good-hands",
-	// 		"name": "Jorik",
-	// 		"birthdate": "12.02.2022",
-	// 		"breed": "hz",
-	// 		"sex": "male",
-	// 		"location": "Kharkiv, Kharkiv",
-	// 		"comments": "good dog Jorik"
-	//   }
-
 	const submitForm = values => {
 		const { title, name, breed, price, comments } = values;
 
-		const data = { title, category, name, birthdate, breed, sex, location, comments, price, imgURL };
+		const data = { title, category, name, birthdate, breed, sex, location, comments, price };
+		console.log(data);
 
 		dispatch(addNotice(data))
+	}
+
+	const initialValues = {
+		title: "",
+		name: "",
+		breed: "",
+		comments: "",
+		price: "",
+		location: ""
 	}
 
 	const schema = Yup.object().shape({
@@ -168,16 +167,7 @@ export const ModalAddNotice = ({ onClose }) => {
 			.required('Required'),
 		price: Yup.number()
 			.min(1, "Price has to be more than 0")
-			.required('Required'),
 	})
-
-	const initialValues = {
-		title: "",
-		name: "",
-		breed: "",
-		comments: "",
-		price: ""
-	}
 
 	return <ModalWindow onClose={onClose} modalType={'addPet'}>
 		<Title>Add pet</Title>
@@ -247,7 +237,7 @@ export const ModalAddNotice = ({ onClose }) => {
 						{category === "sell" && <PriceWrap>
 							<Label>
 								<div>Price <span>*</span></div>
-								<InputField name="price" type="text" placeholder="Type the price" />
+								<InputField name="price" type="text" placeholder="Type the price" required />
 								{touched.price && errors.price && <Error>{errors.price}</Error>}
 							</Label>
 						</PriceWrap>}

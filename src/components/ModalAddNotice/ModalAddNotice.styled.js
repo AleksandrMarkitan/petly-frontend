@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Datetime from 'react-datetime';
 import { Form, Field } from 'formik';
-import { symbol } from "prop-types";
+
 
 export const DateInput = styled(Datetime)`
 	position: relative;

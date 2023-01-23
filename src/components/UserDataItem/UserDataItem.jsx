@@ -1,11 +1,11 @@
 import { useState } from "react";
 
-import axios from "axios";
+// import axios from "axios";
 // axios.defaults.baseURL = "http://localhost:4000/api/v1";
 //---------------testApi---------------
-const token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYzg0MjNiMzMwNTdmZTc5ZTZkYzNkNyIsImlhdCI6MTY3NDA2ODU3MCwiZXhwIjoxNjc0MTUxMzcwfQ.zJ573neN-3HKihDENOlTXTjDDiipaxkVCGZD6fJVIbM";
-axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+// const token =
+//   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYzg0MjNiMzMwNTdmZTc5ZTZkYzNkNyIsImlhdCI6MTY3NDA2ODU3MCwiZXhwIjoxNjc0MTUxMzcwfQ.zJ573neN-3HKihDENOlTXTjDDiipaxkVCGZD6fJVIbM";
+// axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 
 // const loginData = {
 //   email: "user3@gmail.com",
@@ -27,27 +27,27 @@ axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 //   .catch((err) => console.log(err));
 //--------------------------
 export const UserDataItem = ({ valueLabel, value, nameInput }) => {
-  const [inputValue, setInputValue] = useState(value);
+	const [inputValue, setInputValue] = useState(value);
 
-  const handleChange = (evt) => {
-    setInputValue(evt.target.value);
-  };
-  //   const user = useSelector(selectUser);
-  //   console.log(user);
-  return (
-    <>
-      <form>
-        <label>
-          {valueLabel}
-          <input
-            type="text"
-            name={nameInput}
-            value={inputValue}
-            onChange={handleChange}
-          />
-        </label>
-        <button>edit</button>
-      </form>
-    </>
-  );
+	const handleChange = (evt) => {
+		setInputValue(evt.target.value);
+	};
+	//   const user = useSelector(selectUser);
+	//   console.log(user);
+	return (
+		<>
+			<form>
+				<label>
+					{valueLabel}
+					<input
+						type="text"
+						name={nameInput}
+						value={inputValue}
+						onChange={handleChange}
+					/>
+				</label>
+				<button>edit</button>
+			</form>
+		</>
+	);
 };
