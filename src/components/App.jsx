@@ -35,71 +35,69 @@ export const App = () => {
   return isFetchingCurrentUser || isLoading ? (
     <Loader />
   ) : (
-    <>
-      <ThemeProvider theme={theme}>
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route
-              index
-              element={
-                <PublicRoute>
-                  <HomePage />
-                </PublicRoute>
-              }
-            />
-            <Route
-              path="register"
-              element={
-                <PublicRoute restricted>
-                  <RegisterPage />
-                </PublicRoute>
-              }
-            />
-            <Route
-              path="login"
-              element={
-                <PublicRoute restricted>
-                  <LoginPage />
-                </PublicRoute>
-              }
-            />
-            <Route
-              path="news"
-              element={
-                <PublicRoute>
-                  <NewsPage />
-                </PublicRoute>
-              }
-            />
-            <Route
-              path="notices/:route"
-              element={
-                <PublicRoute>
-                  <NoticesPage />
-                </PublicRoute>
-              }
-            />
+    <ThemeProvider theme={theme}>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route
+            index
+            element={
+              <PublicRoute>
+                <HomePage />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="register"
+            element={
+              <PublicRoute restricted>
+                <RegisterPage />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="login"
+            element={
+              <PublicRoute restricted>
+                <LoginPage />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="news"
+            element={
+              <PublicRoute>
+                <NewsPage />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="notices/:route"
+            element={
+              <PublicRoute>
+                <NoticesPage />
+              </PublicRoute>
+            }
+          />
 
-            <Route
-              path="friends"
-              element={
-                <PublicRoute>
-                  <OurFriendsPage />
-                </PublicRoute>
-              }
-            />
-            <Route
-              path="user"
-              element={
-                <PrivateRoute>
-                  <UserPage />
-                </PrivateRoute>
-              }
-            />
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Route>
-        </Routes>
-      </ThemeProvider>
-    </>
+          <Route
+            path="friends"
+            element={
+              <PublicRoute>
+                <OurFriendsPage />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="user"
+            element={
+              <PrivateRoute>
+                <UserPage />
+              </PrivateRoute>
+            }
+          />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Route>
+      </Routes>
+    </ThemeProvider>
   );
 };

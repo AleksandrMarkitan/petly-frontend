@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { selectUser } from "../../redux/auth/authSelectors";
+import {
+  selectUser,
+  selectFavoriteNotices,
+} from "../../redux/auth/authSelectors";
 import { deleteNotice } from "../../redux/notices/noticesOperations";
 import { updateFavoriteNotice } from "../../redux/auth/authOperations";
 
@@ -31,7 +34,7 @@ export const NoticeCategoryItem = ({ data }) => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // const favorites = useSelector(selectFavoriteNotices);
+  const favorites = useSelector(selectFavoriteNotices);
 
   const [isFavorite, setIsFavorite] = useState(false);
 
@@ -39,6 +42,10 @@ export const NoticeCategoryItem = ({ data }) => {
 
   // setIsFavorite(currentUser.favoriteNotices
   //   .includes(_id));
+
+  // console.log(data);
+  // console.log(currentUser);
+  // console.log(favorites);
 
   const getAge = (birthdate) => {
     // const age = now Date() - birthdate;
