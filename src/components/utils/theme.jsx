@@ -44,7 +44,7 @@ const theme = {
     fw700: "700",
   },
 
-  transition: "250ms cubic-bezier(0.57, 0.21, 0.69, 1.25)",
+  transition: { first: "250ms cubic-bezier(0.57, 0.21, 0.69, 1.25)" },
 };
 
 export default theme;

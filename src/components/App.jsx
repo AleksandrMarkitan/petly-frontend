@@ -22,7 +22,6 @@ import {
   selectIsFetchingCurrentUser,
   selectIsLoading,
 } from "../redux/auth/authSelectors";
-
 export const App = () => {
   const isFetchingCurrentUser = useSelector(selectIsFetchingCurrentUser);
   const isLoading = useSelector(selectIsLoading);
