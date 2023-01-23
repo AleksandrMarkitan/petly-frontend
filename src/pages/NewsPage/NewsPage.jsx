@@ -8,7 +8,7 @@ import { NewsList } from "../../components/NewsList/NewsList"
 import { getNews } from "../../serveсes/getNews"
 import { Loader } from "../../components/Loader/Loader"
 
-export const NewsPage = () => {
+ const NewsPage = () => {
 	const [news, setNews] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
 
@@ -65,3 +65,5 @@ export const NewsPage = () => {
 		</Container>
 	</Section>
 }
+
+export default NewsPage;

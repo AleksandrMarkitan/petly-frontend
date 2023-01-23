@@ -6,7 +6,7 @@ import { SectionTitle } from "../../components/CommonComponents/SectionTitle/Sec
 import { OurFriendsList } from "../../components/OurFriends/OurFriends";
 import { getOurFriends } from "../../serveсes/getOurFriends";
 
-export const OurFriendsPage = () => {
+const OurFriendsPage = () => {
   const [friends, setFriends] = useState([]);
 
   useEffect(() => {
@@ -35,3 +35,5 @@ export const OurFriendsPage = () => {
     </Section>
   );
 };
+
+export default OurFriendsPage;
