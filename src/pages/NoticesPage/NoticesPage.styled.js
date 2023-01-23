@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const MenuWrap = styled.div`
 	display: flex;
 	justify-content: space-between;
-	align-items: center;
+	align-items: flex-start;
 	margin-top: 28px;
 	margin-bottom: 30px; 
 

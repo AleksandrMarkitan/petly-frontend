@@ -1,6 +1,8 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { ThemeProvider } from "styled-components";
+import theme from "../components/utils/theme";
 
 import { PublicRoute } from "../HOCs/PublicRoute";
 import { PrivateRoute } from "../HOCs/PrivateRoute";
@@ -14,13 +16,12 @@ import { UserPage } from "../pages/UserPage/UserPage";
 import { OurFriendsPage } from "../pages/OurFriendsPage/OurFriendsPage";
 import { NoticesPage } from "../pages/NoticesPage/NoticesPage";
 import { fetchCurrentUser } from "../redux/auth/authOperations";
-// import { Loader } from "./Loader/Loader";
+import { Loader } from "./Loader/Loader";
+
 import {
   selectIsFetchingCurrentUser,
   selectIsLoading,
 } from "../redux/auth/authSelectors";
-import { ThemeProvider } from "styled-components";
-import theme from "../components/utils/theme";
 export const App = () => {
   const isFetchingCurrentUser = useSelector(selectIsFetchingCurrentUser);
   const isLoading = useSelector(selectIsLoading);
@@ -30,10 +31,9 @@ export const App = () => {
     dispatch(fetchCurrentUser());
   }, [dispatch]);
 
-  return (
-    // isFetchingCurrentUser || isLoading ? (
-    //   <Loader />
-    // ) : (
+  return isFetchingCurrentUser || isLoading ? (
+    <Loader />
+  ) : (
     <ThemeProvider theme={theme}>
       <Routes>
         <Route path="/" element={<Layout />}>

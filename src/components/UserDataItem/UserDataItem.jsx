@@ -1,38 +1,24 @@
 import { useState } from "react";
+import {
+  Div,
+  Title,
+  Block,
+  Input,
+  Button,
+  EditTextBtnIcon,
+  IconCheck,
+} from "./UserDataItem.styled";
 
 //import axios from "axios";
 import { useDispatch } from "react-redux";
-import {
-  //updateUserAvatar,
-  updateUserData,
-} from "../../redux/auth/authOperations";
-//import { selectUser } from "../../redux/auth/authSelectors";
-//import { selectUser } from "../../redux/user/userSelectors";
-//import { selectIsFetchingCurrentUser } from "../../redux/auth/authSelectors";
-// axios.defaults.baseURL = "http://localhost:4000/api/v1";
-// //---------------testApi---------------
-// const token =
-//   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYzkzMDc0Nzc4MDA3ZDg1NmVlZDhiOCIsImlhdCI6MTY3NDE2NDQ3NSwiZXhwIjoxNjc0OTkyNDc1fQ.pGsU7-qWoeUAQS8l3qzUqVLV876F1d48tpeoC8vwAfQ";
-// axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+import { updateUserData } from "../../redux/auth/authOperations";
 
-//--------------------------
-export const UserDataItem = ({
-  valueLabel,
-  value,
-  nameInput,
-  //handleUpdate,
-  // handleButtonUpdate,
-  //changeUserData,
-  // handleChange,
-  // user,
-}) => {
-  //const user = useSelector(selectUser);
-  //const user2 = useSelector(selectIsFetchingCurrentUser);
+export const UserDataItem = ({ valueLabel, value, nameInput }) => {
   const dispatch = useDispatch();
   const [inputValue, setInputValue] = useState(value);
   const [inputName, setInputName] = useState(nameInput);
-  //const [editButton, setEditButton] = useState(true);
   const [inputActive, setInputActive] = useState(false);
+  //const [editButton, setEditButton] = useState(true);
   //console.log(user);
   //const { name, city } = inputName;
 
@@ -50,10 +36,8 @@ export const UserDataItem = ({
 
     if (inputValue === value) {
       setInputActive(true);
-      //setEditButton(true);
       return;
     }
-    // const { name, value } = e.target;
     switch (inputName) {
       case "name":
         dispatch(updateUserData({ name: inputValue }));
@@ -70,9 +54,9 @@ export const UserDataItem = ({
       case "city":
         dispatch(updateUserData({ city: inputValue }));
         break;
-        //   case "city":
-        //     dispatch(updateUserAvatar({ avatarURL: data }));
-       
+      //   case "city":
+      //     dispatch(updateUserAvatar({ avatarURL: data }));
+
       default:
         return;
     }
@@ -80,22 +64,29 @@ export const UserDataItem = ({
   };
 
   return (
-    <>
-      <form>
-        <label>
-          {valueLabel}
-          <input
-            type="text"
-            name={nameInput}
-            value={inputValue}
-            onChange={handleChange}
-            readOnly={!inputActive ? true : false}
-            // onChange={changeUserData}
-          />
-        </label>
-        {!inputActive && <button onClick={handleButtonUpdate}>edit</button>}
-        {inputActive && <button onClick={handleButtonUpdate}>update</button>}
-      </form>
-    </>
+    <Div>
+      <Title>{valueLabel}</Title>
+      <Block>
+        <Input
+          type="text"
+          name={nameInput}
+          value={inputValue}
+          onChange={handleChange}
+          readOnly={!inputActive ? true : false}
+          disabled={!inputActive}
+          // onChange={changeUserData}
+        />
+        {!inputActive && (
+          <Button onClick={handleButtonUpdate}>
+            <EditTextBtnIcon />
+          </Button>
+        )}
+        {inputActive && (
+          <Button onClick={handleButtonUpdate}>
+            <IconCheck />
+          </Button>
+        )}
+      </Block>
+    </Div>
   );
 };
