@@ -18,6 +18,7 @@ export const AddBtnMobile = styled.button`
 	font-size: 12px;
 	line-height: calc(16 / 12);
 	transition: transform 300ms linear;
+	z-index: 1000;
 
 	svg{
 		width: 21px;
@@ -25,12 +26,13 @@ export const AddBtnMobile = styled.button`
 	}
 
 	:hover, :focus{
-		transform: scale(1.2);
+		transform: scale(1.1);
 	}
 `
 
 export const AddBtn = styled.button`
 	display: flex;
+	width: 200px;
 	gap: 12px;
 	align-items: center;
 	font-size: 20px;
