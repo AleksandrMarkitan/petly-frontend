@@ -16,6 +16,7 @@ import { UserPage } from "../pages/UserPage/UserPage";
 import { OurFriendsPage } from "../pages/OurFriendsPage/OurFriendsPage";
 import { NoticesPage } from "../pages/NoticesPage/NoticesPage";
 import { fetchCurrentUser } from "../redux/auth/authOperations";
+import { Loader } from "./Loader/Loader";
 
 import { Loader } from "../components/Loader/Loader";
 
