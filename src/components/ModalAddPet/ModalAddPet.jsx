@@ -71,7 +71,7 @@ export const ModalAddPet = () => {
     e.preventDefault();
     const data = new FormData();
     setSelectedFile(e.target.files[0]); // я это засунула в функцию handleAvatar
-    inputFileHandler();
+    //inputFileHandler(); //Anna
   };
 
   // для отправки на бек
@@ -116,16 +116,22 @@ export const ModalAddPet = () => {
   };
 
   const inputFileHandler = (e) => {
+    // e.preventDefault();
+    // const data = new FormData();
+    // setSelectedFile(e.target.files[0]);
+
+    // Anna
     const file = e.target.files[0];
 
     setImgURL(file);
     const reader = new FileReader();
 
     reader.onload = function (e) {
-      setPreview(e.target.result);
+      setPreview(file);
     };
 
     reader.readAsDataURL(file);
+    setSelectedFile(file);
   };
 
   return (
@@ -179,9 +185,9 @@ export const ModalAddPet = () => {
               type="file"
               name="avatarURL"
               // value={selectedFile}
-              // onChange={handleAvatar}
+              onChange={inputFileHandler}
               // ref={filePicker}
-              onChange={selectAvatar}
+              // onChange={selectAvatar}
             />
             {/* </InputHidden> */}
             <img src="" alt="avatar" />
