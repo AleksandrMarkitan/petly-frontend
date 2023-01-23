@@ -5,7 +5,7 @@ import { login } from "../../../redux/auth/authOperations";
 
 import {
   Input,
-  TitleLogin,
+  TitleAuth,
   Wrapper,
   Paragraph,
   FormLink,
@@ -15,6 +15,16 @@ import {
 } from "../../AuthForms/Forms.styled";
 import { LoginBtn } from "../../CommonButtons/LoginBtn/LoginBtn";
 import { Container } from "../../CommonComponents/Container/Container";
+import { emailRegexp, passwordRegexp } from "../RegisterForm/RegisterForm";
+
+export const FormError = ({ name }) => {
+  return (
+    <ErrorMessage
+      name={name}
+      render={(message) => <ErrorText>{message}</ErrorText>}
+    />
+  );
+};
 
 export const LoginForm = () => {
   const dispatch = useDispatch();
@@ -22,12 +32,14 @@ export const LoginForm = () => {
   const validationSchema = yup.object({
     email: yup
       .string()
-      .email("Please, enter a valid e-mail")
+      .max(63)
+      .matches(emailRegexp, "Please, enter a valid e-mail")
       .required("E-mail is required"),
     password: yup
       .string()
       .min(7, "Password must consist of at least 7 symbols")
       .max(32, "Password must contain no more than 32 symbols")
+      .matches(passwordRegexp, "Please, enter a valid password")
       .required("Password is required"),
   });
 
@@ -41,18 +53,10 @@ export const LoginForm = () => {
     resetForm();
   };
 
-  const FormError = ({ name }) => {
-    return (
-      <ErrorMessage
-        name={name}
-        render={(message) => <ErrorText>{message}</ErrorText>}
-      />
-    );
-  };
   return (
     <Container>
       <Wrapper>
-        <TitleLogin>Login</TitleLogin>
+        <TitleAuth>Login</TitleAuth>
         <Formik
           initialValues={initialValues}
           onSubmit={handleSubmit}

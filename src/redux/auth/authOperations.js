@@ -6,20 +6,16 @@ import { toastStyled } from "../../components/AuthForms/Forms.styled";
 const { REACT_APP_API_URL } = process.env;
 const BASE_URL = REACT_APP_API_URL;
 
-//axios.defaults.baseURL = BASE_URL;
-const token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzY2Q2NzhlYmZmN2YxODM2ZDg4ZmJmMiIsImlhdCI6MTY3NDQwOTEzNywiZXhwIjoxNjc1MjM3MTM3fQ.2Ejp1wqGmA6zTpgJoe829bgz2EInYIVuNEg1haSXrN8";
-axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-axios.defaults.baseURL = "http://localhost:4000/api/v1";
+axios.defaults.baseURL = BASE_URL;
 
-// const token = {
-//   set(token) {
-//     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-//   },
-//   unset() {
-//     axios.defaults.headers.common.Authorization = ``;
-//   },
-// };
+const token = {
+  set(token) {
+    axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+  },
+  unset() {
+    axios.defaults.headers.common.Authorization = ``;
+  },
+};
 
 export const register = createAsyncThunk(
   "auth/register",
@@ -29,6 +25,12 @@ export const register = createAsyncThunk(
       token.set(data.token);
       return data;
     } catch (error) {
+      if (error.response.status === 409) {
+        toast.error("User with such email already exists!", toastStyled);
+      } else {
+        toast.error("Validation error.", toastStyled);
+      }
+
       return rejectWithValue(error.message);
     }
   }
@@ -42,7 +44,9 @@ export const login = createAsyncThunk(
       token.set(data.token);
       return data;
     } catch (error) {
-      if (error.response.status === 401) {
+      if (error.response.status === 404) {
+        toast.error("User with such email not found!", toastStyled);
+      } else if (error.response.status === 401) {
         toast.error("Email or password is wrong!", toastStyled);
       } else {
         toast.error("Validation error!", toastStyled);
@@ -68,11 +72,11 @@ export const logout = createAsyncThunk(
 export const fetchCurrentUser = createAsyncThunk(
   "auth/refresh",
   async (_, { rejectWithValue, getState }) => {
-    // const tokenCurrent = getState().auth.token;
-    // if (!tokenCurrent) {
-    //   return rejectWithValue();
-    // }
-    // token.set(tokenCurrent);
+    const tokenCurrent = getState().auth.token;
+    if (!tokenCurrent) {
+      return rejectWithValue();
+    }
+    token.set(tokenCurrent);
     try {
       const { data } = await axios("/users/current");
       return data;

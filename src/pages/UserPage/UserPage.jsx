@@ -1,5 +1,5 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+// import { useEffect } from "react";
+import { useSelector } from "react-redux";
 //import { selectPets, selectUser } from "../../redux/user/userSelectors";
 
 import { Section } from "../../components/CommonComponents/Section/Section";
@@ -7,7 +7,7 @@ import { Container } from "../../components/CommonComponents/Container/Container
 import { SectionTitle } from "../../components/CommonComponents/SectionTitle/SectionTitle";
 import { UserData } from "../../components/UserData/UserData";
 //import { fetchUserPets } from "../../redux/user/userOperations";
-import { fetchCurrentUser } from "../../redux/auth/authOperations";
+// import { fetchCurrentUser } from "../../redux/auth/authOperations";
 import { PetsData } from "../../components/PetsData/PetsData";
 import { selectUser, selectUserPets } from "../../redux/auth/authSelectors";
 //import { selectPets } from "../../redux/user/userSelectors";
@@ -18,11 +18,6 @@ export const UserPage = () => {
   // console.log(user);
   // console.log(user.avatarURL);
   const pets = useSelector(selectUserPets);
-  //const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   dispatch(fetchCurrentUser());
-  // }, [dispatch]);
 
   return (
     <Section>
