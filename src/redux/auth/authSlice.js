@@ -112,7 +112,10 @@ const authSlice = createSlice({
       .addCase(updateUserAvatar.fulfilled, (state, { payload }) => {
         // const index = state.items.findIndex(({ id }) => id === payload.id);
         // state.items[index] = payload;
-        state.user = payload;
+        const newUrl = payload.avatarURL;
+        state.user = { ...state.user, avatarURL: newUrl };
+
+        console.log(state.user);
         state.isLoading = false;
         state.error = null;
       })
