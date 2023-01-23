@@ -1,63 +1,21 @@
 import { useRef } from "react";
 import { InputHidden } from "./UserData.styled";
 import { UserDataItem } from "../UserDataItem/UserDataItem";
-//import axios from "axios";
-import {
-  updateUserAvatar,
-  // updateUserData,
-} from "../../redux/auth/authOperations";
-import { useDispatch } from "react-redux";
 
-// const token =
-//   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzY2QwZDE4OWYyYzE5MjI4ZTU1M2Y0ZiIsImlhdCI6MTY3NDM4MjcxOSwiZXhwIjoxNjc1MjEwNzE5fQ.kONMeCBrIJcPokziKvTGWUsPwXewg04H1RTgG3H6CyE";
-// axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+import { updateUserAvatar } from "../../redux/auth/authOperations";
+import { useDispatch, useSelector } from "react-redux";
+import { selectUser } from "../../redux/auth/authSelectors";
 
-export const UserData = ({ user }) => {
+export const UserData = () => {
   const dispatch = useDispatch();
-
+  const user = useSelector(selectUser);
   //  ------------Update Avatar----------
   const filePicker = useRef(null);
-  //const [uploaded, setUploaded] = useState(null);
-  // const [selectedFile, setSelectedFile] = useState(null);
-  //const [selectedFile1, setSelectedFile1] = useState(null);
 
-  // при изменении инпута добавляем выбранную картинку в селектедфайл
-  // const selectAvatar = (e) => {
-  //   e.preventDefault();
-  //   const data = new FormData();
-  //   setSelectedFile(e.target.files[0]); // я это засунула в функцию handleAvatar
-  // };
-
-  // для отправки на бек
   const handleAvatar = async (e) => {
-    //e.preventDefault();
     e.preventDefault();
     const data = new FormData();
-    data.append(
-      "avatarURL",
-      e.target.files[0]
-      //selectedFile
-    );
-    console.log(data);
-    console.log(e.target.files[0]);
-    //добавляет картинку на бек
-    // const res = await fetch(
-    //   "https://pets-support-backend.onrender.com/api/v1/users/update",
-    //   {
-    //     method: "PATCH",
-    //     headers: {
-    //       Authorization: `Bearer ${token}`,
-    //     },
-    //     body: data,
-    //   }
-    // );
-    // console.log(data);
-    //const res1 = dispatch(updateUserData(data));
-
-    // const result = await res.json();
-
-    // setUploaded(result.avatarURL);
-
+    data.append("avatarURL", e.target.files[0]);
     dispatch(updateUserAvatar({ avatarURL: data }));
   };
 
@@ -84,7 +42,7 @@ export const UserData = ({ user }) => {
         </InputHidden>
         {avatarURL && (
           <img src={avatarURL} alt="avatar" />
-          //  <img src={uploaded ? uploaded : avatarURL} alt="avatar" />
+          // <img src={uploaded ? uploaded : avatarURL} alt="avatar" />
         )}
       </form>
 
