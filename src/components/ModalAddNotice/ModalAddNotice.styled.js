@@ -239,6 +239,10 @@ export const InputFileWrap = styled.div`
 	position: relative;
 	margin-top: 20px;
 
+	label{
+		display: inline-block;
+	}
+
 	label span{
 		content: "";
 		width: 116px;

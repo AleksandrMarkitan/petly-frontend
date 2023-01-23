@@ -14,7 +14,6 @@ import { NoticesCategoriesList } from "../../components/NoticesCategoriesList/No
 import { MenuWrap } from "./NoticesPage.styled";
 // -----------------------------------------------------------
 import { ModalAddNotice } from "../../components/ModalAddNotice/ModalAddNotice";
-import { TestFormik } from "../../components/ModalAddNotice/TestFormik/TestFormik";
 
 export const NoticesPage = () => {
 	const [isModalOpen, setIsModalOpen] = useState(false);
@@ -42,7 +41,6 @@ export const NoticesPage = () => {
 				</MenuWrap>
 				<NoticesCategoriesList />
 				{isModalOpen && <ModalAddNotice onClose={closeModal} />}
-				<TestFormik />
 			</Container>
 		</Section>
 	);

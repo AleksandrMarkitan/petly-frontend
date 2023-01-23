@@ -1,3 +1,5 @@
+import { Formik } from "formik";
+import * as Yup from 'yup';
 import { useEffect, useState } from "react";
 import { BsPlusLg } from "react-icons/bs";
 import "react-datetime/css/react-datetime.css";
@@ -8,9 +10,6 @@ import { NextBtn } from "../CommonButtons/NextBtn/NextBtn";
 import { CancelBtn } from "../CommonButtons/CancelBtn/CancelBtn";
 import { Error, SubmitBtn, Title, Subtitle, FormStyled, RadioBtnWrap, LabelRadioBtn, InputRadio, InputFieldWrap, Label, InputField, BtnWrapper, SexRadioWrap, RadioSexLabel, LocationWrap, CitiesList, CitiesItem, InputFileWrap, InputFile, CommentWrap, Textarea, DateInput, PriceWrap } from "./ModalAddNotice.styled";
 import { getCities } from "../../serveсes/getCities";
-
-import { Formik } from "formik";
-import * as Yup from 'yup';
 import { useDispatch } from "react-redux";
 import { addNotice } from "../../redux/notices/noticesOperations";
 
@@ -18,23 +17,21 @@ export const ModalAddNotice = ({ onClose }) => {
 	const dispatch = useDispatch();
 
 	const [category, setCategory] = useState("sell");
-	const [title, setTitle] = useState(""); //не треба
-	const [name, setName] = useState('');  //не треба
 	const [birthdate, setBirthdate] = useState("");
-	const [breed, setBreed] = useState(''); //не треба
-	const [sex, setSex] = useState("")
+	const [sex, setSex] = useState("");
 	const [location, setLocation] = useState('');
-	const [city, setCity] = useState('')
 	const [imgURL, setImgURL] = useState("");
-	const [comments, setComment] = useState(""); //не треба
-	const [price, setPrice] = useState(""); //не треба
 
-	const [cities, setCities] = useState([]);
 	const [page, setPage] = useState(1);
+	const [title, setTitle] = useState("");
+	const [city, setCity] = useState('')
+	const [cities, setCities] = useState([]);
 	const [showCitiesList, setShowCitiesList] = useState(false);
-
 	const [preview, setPreview] = useState("");
 
+	const validateTitle = (value) => {
+		setTitle(value)
+	}
 
 	useEffect(() => {
 		const query = city.split(',')[0].toLowerCase();
@@ -73,24 +70,9 @@ export const ModalAddNotice = ({ onClose }) => {
 
 	const textInputHandler = e => {
 		switch (e.target.name) {
-			// case "title":
-			// 	setTitle(e.target.value);
-			// 	break;
-			// case "name":
-			// 	setName(e.target.value);
-			// 	break;
-			// case "breed":
-			// 	setBreed(e.target.value);
-			// 	break;
 			case "city":
 				setCity(e.target.value);
 				break;
-			// case "comment":
-			// 	setComment(e.target.value);
-			// 	break;
-			// case "price":
-			// 	setPrice(e.target.value);
-			// 	break;
 			default: return;
 		}
 	}
@@ -135,10 +117,22 @@ export const ModalAddNotice = ({ onClose }) => {
 	const submitForm = values => {
 		const { title, name, breed, price, comments } = values;
 
-		const data = { title, category, name, birthdate, breed, sex, location, comments, price };
-		console.log(data);
+		const data = new FormData();
+
+		data.append("title", title)
+		data.append("category", category)
+		data.append("price", price)
+		data.append("comments", comments)
+
+		name && data.append("name", name)
+		birthdate && data.append("birthdate", birthdate)
+		breed && data.append("breed", breed)
+		sex && data.append("sex", sex)
+		location && data.append("location", location)
+		imgURL && data.append("imgURL", imgURL)
 
 		dispatch(addNotice(data))
+		onClose();
 	}
 
 	const initialValues = {
@@ -171,8 +165,8 @@ export const ModalAddNotice = ({ onClose }) => {
 
 	return <ModalWindow onClose={onClose} modalType={'addPet'}>
 		<Title>Add pet</Title>
-		<Subtitle>Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet, consectetur </Subtitle>
-		<Formik initialValues={initialValues} validationSchema={schema} onSubmit={values => submitForm(values)}>
+		<Subtitle>Fill the fields below, please.</Subtitle>
+		<Formik initialValues={initialValues} validationSchema={schema} onSubmit={values => submitForm(values)} validateOnChange>
 			{({ errors, touched }) => (
 				<FormStyled encType="multipart/form-data">
 					{page === 1 && <>
@@ -193,11 +187,11 @@ export const ModalAddNotice = ({ onClose }) => {
 						<InputFieldWrap>
 							<Label>
 								<div>Title of ad <span>*</span></div>
-								<InputField type="text" placeholder="Type title" name="title" />
+								<InputField type="text" placeholder="Type title" name="title" validate={validateTitle} />
 								{touched.title && errors.title && <Error>{errors.title}</Error>}
 							</Label>
 							<Label>
-								Name pet
+								Pet's name
 								<InputField type="text" placeholder="Type name pet" name="name" />
 								{touched.name && errors.name && <Error>{errors.name}</Error>}
 							</Label>
@@ -251,7 +245,7 @@ export const ModalAddNotice = ({ onClose }) => {
 						</InputFileWrap>
 						<CommentWrap>
 							<Label>
-								Comments
+								<div>Comments <span>*</span></div>
 								<InputField placeholder="Type comment" name="comments" />
 								{touched.comments && errors.comments && <Error>{errors.comments}</Error>}
 							</Label>
@@ -259,7 +253,7 @@ export const ModalAddNotice = ({ onClose }) => {
 					</>}
 					<BtnWrapper>
 						{page === 1 ?
-							<NextBtn onClick={nextPage} />
+							(title.length >= 2 ? <NextBtn onClick={nextPage} /> : <NextBtn onClick={nextPage} disabled={true} />)
 							:
 							<SubmitBtn type="submit">Done</SubmitBtn>
 						}
