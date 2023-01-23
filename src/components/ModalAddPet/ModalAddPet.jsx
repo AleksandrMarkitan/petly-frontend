@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 
 import { useRef, useState } from "react";
 import { addPet } from "../../redux/user/userOperations";
+import { BsPlusLg } from "react-icons/bs";
 //import { InputHidden } from "./UserData.styled";
 //import { UserDataItem } from "../UserDataItem/UserDataItem";
 
@@ -19,6 +20,8 @@ export const ModalAddPet = () => {
   const [backFormShow, setBackFormShow] = useState(true);
   const filePicker = useRef(null);
   const [selectedFile, setSelectedFile] = useState(null);
+  const [imgURL, setImgURL] = useState("");
+  const [preview, setPreview] = useState("");
   //const [uploaded, setUploaded] = useState(null);
 
   //   const closeModal = () => {
@@ -68,9 +71,7 @@ export const ModalAddPet = () => {
     e.preventDefault();
     const data = new FormData();
     setSelectedFile(e.target.files[0]); // я это засунула в функцию handleAvatar
-    console.log(selectedFile);
-    console.log(data);
-    console.log(e.target.files[0]);
+    inputFileHandler();
   };
 
   // для отправки на бек
@@ -102,33 +103,29 @@ export const ModalAddPet = () => {
     filePicker.current.click();
   };
 
-  const onAddPet = (name) => {
-    const data = new FormData();
-    // data.append(
-    //   "avatarURL",
-    //   // e.target.files[0]
-    //   selectedFile
-    // );
-    // data.append("name", name.name);
-    // console.log(data);
+  const onAddPet = (value) => {
+    let formData = new FormData();
 
-    dispatch(
-      addPet(
-        //data.append("avatarURL", selectedFile)
-        // data.append("name", name.name),
-        // data.append("breed", name.breed)
-        // data
-        { breed: name.breed, name: name.name }
-      )
-    );
-    console.log(data);
-    console.log(name.name);
-    //addPet(data)  //працю окрем
-    // addPet({ breed: name.breed, name: name.name }) //працю окремо
-    // avatarURL: data,
+    selectedFile && formData.append("avatarURL", selectedFile);
+    formData.append("name", value.name);
+    formData.append("date", value.date);
+    formData.append("breed", value.breed);
+    value.comments && formData.append("comments", value.comments);
+    console.log(formData);
+    dispatch(addPet(formData));
+  };
 
-    //handleAvatar();  отправляет но одно поле
-    // { name: "oopppp", breed: "oooooo" }
+  const inputFileHandler = (e) => {
+    const file = e.target.files[0];
+
+    setImgURL(file);
+    const reader = new FileReader();
+
+    reader.onload = function (e) {
+      setPreview(e.target.result);
+    };
+
+    reader.readAsDataURL(file);
   };
 
   return (
@@ -188,6 +185,13 @@ export const ModalAddPet = () => {
             />
             {/* </InputHidden> */}
             <img src="" alt="avatar" />
+            {!preview && (
+              <span>
+                <BsPlusLg />
+              </span>
+            )}
+            {preview && <img src={preview} alt="Previev" />}
+
             {/* <label>
                 Date of birth
                 <Field name="avatar" /> */}
