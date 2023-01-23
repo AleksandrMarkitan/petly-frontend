@@ -1,13 +1,17 @@
 import { Container } from "../CommonComponents/Container/Container";
+import { Logo } from "../Logo/Logo";
 import { Navigation } from "../Navigation/Navigation";
 
-import { HeaderStyled } from "./Header.styled";
+import { HeaderStyled, Div } from "./Header.styled";
 
 export const Header = () => {
   return (
     <HeaderStyled>
       <Container>
-        <Navigation />
+        <Div>
+          <Logo />
+          <Navigation />
+        </Div>
       </Container>
     </HeaderStyled>
   );

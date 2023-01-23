@@ -1,7 +1,7 @@
-import { Routes, Route, Navigate } from "react-router-dom";
-import { lazy } from "react";
-// import { useEffect, Suspense } from "react";
-// import { useSelector } from "react-redux";
+import { Routes, Route } from "react-router-dom";
+import { useEffect, lazy } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
 import { PublicRoute } from "../HOCs/PublicRoute";
 import { PrivateRoute } from "../HOCs/PrivateRoute";
 
@@ -14,25 +14,53 @@ import { Layout } from "./Layout/Layout";
 
 // const NewsPage = lazy(() => import("../pages/NewsPage/NewsPage"));
 
-import OurFriendsPage from "../pages/UserPage/UserPage";
-import NewsPage from "../pages/NewsPage/NewsPage";
-import UserPage from "../pages/UserPage/UserPage";
-import HomePage from "../pages/HomePage/HomePage";
+// import OurFriendsPage from "../pages/UserPage/UserPage";
+// import NewsPage from "../pages/NewsPage/NewsPage";
+// import UserPage from "../pages/UserPage/UserPage";
+// import HomePage from "../pages/HomePage/HomePage";
 // const HomePage = lazy(() => import("../pages/HomePage/HomePage"));
+import { LoginPage } from "../pages/LoginPage/LoginPage";
+import { RegisterPage } from "../pages/RegisterPage/RegisterPage";
+import { NewsPage } from "../pages/NewsPage/NewsPage";
+import { UserPage } from "../pages/UserPage/UserPage";
+import { OurFriendsPage } from "../pages/OurFriendsPage/OurFriendsPage";
+import { NoticesPage } from "../pages/NoticesPage/NoticesPage";
+import { fetchCurrentUser } from "../redux/auth/authOperations";
 
-// import { Loader } from "../components/Loader/Loader";
+import { Loader } from "../components/Loader/Loader";
+
+import {
+  selectIsFetchingCurrentUser,
+  selectIsLoading,
+} from "../redux/auth/authSelectors";
 
 export const App = () => {
-  return (
+  const isFetchingCurrentUser = useSelector(selectIsFetchingCurrentUser);
+  const isLoading = useSelector(selectIsLoading);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchCurrentUser());
+  }, [dispatch]);
+
+  return isFetchingCurrentUser || isLoading ? (
+    <Loader />
+  ) : (
     <>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<HomePage />} />
-          {/* <Route
-            
+          <Route
+            index
+            element={
+              <PublicRoute>
+                <HomePage />
+              </PublicRoute>
+            }
+          />
+          <Route
             path="register"
             element={
-              <PublicRoute  restricted>
+              <PublicRoute restricted>
                 <RegisterPage />
               </PublicRoute>
             }
@@ -40,48 +68,45 @@ export const App = () => {
           <Route
             path="login"
             element={
-              <PublicRoute  restricted>
+              <PublicRoute restricted>
                 <LoginPage />
               </PublicRoute>
             }
-          /> */}
-          <Route
-            path="friends"
-            element={
-              <PublicRoute restricted>
-                <OurFriendsPage />
-              </PublicRoute>
-            }
           />
-
           <Route
             path="news"
             element={
-              <PublicRoute restricted>
+              <PublicRoute>
                 <NewsPage />
               </PublicRoute>
             }
           />
-
           <Route
-            path="user"
+            path="notices/:route"
             element={
-              <PrivateRoute>
-                <UserPage />
-              </PrivateRoute>
-            }
-          />
-
-          {/* 
-          <Route
-            path="notices/:categoryName"
-            element={
-              <PublicRoute resticred>
+              <PublicRoute>
                 <NoticesPage />
               </PublicRoute>
             }
-          /> */}
-          <Route path="*" element={<Navigate to="/" replace />} />
+          />
+
+          <Route
+            path="friends"
+            element={
+              <PublicRoute>
+                <OurFriendsPage />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="user"
+            element={
+              <PublicRoute>
+                <UserPage />
+              </PublicRoute>
+            }
+          />
+          <Route path="*" element={<HomePage />} />
         </Route>
       </Routes>
     </>

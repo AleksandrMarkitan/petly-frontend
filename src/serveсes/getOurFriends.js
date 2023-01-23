@@ -1,4 +1,6 @@
-const BASE_URL = "http://localhost:4000/api/v1";
+
+const { REACT_APP_API_URL } = process.env;
+const BASE_URL = REACT_APP_API_URL;
 
 export const getOurFriends = async ({ page = 1, limit = 20 }) => {
   const response = await fetch(

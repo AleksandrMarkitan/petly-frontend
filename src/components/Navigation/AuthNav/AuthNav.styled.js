@@ -1,6 +1,5 @@
 import styled from "styled-components";
-import { CategoryBtn } from "../../CommonButtons/CategoryBtn/CategoryBtn";
-import { LoginBtn } from "../../CommonButtons/LoginBtn/LoginBtn";
+import { AuthBtn } from "../../CommonButtons/AuthBtn/AuthBtn.styled";
 
 export const UlStyled = styled.ul`
   display: flex;
@@ -12,16 +11,13 @@ export const UlStyled = styled.ul`
   }
 `;
 
-export const BtnReg = styled(CategoryBtn)``;
+export const BtnLog = styled(AuthBtn)`
+  padding: 8px 28px;
 
-export const BtnLog = styled(LoginBtn)``;
+  @media (min-width: 768px) {
+    padding: 10px 28px;
+    font-size: 20px;
+  }
+`;
 
-// export const BtnLog = styled(CategoryBtn)`
-//   background-color: #f59256;
-//   color: #fff;
-//   :hover,
-//   :focus {
-//     background-color: #fff;
-//     color: #f59256;
-//   }
-// `;
+export const BtnReg = styled(BtnLog)``;

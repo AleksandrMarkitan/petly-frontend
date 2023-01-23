@@ -1,9 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { updateFavoriteNotices } from "../auth/authSlice";
 import {
   fetchNotices,
   fetchOneNotice,
-  updateFavoriteNotice,
   fetchFavorites,
   addNotice,
   fetchOwnerNotices,
@@ -12,7 +10,7 @@ import {
 
 const initialState = {
   notices: [],
-  oneNotice:{},
+  oneNotice: {},
   isLoading: false,
   error: null,
   notifyNotices: null,
@@ -94,21 +92,7 @@ const noticesSlice = createSlice({
       state.error = payload;
       state.isLoading = false;
     },
-    // додавання та видалення оголошення з обраних
-    [updateFavoriteNotice.pending]: (state) => {
-      state.isLoading = true;
-      state.error = null;
-      state.notifyNotices = null;
-    },
 
-    [updateFavoriteNotice.fulfilled]: (state, { payload }) => {
-      updateFavoriteNotices(payload);
-      state.isLoading = false;
-    },
-    [updateFavoriteNotice.rejected]: (state, { payload }) => {
-      state.error = payload;
-      state.isLoading = false;
-    },
     // отримання оголошень авторизованого користувача створених цим же користувачем
     [fetchOwnerNotices.pending]: (state) => {
       state.isLoading = true;

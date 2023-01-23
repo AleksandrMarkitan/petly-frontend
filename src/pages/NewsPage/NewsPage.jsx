@@ -48,7 +48,7 @@ import { getNews } from "../../serveсes/getNews"
 	return <Section>
 		<Container>
 			<SectionTitle text="News" />
-			<SearchField searchNews={searchNews} />
+			<SearchField searchFunction={searchNews} />
 			<NewsList news={news} />
 			{news.length === 0 && <div style={{ textAlign: "center" }}>Новин за вашим запитом не знайдено.</div>}
 		</Container>
