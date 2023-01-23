@@ -18,8 +18,6 @@ import { NoticesPage } from "../pages/NoticesPage/NoticesPage";
 import { fetchCurrentUser } from "../redux/auth/authOperations";
 import { Loader } from "./Loader/Loader";
 
-import { Loader } from "../components/Loader/Loader";
-
 import {
   selectIsFetchingCurrentUser,
   selectIsLoading,
