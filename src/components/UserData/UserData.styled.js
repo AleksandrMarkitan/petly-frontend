@@ -10,12 +10,7 @@ export const InputHidden = styled.div`
   padding: 0;
   margin: 0;
 `;
-export const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  flex: auto;
-  justify-content: space-between;
-`;
+export const Form = styled.form``;
 export const UserBlock = styled.div`
   display: flex;
   flex-direction: column;
@@ -24,7 +19,7 @@ export const UserBlock = styled.div`
   padding: 20px 12px 20px 16px;
   border-radius: 40px;
   box-shadow: 7px 4px 14px rgba(49, 21, 4, 0.07);
-  background-color: #fff;
+  background-color: ${(p) => p.theme.colors.secondaryBackground};
   @media (min-width: 768px) {
     position: relative;
     flex-direction: row-reverse;
@@ -32,7 +27,7 @@ export const UserBlock = styled.div`
     width: 736px;
     min-height: 311px;
     padding: 24px 40px 24px 32px;
-    border-radius: 40px;
+    border-radius: ${(p) => p.theme.borderRadius.br40};
   }
   @media (min-width: 1280px) {
     flex-direction: column;
@@ -40,7 +35,7 @@ export const UserBlock = styled.div`
     width: 411px;
     min-height: 580px;
     border-radius: 0px 40px 40px 0px;
-    padding: 20px 16px 42px 16px;
+    padding: 20px 16px 20px 16px;
   }
 `;
 export const EditButton = styled.button`
@@ -56,14 +51,14 @@ export const IconEditImgBtn = styled(HiCamera)`
   width: 20px;
   height: 20px;
   margin-right: 4px;
-  fill: #f59256; ;
+  fill: ${(p) => p.theme.colors.accent};
 `;
 export const Img = styled.img`
   width: 233px;
   height: 233px;
   border-radius: 50%;
   box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.11);
-  background-color: #e1e1e1;
+  background-color: ${(p) => p.theme.colors.background};
 `;
 export const ImageBox = styled.div`
   display: flex;
@@ -115,7 +110,7 @@ export const BoxTitleUser = styled.div`
 `;
 
 export const TitleUser = styled.h2`
-  color: #111111;
+  color: ${(p) => p.theme.colors.mainText};
   font-weight: 500;
   font-size: 20px;
   letter-spacing: 0.04em;

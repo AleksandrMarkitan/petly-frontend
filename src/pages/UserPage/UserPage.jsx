@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+// import { useEffect } from "react";
 import { useSelector } from "react-redux";
 //import { selectPets, selectUser } from "../../redux/user/userSelectors";
 import {
@@ -13,12 +13,11 @@ import {
 } from "../../components/PetsData/ModalAddPet.styled";
 import { UserData } from "../../components/UserData/UserData";
 //import { fetchUserPets } from "../../redux/user/userOperations";
-import { fetchCurrentUser } from "../../redux/auth/authOperations";
+// import { fetchCurrentUser } from "../../redux/auth/authOperations";
 import { PetsData } from "../../components/PetsData/PetsData";
 import { selectUser, selectUserPets } from "../../redux/auth/authSelectors";
 //import { selectPets } from "../../redux/user/userSelectors";
 //import { selectUserPets } from "../../redux/auth/authSelectors";
-// import { Logout } from "../../components/Logout/Logout";
 export const UserPage = () => {
   const user = useSelector(selectUser);
   console.log(user);
@@ -30,8 +29,8 @@ export const UserPage = () => {
         <BoxTitleUser>
           <TitleUser>My information:</TitleUser>
         </BoxTitleUser>
+
         <UserData user={user} />
-        {/* <Logout /> */}
       </BoxUser>
       <BoxPet>
         <BoxTitlePet>

@@ -10,6 +10,8 @@ import {
   ImageBox,
   EditButton,
 } from "./UserData.styled";
+import { Logout } from "../Logout/Logout";
+
 //import axios from "axios";
 import {
   updateUserAvatar,
@@ -121,6 +123,7 @@ export const UserData = ({ user }) => {
           <UserDataItem valueLabel="City:" nameInput="city" value={city} />
         )}
       </Form>
+      <Logout />
     </UserBlock>
   );
 };

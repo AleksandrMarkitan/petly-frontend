@@ -5,27 +5,24 @@ export const Div = styled.div`
   display: flex;
   align-items: center;
   &:not(:last-child) {
-    margin-bottom: 8px;
-    @media (min-width: 1280px) {
+    margin-bottom: 12px;
+    @media (min-width: 768px) {
+      width: 379px;
       margin-bottom: 15px;
     }
-  }
-  @media (min-width: 768px) {
-    width: 379px;
   }
 `;
 export const Title = styled.label`
   width: 64px;
-  font-size: 12px;
+  font-size: ${(p) => p.theme.fontSize.fs12};
   font-weight: 500px;
   @media (min-width: 768px) {
     width: 107px;
-    font-size: 18px;
+    font-size: ${(p) => p.theme.fontSize.fs18};
   }
 `;
 export const Block = styled.div`
   display: flex;
-  flex: auto;
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
@@ -34,22 +31,30 @@ export const Input = styled.input`
   padding: 4px 18px;
   width: 159px;
   height: 24px;
-  background-color: #fff;
-  border: 1px solid;
-  border-color: rgba(245, 146, 86, 0.5);
-  color: #111111;
-  border-radius: 40px;
-  font-size: 12px;
-  font-weight: 400;
+  margin-right: 9px;
+  background-color: ${(p) =>
+    p.disabled
+      ? p.theme.colors.secondaryBackground
+      : p.theme.colors.mainBackground};
+  border: ${(p) => (p.disabled ? "none" : p.theme.border.inputOutline)};
+  border-color: ${(p) => p.theme.colors.inputOutline};
+
+  color: ${(p) => p.theme.colors.mainText};
+  border-radius: ${(p) => p.theme.borderRadius.br40};
+  font-size: ${(p) => p.theme.fontSize.fs12};
+  font-weight: ${(p) => p.theme.fontWeight.fw400};
   :focus {
-    outline-color: rgba(245, 146, 86, 0.5);
+    outline-color: ${(p) => p.theme.colors.inputOutline};
   }
   @media (min-width: 768px) {
     width: 216px;
     height: 32px;
     padding: 4px 12px;
-    font-size: 18px;
+    margin-right: 24px;
+    font-size: ${(p) => p.theme.fontSize.fs18};
   }
+    @media (min-width: 1280px) {
+
 `;
 export const Button = styled.button`
   display: flex;
@@ -60,7 +65,7 @@ export const Button = styled.button`
   height: 20px;
   border-radius: 50%;
   border: none;
-  background-color: #fdf7f2;
+  background-color: ${(p) => p.theme.colors.mainBackground};
   margin-left: auto;
   cursor: pointer;
 
@@ -72,7 +77,7 @@ export const Button = styled.button`
 export const EditTextBtnIcon = styled(HiPencil)`
   width: 13px;
   height: 13px;
-  color: #f59256;
+  color: ${(p) => p.theme.colors.accent};
   @media (min-width: 768px) {
     width: 20px;
     height: 20px;
@@ -82,7 +87,7 @@ export const EditTextBtnIcon = styled(HiPencil)`
 export const IconCheck = styled(BsCheckLg)`
   width: 10px;
   height: 8px;
-  fill: #f59256;
+  fill: ${(p) => p.theme.colors.accent};
   @media (min-width: 768px) {
     width: 17px;
     height: 13px;

@@ -98,6 +98,7 @@ export const UserDataItem = ({
           value={inputValue}
           onChange={handleChange}
           readOnly={!inputActive ? true : false}
+          disabled={!inputActive}
           // onChange={changeUserData}
         />
         {!inputActive && (
