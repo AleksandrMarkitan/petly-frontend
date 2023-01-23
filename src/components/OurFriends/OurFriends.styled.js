@@ -221,6 +221,3 @@ export const Dr = styled.div`
 export const Hours = styled.p`
   display: block;
 `;
-export const Rr = styled.p`
-  display: block;
-`;

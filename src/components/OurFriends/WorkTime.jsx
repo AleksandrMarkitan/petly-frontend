@@ -1,5 +1,5 @@
 import { nanoid } from "nanoid";
-import { List, Button, Days, Hours, Dr, Rr } from "./OurFriends.styled";
+import { List, Button, Days, Hours, Dr } from "./OurFriends.styled";
 import { useState } from "react";
 export const WorkTime = ({ workDays }) => {
   const days = ["MN: ", "TU: ", "WE: ", "TH: ", "FR: ", "SA: ", "SU: "];
