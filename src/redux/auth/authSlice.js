@@ -77,10 +77,18 @@ const authSlice = createSlice({
       })
       .addCase(logout.fulfilled, (state) => {
         state.token = null;
-        state = initialState;
-        state.isAuth = false;
-
         state.isLoading = false;
+        state.isAuth = false;
+        state.user = {
+          name: "",
+          email: "",
+          avatarURL: "",
+          city: "",
+          birthday: "",
+          phone: "",
+          pets: [],
+          favoriteNotices: [],
+        };
       })
       .addCase(fetchCurrentUser.pending, (state) => {
         state.isLoading = true;

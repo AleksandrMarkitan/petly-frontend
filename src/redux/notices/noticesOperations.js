@@ -5,10 +5,13 @@ const baseURL = "https://pets-support-backend.onrender.com/api/v1";
 export const fetchNotices = createAsyncThunk(
   "notices/fetchNotices",
 
-  async ({ category, page = 1, limit = 8 }, { rejectWithValue }) => {
+  async (
+    { category, qwery = "", page = 1, limit = 8 },
+    { rejectWithValue }
+  ) => {
     try {
       const { data } = await axios(
-        `${baseURL}/notices?category=${category}&page=${page}&limit=${limit}`
+        `${baseURL}/notices?category=${category}&page=${page}&limit=${limit}&qwery=${qwery}`
       );
       return data;
     } catch (error) {
@@ -35,10 +38,10 @@ export const fetchOneNotice = createAsyncThunk(
 export const fetchFavorites = createAsyncThunk(
   "notices/fetchFavorites",
 
-  async ({ page = 1, limit = 8 }, { rejectWithValue }) => {
+  async ({ qwery="",page = 1, limit = 8 }, { rejectWithValue }) => {
     try {
       const { data } = await axios(
-        `${baseURL}/notices/favorites?page=${page}&limit=${limit}`
+        `${baseURL}/notices/favorites?page=${page}&limit=${limit}&qwery=${qwery}`
       );
       return data;
     } catch (error) {
@@ -65,10 +68,10 @@ export const addNotice = createAsyncThunk(
 export const fetchOwnerNotices = createAsyncThunk(
   "notices/fetchOwnerNotices",
 
-  async ({ page = 1, limit = 8 }, { rejectWithValue }) => {
+  async ({qwery="", page = 1, limit = 8 }, { rejectWithValue }) => {
     try {
       const { data } = await axios(
-        `${baseURL}/notices/owner?page=${page}&limit=${limit}`
+        `${baseURL}/notices/owner?page=${page}&limit=${limit}&qwery=${qwery}`
       );
       return data;
     } catch (error) {
