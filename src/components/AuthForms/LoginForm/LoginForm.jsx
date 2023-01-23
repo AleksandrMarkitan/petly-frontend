@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux";
 import { Formik, ErrorMessage } from "formik";
 import * as yup from "yup";
+import { useNavigate } from "react-router-dom";
 import { login } from "../../../redux/auth/authOperations";
 
 import {
@@ -28,6 +29,7 @@ export const FormError = ({ name }) => {
 
 export const LoginForm = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const validationSchema = yup.object({
     email: yup
@@ -49,7 +51,12 @@ export const LoginForm = () => {
   };
 
   const handleSubmit = (values, { resetForm }) => {
-    dispatch(login(values));
+    dispatch(login(values)).then((resp) => {
+      if (resp.meta.requestStatus === "fulfilled") {
+        navigate("/user", { replace: true });
+      }
+      return;
+    });
     resetForm();
   };
 

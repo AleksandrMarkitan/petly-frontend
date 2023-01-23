@@ -11,6 +11,7 @@ export const Button = styled.button`
   backdrop-filter: blur(2px);
 
   svg {
+    margin-left: 13px;
     fill: #111111;
     fill-opacity: 0.6;
     transition: fill 300ms linear;
