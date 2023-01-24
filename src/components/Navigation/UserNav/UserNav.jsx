@@ -1,4 +1,9 @@
-import { AccountBtn, UserCircle } from "./UserNav.styled";
+import {
+  AccountBtn,
+  BtnAvatar,
+  UserCircle,
+  UserCircleAvatar,
+} from "./UserNav.styled";
 
 export const UserNav = ({ onClose }) => {
   return (
@@ -7,6 +12,10 @@ export const UserNav = ({ onClose }) => {
         <UserCircle />
         Account
       </AccountBtn>
+      <BtnAvatar>
+        <UserCircleAvatar />
+        <img src="" alt="Account" />
+      </BtnAvatar>
     </>
   );
 };

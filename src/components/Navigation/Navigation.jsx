@@ -28,8 +28,8 @@ export const Navigation = () => {
       {!isMenuOpen && (
         <NavStyled>
           {isDesctop && <Nav />}
-          {!isMobile && token && <UserNav />}
-          {!isMobile && !token && <AuthNav />}
+          {!isMobile && !token && <UserNav />}
+          {!isMobile && token && <AuthNav />}
           {!isDesctop && <BtnMenu onClick={onOpen} />}
         </NavStyled>
       )}
