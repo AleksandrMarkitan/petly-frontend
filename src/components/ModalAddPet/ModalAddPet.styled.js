@@ -2,21 +2,7 @@ import styled from 'styled-components';
 import Datetime from 'react-datetime';
 import { Form, Field } from 'formik';
 
-// export const List = styled.ul`
-//   margin: 40px 0 0;
-//   display: flex;
-//   flex-direction: column;
-//   gap: 48px;
-
-//   @media (min-width: 768px) {
-//     margin: 72px 0 0;
-//     flex-direction: row;
-//     flex-wrap: wrap;
-//     row-gap: 72px;
-//     column-gap: 32px;
-//   }
-// `;
-export const DateInput = styled(Datetime)`
+export const Calendar = styled(Datetime)`
   position: relative;
   font-size: 16px;
   line-height: calc(22 / 16);
@@ -41,14 +27,6 @@ export const DateInput = styled(Datetime)`
   }
 `;
 //----------------------------------------------------------------
-export const FormStyled = styled(Form)`
-  margin-top: 20px;
-
-  @media (min-width: 768px) {
-    margin-top: 28px;
-  }
-`;
-//----------------------------------------------------------------
 export const Title = styled.h3`
   font-size: 24px;
   line-height: calc(33 / 24);
@@ -60,6 +38,15 @@ export const Title = styled.h3`
     line-height: calc(49 / 36);
   }
 `;
+
+export const FormStyled = styled(Form)`
+  margin-top: 20px;
+
+  @media (min-width: 768px) {
+    margin-top: 28px;
+  }
+`;
+//----------------------------------------------------------------
 
 export const InputFieldWrap = styled.div`
   margin-top: 32px;
@@ -93,16 +80,62 @@ export const Label = styled.label`
   }
 `;
 
+export const InputField = styled(Field)`
+  padding: 12px 20px 12px 14px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: calc(19 / 14);
+  color: rgba(27, 27, 27, 0.6);
+  background-color: #fdf7f2;
+  border: 1px solid rgba(245, 146, 86, 0.5);
+  border-radius: 40px;
+  outline: none;
+  transition: border-color 300ms linear;
+
+  :focus {
+    border-color: #f59256;
+  }
+`;
+
+//----------------------------------------------------------------
+export const BtnWrapper = styled.div`
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  @media (min-width: 768px) {
+    flex-direction: row-reverse;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+  }
+`;
+
+//----------------------------------------------------------------
+
 export const InputFileWrap = styled.div`
   position: relative;
   margin-top: 20px;
-
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: center;
+  /* @media (min-width: 768px) {
+    margin-left: auto;
+    margin-right: auto;
+    width: 140px;
+    height: 140px;
+  } */
   label {
     display: inline-block;
+    font-size: 16px;
   }
 
   label span {
     content: '';
+    margin-left: auto;
+    margin-right: auto;
     width: 116px;
     height: 116px;
     background: #fdf7f2;
@@ -110,6 +143,7 @@ export const InputFileWrap = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-top: 20px;
 
     @media (min-width: 768px) {
       width: 140px;
@@ -123,10 +157,16 @@ export const InputFileWrap = styled.div`
     }
   }
 
+  /* @media (min-width: 768px) {
+  } */
+
   label img {
     width: 116px;
     height: 116px;
     border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
 
     @media (min-width: 768px) {
       width: 140px;
@@ -147,7 +187,7 @@ export const CommentWrap = styled.div`
   margin-top: 20px;
 `;
 
-export const Textarea = styled(Field)`
+export const Textarea = styled.textarea`
   padding: 12px 20px 12px 14px;
   height: max-content;
   font-weight: 400;
@@ -165,37 +205,7 @@ export const Textarea = styled(Field)`
     border-color: #f59256;
   }
 `;
-//---------------------------------
-export const InputField = styled(Field)`
-  padding: 12px 20px 12px 14px;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: calc(19 / 14);
-  color: rgba(27, 27, 27, 0.6);
-  background-color: #fdf7f2;
-  border: 1px solid rgba(245, 146, 86, 0.5);
-  border-radius: 40px;
-  outline: none;
-  transition: border-color 300ms linear;
 
-  :focus {
-    border-color: #f59256;
-  }
-`;
-//----------------------------------------------------------------
-export const BtnWrapper = styled.div`
-  margin-top: 40px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-
-  @media (min-width: 768px) {
-    flex-direction: row-reverse;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-  }
-`;
 //----------------------------------------------------------------
 
 export const FieldsWrapper = styled.div`

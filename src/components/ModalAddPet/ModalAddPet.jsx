@@ -27,8 +27,9 @@ import {
   Title,
   DateInput,
   InputFieldWrap,
+  Calendar,
 } from './ModalAddPet.styled';
-import { getCities } from '../../serveсes/getCities';
+//import { DateInput } from '../ModalAddNotice/ModalAddNotice.styled';
 
 //import { Label } from '../AuthForms/Forms.styled';
 //import { InputHidden } from "./UserData.styled";
@@ -43,7 +44,7 @@ export const ModalAddPet = ({ onClose }) => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [imgURL, setImgURL] = useState('');
   const [preview, setPreview] = useState('');
-  const [date, setDate] = useState('');
+  const [birthdate, setBirthdate] = useState('');
 
   const [page, setPage] = useState(1);
   const [name, setName] = useState('');
@@ -78,7 +79,7 @@ export const ModalAddPet = ({ onClose }) => {
   };
 
   const birthdateHandler = e => {
-    setDate(e.format('DD.MM.YYYY'));
+    setBirthdate(e.format('DD.MM.YYYY'));
   };
 
   const initialValues = {
@@ -111,7 +112,7 @@ export const ModalAddPet = ({ onClose }) => {
 
     selectedFile && formData.append('avatarURL', selectedFile);
     name && formData.append('name', name);
-    date && formData.append('date', date);
+    birthdate && formData.append('date', birthdate);
     breed && formData.append('breed', breed);
     comments && formData.append('comments', comments);
     // console.log(date);
@@ -148,15 +149,13 @@ export const ModalAddPet = ({ onClose }) => {
                     )}
                   </Label>
                   <Label htmlFor="birth">Date of birth</Label>
-                  <DateInput
+                  <Calendar
                     inputProps={{
                       readOnly: true,
                       id: 'birth',
                       placeholder: 'Choose date',
-                      // open: 'false',
-                      // name: 'date',
                     }}
-                    value={date}
+                    value={birthdate}
                     onChange={birthdateHandler}
                     timeFormat={false}
                     closeOnSelect={true}
@@ -198,7 +197,7 @@ export const ModalAddPet = ({ onClose }) => {
                     <div>
                       Comments <span>*</span>
                     </div>
-                    <InputField placeholder="Type comment" name="comments" />
+                    <Textarea placeholder="Type comment" name="comments" />
                     {touched.comments && errors.comments && (
                       <Error>{errors.comments}</Error>
                     )}
