@@ -47,11 +47,14 @@ export const ModalAddPet = ({ onClose }) => {
 
   const [page, setPage] = useState(1);
   const [name, setName] = useState('');
+  const [breed, setBreed] = useState('');
 
   const validateName = value => {
     setName(value);
   };
-
+  const validateBreed = value => {
+    setBreed(value);
+  };
   const nextPage = () => {
     setPage(prevState => prevState + 1);
   };
@@ -111,7 +114,7 @@ export const ModalAddPet = ({ onClose }) => {
     date && formData.append('date', date);
     breed && formData.append('breed', breed);
     comments && formData.append('comments', comments);
-    console.log(date);
+    // console.log(date);
     dispatch(addPet(formData));
     //onClose();
   };
@@ -165,6 +168,7 @@ export const ModalAddPet = ({ onClose }) => {
                       type="text"
                       placeholder="Type breed"
                       name="breed"
+                      validate={validateBreed}
                     />
                     {touched.breed && errors.breed && (
                       <Error>{errors.breed}</Error>
@@ -204,7 +208,7 @@ export const ModalAddPet = ({ onClose }) => {
             )}
             <BtnWrapper>
               {page === 1 ? (
-                name.length >= 2 ? (
+                (name.length >= 2) & (breed.length >= 2) ? (
                   <NextBtn onClick={nextPage} />
                 ) : (
                   <NextBtn onClick={nextPage} disabled={true} />
