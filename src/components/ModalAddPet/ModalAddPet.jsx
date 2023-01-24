@@ -1,217 +1,234 @@
 //import { ModalWindow } from "../CommonComponents/ModalWindow/ModalWindow";
-import { Formik, Form, Field } from "formik";
-//import * as Yup from "yup";
-//import { FieldsWrapper } from "./ModalAddPet.styled";
-import { CancelBtn } from "../CommonButtons/CancelBtn/CancelBtn";
-import { NextBtn } from "../CommonButtons/NextBtn/NextBtn";
-import { useDispatch } from "react-redux";
+
+import { useEffect } from 'react';
+import { Formik, Form, Field } from 'formik';
+import * as Yup from 'yup';
+import { ModalWindow } from '../CommonComponents/ModalWindow/ModalWindow';
+import { CancelBtn } from '../CommonButtons/CancelBtn/CancelBtn';
+import { NextBtn } from '../CommonButtons/NextBtn/NextBtn';
+import { useDispatch } from 'react-redux';
 //import { addPet } from "../../redux/user/userOperations";
 
-import { useRef, useState } from "react";
-import { addPet } from "../../redux/user/userOperations";
+import { useRef, useState } from 'react';
+import { addPet } from '../../redux/user/userOperations';
+import { BsPlusLg } from 'react-icons/bs';
+import {
+  InputFileWrap,
+  InputFile,
+  FieldsWrapper,
+  Label,
+  BtnWrapper,
+  FormStyled,
+  SubmitBtn,
+  Error,
+  InputField,
+  CommentWrap,
+  Textarea,
+  Title,
+  DateInput,
+  InputFieldWrap,
+  Calendar,
+} from './ModalAddPet.styled';
+//import { DateInput } from '../ModalAddNotice/ModalAddNotice.styled';
+
+//import { Label } from '../AuthForms/Forms.styled';
 //import { InputHidden } from "./UserData.styled";
 //import { UserDataItem } from "../UserDataItem/UserDataItem";
 
-export const ModalAddPet = () => {
+export const ModalAddPet = ({ onClose }) => {
   const dispatch = useDispatch();
-  //const [isModalOpen, setIsModalOpen] = useState(false);
-  const [nextFormShow, setNextFormShow] = useState(false);
-  const [backFormShow, setBackFormShow] = useState(true);
-  const filePicker = useRef(null);
+
+  // const [nextFormShow, setNextFormShow] = useState(false);
+  // const [backFormShow, setBackFormShow] = useState(true);
+  // const filePicker = useRef(null);
   const [selectedFile, setSelectedFile] = useState(null);
-  //const [uploaded, setUploaded] = useState(null);
+  const [imgURL, setImgURL] = useState('');
+  const [preview, setPreview] = useState('');
+  const [birthdate, setBirthdate] = useState('');
 
-  //   const closeModal = () => {
-  //     setIsModalOpen(!isModalOpen);
-  //   };
+  const [page, setPage] = useState(1);
+  const [name, setName] = useState('');
+  const [breed, setBreed] = useState('');
 
-  //   const token =
-  //     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYzkzMDc0Nzc4MDA3ZDg1NmVlZDhiOCIsImlhdCI6MTY3NDE2NDQ3NSwiZXhwIjoxNjc0OTkyNDc1fQ.pGsU7-qWoeUAQS8l3qzUqVLV876F1d48tpeoC8vwAfQ";
+  const validateName = value => {
+    setName(value);
+  };
+  const validateBreed = value => {
+    setBreed(value);
+  };
+  const nextPage = () => {
+    setPage(prevState => prevState + 1);
+  };
 
-  /////////----------------------
+  const prevPage = () => {
+    setPage(prevState => prevState - 1);
+  };
+
+  const inputFileHandler = e => {
+    const file = e.target.files[0];
+
+    setImgURL(file);
+    const reader = new FileReader();
+
+    reader.onload = function (e) {
+      setPreview(e.target.result);
+    };
+
+    reader.readAsDataURL(file);
+    setSelectedFile(file);
+  };
+
+  const birthdateHandler = e => {
+    setBirthdate(e.format('DD.MM.YYYY'));
+  };
 
   const initialValues = {
-    name: "",
-    date: "",
-    breed: "",
+    name: '',
+    // date: '',
+    breed: '',
     avatarURL: {},
-    comments: "",
-    //   comment: "",
-
-    // toggle: true,
-    // toggle: 'checked',
-    //category: '',
-  };
-  const handleNext = (e) => {
-    e.preventDefault(e);
-    setBackFormShow(false);
-
-    setNextFormShow(true);
-    // setBackFormShow(false);
-  };
-  const handleBack = (e) => {
-    e.preventDefault(e);
-    setBackFormShow(true);
-    setNextFormShow(false);
-    console.log(888);
-  };
-  const handleSubmit = () => {
-    console.log(777);
+    comments: '',
   };
 
-  //---------PICTURE---------
+  const schema = Yup.object().shape({
+    name: Yup.string()
+      .min(2, 'Too Short!')
+      .max(16, 'Too Long!')
+      .required('Required'),
+    breed: Yup.string()
+      .min(2, 'Too Short!')
+      .max(24, 'Too Long!')
+      .required('Required'),
+    comments: Yup.string()
+      .min(8, 'Too Short!')
+      .max(120, 'Too Long!')
+      .required('Required'),
+  });
 
-  //const [selectedFile1, setSelectedFile1] = useState(null);
+  const onAddPet = value => {
+    const { name, breed, comments } = value;
 
-  //при изменении инпута добавляем выбранную картинку в селектедфайл
-  const selectAvatar = (e) => {
-    e.preventDefault();
-    const data = new FormData();
-    setSelectedFile(e.target.files[0]); // я это засунула в функцию handleAvatar
-    console.log(selectedFile);
-    console.log(data);
-    console.log(e.target.files[0]);
-  };
+    const formData = new FormData();
 
-  // для отправки на бек
-  const handleAvatar = async (e) => {
-    const data = new FormData();
-    data.append(
-      "avatarURL",
-      // e.target.files[0]
-      selectedFile
-    );
-
-    //добавляет картинку на бек
-    // const res = await fetch("Http://localhost:4000/api/v1/pets", {
-    //   method: "POST",
-    //   headers: {
-    //     Authorization: `Bearer ${token}`,
-    //   },
-    //   body: data,
-    // });
-
-    // const result = await res.json();
-    // setUploaded(result.avatarURL);
-    // console.log(result.avatarURL);
-    //dispatch(updateUserData(data));
-
-    dispatch(addPet(data));
-  };
-  const handlePick = () => {
-    filePicker.current.click();
-  };
-
-  const onAddPet = (name) => {
-    const data = new FormData();
-    // data.append(
-    //   "avatarURL",
-    //   // e.target.files[0]
-    //   selectedFile
-    // );
-    // data.append("name", name.name);
-    // console.log(data);
-
-    dispatch(
-      addPet(
-        //data.append("avatarURL", selectedFile)
-        // data.append("name", name.name),
-        // data.append("breed", name.breed)
-        // data
-        { breed: name.breed, name: name.name }
-      )
-    );
-    console.log(data);
-    console.log(name.name);
-    //addPet(data)  //працю окрем
-    // addPet({ breed: name.breed, name: name.name }) //працю окремо
-    // avatarURL: data,
-
-    //handleAvatar();  отправляет но одно поле
-    // { name: "oopppp", breed: "oooooo" }
+    selectedFile && formData.append('avatarURL', selectedFile);
+    name && formData.append('name', name);
+    birthdate && formData.append('date', birthdate);
+    breed && formData.append('breed', breed);
+    comments && formData.append('comments', comments);
+    // console.log(date);
+    dispatch(addPet(formData));
+    //onClose();
   };
 
   return (
     <>
-      {/* <button onClick={closeModal}>ВІДКРИТИ МОДАЛКУ</button>
-      {isModalOpen && (
-        <ModalWindow onClose={closeModal} modalType={"addPet"}> */}
+      {/* // <ModalWindow onClose={onClose} modalType={'addPet'}> */}
+      <Title>Add pet</Title>
       <Formik
         initialValues={initialValues}
-        // validationSchema={schema}
-        onSubmit={onAddPet}
+        validationSchema={schema}
+        onSubmit={values => onAddPet(values)}
+        validateOnChange
         //     enableReinitialize
       >
-        {/* <FieldArray> */}
+        {({ errors, touched }) => (
+          <FormStyled encType="multipart/form-data">
+            {page === 1 && (
+              <>
+                <InputFieldWrap>
+                  <Label>
+                    Pet's name
+                    <InputField
+                      type="text"
+                      placeholder="Type name pet"
+                      name="name"
+                      validate={validateName}
+                    />
+                    {touched.name && errors.name && (
+                      <Error>{errors.name}</Error>
+                    )}
+                  </Label>
+                  <Label htmlFor="birth">Date of birth</Label>
+                  <Calendar
+                    inputProps={{
+                      readOnly: true,
+                      id: 'birth',
+                      placeholder: 'Choose date',
+                    }}
+                    value={birthdate}
+                    onChange={birthdateHandler}
+                    timeFormat={false}
+                    closeOnSelect={true}
+                    dateFormat="DD.MM.YYYY"
+                  />
+                  <Label>
+                    Breed
+                    <InputField
+                      type="text"
+                      placeholder="Type breed"
+                      name="breed"
+                      validate={validateBreed}
+                    />
+                    {touched.breed && errors.breed && (
+                      <Error>{errors.breed}</Error>
+                    )}
+                  </Label>
+                </InputFieldWrap>
+              </>
+            )}
 
-        <Form autoComplete="off" encType="multipart/form-data">
-          {/* <FieldsWrapper> */}
-          {backFormShow && (
-            <div>
-              <label>
-                Name pet
-                <Field name="name" placeholder="name" />
-                {/* <ErrorMessage name="name" component="span" /> */}
-              </label>
+            {page === 2 && (
+              <>
+                <InputFileWrap>
+                  <Label>
+                    Add photo and some comments
+                    {!preview && (
+                      <span>
+                        <BsPlusLg />
+                      </span>
+                    )}
+                    {preview && <img src={preview} alt="Previev" />}
+                    <InputFile type="file" onChange={inputFileHandler} />
+                  </Label>
+                </InputFileWrap>
 
-              <label>
-                Date of birth
-                <Field name="date" />
-                {/* <ErrorMessage name="date" component="span" /> */}
-              </label>
-
-              <label>
-                Breed
-                <Field name="breed" />
-                {/* <ErrorMessage name="breed" component="span" /> */}
-              </label>
-              {/* </FieldsWrapper> */}
-              <NextBtn handleBtn={handleNext}>Next</NextBtn>
-              <CancelBtn>Cancel</CancelBtn>
-            </div>
-          )}
-          {/* </Form> */}
-          {/* )} */}
-          {/* {nextFormShow && ( */}
-          <div>
-            <button type="button" onClick={handlePick}>
-              Edit photo
-            </button>
-            {/* <InputHidden> */}
-            <input
-              type="file"
-              name="avatarURL"
-              // value={selectedFile}
-              // onChange={handleAvatar}
-              // ref={filePicker}
-              onChange={selectAvatar}
-            />
-            {/* </InputHidden> */}
-            <img src="" alt="avatar" />
-            {/* <label>
-                Date of birth
-                <Field name="avatar" /> */}
-            {/* <ErrorMessage name="date" component="span" /> */}
-            {/* </label> */}
-
-            <label>
-              Comments
-              <Field name="comments" />
-              {/* <ErrorMessage name="breed" component="span" /> */}
-            </label>
-            <NextBtn handleBtn={handleSubmit}>Done</NextBtn>
-            <CancelBtn type="button" handleBtn={handleBack}>
-              Back
-            </CancelBtn>
-            <button type="submit">добавить</button>
-          </div>
-          {/* )} */}
-        </Form>
-        {/* )} */}
-        {/* </FieldArray> */}
+                <CommentWrap>
+                  <Label>
+                    <div>
+                      Comments <span>*</span>
+                    </div>
+                    <Textarea placeholder="Type comment" name="comments" />
+                    {touched.comments && errors.comments && (
+                      <Error>{errors.comments}</Error>
+                    )}
+                  </Label>
+                </CommentWrap>
+              </>
+            )}
+            <BtnWrapper>
+              {page === 1 ? (
+                (name.length >= 2) & (breed.length >= 2) ? (
+                  <NextBtn onClick={nextPage} />
+                ) : (
+                  <NextBtn onClick={nextPage} disabled={true} />
+                )
+              ) : (
+                <SubmitBtn type="submit">Done</SubmitBtn>
+              )}
+              {page === 1 ? (
+                <CancelBtn onClick={onClose} />
+              ) : (
+                <CancelBtn onClick={prevPage} text="Back" />
+              )}
+            </BtnWrapper>
+          </FormStyled>
+        )}
       </Formik>
       {/* </ModalWindow> */}
       {/* )} */}
     </>
   );
+  {
+    /* </ModalWindow> */
+  }
 };
