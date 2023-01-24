@@ -1,9 +1,9 @@
-import styled from "styled-components";
-import { CgClose } from "react-icons/cg";
+import styled from 'styled-components';
+import { CgClose } from 'react-icons/cg';
 
 export const NavStyled = styled.nav`
   position: absolute;
-  background-color: #fff;
+  background-color: rgba(253, 247, 242, 1);
   z-index: 50;
   padding: 16px 20px;
   width: 100%;

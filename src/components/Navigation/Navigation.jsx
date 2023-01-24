@@ -1,19 +1,19 @@
-import { useState } from "react";
-import { useMedia } from "react-use";
-import { useSelector } from "react-redux";
-import { selectToken } from "../../redux/auth/authSelectors";
-import { BtnMenu } from "./BtnBurgerMenu/BtnBurgerMenu";
-import { AuthNav } from "./AuthNav/AuthNav";
-import { BurgerMenu } from "./BurgerMenu/BurgerMenu";
-import { Nav } from "./Nav/Nav";
-import { UserNav } from "./UserNav/UserNav";
-import { NavStyled } from "./Navigation.styled";
+import { useState } from 'react';
+import { useMedia } from 'react-use';
+import { useSelector } from 'react-redux';
+import { selectToken } from '../../redux/auth/authSelectors';
+import { BtnMenu } from './BtnBurgerMenu/BtnBurgerMenu';
+import { AuthNav } from './AuthNav/AuthNav';
+import { BurgerMenu } from './BurgerMenu/BurgerMenu';
+import { Nav } from './Nav/Nav';
+import { UserNav } from './UserNav/UserNav';
+import { NavStyled } from './Navigation.styled';
 
 export const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const token = useSelector(selectToken);
-  const isDesctop = useMedia("(min-width: 1280px)");
-  const isMobile = useMedia("(max-width: 767px)");
+  const isDesctop = useMedia('(min-width: 1280px)');
+  const isMobile = useMedia('(max-width: 767px)');
 
   const onOpen = () => {
     setIsMenuOpen(true);
