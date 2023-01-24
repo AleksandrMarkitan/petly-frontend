@@ -187,7 +187,7 @@ export const CommentWrap = styled.div`
   margin-top: 20px;
 `;
 
-export const Textarea = styled.textarea`
+export const Textarea = styled(Field)`
   padding: 12px 20px 12px 14px;
   height: max-content;
   font-weight: 400;
