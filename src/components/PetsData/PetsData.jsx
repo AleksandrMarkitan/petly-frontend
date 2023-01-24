@@ -49,20 +49,20 @@ export const PetsData = ({ pets }) => {
     <>
       <BoxTitlePet>
         <TitleUser>My pets:</TitleUser>
-        <BtnBox>
+        {/* <BtnBox>
           <AddTitle>Add pet</AddTitle>
           <AddBtn closeModal={closeModal} />
-        </BtnBox>
+        </BtnBox> */}
       </BoxTitlePet>
 
-      {isModalOpen && (
-        <ModalWindow onClose={closeModal} modalType={'addPet'}>
-          {/* <div>jjjjj</div>
+      {/* {isModalOpen && (
+        <ModalWindow onClose={closeModal} modalType={'addPet'}> */}
+      {/* <div>jjjjj</div>
           <NextBtn onClick={handleSubmit}>Done</NextBtn>
           <CancelBtn onClick={handleBack}>Back</CancelBtn> */}
-          <ModalAddPet />
+      {/* <ModalAddPet />
         </ModalWindow>
-      )}
+      )} */}
       {/* <ModalAddPet /> */}
       {/* <button onClick={closeModal}>ВІДКРИТИ МОДАЛКУ</button> */}
       {/* {isModalOpen && <ModalAddPet />} */}
