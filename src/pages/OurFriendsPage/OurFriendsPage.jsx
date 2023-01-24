@@ -5,6 +5,7 @@ import { Container } from '../../components/CommonComponents/Container/Container
 import { SectionTitle } from '../../components/CommonComponents/SectionTitle/SectionTitle';
 import { OurFriendsList } from '../../components/OurFriends/OurFriends';
 import { getOurFriends } from '../../serveсes/getOurFriends';
+import { Loader } from '../../components/Loader/Loader';
 
 const OurFriendsPage = () => {
   const [friends, setFriends] = useState([]);
@@ -30,7 +31,7 @@ const OurFriendsPage = () => {
     <Section>
       <Container>
         <SectionTitle text="Our friends" />
-        <OurFriendsList friends={friends} />
+        {<Loader /> && <OurFriendsList friends={friends} />}
       </Container>
     </Section>
   );

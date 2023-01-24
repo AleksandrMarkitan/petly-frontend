@@ -11,9 +11,9 @@ import {
   Container,
   Img,
   Time,
-} from "./OurFriends.styled";
-import { WorkTime } from "./WorkTime";
-import image from "../../img/cat.png";
+} from './OurFriends.styled';
+import { WorkTime } from './WorkTime';
+import image from '../../img/cat.png';
 export const OurFriendsList = ({ friends }) => {
   return (
     <Box>
