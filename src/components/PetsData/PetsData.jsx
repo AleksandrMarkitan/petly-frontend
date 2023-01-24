@@ -26,7 +26,7 @@ export const PetsData = ({ pets }) => {
 
       {isModalOpen && (
         <ModalWindow onClose={closeModal} modalType={'addPet'}>
-          <ModalAddPet />
+          <ModalAddPet onClose={closeModal} />
         </ModalWindow>
       )}
 
