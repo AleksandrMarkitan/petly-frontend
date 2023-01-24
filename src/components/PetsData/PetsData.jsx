@@ -18,36 +18,36 @@ import { TitleUser } from '../UserData/UserData.styled';
 // import { selectUser } from "../../redux/user/userSelectors";
 
 export const PetsData = ({ pets }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+	const [isModalOpen, setIsModalOpen] = useState(false);
 
-  //   const [nextFormShow, setNextFormShow] = useState(false);
-  //   const [backFormShow, setBackFormShow] = useState(true);
-  const closeModal = () => {
-    setIsModalOpen(!isModalOpen);
-  };
-  //   const pets = useSelector(selectUser);
-  //   const dispatch = useDispatch();
-  //   useEffect(() => {
-  //     dispatch(fetchUserPets());
-  //   }, [dispatch]);
-  //   console.log(pets);
+	//   const [nextFormShow, setNextFormShow] = useState(false);
+	//   const [backFormShow, setBackFormShow] = useState(true);
+	const closeModal = () => {
+		setIsModalOpen(!isModalOpen);
+	};
+	//   const pets = useSelector(selectUser);
+	//   const dispatch = useDispatch();
+	//   useEffect(() => {
+	//     dispatch(fetchUserPets());
+	//   }, [dispatch]);
+	//   console.log(pets);
 
-  /////////----------------------
-  //   const handleNext = () => {
-  //     setNextFormShow(true);
-  //     setBackFormShow(false);
-  //   };
-  //   const handleBack = () => {
-  //     setBackFormShow(false);
-  //     setBackFormShow(true);
-  //   };
-  //   const handleSubmit = () => {
-  //     console.log(777);
-  //   };
+	/////////----------------------
+	//   const handleNext = () => {
+	//     setNextFormShow(true);
+	//     setBackFormShow(false);
+	//   };
+	//   const handleBack = () => {
+	//     setBackFormShow(false);
+	//     setBackFormShow(true);
+	//   };
+	//   const handleSubmit = () => {
+	//     console.log(777);
+	//   };
 
-  return (
-    <>
-      <BoxTitlePet>
+	return (
+		<>
+			{/* <BoxTitlePet>
         <TitleUser>My pets:</TitleUser>
         <BtnBox>
           <AddTitle>Add pet</AddTitle>
@@ -61,10 +61,10 @@ export const PetsData = ({ pets }) => {
         </ModalWindow>
       )}
       {/* <ModalAddPet /> */}
-      {/* <button onClick={closeModal}>ВІДКРИТИ МОДАЛКУ</button> */}
-      {/* {isModalOpen && <ModalAddPet />} */}
+			{/* <button onClick={closeModal}>ВІДКРИТИ МОДАЛКУ</button> */}
+			{/* {isModalOpen && <ModalAddPet />} */}
 
-      {pets && <PetsList pets={pets} />}
-    </>
-  );
+			{pets && <PetsList pets={pets} />}
+		</>
+	);
 };
