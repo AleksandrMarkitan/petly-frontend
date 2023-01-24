@@ -1,11 +1,11 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const WrapperPicDiv = styled.img`
   margin-bottom: 20px;
   width: 240px;
   height: 240px;
-  border-radius: ${(p) => p.theme.borderRadius.br20};
-  background-color: ${(p) => p.theme.colors.background};
+  border-radius: ${p => p.theme.borderRadius.br20};
+  background-color: ${p => p.theme.colors.background};
   @media (min-width: 768px) {
     margin-right: 32px;
     margin-bottom: 0;
@@ -28,9 +28,9 @@ export const Box = styled.div`
     margin-bottom: 20px;
   }
   padding: 20px;
-  border-radius: ${(p) => p.theme.borderRadius.br40};
+  border-radius: ${p => p.theme.borderRadius.br40};
   box-shadow: 7px 4px 14px rgba(49, 21, 4, 0.07);
-  background-color: ${(p) => p.theme.colors.secondaryBackground};
+  background-color: ${p => p.theme.colors.secondaryBackground};
   @media (min-width: 768px) {
     display: flex;
     width: 704px;
@@ -45,10 +45,10 @@ export const InfoPet = styled.p`
   &:not(:last-child) {
     margin-bottom: 12px;
   }
-  font-size: ${(p) => p.theme.fontSize.fs14};
-  font-weight: ${(p) => p.theme.fontWeight.fw400};
+  font-size: ${p => p.theme.fontSize.fs14};
+  font-weight: ${p => p.theme.fontWeight.fw400};
   @media (min-width: 768px) {
-    font-size: ${(p) => p.theme.fontSize.fs16};
+    font-size: ${p => p.theme.fontSize.fs16};
   }
 `;
 
@@ -64,10 +64,10 @@ export const AdditionalInfo = styled.div`
 `;
 
 export const Date = styled.p`
-  font-weight: ${(p) => p.theme.fontWeight.fw400};
-  font-size: ${(p) => p.theme.fontSize.fs16};
+  font-weight: ${p => p.theme.fontWeight.fw400};
+  font-size: ${p => p.theme.fontSize.fs16};
   line-height: calc(22 / 16);
-  color: ${(p) => p.theme.colors.inputText};
+  color: ${p => p.theme.colors.inputText};
 `;
 
 export const Link = styled.a`
@@ -77,7 +77,7 @@ export const Link = styled.a`
   color: #f59256;
 
   ::after {
-    content: "";
+    content: '';
     position: absolute;
     left: 0;
     bottom: 0;
@@ -89,6 +89,7 @@ export const Link = styled.a`
 
   :hover::after {
     width: 100%;
+    transition: ${p => p.theme.transition.first};
   }
 `;
 

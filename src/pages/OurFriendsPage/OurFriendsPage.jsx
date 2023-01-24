@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
-import { Section } from "../../components/CommonComponents/Section/Section";
-import { Container } from "../../components/CommonComponents/Container/Container";
-import { SectionTitle } from "../../components/CommonComponents/SectionTitle/SectionTitle";
-import { OurFriendsList } from "../../components/OurFriends/OurFriends";
-import { getOurFriends } from "../../serveсes/getOurFriends";
+import { Section } from '../../components/CommonComponents/Section/Section';
+import { Container } from '../../components/CommonComponents/Container/Container';
+import { SectionTitle } from '../../components/CommonComponents/SectionTitle/SectionTitle';
+import { OurFriendsList } from '../../components/OurFriends/OurFriends';
+import { getOurFriends } from '../../serveсes/getOurFriends';
 
 const OurFriendsPage = () => {
   const [friends, setFriends] = useState([]);
