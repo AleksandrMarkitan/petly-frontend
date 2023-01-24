@@ -19,7 +19,8 @@ import { useState } from 'react';
 import { AddTitle, BtnBox, BoxPet, BoxTitlePet } from './UserPage.styled';
 //import { selectPets } from "../../redux/user/userSelectors";
 //import { selectUserPets } from "../../redux/auth/authSelectors";
-export const UserPage = () => {
+
+const UserPage = () => {
   const user = useSelector(selectUser);
   // console.log(user);
   // console.log(user.avatarURL);
@@ -55,3 +56,5 @@ export const UserPage = () => {
     </UserPageContainer>
   );
 };
+
+export default UserPage;
