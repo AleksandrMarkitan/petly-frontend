@@ -3,9 +3,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { selectNotices } from "../../redux/notices/noticesSelectors";
 import {
-  fetchNotices,
-  fetchFavorites,
-  fetchOwnerNotices,
+	fetchNotices,
+	fetchFavorites,
+	fetchOwnerNotices,
 } from "../../redux/notices/noticesOperations";
 import { SectionTitle } from "../../components/CommonComponents/SectionTitle/SectionTitle";
 import { NoticesCategoriesNav } from "../../components/NoticesCategoriesNav/NoticesCategoriesNav";
@@ -17,60 +17,62 @@ import { ModalAddNotice } from "../../components/ModalAddNotice/ModalAddNotice";
 import { MenuWrap } from "./NoticesPage.styled";
 import { NoticesSearch } from "../../components/NoticesSearch/NoticesSearch";
 
-export const NoticesPage = () => {
-  const { route } = useParams();
+const NoticesPage = () => {
+	const { route } = useParams();
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [searchTitleQwery, setSearchTitleQwery] = useState("");
+	const [isModalOpen, setIsModalOpen] = useState(false);
+	const [searchTitleQwery, setSearchTitleQwery] = useState("");
 
-  const notices = useSelector(selectNotices);
+	const notices = useSelector(selectNotices);
 
-  const dispatch = useDispatch();
+	const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (route === "favorite") {
-      if (searchTitleQwery !== "") {
-        dispatch(fetchFavorites({ qwery: searchTitleQwery }));
-      } else {
-        dispatch(fetchFavorites({}));
-      }
-    }
-    if (route === "owner") {
-      if (searchTitleQwery !== "") {
-        dispatch(fetchOwnerNotices({ qwery: searchTitleQwery }));
-      } else {
-        dispatch(fetchOwnerNotices({}));
-      }
-    }
-    if (["sell", "lost-found", "in-good-hands"].includes(route)) {
-      if (searchTitleQwery !== "") {
-        dispatch(fetchNotices({ category: route, qwery: searchTitleQwery }));
-      } else {
-        dispatch(fetchNotices({ category: route }));
-      }
-    }
-  }, [dispatch, route, searchTitleQwery]);
+	useEffect(() => {
+		if (route === "favorite") {
+			if (searchTitleQwery !== "") {
+				dispatch(fetchFavorites({ qwery: searchTitleQwery }));
+			} else {
+				dispatch(fetchFavorites({}));
+			}
+		}
+		if (route === "owner") {
+			if (searchTitleQwery !== "") {
+				dispatch(fetchOwnerNotices({ qwery: searchTitleQwery }));
+			} else {
+				dispatch(fetchOwnerNotices({}));
+			}
+		}
+		if (["sell", "lost-found", "in-good-hands"].includes(route)) {
+			if (searchTitleQwery !== "") {
+				dispatch(fetchNotices({ category: route, qwery: searchTitleQwery }));
+			} else {
+				dispatch(fetchNotices({ category: route }));
+			}
+		}
+	}, [dispatch, route, searchTitleQwery]);
 
-  const closeModal = () => {
-    setIsModalOpen(!isModalOpen);
-  };
+	const closeModal = () => {
+		setIsModalOpen(!isModalOpen);
+	};
 
-  const onSearch = (searchQuery) => {
-    setSearchTitleQwery(searchQuery);
-  };
+	const onSearch = (searchQuery) => {
+		setSearchTitleQwery(searchQuery);
+	};
 
-  return (
-    <Section>
-      <Container>
-        <SectionTitle text={"Find your favorite pet"} />
-        <NoticesSearch onSearch={onSearch} />
-        <MenuWrap>
-          <NoticesCategoriesNav />
-          <AddNoticeButton onClick={closeModal} />
-        </MenuWrap>
-        <NoticesCategoriesList data={notices} />
-        {isModalOpen && <ModalAddNotice onClose={closeModal} />}
-      </Container>
-    </Section>
-  );
+	return (
+		<Section>
+			<Container>
+				<SectionTitle text={"Find your favorite pet"} />
+				<NoticesSearch onSearch={onSearch} />
+				<MenuWrap>
+					<NoticesCategoriesNav />
+					<AddNoticeButton onClick={closeModal} />
+				</MenuWrap>
+				<NoticesCategoriesList data={notices} />
+				{isModalOpen && <ModalAddNotice onClose={closeModal} />}
+			</Container>
+		</Section>
+	);
 };
+
+export default NoticesPage;
