@@ -1,13 +1,13 @@
-import { useDispatch } from "react-redux";
-import { formatDate } from "../../helpers/formatDate";
-import { deletePet } from "../../redux/user/userOperations";
-import { DeletePetBtn } from "../../../src/components/CommonButtons/DeletePetBtn/DeletePetBtn";
-import { WrapperPicDiv, Box, Description, InfoPet } from "./PetsList.styled";
+import { useDispatch } from 'react-redux';
+import { formatDate } from '../../helpers/formatDate';
+import { deletePet } from '../../redux/user/userOperations';
+import { DeletePetBtn } from '../../../src/components/CommonButtons/DeletePetBtn/DeletePetBtn';
+import { WrapperPicDiv, Box, Description, InfoPet } from './PetsList.styled';
 
 export const PetsList = ({ pets }) => {
   const dispatch = useDispatch();
 
-  const deletePetItem = (id) => {
+  const deletePetItem = id => {
     dispatch(deletePet(id));
     // const onDelete = () => {
     //   dispatch(logout());
@@ -23,7 +23,7 @@ export const PetsList = ({ pets }) => {
           <Description>
             <DeletePetBtn onDelete={() => deletePetItem(_id)}></DeletePetBtn>
             <InfoPet>Name: {name}</InfoPet>
-            <InfoPet>Date of birth: {formatDate(date)}</InfoPet>
+            <InfoPet>Date of birth: {date}</InfoPet>
             <InfoPet>Breed: {breed}</InfoPet>
             <InfoPet>Comments: {comments}</InfoPet>
           </Description>

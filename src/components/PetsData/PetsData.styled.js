@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 // export const List = styled.ul`
 //   margin: 40px 0 0;
@@ -37,8 +37,8 @@ export const BoxTitlePet = styled.div`
 `;
 export const AddTitle = styled.p`
   margin-right: 15px;
-  font-weight: ${(p) => p.theme.fontWeight.fw500};
-  font-size: ${(p) => p.theme.fontSize.fs20};
+  font-weight: ${p => p.theme.fontWeight.fw500};
+  font-size: ${p => p.theme.fontSize.fs20};
 `;
 export const BtnBox = styled.div`
   display: inline-flex;
