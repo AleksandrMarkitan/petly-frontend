@@ -1,30 +1,30 @@
-import { Routes, Route, Navigate } from "react-router-dom";
-import { useEffect, lazy } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { ThemeProvider } from "styled-components";
+import { Routes, Route, Navigate } from 'react-router-dom';
+import { useEffect, lazy } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { ThemeProvider } from 'styled-components';
 import {
   selectIsFetchingCurrentUser,
   selectIsLoading,
-} from "../redux/auth/authSelectors";
-import theme from "../components/utils/theme";
+} from '../redux/auth/authSelectors';
+import theme from '../components/utils/theme';
 
-import { PublicRoute } from "../HOCs/PublicRoute";
-import { PrivateRoute } from "../HOCs/PrivateRoute";
+import { PublicRoute } from '../HOCs/PublicRoute';
+import { PrivateRoute } from '../HOCs/PrivateRoute';
 
-import { Loader } from "./Loader/Loader";
+import { Loader } from './Loader/Loader';
 
-import { Layout } from "./Layout/Layout";
-import { fetchCurrentUser } from "../redux/auth/authOperations";
-const NoticesPage = lazy(() => import("../pages/NoticesPage/NoticesPage"));
-const LoginPage = lazy(() => import("../pages/LoginPage/LoginPage"));
-const RegisterPage = lazy(() => import("../pages/RegisterPage/RegisterPage"));
+import { Layout } from './Layout/Layout';
+import { fetchCurrentUser } from '../redux/auth/authOperations';
+const NoticesPage = lazy(() => import('../pages/NoticesPage/NoticesPage'));
+const LoginPage = lazy(() => import('../pages/LoginPage/LoginPage'));
+const RegisterPage = lazy(() => import('../pages/RegisterPage/RegisterPage'));
 
 const OurFriendsPage = lazy(() =>
-  import("../pages/OurFriendsPage/OurFriendsPage")
+  import('../pages/OurFriendsPage/OurFriendsPage')
 );
-const UserPage = lazy(() => import("../pages/UserPage/UserPage"));
+const UserPage = lazy(() => import('../pages/UserPage/UserPage'));
 
-const NewsPage = lazy(() => import("../pages/NewsPage/NewsPage"));
+const NewsPage = lazy(() => import('../pages/NewsPage/NewsPage'));
 
 // import OurFriendsPage from "../pages/UserPage/UserPage";
 // import NewsPage from "../pages/NewsPage/NewsPage";
@@ -36,7 +36,7 @@ const NewsPage = lazy(() => import("../pages/NewsPage/NewsPage"));
 
 // import { Loader } from "../components/Loader/Loader";
 
-const HomePage = lazy(() => import("../pages/HomePage/HomePage"));
+const HomePage = lazy(() => import('../pages/HomePage/HomePage'));
 
 export const App = () => {
   const isFetchingCurrentUser = useSelector(selectIsFetchingCurrentUser);
