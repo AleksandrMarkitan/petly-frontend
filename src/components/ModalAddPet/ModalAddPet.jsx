@@ -44,17 +44,12 @@ export const ModalAddPet = ({ onClose }) => {
   const [imgURL, setImgURL] = useState('');
   const [preview, setPreview] = useState('');
   const [date, setDate] = useState('');
-  const [sex, setSex] = useState('');
-  const [location, setLocation] = useState('');
 
   const [page, setPage] = useState(1);
-  const [title, setTitle] = useState('');
-  const [city, setCity] = useState('');
-  const [cities, setCities] = useState([]);
-  const [showCitiesList, setShowCitiesList] = useState(false);
+  const [name, setName] = useState('');
 
-  const validateTitle = value => {
-    setTitle(value);
+  const validateName = value => {
+    setName(value);
   };
 
   const nextPage = () => {
@@ -105,49 +100,6 @@ export const ModalAddPet = ({ onClose }) => {
       .max(120, 'Too Long!')
       .required('Required'),
   });
-  // const handleNext = e => {
-  //   e.preventDefault(e);
-  //   setBackFormShow(false);
-
-  //   setNextFormShow(true);
-  //   // setBackFormShow(false);
-  // };
-  // const handleBack = e => {
-  //   e.preventDefault(e);
-  //   setBackFormShow(true);
-  //   setNextFormShow(false);
-  //   console.log(888);
-  // };
-  // const handleSubmit = () => {
-  //   console.log(777);
-  // };
-
-  //---------PICTURE---------
-
-  //const [selectedFile1, setSelectedFile1] = useState(null);
-
-  //при изменении инпута добавляем выбранную картинку в селектедфайл
-  // const selectAvatar = e => {
-  //   e.preventDefault();
-  //   const data = new FormData();
-  //   setSelectedFile(e.target.files[0]); // я это засунула в функцию handleAvatar
-  //   //inputFileHandler(); //Anna
-  // };
-
-  // для отправки на бек
-  // const handleAvatar = async e => {
-  //   const data = new FormData();
-  //   data.append(
-  //     'avatarURL',
-  //     // e.target.files[0]
-  //     selectedFile
-  //   );
-
-  //   dispatch(addPet(data));
-  // };
-  // const handlePick = () => {
-  //   filePicker.current.click();
-  // };
 
   const onAddPet = value => {
     const { name, breed, comments } = value;
@@ -156,7 +108,7 @@ export const ModalAddPet = ({ onClose }) => {
 
     selectedFile && formData.append('avatarURL', selectedFile);
     name && formData.append('name', name);
-    formData.append('date', date);
+    date && formData.append('date', date);
     breed && formData.append('breed', breed);
     comments && formData.append('comments', comments);
     console.log(date);
@@ -165,11 +117,9 @@ export const ModalAddPet = ({ onClose }) => {
   };
 
   return (
-    <ModalWindow onClose={onClose} modalType={'addPet'}>
+    <>
+      {/* // <ModalWindow onClose={onClose} modalType={'addPet'}> */}
       <Title>Add pet</Title>
-      {/* <button onClick={closeModal}>ВІДКРИТИ МОДАЛКУ</button>
-      {isModalOpen && (
-        <ModalWindow onClose={closeModal} modalType={"addPet"}> */}
       <Formik
         initialValues={initialValues}
         validationSchema={schema}
@@ -188,34 +138,20 @@ export const ModalAddPet = ({ onClose }) => {
                       type="text"
                       placeholder="Type name pet"
                       name="name"
+                      validate={validateName}
                     />
                     {touched.name && errors.name && (
                       <Error>{errors.name}</Error>
                     )}
                   </Label>
-
-                  {/* <label>
-                    Name pet
-                    <Field name="name" placeholder="name" />
-                  </label> */}
-                  {/* <label>
-                    Date of birth
-                    <Field name="date" />
-                  </label>
-                  <label>
-                    Breed
-                    <Field name="breed" />
-                  </label> */}
-                  {/* </FieldsWrapper> */}
-                  {/* <NextBtn handleBtn={handleNext}>Next</NextBtn>
-              <CancelBtn>Cancel</CancelBtn> */}
-                  <Label htmlFor="date">Date of birth</Label>
+                  <Label htmlFor="birth">Date of birth</Label>
                   <DateInput
                     inputProps={{
                       readOnly: true,
-                      id: 'date',
+                      id: 'birth',
                       placeholder: 'Choose date',
-                      name: 'date',
+                      // open: 'false',
+                      // name: 'date',
                     }}
                     value={date}
                     onChange={birthdateHandler}
@@ -238,14 +174,6 @@ export const ModalAddPet = ({ onClose }) => {
               </>
             )}
 
-            {/* </Form> */}
-            {/* )} */}
-            {/* {nextFormShow && ( */}
-            {/* <div>
-            <button type="button" onClick={handlePick}>
-              Edit photo
-            </button> */}
-            {/* <InputHidden> */}
             {page === 2 && (
               <>
                 <InputFileWrap>
@@ -260,27 +188,6 @@ export const ModalAddPet = ({ onClose }) => {
                     <InputFile type="file" onChange={inputFileHandler} />
                   </Label>
                 </InputFileWrap>
-                {/* <input
-              type="file"
-              name="avatarURL"
-              onChange={inputFileHandler}
-              // ref={filePicker}
-              // onChange={selectAvatar}
-            /> */}
-                {/* </InputHidden> */}
-                {/* <img src="" alt="avatar" />
-          {!preview && (
-            <span>
-              <BsPlusLg />
-            </span>
-          )}
-          {preview && <img src={preview} alt="Previev" />} */}
-
-                {/* <label>
-                Date of birth
-                <Field name="avatar" /> */}
-                {/* <ErrorMessage name="date" component="span" /> */}
-                {/* </label> */}
 
                 <CommentWrap>
                   <Label>
@@ -297,13 +204,13 @@ export const ModalAddPet = ({ onClose }) => {
             )}
             <BtnWrapper>
               {page === 1 ? (
-                // title.length >= 2 ? (
-                <NextBtn onClick={nextPage} />
+                name.length >= 2 ? (
+                  <NextBtn onClick={nextPage} />
+                ) : (
+                  <NextBtn onClick={nextPage} disabled={true} />
+                )
               ) : (
-                <NextBtn onClick={nextPage} disabled={true} />
-                // )
-                // ) : (
-                // <SubmitBtn type="submit">Done</SubmitBtn>
+                <SubmitBtn type="submit">Done</SubmitBtn>
               )}
               {page === 1 ? (
                 <CancelBtn onClick={onClose} />
@@ -311,19 +218,14 @@ export const ModalAddPet = ({ onClose }) => {
                 <CancelBtn onClick={prevPage} text="Back" />
               )}
             </BtnWrapper>
-            {/* <NextBtn handleBtn={handleSubmit}>Done</NextBtn>
-          <CancelBtn type="button" handleBtn={handleBack}>
-            Back
-          </CancelBtn>
-          <button type="submit">добавить</button> */}
-            {/* </div> */}
-            {/* )} */}
           </FormStyled>
         )}
-        {/* </FieldArray> */}
       </Formik>
       {/* </ModalWindow> */}
       {/* )} */}
-    </ModalWindow>
+    </>
   );
+  {
+    /* </ModalWindow> */
+  }
 };
