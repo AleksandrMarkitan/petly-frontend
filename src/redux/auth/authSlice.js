@@ -1,7 +1,7 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { persistReducer } from "redux-persist";
-import storage from "redux-persist/lib/storage";
-import { deletePet, addPet } from "../user/userOperations";
+import { createSlice } from '@reduxjs/toolkit';
+import { persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+import { deletePet, addPet } from '../user/userOperations';
 import {
   register,
   login,
@@ -10,16 +10,16 @@ import {
   updateUserData,
   updateFavoriteNotice,
   updateUserAvatar,
-} from "./authOperations";
+} from './authOperations';
 
 const initialState = {
   user: {
-    name: "",
-    email: "",
-    avatarURL: "",
-    city: "",
-    birthday: "",
-    phone: "",
+    name: '',
+    email: '',
+    avatarURL: '',
+    city: '',
+    birthday: '',
+    phone: '',
     pets: [],
     favoriteNotices: [],
   },
@@ -32,12 +32,12 @@ const initialState = {
 };
 
 const authPersistConfig = {
-  key: "token",
+  key: 'token',
   storage,
-  whitelist: ["token"],
+  whitelist: ['token'],
 };
 
-const handlePending = (state) => {
+const handlePending = state => {
   state.isLoading = true;
   state.error = null;
 };
@@ -48,9 +48,9 @@ const handleRejected = (state, { payload }) => {
 };
 
 const authSlice = createSlice({
-  name: "auth",
+  name: 'auth',
   initialState,
-  extraReducers: (builder) => {
+  extraReducers: builder => {
     builder
       .addCase(register.pending, handlePending)
       .addCase(login.pending, handlePending)
@@ -75,22 +75,22 @@ const authSlice = createSlice({
 
         state.isLoading = false;
       })
-      .addCase(logout.fulfilled, (state) => {
+      .addCase(logout.fulfilled, state => {
         state.token = null;
         state.isLoading = false;
         state.isAuth = false;
         state.user = {
-          name: "",
-          email: "",
-          avatarURL: "",
-          city: "",
-          birthday: "",
-          phone: "",
+          name: '',
+          email: '',
+          avatarURL: '',
+          city: '',
+          birthday: '',
+          phone: '',
           pets: [],
           favoriteNotices: [],
         };
       })
-      .addCase(fetchCurrentUser.pending, (state) => {
+      .addCase(fetchCurrentUser.pending, state => {
         state.isLoading = true;
         state.isFetching = true;
       })
@@ -136,7 +136,7 @@ const authSlice = createSlice({
       })
       .addCase(addPet.pending, handlePending)
       .addCase(addPet.fulfilled, (state, { payload }) => {
-        state.items = [...state.items, payload];
+        state.user.pets = [...state.user.pets, payload];
         state.isLoading = false;
         state.error = null;
       })

@@ -43,7 +43,7 @@ export const ModalAddPet = ({ onClose }) => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [imgURL, setImgURL] = useState('');
   const [preview, setPreview] = useState('');
-  const [birthdate, setBirthdate] = useState('');
+  const [date, setDate] = useState('');
   const [sex, setSex] = useState('');
   const [location, setLocation] = useState('');
 
@@ -80,7 +80,7 @@ export const ModalAddPet = ({ onClose }) => {
   };
 
   const birthdateHandler = e => {
-    setBirthdate(e.format('DD.MM.YYYY'));
+    setDate(e.format('DD.MM.YYYY'));
   };
 
   const initialValues = {
@@ -156,10 +156,10 @@ export const ModalAddPet = ({ onClose }) => {
 
     selectedFile && formData.append('avatarURL', selectedFile);
     name && formData.append('name', name);
-    formData.append('date', birthdate);
+    formData.append('date', date);
     breed && formData.append('breed', breed);
     comments && formData.append('comments', comments);
-    console.log(birthdate);
+    console.log(date);
     dispatch(addPet(formData));
     //onClose();
   };
@@ -209,15 +209,15 @@ export const ModalAddPet = ({ onClose }) => {
                   {/* </FieldsWrapper> */}
                   {/* <NextBtn handleBtn={handleNext}>Next</NextBtn>
               <CancelBtn>Cancel</CancelBtn> */}
-                  <Label htmlFor="birth">Date of birth</Label>
+                  <Label htmlFor="date">Date of birth</Label>
                   <DateInput
                     inputProps={{
                       readOnly: true,
-                      id: 'birth',
+                      id: 'date',
                       placeholder: 'Choose date',
                       name: 'date',
                     }}
-                    value={birthdate}
+                    value={date}
                     onChange={birthdateHandler}
                     timeFormat={false}
                     closeOnSelect={true}

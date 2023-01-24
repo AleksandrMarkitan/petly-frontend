@@ -7,10 +7,7 @@ import {
   TitleUser,
   BoxTitleUser,
 } from '../../components/UserData/UserData.styled';
-import {
-  BoxPet,
-  // BoxTitlePet,
-} from '../../components/PetsData/ModalAddPet.styled';
+
 import { UserData } from '../../components/UserData/UserData';
 //import { fetchUserPets } from "../../redux/user/userOperations";
 // import { fetchCurrentUser } from "../../redux/auth/authOperations";
@@ -19,7 +16,7 @@ import { selectUser, selectUserPets } from '../../redux/auth/authSelectors';
 import { ModalAddPet } from '../../components/ModalAddPet/ModalAddPet';
 import { AddBtn } from '../../components/CommonButtons/AddBtn/AddBtn';
 import { useState } from 'react';
-import { AddTitle, BtnBox } from './UserPage.styled';
+import { AddTitle, BtnBox, BoxPet, BoxTitlePet } from './UserPage.styled';
 //import { selectPets } from "../../redux/user/userSelectors";
 //import { selectUserPets } from "../../redux/auth/authSelectors";
 export const UserPage = () => {
@@ -28,10 +25,10 @@ export const UserPage = () => {
   // console.log(user.avatarURL);
   const pets = useSelector(selectUserPets);
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const closeModal = () => {
-    setIsModalOpen(!isModalOpen);
-  };
+  // const [isModalOpen, setIsModalOpen] = useState(false);
+  // const closeModal = () => {
+  //   setIsModalOpen(!isModalOpen);
+  // };
 
   return (
     <UserPageContainer>
@@ -39,15 +36,22 @@ export const UserPage = () => {
         <BoxTitleUser>
           <TitleUser>My information:</TitleUser>
         </BoxTitleUser>
-        <BtnBox>
+        {/* <BoxTitlePet>
+          <TitleUser>My pets:</TitleUser>
+          <BtnBox>
+            <AddTitle>Add pet</AddTitle>
+            <AddBtn closeModal={closeModal} />
+          </BtnBox>
+        </BoxTitlePet> */}
+        {/* <BtnBox>
           <AddTitle>Add pet</AddTitle>
           <AddBtn closeModal={closeModal} />
-        </BtnBox>
+        </BtnBox> */}
         {/* <AddBtn closeModal={closeModal} /> */}
         <UserData user={user} />
       </BoxUser>
       <BoxPet>{pets && <PetsData pets={pets} />}</BoxPet>
-      {isModalOpen && <ModalAddPet onClose={closeModal} />}
+      {/* {isModalOpen && <ModalAddPet onClose={closeModal} />} */}
     </UserPageContainer>
   );
 };

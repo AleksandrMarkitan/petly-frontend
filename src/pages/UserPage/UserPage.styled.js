@@ -5,6 +5,7 @@ export const AddTitle = styled.p`
   font-weight: ${p => p.theme.fontWeight.fw500};
   font-size: ${p => p.theme.fontSize.fs20};
 `;
+
 export const BtnBox = styled.div`
   display: inline-flex;
   align-items: center;
@@ -12,5 +13,19 @@ export const BtnBox = styled.div`
   }
   @media (min-width: 1280px) {
     display: inline-flex;
+  }
+`;
+
+export const BoxPet = styled.section`
+  width: 100%;
+`;
+
+export const BoxTitlePet = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 26px;
+  @media (min-width: 768px) {
+    margin-bottom: 24px;
   }
 `;
