@@ -1,15 +1,9 @@
-//import { ModalWindow } from "../CommonComponents/ModalWindow/ModalWindow";
-import { moment } from 'moment';
-import Datetime from 'react-datetime';
-import { useEffect } from 'react';
-import { Formik, Form, Field } from 'formik';
+import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { ModalWindow } from '../CommonComponents/ModalWindow/ModalWindow';
 import { CancelBtn } from '../CommonButtons/CancelBtn/CancelBtn';
 import { NextBtn } from '../CommonButtons/NextBtn/NextBtn';
 import { useDispatch } from 'react-redux';
-//import { addPet } from "../../redux/user/userOperations";
-
 import { useRef, useState } from 'react';
 import { addPet } from '../../redux/user/userOperations';
 import { BsPlusLg } from 'react-icons/bs';
@@ -30,11 +24,6 @@ import {
   InputFieldWrap,
   Calendar,
 } from './ModalAddPet.styled';
-//import { DateInput } from '../ModalAddNotice/ModalAddNotice.styled';
-
-//import { Label } from '../AuthForms/Forms.styled';
-//import { InputHidden } from "./UserData.styled";
-//import { UserDataItem } from "../UserDataItem/UserDataItem";
 
 export const ModalAddPet = ({ onClose }) => {
   const dispatch = useDispatch();
@@ -82,7 +71,6 @@ export const ModalAddPet = ({ onClose }) => {
 
   const initialValues = {
     name: '',
-    // date: '',
     breed: '',
     avatarURL: {},
     comments: '',
@@ -129,7 +117,6 @@ export const ModalAddPet = ({ onClose }) => {
         validationSchema={schema}
         onSubmit={values => onAddPet(values)}
         validateOnChange
-        //     enableReinitialize
       >
         {({ errors, touched }) => (
           <FormStyled
@@ -153,7 +140,7 @@ export const ModalAddPet = ({ onClose }) => {
                     )}
                   </Label>
                   <Label htmlFor="birth">Date of birth</Label>
-                  <Datetime
+                  <Calendar
                     inputProps={{
                       readOnly: true,
                       id: 'birth',
@@ -165,8 +152,8 @@ export const ModalAddPet = ({ onClose }) => {
                     closeOnSelect={true}
                     dateFormat="DD.MM.YYYY"
                     //input={true}
-                    //open={true}
-                    //isValidDate={valid}
+                    //open={false}
+                    // isValidDate={valid}
                   />
                   <Label>
                     Breed
@@ -229,11 +216,6 @@ export const ModalAddPet = ({ onClose }) => {
           </FormStyled>
         )}
       </Formik>
-      {/* </ModalWindow> */}
-      {/* )} */}
     </>
   );
-  {
-    /* </ModalWindow> */
-  }
 };
