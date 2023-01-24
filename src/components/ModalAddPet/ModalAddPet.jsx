@@ -27,8 +27,9 @@ import {
   Title,
   DateInput,
   InputFieldWrap,
+  Calendar,
 } from './ModalAddPet.styled';
-import { getCities } from '../../serveсes/getCities';
+//import { DateInput } from '../ModalAddNotice/ModalAddNotice.styled';
 
 //import { Label } from '../AuthForms/Forms.styled';
 //import { InputHidden } from "./UserData.styled";
@@ -43,15 +44,18 @@ export const ModalAddPet = ({ onClose }) => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [imgURL, setImgURL] = useState('');
   const [preview, setPreview] = useState('');
-  const [date, setDate] = useState('');
+  const [birthdate, setBirthdate] = useState('');
 
   const [page, setPage] = useState(1);
   const [name, setName] = useState('');
+  const [breed, setBreed] = useState('');
 
   const validateName = value => {
     setName(value);
   };
-
+  const validateBreed = value => {
+    setBreed(value);
+  };
   const nextPage = () => {
     setPage(prevState => prevState + 1);
   };
@@ -75,7 +79,7 @@ export const ModalAddPet = ({ onClose }) => {
   };
 
   const birthdateHandler = e => {
-    setDate(e.format('DD.MM.YYYY'));
+    setBirthdate(e.format('DD.MM.YYYY'));
   };
 
   const initialValues = {
@@ -108,10 +112,10 @@ export const ModalAddPet = ({ onClose }) => {
 
     selectedFile && formData.append('avatarURL', selectedFile);
     name && formData.append('name', name);
-    date && formData.append('date', date);
+    birthdate && formData.append('date', birthdate);
     breed && formData.append('breed', breed);
     comments && formData.append('comments', comments);
-    console.log(date);
+    // console.log(date);
     dispatch(addPet(formData));
     //onClose();
   };
@@ -145,15 +149,13 @@ export const ModalAddPet = ({ onClose }) => {
                     )}
                   </Label>
                   <Label htmlFor="birth">Date of birth</Label>
-                  <DateInput
+                  <Calendar
                     inputProps={{
                       readOnly: true,
                       id: 'birth',
                       placeholder: 'Choose date',
-                      // open: 'false',
-                      // name: 'date',
                     }}
-                    value={date}
+                    value={birthdate}
                     onChange={birthdateHandler}
                     timeFormat={false}
                     closeOnSelect={true}
@@ -165,6 +167,7 @@ export const ModalAddPet = ({ onClose }) => {
                       type="text"
                       placeholder="Type breed"
                       name="breed"
+                      validate={validateBreed}
                     />
                     {touched.breed && errors.breed && (
                       <Error>{errors.breed}</Error>
@@ -194,7 +197,7 @@ export const ModalAddPet = ({ onClose }) => {
                     <div>
                       Comments <span>*</span>
                     </div>
-                    <InputField placeholder="Type comment" name="comments" />
+                    <Textarea placeholder="Type comment" name="comments" />
                     {touched.comments && errors.comments && (
                       <Error>{errors.comments}</Error>
                     )}
@@ -204,7 +207,7 @@ export const ModalAddPet = ({ onClose }) => {
             )}
             <BtnWrapper>
               {page === 1 ? (
-                name.length >= 2 ? (
+                (name.length >= 2) & (breed.length >= 2) ? (
                   <NextBtn onClick={nextPage} />
                 ) : (
                   <NextBtn onClick={nextPage} disabled={true} />
