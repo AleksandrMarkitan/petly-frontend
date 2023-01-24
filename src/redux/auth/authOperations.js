@@ -7,19 +7,17 @@ const { REACT_APP_API_URL } = process.env;
 const BASE_URL = REACT_APP_API_URL;
 
 axios.defaults.baseURL = BASE_URL;
-axios.defaults.baseURL = 'http://localhost:4000/api/v1';
 
-const token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYzkzMDc0Nzc4MDA3ZDg1NmVlZDhiOCIsImlhdCI6MTY3NDE2NDQ3NSwiZXhwIjoxNjc0OTkyNDc1fQ.pGsU7-qWoeUAQS8l3qzUqVLV876F1d48tpeoC8vwAfQ';
 axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-// const token = {
-// 	set(token) {
-// 		axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-// 	},
-// 	unset() {
-// 		axios.defaults.headers.common.Authorization = ``;
-// 	},
-// };
+
+const token = {
+  set(token) {
+    axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+  },
+  unset() {
+    axios.defaults.headers.common.Authorization = ``;
+  },
+};
 
 export const register = createAsyncThunk(
   'auth/register',
@@ -76,11 +74,11 @@ export const logout = createAsyncThunk(
 export const fetchCurrentUser = createAsyncThunk(
   'auth/refresh',
   async (_, { rejectWithValue, getState }) => {
-    // const tokenCurrent = getState().auth.token;
-    // if (!tokenCurrent) {
-    // 	return rejectWithValue();
-    // }
-    // token.set(tokenCurrent);
+    const tokenCurrent = getState().auth.token;
+    if (!tokenCurrent) {
+      return rejectWithValue();
+    }
+    token.set(tokenCurrent);
     try {
       const { data } = await axios('/users/current');
       return data;
