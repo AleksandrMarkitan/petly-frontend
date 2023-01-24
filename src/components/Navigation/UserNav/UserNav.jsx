@@ -1,11 +1,11 @@
 import { useSelector } from 'react-redux';
-import { selectUser } from '../../../redux/auth/authSelectors';
+import { selectUser } from '../../../redux/user/userSelectors';
 import {
-  AccountBtn,
+  // AccountBtn,
+  // UserCircle,
   BtnAvatar,
   DivInfo,
   DivAvatar,
-  UserCircle,
   UserCircleAvatar,
   Email,
 } from './UserNav.styled';
