@@ -1,5 +1,4 @@
 import { useDispatch } from 'react-redux';
-import { formatDate } from '../../helpers/formatDate';
 import { deletePet } from '../../redux/user/userOperations';
 import { DeletePetBtn } from '../../../src/components/CommonButtons/DeletePetBtn/DeletePetBtn';
 import { WrapperPicDiv, Box, Description, InfoPet } from './PetsList.styled';
@@ -12,7 +11,6 @@ export const PetsList = ({ pets }) => {
     // const onDelete = () => {
     //   dispatch(logout());
     // };
-    // deletePetItem
   };
 
   return (
