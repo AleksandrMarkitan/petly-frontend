@@ -8,8 +8,6 @@ const BASE_URL = REACT_APP_API_URL;
 
 axios.defaults.baseURL = BASE_URL;
 
-axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-
 const token = {
   set(token) {
     axios.defaults.headers.common.Authorization = `Bearer ${token}`;

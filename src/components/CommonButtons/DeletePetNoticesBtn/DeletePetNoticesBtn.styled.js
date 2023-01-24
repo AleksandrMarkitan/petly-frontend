@@ -1,40 +1,49 @@
 import styled from "styled-components";
 
 export const Button = styled.button`
- width: 248px;
+  width: 248px;
 	padding: 8px 0;
 	font-size: 16px;
 	line-height: calc(22 / 16);
 	letter-spacing: 0.04em;
-	background-color: #fff;
+	background-color: #FFFFFF;
 	border: 2px solid #F59256;
 	border-radius: 40px;
 	color: #F59256;
-	transition:  color 300ms linear, background-color 300ms linear;
+	transition:  color 250ms cubic-bezier(0.57, 0.21, 0.69, 1.25), background-color 250ms cubic-bezier(0.57, 0.21, 0.69, 1.25);
 
-	:hover, :focus{
-		color: #fff;
+	:hover, 
+	:focus{
+		color: #FFFFFF;
 		background-color: #F59256;
 	}
 
-    svg {
-    margin-left: 13px;
-    fill: #F59256;
-    fill-opacity: 0.6;
-    transition: fill 300ms linear;
-  }
+  span{
+		/* display: flex;
+		justify-content: center; */
+		align-items: center;
+		margin-left: 13px;
+		width: 20px;
+		height: 20px;
+		/* background: #F59256; */
 
-  :hover,
-  :focus {
-    svg {
-      fill: #FF6101;
-    }
-  }
+		svg{
+      fill: #F59256;
+      fill-opacity: 0.6;
+		}
+		
+		:hover,
+		:focus {
+			svg {
+				fill: #FFFFFF;
+			}
+		}
+	}
 `;
 
-export const Icon = styled.div`
-  width: 20px;
-  height: 20px;
-  background-color: rgba(255, 255, 255, 0.6);
-  backdrop-filter: blur(2px);
+export const Text = styled.span`
+font-size: 16px;
+line-height: calc(22 / 16);
+align-items: center;
+color: #FF6101;
 `;
