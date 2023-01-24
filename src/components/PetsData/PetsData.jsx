@@ -1,11 +1,11 @@
-import { AddBtn } from "../CommonButtons/AddBtn/AddBtn";
-import { PetsList } from "../PetsList/PetsList";
-import { ModalWindow } from "../CommonComponents/ModalWindow/ModalWindow";
-import { useState } from "react";
-import { ModalAddPet } from "../ModalAddPet/ModalAddPet";
-import { AddTitle, BtnBox } from "./ModalAddPet.styled";
-import { BoxTitlePet } from "../../components/PetsData/ModalAddPet.styled";
-import { TitleUser } from "../../components/UserData/UserData.styled";
+import { AddBtn } from '../CommonButtons/AddBtn/AddBtn';
+import { PetsList } from '../PetsList/PetsList';
+import { ModalWindow } from '../CommonComponents/ModalWindow/ModalWindow';
+import { useState } from 'react';
+import { ModalAddPet } from '../ModalAddPet/ModalAddPet';
+import { AddTitle, BtnBox, BoxTitlePet } from './PetsData.styled';
+import { TitleUser } from '../UserData/UserData.styled';
+
 // import { Formik, Form, Field, ErrorMessage, FieldArray } from "formik";
 // import * as Yup from "yup";
 // import { FieldsWrapper } from "./ModalAddPet.styled";
@@ -56,10 +56,7 @@ export const PetsData = ({ pets }) => {
       </BoxTitlePet>
 
       {isModalOpen && (
-        <ModalWindow onClose={closeModal} modalType={"addPet"}>
-          {/* <div>jjjjj</div>
-          <NextBtn onClick={handleSubmit}>Done</NextBtn>
-          <CancelBtn onClick={handleBack}>Back</CancelBtn> */}
+        <ModalWindow onClose={closeModal} modalType={'addPet'}>
           <ModalAddPet />
         </ModalWindow>
       )}
