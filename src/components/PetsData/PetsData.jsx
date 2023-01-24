@@ -3,7 +3,9 @@ import { PetsList } from "../PetsList/PetsList";
 import { ModalWindow } from "../CommonComponents/ModalWindow/ModalWindow";
 import { useState } from "react";
 import { ModalAddPet } from "../ModalAddPet/ModalAddPet";
-
+import { AddTitle, BtnBox } from "./ModalAddPet.styled";
+import { BoxTitlePet } from "../../components/PetsData/ModalAddPet.styled";
+import { TitleUser } from "../../components/UserData/UserData.styled";
 // import { Formik, Form, Field, ErrorMessage, FieldArray } from "formik";
 // import * as Yup from "yup";
 // import { FieldsWrapper } from "./ModalAddPet.styled";
@@ -45,8 +47,14 @@ export const PetsData = ({ pets }) => {
 
   return (
     <>
-      <AddBtn closeModal={closeModal} />
-      <button onClick={closeModal}>ВІДКРИТИ МОДАЛКУ</button>
+      <BoxTitlePet>
+        <TitleUser>My pets:</TitleUser>
+        <BtnBox>
+          <AddTitle>Add pet</AddTitle>
+          <AddBtn closeModal={closeModal} />
+        </BtnBox>
+      </BoxTitlePet>
+
       {isModalOpen && (
         <ModalWindow onClose={closeModal} modalType={"addPet"}>
           {/* <div>jjjjj</div>

@@ -77,10 +77,18 @@ const authSlice = createSlice({
       })
       .addCase(logout.fulfilled, (state) => {
         state.token = null;
-        state = initialState;
-        state.isAuth = false;
-
         state.isLoading = false;
+        state.isAuth = false;
+        state.user = {
+          name: "",
+          email: "",
+          avatarURL: "",
+          city: "",
+          birthday: "",
+          phone: "",
+          pets: [],
+          favoriteNotices: [],
+        };
       })
       .addCase(fetchCurrentUser.pending, (state) => {
         state.isLoading = true;
@@ -110,9 +118,8 @@ const authSlice = createSlice({
       .addCase(updateUserData.rejected, handleRejected)
       .addCase(updateUserAvatar.pending, handlePending)
       .addCase(updateUserAvatar.fulfilled, (state, { payload }) => {
-        // const index = state.items.findIndex(({ id }) => id === payload.id);
-        // state.items[index] = payload;
-        state.user = payload;
+        const newUrl = payload.avatarURL;
+        state.user = { ...state.user, avatarURL: newUrl };
         state.isLoading = false;
         state.error = null;
       })
@@ -129,7 +136,7 @@ const authSlice = createSlice({
       })
       .addCase(addPet.pending, handlePending)
       .addCase(addPet.fulfilled, (state, { payload }) => {
-        state.items = [...state.items, payload];
+        state.user.pets = [...state.user.pets, payload];
         state.isLoading = false;
         state.error = null;
       })

@@ -14,6 +14,13 @@ import {
 import { StepOne } from "./StepOne/StepOne";
 import { StepTwo } from "./StepTwo/StepTwo";
 
+export const passwordRegexp = /^[A-Za-z0-9!?#$%^&_\-*]{7,32}$/;
+const nameRegexp = /^[a-zA-Z]{2,20}$/;
+const cityRegexp = /^([^0-9][A-Za-z-\s]{2,})*,([^0-9][A-Za-z-\s]{2,})*/;
+const phoneRegexp = /^\+\d{12}$/;
+export const emailRegexp =
+  /^[^-]{1}[A-Za-z0-9._-]{2,}@[^-]{1}[A-Za-z0-9.-]{2,}\.[A-Za-z]{2,4}$/;
+
 export const RegisterForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -40,15 +47,11 @@ export const RegisterForm = () => {
     phone: "",
   };
 
-  const passwordRegexp = /^[A-Za-z0-9!?#$%^&_\-*]{7,32}$/;
-  const nameRegexp = /^[a-zA-Z]{2,20}$/;
-  const phoneRegexp = /^\+\d{12}$/;
-
   const schemaStepOne = yup.object({
     email: yup
       .string()
-      .email("Please, enter a valid e-mail")
       .max(63)
+      .matches(emailRegexp, "Please, enter a valid e-mail")
       .required("E-mail is required"),
     password: yup
       .string()
@@ -72,7 +75,14 @@ export const RegisterForm = () => {
       .max(20, "Name must contain no more than 20 symbols")
       .matches(nameRegexp, "Please, enter a valid name")
       .required("Name is required"),
-    city: yup.string().required("City is required"),
+    city: yup
+      .string()
+      .max(50, "Too long")
+      .matches(
+        cityRegexp,
+        "Please, enter a valid city. For example, Ivano-Frankivsk, Ivano-Frankivsk Oblast"
+      )
+      .required("City is required"),
     phone: yup
       .string()
       .matches(
@@ -118,7 +128,7 @@ export const RegisterForm = () => {
           <TitleAuth>Registration</TitleAuth>
           <FormCustom>
             {renderComponent()}
-            <Button type="button" onClick={handleNext}>
+            <Button onClick={handleNext}>
               {isLastStep ? "Register" : "Next"}
             </Button>
             {isLastStep && (
