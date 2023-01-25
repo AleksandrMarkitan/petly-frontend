@@ -22,7 +22,7 @@ import {
   Text,
   ThumbBtn,
 } from "./NoticeCategoryItem.styled";
-import { ageInWords } from '../../helpers/dateFormat';
+import { getAge } from '../../helpers/dateFormat';
 
 export const NoticeCategoryItem = ({ data }) => {
   const {
@@ -81,7 +81,7 @@ export const NoticeCategoryItem = ({ data }) => {
               </Li>
               <Li key={`${_id}+age`}>
                 <Lable>Age:</Lable>
-                <Text>{ageInWords(birthdate)}</Text>
+                <Text>{getAge(birthdate)}</Text>
               </Li>
             </Ul>
           </WrapInner>
@@ -89,7 +89,6 @@ export const NoticeCategoryItem = ({ data }) => {
             <LearnMoreBtn onClick={closeModal} />
             {currentUser.email === owner.email &&
               <DeletePetNoticesBtn onDelete={deletePet} />}
-            <p></p>
           </ThumbBtn>
         </Wrap>
       </Item>
