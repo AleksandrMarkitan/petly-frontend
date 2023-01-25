@@ -38,11 +38,17 @@ export const UserData = () => {
   return (
     <UserBlock>
       <ImageContainer>
-        <form action="" id="avatar-add" encType="multipart/form-data">
+        <form
+          action=""
+          id="avatar-add"
+          accept="image/jpeg, image/png"
+          encType="multipart/form-data"
+        >
           <InputHidden>
             <input
               type="file"
               name="avatarURL"
+              accept="image/jpeg, image/png"
               onChange={handleAvatar}
               ref={filePicker}
             />
@@ -83,52 +89,3 @@ export const UserData = () => {
     </UserBlock>
   );
 };
-
-// <>
-// <WrapperDataUser>
-// <form action="" id="avatar-add" encType="multipart/form-data">
-//   <button type="button" onClick={handlePick}>
-//     Edit photo
-//   </button>
-//   <InputHidden>
-//     <input
-//       type="file"
-//       name="avatarURL"
-//       onChange={handleAvatar}
-//       ref={filePicker}
-//     />
-//   </InputHidden>
-//   {avatarURL && (
-//     <img src={avatarURL} alt="avatar" />
-//     // <img src={uploaded ? uploaded : avatarURL} alt="avatar" />
-//   )}
-// </form>
-
-// {name && (
-//   <UserDataItem valueLabel="Name:" nameInput="name" value={name} />
-// )}
-// {email && (
-//   <UserDataItem valueLabel="Email:" nameInput="email" value={email} />
-// )}
-// {birthday && (
-//   <UserDataItem
-//     valueLabel="Birthday:"
-//     nameInput="birthday"
-//     value={birthday}
-//   />
-// )}
-// {phone && (
-//   <UserDataItem valueLabel="Phone:" nameInput="phone" value={phone} />
-// )}
-// {city && (
-//   <UserDataItem valueLabel="City:" nameInput="city" value={city} />
-// )}
-// {
-//   /* <LogOut
-//         onClick={() => {
-//           dispatch(logout());
-//         }}
-//       /> */
-// }
-
-// </>

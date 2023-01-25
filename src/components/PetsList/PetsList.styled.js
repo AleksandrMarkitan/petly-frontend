@@ -92,13 +92,3 @@ export const Link = styled.a`
     transition: ${p => p.theme.transition.first};
   }
 `;
-
-//   ::before {
-//     content: "";
-//     position: absolute;
-//     top: -4px;
-//     left: 0;
-//     width: 85%;
-//     height: 4px;
-//     background: linear-gradient(90deg, #ff634e 0%, #ffdf48 105.44%);
-//     border-radius: 40px;

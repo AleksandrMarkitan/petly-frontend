@@ -1,10 +1,10 @@
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { ModalWindow } from '../CommonComponents/ModalWindow/ModalWindow';
+import moment from 'moment';
 import { CancelBtn } from '../CommonButtons/CancelBtn/CancelBtn';
 import { NextBtn } from '../CommonButtons/NextBtn/NextBtn';
 import { useDispatch } from 'react-redux';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { addPet } from '../../redux/user/userOperations';
 import { BsPlusLg } from 'react-icons/bs';
 import {
@@ -20,7 +20,6 @@ import {
   CommentWrap,
   Textarea,
   Title,
-  DateInput,
   InputFieldWrap,
   Calendar,
 } from './ModalAddPet.styled';
@@ -36,6 +35,10 @@ export const ModalAddPet = ({ onClose }) => {
   const [breed, setBreed] = useState('');
   const nameBreedRegexp = /^[a-zA-Z]{2,16}$/;
   const commentRegexp = /^[A-Za-z0-9!?#$%^&_\-*]{8,120}$/;
+
+  const validDate = current => {
+    return current.isBefore(moment()) && current.isAfter('1999-12-31', 'day');
+  };
 
   const validateName = value => {
     setName(value);
@@ -110,7 +113,6 @@ export const ModalAddPet = ({ onClose }) => {
 
   return (
     <>
-      {/* // <ModalWindow onClose={onClose} modalType={'addPet'}> */}
       <Title>Add pet</Title>
       <Formik
         initialValues={initialValues}
@@ -119,11 +121,7 @@ export const ModalAddPet = ({ onClose }) => {
         validateOnChange
       >
         {({ errors, touched }) => (
-          <FormStyled
-            encType="multipart/form-data"
-            //accept="image/jpeg, image/png"
-            accept="image/*"
-          >
+          <FormStyled encType="multipart/form-data">
             {page === 1 && (
               <>
                 <InputFieldWrap>
@@ -153,7 +151,7 @@ export const ModalAddPet = ({ onClose }) => {
                     dateFormat="DD.MM.YYYY"
                     //input={true}
                     //open={false}
-                    // isValidDate={valid}
+                    isValidDate={validDate}
                   />
                   <Label>
                     Breed
@@ -182,7 +180,11 @@ export const ModalAddPet = ({ onClose }) => {
                       </span>
                     )}
                     {preview && <img src={preview} alt="Previev" />}
-                    <InputFile type="file" onChange={inputFileHandler} />
+                    <InputFile
+                      type="file"
+                      accept="image/jpeg, image/png"
+                      onChange={inputFileHandler}
+                    />
                   </Label>
                 </InputFileWrap>
 

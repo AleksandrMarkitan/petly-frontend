@@ -2,7 +2,6 @@ import { useDispatch } from 'react-redux';
 import { deletePet } from '../../redux/user/userOperations';
 import { DeletePetBtn } from '../../../src/components/CommonButtons/DeletePetBtn/DeletePetBtn';
 import { WrapperPicDiv, Box, Description, InfoPet } from './PetsList.styled';
-
 export const PetsList = ({ pets }) => {
   const dispatch = useDispatch();
 
