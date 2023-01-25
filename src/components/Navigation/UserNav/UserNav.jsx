@@ -3,24 +3,24 @@ import { selectUser } from '../../../redux/auth/authSelectors';
 import {
   AccountBtn,
   UserCircle,
-  BtnAvatar,
-  DivInfo,
-  DivAvatar,
-  UserCircleAvatar,
-  Email,
+  // BtnAvatar,
+  // DivInfo,
+  // Email,
 } from './UserNav.styled';
 
 export const UserNav = ({ onClose }) => {
   const user = useSelector(selectUser);
-  const { name, email, avatarURL } = user;
+  const { name, avatarURL } = user;
 
   return (
     <>
       {/* -----Стандартна кнопка з макету----- */}
 
       <AccountBtn to="/user" onClick={onClose}>
-        <UserCircle />
-        Account
+        <div>
+          {avatarURL ? <img src={avatarURL} alt="Account" /> : <UserCircle />}
+        </div>
+        {name ? { name } : 'Account'}
       </AccountBtn>
 
       {/* ------------Нова кнопка------------- */}

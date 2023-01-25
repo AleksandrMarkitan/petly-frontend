@@ -1,5 +1,5 @@
-import { NavLink } from "react-router-dom";
-import styled from "styled-components";
+import { NavLink } from 'react-router-dom';
+import styled from 'styled-components';
 
 export const AuthBtn = styled(NavLink)`
   display: flex;
@@ -17,7 +17,6 @@ export const AuthBtn = styled(NavLink)`
     text-decoration 300ms linear;
 
   &:hover {
-    text-decoration: underline;
     background-color: #f59256;
     color: #fff;
   }
