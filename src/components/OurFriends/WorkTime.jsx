@@ -10,11 +10,19 @@ export const WorkTime = ({ workDays }) => {
   const handleClick = () => {
     setModalOpened(!modalOpened);
   };
+  const indexUpdater = () => {
+    if (currentDay === 0) {
+      return 6;
+    }
+    return currentDay - 1;
+  };
   return (
     <>
       <Button type="click" onClick={handleClick}>
-        {workDays[0].from && workDays[0].to
-          ? `${workDays[0]?.from} - ${workDays[0]?.to}`
+        {workDays[indexUpdater()].from && workDays[indexUpdater()].to
+          ? `${workDays[indexUpdater()]?.from} - ${
+              workDays[indexUpdater()]?.to
+            }`
           : 'Closed'}
       </Button>
 
