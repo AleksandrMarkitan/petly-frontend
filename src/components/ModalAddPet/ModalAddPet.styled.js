@@ -121,21 +121,17 @@ export const InputFileWrap = styled.div`
   margin-right: auto;
   display: flex;
   justify-content: center;
-  /* @media (min-width: 768px) {
-    margin-left: auto;
-    margin-right: auto;
-    width: 140px;
-    height: 140px;
-  } */
+
   label {
-    display: inline-block;
+    display: flex;
+    justify-content: center;
+    /* display: inline-block; */
     font-size: 16px;
   }
 
   label span {
     content: '';
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0 auto;
     width: 116px;
     height: 116px;
     background: #fdf7f2;
@@ -143,7 +139,6 @@ export const InputFileWrap = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 20px;
 
     @media (min-width: 768px) {
       width: 140px;
@@ -157,16 +152,11 @@ export const InputFileWrap = styled.div`
     }
   }
 
-  /* @media (min-width: 768px) {
-  } */
-
   label img {
+    margin: 0 auto;
     width: 116px;
     height: 116px;
     border-radius: 20px;
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
 
     @media (min-width: 768px) {
       width: 140px;
