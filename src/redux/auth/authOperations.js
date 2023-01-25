@@ -3,25 +3,23 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import { toastStyled } from '../../components/AuthForms/Forms.styled';
 
-// const { REACT_APP_API_URL } = process.env;
-// const BASE_URL = REACT_APP_API_URL;
+const { REACT_APP_API_URL } = process.env;
+const BASE_URL = REACT_APP_API_URL;
 
-const BASE_URL = "https://pets-support-backend.onrender.com/api/v1"
+// const BASE_URL = "https://pets-support-backend.onrender.com/api/v1"
 
 axios.defaults.baseURL = BASE_URL;
 // axios.defaults.baseURL = 'http://localhost:4000/api/v1';
 
-const token =
-	'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYzQ1MDAxMDI2ZGQ1ODMwZjQ4ZWUxYyIsImlhdCI6MTY3NDMwMzc1OCwiZXhwIjoxNjc1MTMxNzU4fQ.GT4LKm3TLNkizz3WKVbQAiKef-ckpF_1puO5NgyrEdE';
 axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-// const token = {
-// 	set(token) {
-// 		axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-// 	},
-// 	unset() {
-// 		axios.defaults.headers.common.Authorization = ``;
-// 	},
-// };
+const token = {
+	set(token) {
+		axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+	},
+	unset() {
+		axios.defaults.headers.common.Authorization = ``;
+	},
+};
 
 export const register = createAsyncThunk(
 	'auth/register',
