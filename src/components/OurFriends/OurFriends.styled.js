@@ -106,6 +106,7 @@ export const Time = styled.li`
   :focus {
     cursor: pointer;
     transition: ${p => p.theme.transition.first};
+    color: ${p => p.theme.colors.accent};
   }
 
   @media (min-width: 768px) {
