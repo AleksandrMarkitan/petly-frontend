@@ -224,7 +224,7 @@ export const LocationWrap = styled.div`
 `
 
 export const CitiesList = styled.ul`
-	position: absolute;
+	/* position: absolute;
 	left: 0;
 	top: 100%;
 	z-index: 5;
@@ -236,11 +236,39 @@ export const CitiesList = styled.ul`
 	border-left: 1px solid #F59256;
 	border-right: 1px solid #F59256;
 	border-bottom: 1px solid #F59256;
-	border-radius: 10px;
+	border-radius: 10px; */
 
-	scrollbar-track{
-		background-color: red;
-	}
+	border-left: 1px solid #f59256;
+  border-right: 1px solid #f59256;
+  border-bottom: 1px solid #f59256;
+  border-radius: 0 0 20px 20px;
+
+  width: 100%;
+  height: 160px;
+  padding-top: 10px;
+  padding-left: 9px;
+  padding-right: 3px;
+
+  color: rgba(27, 27, 27, 0.8);
+  background-color: rgba(253, 247, 242, 0.2);
+  backdrop-filter: blur(10px);
+
+  overflow-y: scroll;
+
+  &::-webkit-scrollbar-track, &::-moz-scrollbar-track {
+    margin-right: 20px;
+    background-color: (255, 255, 255, 0.2); /*Цвет скролла*/
+  }
+  &::-webkit-scrollbar-thumb, &::-moz-scrollbar-track {
+    border-radius: 5px; /*Закругление ползунка*/
+    background-color: #f59256; /*Цвет ползунка*/
+  }
+  &::-webkit-scrollbar, &::-moz-scrollbar-track {
+    width: 6px; /*Толщина скролла*/
+  }
+
+  scrollbar-color: (255, 255, 255, 0.2) #f59256; /*Цвет скролла, цвет ползунка*/
+  scrollbar-width: 6px; /*Толщина скролла thin, auto*/
 `
 
 export const CitiesItem = styled.li`

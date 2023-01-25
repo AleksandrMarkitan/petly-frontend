@@ -9,72 +9,72 @@ import { getNews } from '../../serveсes/getNews';
 import { Loader } from '../../components/Loader/Loader';
 
 const NewsPage = () => {
-  const [news, setNews] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+	const [news, setNews] = useState([]);
+	const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    setIsLoading(true);
+	useEffect(() => {
+		//  setIsLoading(true);
 
-    async function fetch() {
-      try {
-        const response = await getNews({});
+		async function fetch() {
+			try {
+				const response = await getNews({});
 
-        if (response.length === 0) {
-          throw new Error();
-        }
+				if (response.length === 0) {
+					throw new Error();
+				}
 
-        sortByDate(response);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    fetch();
-  }, []);
+				sortByDate(response);
+			} catch (error) {
+				console.log(error);
+			}
+		}
+		fetch();
+	}, []);
 
-  const searchNews = async query => {
-    const searchQuery = query.toLowerCase();
-    const response = await getNews({});
-    const foundNews = response.filter(
-      news =>
-        news.title.toLowerCase().includes(searchQuery) ||
-        news.description.toLowerCase().includes(searchQuery)
-    );
-    sortByDate(foundNews);
-  };
+	const searchNews = async query => {
+		const searchQuery = query.toLowerCase();
+		const response = await getNews({});
+		const foundNews = response.filter(
+			news =>
+				news.title.toLowerCase().includes(searchQuery) ||
+				news.description.toLowerCase().includes(searchQuery)
+		);
+		sortByDate(foundNews);
+	};
 
-  const sortByDate = array => {
-    const addDateForSort = array.map(news => {
-      return { ...news, dateForSort: Date.parse(new Date(news.date)) };
-    });
+	const sortByDate = array => {
+		const addDateForSort = array.map(news => {
+			return { ...news, dateForSort: Date.parse(new Date(news.date)) };
+		});
 
-    const sortedByDateNews = addDateForSort.sort(
-      (a, b) => b.dateForSort - a.dateForSort
-    );
+		const sortedByDateNews = addDateForSort.sort(
+			(a, b) => b.dateForSort - a.dateForSort
+		);
 
-    setNews(sortedByDateNews);
-    setIsLoading(false);
-  };
+		setNews(sortedByDateNews);
+		setIsLoading(false);
+	};
 
-  return (
-    <Section>
-      <Container>
-        <SectionTitle text="News" />
-        {isLoading ? (
-          <Loader />
-        ) : (
-          <>
-            <SearchField searchFunction={searchNews} />
-            <NewsList news={news} />
-          </>
-        )}
-        {news.length === 0 && !isLoading && (
-          <div style={{ textAlign: 'center' }}>
-            Новин за вашим запитом не знайдено.
-          </div>
-        )}
-      </Container>
-    </Section>
-  );
+	return (
+		<Section>
+			<Container>
+				<SectionTitle text="News" />
+				{isLoading ? (
+					<Loader />
+				) : (
+					<>
+						<SearchField searchFunction={searchNews} />
+						<NewsList news={news} />
+					</>
+				)}
+				{news.length === 0 && !isLoading && (
+					<div style={{ textAlign: 'center' }}>
+						Новин за вашим запитом не знайдено.
+					</div>
+				)}
+			</Container>
+		</Section>
+	);
 };
 
 export default NewsPage;
