@@ -1,29 +1,26 @@
 import { Formik } from "formik";
 import * as Yup from 'yup';
-import { useEffect, useState } from "react";
-import { BsPlusLg } from "react-icons/bs";
+import moment from 'moment';
+import debounce from 'lodash.debounce';
 import "react-datetime/css/react-datetime.css";
+import { useEffect, useState, useMemo } from "react";
+import { BsPlusLg } from "react-icons/bs";
 import { ModalWindow } from "../CommonComponents/ModalWindow/ModalWindow";
 import { ReactComponent as MaleIcon } from "../../icons/add_pet_modal/male.svg";
 import { ReactComponent as FemaleIcon } from "../../icons/add_pet_modal/female.svg";
+import { ReactComponent as RemoveIcon } from "../../icons/remove-search-query-icon.svg";
 import { NextBtn } from "../CommonButtons/NextBtn/NextBtn";
-import { CancelBtn } from "../CommonButtons/CancelBtn/CancelBtn";
-import { ClearBtn, Error, SubmitBtn, Title, Subtitle, FormStyled, RadioBtnWrap, LabelRadioBtn, InputRadio, InputFieldWrap, Label, InputField, BtnWrapper, SexRadioWrap, RadioSexLabel, LocationWrap, CitiesList, CitiesItem, InputFileWrap, InputFile, CommentWrap, Textarea, DateInput, PriceWrap } from "./ModalAddNotice.styled";
 import { getCities } from "../../serveсes/getCities";
 import { useDispatch } from "react-redux";
 import { addNotice } from "../../redux/notices/noticesOperations";
-
-
-import { useMemo } from 'react';
-import debounce from 'lodash.debounce';
-import { ReactComponent as RemoveIcon } from "../../icons/remove-search-query-icon.svg";
-
+import { CancelBtn } from "../CommonButtons/CancelBtn/CancelBtn";
+import { ClearBtn, Error, SubmitBtn, Title, Subtitle, FormStyled, RadioBtnWrap, LabelRadioBtn, InputRadio, InputFieldWrap, Label, InputField, BtnWrapper, SexRadioWrap, RadioSexLabel, LocationWrap, CitiesList, CitiesItem, InputFileWrap, InputFile, CommentWrap, Textarea, DateInput, PriceWrap } from "./ModalAddNotice.styled";
 
 export const ModalAddNotice = ({ onClose }) => {
 	const dispatch = useDispatch();
 
 	const [category, setCategory] = useState("sell");
-	const [birthdate, setBirthdate] = useState(new Date());
+	const [birthdate, setBirthdate] = useState("");
 	const [sex, setSex] = useState("");
 	const [location, setLocation] = useState('');
 	const [imgURL, setImgURL] = useState("");
@@ -37,6 +34,10 @@ export const ModalAddNotice = ({ onClose }) => {
 	const [cityQuery, setCityQuery] = useState("");
 	const [cities, setCities] = useState([]);
 	const [filteredCities, setFilteredCities] = useState([]);
+
+	const validDate = current => {
+		return current.isBefore(moment()) && current.isAfter('1999-12-31', 'day');
+	};
 
 	useEffect(() => {
 		async function fetch() {
@@ -220,7 +221,7 @@ export const ModalAddNotice = ({ onClose }) => {
 							<Label htmlFor="birth">
 								Date of birth
 							</Label>
-							<DateInput inputProps={{ readOnly: true, id: "birth", placeholder: "Choose date" }} value={birthdate} onChange={birthdateHandler} timeFormat={false} closeOnSelect={true} dateFormat="DD.MM.YYYY" />
+							<DateInput isValidDate={validDate} inputProps={{ readOnly: true, id: "birth", placeholder: "Choose date" }} value={birthdate} onChange={birthdateHandler} timeFormat={false} closeOnSelect={true} dateFormat="DD.MM.YYYY" />
 							<Label>
 								Breed
 								<InputField type="text" placeholder="Type breed" name="breed" validate={validateBreed} />
@@ -250,7 +251,7 @@ export const ModalAddNotice = ({ onClose }) => {
 										<ClearBtn type="button" onClick={clearLocation}><RemoveIcon /></ClearBtn>
 									</>
 								}
-								{!location && <InputField isListOpen={cityQuery} autoComplete="off" type="text" onChange={debouncedChangeHandler} name="city" placeholder="Type city" />}
+								{!location && <InputField islistopen={cityQuery} autoComplete="off" type="text" onChange={debouncedChangeHandler} name="city" placeholder="Type city" />}
 							</Label>
 							{cityQuery && filteredCities.length > 0 && <CitiesList onClick={locationHandler}>{filteredCities.map(({ _id, city, admin_name }) => {
 								return <CitiesItem key={_id}>{city}, {admin_name}</CitiesItem>
@@ -268,7 +269,7 @@ export const ModalAddNotice = ({ onClose }) => {
 								Load the pet’s image
 								{!preview && <span><BsPlusLg /></span>}
 								{preview && <img src={preview} alt="Previev" />}
-								<InputFile type="file" onChange={inputFileHandler} multiple />
+								<InputFile type="file" accept="image/jpeg, image/png" onChange={inputFileHandler} multiple />
 							</Label>
 						</InputFileWrap>
 						<CommentWrap>

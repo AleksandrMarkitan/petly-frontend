@@ -15,10 +15,20 @@ export const BackDrop = styled.div`
 
 export const Modal = styled.div`
   position: absolute;
-  top: 0%;
+  top: ${p => {
+		if (p.modalHeight >= p.viewPortHeight) {
+			return "0%"
+		}
+		return "50%"
+	}};
   left: 50%;
   z-index: 5;
-  transform: translateX(-50%);
+  transform: ${p => {
+		if (p.modalHeight >= p.viewPortHeight) {
+			return "translateX(-50%)"
+		}
+		return "translate(-50%, -50%)"
+	}};
   background-color: #fff;
   width: 280px;
   border-radius: 20px;

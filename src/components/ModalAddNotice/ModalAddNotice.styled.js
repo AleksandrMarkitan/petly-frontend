@@ -157,14 +157,14 @@ export const InputField = styled(Field)`
 	transition: border-color 300ms linear;
 
 	border-radius: ${p => {
-		if (p.isListOpen) {
+		if (p.islistopen) {
 			return '20px 20px 0px 0px';
 		}
 		return '40px';
 
 	}};;
   border-bottom: ${p => {
-		if (p.isListOpen) {
+		if (p.islistopen) {
 			return 'none';
 		}
 		return '1px solid rgba(245, 146, 86, 0.5)';

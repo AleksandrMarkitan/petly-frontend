@@ -4,7 +4,7 @@ import {
 	TitleUser,
 	BoxTitleUser,
 } from '../../components/UserData/UserData.styled';
-
+import { UserPageContainer } from '../../components/UserData/UserData.styled';
 import { UserData } from '../../components/UserData/UserData';
 import { PetsData } from '../../components/PetsData/PetsData';
 import { selectUser, selectUserPets } from '../../redux/auth/authSelectors';
