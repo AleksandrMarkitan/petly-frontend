@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { InputHidden } from './UserData.styled';
 import { UserDataItem } from '../UserDataItem/UserDataItem';
 import { useDispatch, useSelector } from 'react-redux';
@@ -19,6 +19,7 @@ import { selectUser } from '../../redux/auth/authSelectors';
 export const UserData = () => {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
+  const [editButtonActive, setEditButtonActive] = useState(true);
 
   const filePicker = useRef(null);
 
@@ -66,23 +67,49 @@ export const UserData = () => {
       </ImageContainer>
       <Form>
         {name && (
-          <UserDataItem valueLabel="Name:" nameInput="name" value={name} />
+          <UserDataItem
+            valueLabel="Name:"
+            nameInput="name"
+            value={name}
+            setEditButtonActive={setEditButtonActive}
+            editButtonActive={editButtonActive}
+          />
         )}
         {email && (
-          <UserDataItem valueLabel="Email:" nameInput="email" value={email} />
+          <UserDataItem
+            valueLabel="Email:"
+            nameInput="email"
+            value={email}
+            setEditButtonActive={setEditButtonActive}
+            editButtonActive={editButtonActive}
+          />
         )}
         {birthday && (
           <UserDataItem
             valueLabel="Birthday:"
             nameInput="birthday"
             value={birthday}
+            setEditButtonActive={setEditButtonActive}
+            editButtonActive={editButtonActive}
           />
         )}
         {phone && (
-          <UserDataItem valueLabel="Phone:" nameInput="phone" value={phone} />
+          <UserDataItem
+            valueLabel="Phone:"
+            nameInput="phone"
+            value={phone}
+            setEditButtonActive={setEditButtonActive}
+            editButtonActive={editButtonActive}
+          />
         )}
         {city && (
-          <UserDataItem valueLabel="City:" nameInput="city" value={city} />
+          <UserDataItem
+            valueLabel="City:"
+            nameInput="city"
+            value={city}
+            setEditButtonActive={setEditButtonActive}
+            editButtonActive={editButtonActive}
+          />
         )}
       </Form>
       <Logout />
