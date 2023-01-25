@@ -1,5 +1,5 @@
-import { NavLink } from "react-router-dom";
-import styled from "styled-components";
+import { NavLink } from 'react-router-dom';
+import styled from 'styled-components';
 
 export const NavLinkStyled = styled(NavLink)`
   text-decoration: none;
@@ -34,17 +34,15 @@ export const Ul = styled.ul`
   flex-direction: column;
   align-items: center;
   gap: 40px;
-  margin-bottom: 46px;
 
   @media (min-width: 768px) {
     gap: 60px;
-    margin-bottom: 88px;
   }
 
   @media (min-width: 1280px) {
     flex-direction: row;
     gap: 80px;
     margin-bottom: 0;
-    margin-right: 365px;
+    margin-right: 205px;
   }
 `;
