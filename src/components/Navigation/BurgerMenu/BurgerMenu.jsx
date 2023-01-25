@@ -1,3 +1,4 @@
+import { BackDrop } from '../../CommonComponents/ModalWindow/ModalWindow.styled';
 import { Logo } from '../../Logo/Logo';
 import { AuthNav } from '../AuthNav/AuthNav';
 import { Nav } from '../Nav/Nav';
@@ -10,6 +11,7 @@ export const BurgerMenu = ({ token, onClose, isDesctop, isMobile }) => {
   }
 
   return (
+    <BackDrop>
       <NavStyled>
         <Div1>
           <Logo />
@@ -18,11 +20,12 @@ export const BurgerMenu = ({ token, onClose, isDesctop, isMobile }) => {
           </button>
         </Div1>
         <Div2>
-          {isMobile && !token && <UserNav onClose={onClose} />}
-          {isMobile && token && <AuthNav onClose={onClose} />}
+          {isMobile && token && <UserNav onClose={onClose} />}
+          {isMobile && !token && <AuthNav onClose={onClose} />}
 
           {!isDesctop && <Nav onClose={onClose} />}
         </Div2>
       </NavStyled>
+    </BackDrop>
   );
 };
