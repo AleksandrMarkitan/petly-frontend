@@ -6,7 +6,7 @@ export const DeletePetNoticesBtn = ({ onDelete }) => {
   return (
     <Button type="button" onClick={onDelete}>
       <Text>Delete</Text>
-      <span><DeleteIcon /></span>
+      <DeleteIcon />
     </Button>
   );
 };

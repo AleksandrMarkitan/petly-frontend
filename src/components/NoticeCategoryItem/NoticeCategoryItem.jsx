@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { selectUser, selectFavoriteNotices, selectUserPets } from "../../redux/auth/authSelectors";
+import { selectUser, selectFavoriteNotices } from "../../redux/auth/authSelectors";
 import { deleteNotice } from "../../redux/notices/noticesOperations";
 import { updateFavoriteNotice } from "../../redux/auth/authOperations";
 import { FavoriteBtn } from "../CommonButtons/FavoriteBtn/FavoriteBtn";
@@ -22,6 +22,7 @@ import {
   Text,
   ThumbBtn,
 } from "./NoticeCategoryItem.styled";
+import { ageInWords } from '../../helpers/dateFormat';
 
 export const NoticeCategoryItem = ({ data }) => {
   const {
@@ -48,16 +49,8 @@ export const NoticeCategoryItem = ({ data }) => {
     dispatch(updateFavoriteNotice({ noticeId: _id }));
   };
 
-  const pets = useSelector(selectUserPets);
-  const isOwner = pets.includes(owner._id);
-
-  const getAge = (birthdate) => {
-    // const age = (new Date() - mew Date(birthdate))/31536000000;
-  };
-
   const deletePet = () => {
-    console.log('-----------deletePet-------');
-    // dispatch(deleteNotice({ noticeId: _id }));
+    dispatch(deleteNotice({ noticeId: _id }));
   };
 
   const closeModal = () => {
@@ -67,14 +60,14 @@ export const NoticeCategoryItem = ({ data }) => {
   return (
     <>
       <Item >
+        <ImgWrap>
+          <CategoryLabel>{category}</CategoryLabel>
+          <Img src={imgURL} alt={name} />
+          <FavoriteBtn
+            favorite={isFavorite}
+            onClick={onChangeFavorite} />
+        </ImgWrap>
         <Wrap>
-          <ImgWrap>
-            <CategoryLabel>{category}</CategoryLabel>
-            <Img src={imgURL} alt={name} />
-            <FavoriteBtn
-              favorite={isFavorite}
-              onClick={onChangeFavorite} />
-          </ImgWrap>
           <WrapInner>
             <Title>{title}</Title>
             <Ul>
@@ -88,22 +81,22 @@ export const NoticeCategoryItem = ({ data }) => {
               </Li>
               <Li key={`${_id}+age`}>
                 <Lable>Age:</Lable>
-                <Text>{getAge(birthdate)}</Text>
+                <Text>{ageInWords(birthdate)}</Text>
               </Li>
             </Ul>
           </WrapInner>
           <ThumbBtn>
             <LearnMoreBtn onClick={closeModal} />
-            {/* {isOwner && */}
-            <DeletePetNoticesBtn onDelete={deletePet} />
+            {currentUser.email === owner.email &&
+              <DeletePetNoticesBtn onDelete={deletePet} />}
+            <p></p>
           </ThumbBtn>
-          {isModalOpen &&
-            <ModalWindow onClose={closeModal}>
-              <ModalNotice data={data} />
-            </ModalWindow>
-          }
         </Wrap>
       </Item>
+      {isModalOpen &&
+        <ModalWindow onClose={closeModal}>
+          <ModalNotice data={data} />
+        </ModalWindow>}
     </>
   );
 };

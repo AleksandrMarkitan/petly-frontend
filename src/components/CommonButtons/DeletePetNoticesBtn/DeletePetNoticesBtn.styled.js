@@ -20,14 +20,17 @@ export const Button = styled.button`
 
   span{
 		/* display: flex;
-		justify-content: center; */
-		align-items: center;
+		justify-content: center;
+		align-items: center; */
 		margin-left: 13px;
 		width: 20px;
 		height: 20px;
 		/* background: #F59256; */
 
 		svg{
+			margin-left: 13px;
+		  width: 20px;
+		  height: 20px;
       fill: #F59256;
       fill-opacity: 0.6;
 		}
@@ -42,8 +45,8 @@ export const Button = styled.button`
 `;
 
 export const Text = styled.span`
-font-size: 16px;
-line-height: calc(22 / 16);
-align-items: center;
+/* font-size: 16px;
+line-height: calc(22 / 16); */
+/* align-items: center; */
 color: #FF6101;
 `;
