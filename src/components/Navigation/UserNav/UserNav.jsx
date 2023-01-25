@@ -1,8 +1,8 @@
 import { useSelector } from 'react-redux';
 import { selectUser } from '../../../redux/auth/authSelectors';
 import {
-  // AccountBtn,
-  // UserCircle,
+  AccountBtn,
+  UserCircle,
   BtnAvatar,
   DivInfo,
   DivAvatar,
@@ -18,25 +18,25 @@ export const UserNav = ({ onClose }) => {
     <>
       {/* -----Стандартна кнопка з макету----- */}
 
-      {/* <AccountBtn to="/user" onClick={onClose}>
+      <AccountBtn to="/user" onClick={onClose}>
         <UserCircle />
         Account
-      </AccountBtn> */}
+      </AccountBtn>
 
       {/* ------------Нова кнопка------------- */}
 
-      <BtnAvatar to="/user" onClick={onClose}>
+      {/* <BtnAvatar to="/user" onClick={onClose}>
         <DivAvatar>
           {!avatarURL && <UserCircleAvatar />}
           {avatarURL && <img src={avatarURL} alt="Account" />}
         </DivAvatar>
         <span>
           <DivInfo>
-            <p>{/* {name} */}Andriy</p>
-            <Email>{/* {email} */}asopelnyak@gmail.com</Email>
+            <p>{name}</p>
+            <Email>{email}</Email>
           </DivInfo>
         </span>
-      </BtnAvatar>
+      </BtnAvatar> */}
     </>
   );
 };

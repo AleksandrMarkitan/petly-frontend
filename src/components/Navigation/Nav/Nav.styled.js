@@ -43,6 +43,6 @@ export const Ul = styled.ul`
     flex-direction: row;
     gap: 80px;
     margin-bottom: 0;
-    margin-right: 205px;
+    margin-left: 80px;
   }
 `;

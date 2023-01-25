@@ -8,6 +8,7 @@ import { BurgerMenu } from './BurgerMenu/BurgerMenu';
 import { Nav } from './Nav/Nav';
 import { UserNav } from './UserNav/UserNav';
 import { NavStyled } from './Navigation.styled';
+import { Logo } from '../Logo/Logo';
 
 export const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -27,10 +28,16 @@ export const Navigation = () => {
     <>
       {!isMenuOpen && (
         <NavStyled>
-          {isDesctop && <Nav />}
-          {!isMobile && token && <UserNav />}
-          {!isMobile && !token && <AuthNav />}
-          {!isDesctop && <BtnMenu onClick={onOpen} />}
+          <div>
+            <Logo />
+            {isDesctop && <Nav />}
+          </div>
+
+          <div>
+            {!isMobile && token && <UserNav />}
+            {!isMobile && !token && <AuthNav />}
+            {!isDesctop && <BtnMenu onClick={onOpen} />}
+          </div>
         </NavStyled>
       )}
 
