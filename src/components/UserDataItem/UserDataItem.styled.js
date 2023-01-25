@@ -73,7 +73,15 @@ export const Button = styled.button`
 export const EditTextBtnIcon = styled(HiPencil)`
   width: 13px;
   height: 13px;
-  color: ${p => p.theme.colors.accent};
+  /* color: ${p => p.theme.colors.accent}; */
+
+  color: ${p => {
+    if (p.changeColor) {
+      return '#F59256';
+    }
+    return `${p => p.theme.colors.accent}`;
+  }};
+
   @media (min-width: 768px) {
     width: 20px;
     height: 20px;
