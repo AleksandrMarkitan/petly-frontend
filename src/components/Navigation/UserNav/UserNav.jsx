@@ -32,8 +32,8 @@ export const UserNav = ({ onClose }) => {
         </DivAvatar>
         <span>
           <DivInfo>
-            <p>{name}</p>
-            <Email>{email}</Email>
+            <p>{/* {name} */}Andriy</p>
+            <Email>{/* {email} */}asopelnyak@gmail.com</Email>
           </DivInfo>
         </span>
       </BtnAvatar>

@@ -32,13 +32,18 @@ export const BtnAvatar = styled(NavLink)`
   span {
     display: block;
     position: absolute;
-    top: 50px;
+    top: 55px;
     left: -34px;
     transition: visibility 300ms cubic-bezier(0.42, 0, 1, 1),
       opacity 300ms cubic-bezier(0.42, 0, 1, 1);
-    pointer-events: none;
 
     @media (min-width: 768px) {
+      left: auto;
+      right: 54px;
+      top: 0px;
+    }
+    @media (min-width: 1280px) {
+      pointer-events: none;
       visibility: hidden;
       opacity: 0;
       left: auto;
@@ -83,14 +88,16 @@ export const DivInfo = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 5px;
+  color: rgba(83, 83, 83, 1);
 
   @media (min-width: 768px) {
     align-items: end;
-    background-color: rgba(245, 146, 86, 0.3);
-
     padding: 5px;
+  }
+
+  @media (min-width: 1280px) {
+    background-color: rgba(245, 146, 86, 0.3);
     border-radius: 5px;
-    color: rgba(83, 83, 83, 1);
   }
 `;
 
