@@ -8,9 +8,7 @@ export const NavLinkStyled = styled(NavLink)`
   line-height: 1.37;
   letter-spacing: 0.04em;
   color: rgba(24, 28, 39, 1);
-  &:hover {
-    text-decoration-line: underline;
-  }
+  transition: color 100ms linear;
 
   &.active {
     color: rgba(245, 146, 86, 1);
@@ -26,6 +24,9 @@ export const NavLinkStyled = styled(NavLink)`
     font-size: 20px;
     line-height: 1.35;
     color: rgba(0, 0, 0, 1);
+    &:hover {
+      color: rgba(245, 146, 86, 1);
+    }
   }
 `;
 
@@ -45,4 +46,5 @@ export const Ul = styled.ul`
     margin-bottom: 0;
     margin-left: 80px;
   }
+
 `;
