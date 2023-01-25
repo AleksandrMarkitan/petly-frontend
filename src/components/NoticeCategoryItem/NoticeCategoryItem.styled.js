@@ -39,15 +39,35 @@ export const Img = styled.img`
   width: 100%;
   object-fit: cover;
 `;
-export const Inner = styled.div`
+
+export const WrapInner = styled.div`
+  padding: 20px;
 `;
-export const Title = styled.p`
+
+export const Title = styled.h2`
+  font-weight: 700;
+  font-size: 28px;
+  line-height: calc(38 / 28);
+  letter-spacing: -0.01em;
+  color: #111111;
 `;
+
 export const Ul = styled.ul`
+  font-size: 16px;
+  line-height: calc(22 / 16);
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #111111;
 `;
 export const Li = styled.li`
 `;
 export const Lable = styled.p`
 `;
 export const Text = styled.p`
+`;
+export const ThumbBtn = styled.div`
+  display: flex;
+	/* justify-content: center; */
+  gap: 12px;
 `;

@@ -1,7 +1,12 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import { selectNotices } from "../../redux/notices/noticesSelectors";
+import {
+	selectNotices,
+	selectNoticesIsLoading,
+	// selectNoticesError,
+	// selectNoticesNotify,
+} from "../../redux/notices/noticesSelectors";
 import {
 	fetchNotices,
 	fetchFavorites,
@@ -16,18 +21,24 @@ import { NoticesCategoriesList } from "../../components/NoticesCategoriesList/No
 import { ModalAddNotice } from "../../components/ModalAddNotice/ModalAddNotice";
 import { MenuWrap } from "./NoticesPage.styled";
 import { NoticesSearch } from "../../components/NoticesSearch/NoticesSearch";
+import { Notification } from "../../components/Notification/Notification";
+import { Loader } from "../../components/Loader/Loader";
+import { NOT_FOUND } from "../../helpers/constants";
 
 const NoticesPage = () => {
 	const { route } = useParams();
 
 	const [isModalOpen, setIsModalOpen] = useState(false);
+
 	const [searchTitleQwery, setSearchTitleQwery] = useState("");
 
 	const notices = useSelector(selectNotices);
+	const isLoading = useSelector(selectNoticesIsLoading);
 
 	const dispatch = useDispatch();
 
 	useEffect(() => {
+
 		if (route === "favorite") {
 			if (searchTitleQwery !== "") {
 				dispatch(fetchFavorites({ qwery: searchTitleQwery }));
@@ -35,6 +46,7 @@ const NoticesPage = () => {
 				dispatch(fetchFavorites({}));
 			}
 		}
+
 		if (route === "owner") {
 			if (searchTitleQwery !== "") {
 				dispatch(fetchOwnerNotices({ qwery: searchTitleQwery }));
@@ -42,6 +54,7 @@ const NoticesPage = () => {
 				dispatch(fetchOwnerNotices({}));
 			}
 		}
+
 		if (["sell", "lost-found", "in-good-hands"].includes(route)) {
 			if (searchTitleQwery !== "") {
 				dispatch(fetchNotices({ category: route, qwery: searchTitleQwery }));
@@ -64,11 +77,17 @@ const NoticesPage = () => {
 			<Container>
 				<SectionTitle text={"Find your favorite pet"} />
 				<NoticesSearch onSearch={onSearch} />
-				<MenuWrap>
-					<NoticesCategoriesNav />
-					<AddNoticeButton onClick={closeModal} />
-				</MenuWrap>
-				<NoticesCategoriesList data={notices} />
+				{isLoading ? (
+					<Loader />
+				) : (
+					<><MenuWrap>
+						<NoticesCategoriesNav />
+						<AddNoticeButton onClick={closeModal} />
+					</MenuWrap>
+						{notices.length > 0 ?
+							<NoticesCategoriesList data={notices} /> :
+							<Notification message={NOT_FOUND} />}
+					</>)}
 				{isModalOpen && <ModalAddNotice onClose={closeModal} />}
 			</Container>
 		</Section>

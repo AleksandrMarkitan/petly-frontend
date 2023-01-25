@@ -1,15 +1,10 @@
-//import { ModalWindow } from "../CommonComponents/ModalWindow/ModalWindow";
-
-import { useEffect } from 'react';
-import { Formik, Form, Field } from 'formik';
+import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { ModalWindow } from '../CommonComponents/ModalWindow/ModalWindow';
+import moment from 'moment';
 import { CancelBtn } from '../CommonButtons/CancelBtn/CancelBtn';
 import { NextBtn } from '../CommonButtons/NextBtn/NextBtn';
 import { useDispatch } from 'react-redux';
-//import { addPet } from "../../redux/user/userOperations";
-
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { addPet } from '../../redux/user/userOperations';
 import { BsPlusLg } from 'react-icons/bs';
 import {
@@ -25,33 +20,32 @@ import {
 	CommentWrap,
 	Textarea,
 	Title,
-	DateInput,
 	InputFieldWrap,
+	Calendar,
 } from './ModalAddPet.styled';
-import { getCities } from '../../serveсes/getCities';
-
-//import { Label } from '../AuthForms/Forms.styled';
-//import { InputHidden } from "./UserData.styled";
-//import { UserDataItem } from "../UserDataItem/UserDataItem";
 
 export const ModalAddPet = ({ onClose }) => {
 	const dispatch = useDispatch();
-
-	// const [nextFormShow, setNextFormShow] = useState(false);
-	// const [backFormShow, setBackFormShow] = useState(true);
-	// const filePicker = useRef(null);
 	const [selectedFile, setSelectedFile] = useState(null);
 	const [imgURL, setImgURL] = useState('');
 	const [preview, setPreview] = useState('');
-	const [date, setDate] = useState('');
-
+	const [birthdate, setBirthdate] = useState('');
 	const [page, setPage] = useState(1);
 	const [name, setName] = useState('');
+	const [breed, setBreed] = useState('');
+	const nameBreedRegexp = /^[a-zA-Z]{2,16}$/;
+	const commentRegexp = /^[A-Za-z0-9!?#$%^&_\-*]{8,120}$/;
+
+	const validDate = current => {
+		return current.isBefore(moment()) && current.isAfter('1999-12-31', 'day');
+	};
 
 	const validateName = value => {
 		setName(value);
 	};
-
+	const validateBreed = value => {
+		setBreed(value);
+	};
 	const nextPage = () => {
 		setPage(prevState => prevState + 1);
 	};
@@ -75,12 +69,11 @@ export const ModalAddPet = ({ onClose }) => {
 	};
 
 	const birthdateHandler = e => {
-		setDate(e.format('DD.MM.YYYY'));
+		setBirthdate(e.format('DD.MM.YYYY'));
 	};
 
 	const initialValues = {
 		name: '',
-		// date: '',
 		breed: '',
 		avatarURL: {},
 		comments: '',
@@ -88,17 +81,20 @@ export const ModalAddPet = ({ onClose }) => {
 
 	const schema = Yup.object().shape({
 		name: Yup.string()
-			.min(2, 'Too Short!')
-			.max(16, 'Too Long!')
-			.required('Required'),
+			.min(2, 'Name must contain at least 2 symbol')
+			.max(16, 'Name must contain no more than 16 symbols')
+			.matches(nameBreedRegexp, 'Please, enter a valid name')
+			.required('Name is required'),
 		breed: Yup.string()
-			.min(2, 'Too Short!')
-			.max(24, 'Too Long!')
-			.required('Required'),
+			.min(2, 'Breed must contain at least 2 symbol')
+			.max(16, 'Breed must contain no more than 16 symbols')
+			.matches(nameBreedRegexp, 'Please, enter a valid breed')
+			.required('Breed is required'),
 		comments: Yup.string()
-			.min(8, 'Too Short!')
-			.max(120, 'Too Long!')
-			.required('Required'),
+			.min(8, 'Comment must contain at least 8 symbol')
+			.max(120, 'Comment must contain no more than 120 symbols')
+			.matches(commentRegexp, 'Please, enter a valid comment')
+			.required('Comment is required'),
 	});
 
 	const onAddPet = value => {
@@ -108,23 +104,21 @@ export const ModalAddPet = ({ onClose }) => {
 
 		selectedFile && formData.append('avatarURL', selectedFile);
 		name && formData.append('name', name);
-		date && formData.append('date', date);
+		birthdate && formData.append('date', birthdate);
 		breed && formData.append('breed', breed);
 		comments && formData.append('comments', comments);
-		console.log(date);
+
 		dispatch(addPet(formData));
-		//onClose();
 	};
 
-	return <>
-		<ModalWindow onClose={onClose} modalType={'addPet'} >
+	return (
+		<>
 			<Title>Add pet</Title>
 			<Formik
 				initialValues={initialValues}
 				validationSchema={schema}
 				onSubmit={values => onAddPet(values)}
 				validateOnChange
-			//     enableReinitialize
 			>
 				{({ errors, touched }) => (
 					<FormStyled encType="multipart/form-data">
@@ -144,19 +138,20 @@ export const ModalAddPet = ({ onClose }) => {
 										)}
 									</Label>
 									<Label htmlFor="birth">Date of birth</Label>
-									<DateInput
+									<Calendar
 										inputProps={{
 											readOnly: true,
 											id: 'birth',
 											placeholder: 'Choose date',
-											// open: 'false',
-											// name: 'date',
 										}}
-										value={date}
+										value={birthdate}
 										onChange={birthdateHandler}
 										timeFormat={false}
 										closeOnSelect={true}
 										dateFormat="DD.MM.YYYY"
+										//input={true}
+										//open={false}
+										isValidDate={validDate}
 									/>
 									<Label>
 										Breed
@@ -164,6 +159,7 @@ export const ModalAddPet = ({ onClose }) => {
 											type="text"
 											placeholder="Type breed"
 											name="breed"
+											validate={validateBreed}
 										/>
 										{touched.breed && errors.breed && (
 											<Error>{errors.breed}</Error>
@@ -184,16 +180,18 @@ export const ModalAddPet = ({ onClose }) => {
 											</span>
 										)}
 										{preview && <img src={preview} alt="Previev" />}
-										<InputFile type="file" onChange={inputFileHandler} />
+										<InputFile
+											type="file"
+											accept="image/jpeg, image/png"
+											onChange={inputFileHandler}
+										/>
 									</Label>
 								</InputFileWrap>
 
 								<CommentWrap>
 									<Label>
-										<div>
-											Comments <span>*</span>
-										</div>
-										<InputField placeholder="Type comment" name="comments" />
+										<div>Comments</div>
+										<Textarea placeholder="Type comment" name="comments" />
 										{touched.comments && errors.comments && (
 											<Error>{errors.comments}</Error>
 										)}
@@ -203,7 +201,7 @@ export const ModalAddPet = ({ onClose }) => {
 						)}
 						<BtnWrapper>
 							{page === 1 ? (
-								name.length >= 2 ? (
+								(name.length >= 2) & (breed.length >= 2) ? (
 									<NextBtn onClick={nextPage} />
 								) : (
 									<NextBtn onClick={nextPage} disabled={true} />
@@ -220,6 +218,6 @@ export const ModalAddPet = ({ onClose }) => {
 					</FormStyled>
 				)}
 			</Formik>
-		</ModalWindow>
-	</>
+		</>
+	);
 };

@@ -88,10 +88,6 @@ export const Hr = styled.hr`
   border: none;
   border-top: 2px dashed #111111;
   width: 70%;
-  :hover {
-    color: ${p => p.theme.colors.accent};
-    transition: ${p => p.theme.transition.first};
-  }
 `;
 
 export const Time = styled.li`
@@ -109,6 +105,7 @@ export const Time = styled.li`
   :hover,
   :focus {
     cursor: pointer;
+    transition: ${p => p.theme.transition.first};
   }
 
   @media (min-width: 768px) {
@@ -150,14 +147,55 @@ export const Address = styled.li`
     font-size: ${p => p.theme.fontSize.fs16};
     line-height: calc(22 / 16);
   }
-  :hover {
-    color: ${p => p.theme.colors.accent};
+  :hover span {
+    position: absolute;
+    left: 0px;
+    top: 25%;
+    display: inline-block;
+    padding: 2px 2px 2px 2px;
+    border: 1px solid #f59256;
     cursor: pointer;
+    background: #ffffff;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.25);
+    transition: ${p => p.theme.transition.first};
+    border-radius: 8px;
+    overflow: visible;
   }
 `;
 
-export const Email = styled(Address)``;
-export const Phone = styled(Address)``;
+export const Email = styled.li`
+  display: flex;
+  flex-direction: column;
+  text-align: start;
+  height: 32px;
+  margin-top: 4px;
+  font-size: ${p => p.theme.fontSize.fs12};
+  line-height: calc(16 / 12);
+
+  overflow: hidden;
+  &:nth-child(1) {
+    margin-top: 0px;
+  }
+
+  @media (min-width: 768px) {
+    margin-top: 8px;
+    font-size: ${p => p.theme.fontSize.fs14};
+    line-height: calc(19 / 14);
+    height: 38px;
+  }
+  @media (min-width: 1280px) {
+    height: 44px;
+    margin-top: 12px;
+    font-size: ${p => p.theme.fontSize.fs16};
+    line-height: calc(22 / 16);
+  }
+  :hover {
+    color: ${p => p.theme.colors.accent};
+    cursor: pointer;
+    transition: ${p => p.theme.transition.first};
+  }
+`;
+export const Phone = styled(Email)``;
 export const Img = styled.img`
   width: 100%;
 `;
@@ -203,11 +241,6 @@ export const List = styled.ul`
   border-radius: 8px;
   @media (min-width: 1280px) {
     top: 20%;
-  }
-  :hover,
-  :focus {
-    color: ${p => p.theme.colors.accent};
-    cursor: pointer;
   }
 `;
 export const Days = styled.div`

@@ -6,12 +6,8 @@ import { toastStyled } from '../../components/AuthForms/Forms.styled';
 const { REACT_APP_API_URL } = process.env;
 const BASE_URL = REACT_APP_API_URL;
 
-// const BASE_URL = "https://pets-support-backend.onrender.com/api/v1"
-
 axios.defaults.baseURL = BASE_URL;
-// axios.defaults.baseURL = 'http://localhost:4000/api/v1';
 
-axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 const token = {
 	set(token) {
 		axios.defaults.headers.common.Authorization = `Bearer ${token}`;
@@ -76,11 +72,11 @@ export const logout = createAsyncThunk(
 export const fetchCurrentUser = createAsyncThunk(
 	'auth/refresh',
 	async (_, { rejectWithValue, getState }) => {
-		// const tokenCurrent = getState().auth.token;
-		// if (!tokenCurrent) {
-		// 	return rejectWithValue();
-		// }
-		// token.set(tokenCurrent);
+		const tokenCurrent = getState().auth.token;
+		if (!tokenCurrent) {
+			return rejectWithValue();
+		}
+		token.set(tokenCurrent);
 		try {
 			const { data } = await axios('/users/current');
 			return data;
