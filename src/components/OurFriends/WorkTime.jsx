@@ -3,7 +3,8 @@ import { List, Button, Days, Hours, Dr } from './OurFriends.styled';
 import { useState } from 'react';
 export const WorkTime = ({ workDays }) => {
   const days = ['MN: ', 'TU: ', 'WE: ', 'TH: ', 'FR: ', 'SA: ', 'SU: '];
-  // const currentDay = new Date();
+  const currentDate = new Date();
+  const currentDay = currentDate.getDay();
 
   const [modalOpened, setModalOpened] = useState(false);
   const handleClick = () => {

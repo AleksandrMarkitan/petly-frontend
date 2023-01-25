@@ -106,7 +106,6 @@ export const Time = styled.li`
   :focus {
     cursor: pointer;
     transition: ${p => p.theme.transition.first};
-    color: ${p => p.theme.colors.accent};
   }
 
   @media (min-width: 768px) {
@@ -242,6 +241,11 @@ export const List = styled.ul`
   border-radius: 8px;
   @media (min-width: 1280px) {
     top: 20%;
+  }
+  :hover {
+    color: ${p => p.theme.colors.accent};
+    transition: ${p => p.theme.transition.first};
+    cursor: pointer;
   }
 `;
 export const Days = styled.div`
