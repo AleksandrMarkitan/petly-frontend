@@ -103,7 +103,7 @@ export const ModalAddNotice = ({ onClose }) => {
 	const locationHandler = e => {
 		if (e.target.nodeName === "LI") {
 			setLocation(e.target.textContent);
-			setCityQuery(e.target.textContent);
+			setCityQuery("");
 		}
 	}
 
@@ -250,7 +250,7 @@ export const ModalAddNotice = ({ onClose }) => {
 										<ClearBtn type="button" onClick={clearLocation}><RemoveIcon /></ClearBtn>
 									</>
 								}
-								{!location && <InputField autoComplete="off" type="text" onChange={debouncedChangeHandler} name="city" placeholder="Type city" />}
+								{!location && <InputField isListOpen={cityQuery} autoComplete="off" type="text" onChange={debouncedChangeHandler} name="city" placeholder="Type city" />}
 							</Label>
 							{cityQuery && filteredCities.length > 0 && <CitiesList onClick={locationHandler}>{filteredCities.map(({ _id, city, admin_name }) => {
 								return <CitiesItem key={_id}>{city}, {admin_name}</CitiesItem>

@@ -153,9 +153,22 @@ export const InputField = styled(Field)`
 	color: rgba(27, 27, 27, 0.6);
 	background-color: #FDF7F2;
 	border: 1px solid rgba(245, 146, 86, 0.5);
-	border-radius: 40px;
 	outline: none;
 	transition: border-color 300ms linear;
+
+	border-radius: ${p => {
+		if (p.isListOpen) {
+			return '20px 20px 0px 0px';
+		}
+		return '40px';
+
+	}};;
+  border-bottom: ${p => {
+		if (p.isListOpen) {
+			return 'none';
+		}
+		return '1px solid rgba(245, 146, 86, 0.5)';
+	}};;
 
 	:focus{
 		border-color: #F59256;
@@ -224,36 +237,27 @@ export const LocationWrap = styled.div`
 `
 
 export const CitiesList = styled.ul`
-	/* position: absolute;
+	position: absolute;
 	left: 0;
 	top: 100%;
 	z-index: 5;
-	min-width: 100%;
-	max-height: 100px;
-	overflow: auto;
-	background-color: #fff;
-	padding: 12px;
-	border-left: 1px solid #F59256;
-	border-right: 1px solid #F59256;
-	border-bottom: 1px solid #F59256;
-	border-radius: 10px; */
-
 	border-left: 1px solid #f59256;
   border-right: 1px solid #f59256;
-  border-bottom: 1px solid #f59256;
   border-radius: 0 0 20px 20px;
+  border-bottom: 1px solid #f59256;
 
   width: 100%;
   height: 160px;
   padding-top: 10px;
   padding-left: 9px;
   padding-right: 3px;
+  padding-bottom: 5px;
 
   color: rgba(27, 27, 27, 0.8);
   background-color: rgba(253, 247, 242, 0.2);
   backdrop-filter: blur(10px);
 
-  overflow-y: scroll;
+  overflow: auto;
 
   &::-webkit-scrollbar-track, &::-moz-scrollbar-track {
     margin-right: 20px;
@@ -272,8 +276,14 @@ export const CitiesList = styled.ul`
 `
 
 export const CitiesItem = styled.li`
-	padding: 4px 0;
+	padding: 4px;
+	border-radius: 8px;
 	font-size: 12px;
+	transition: background-color 300ms linear;
+
+	:hover, :focus{
+		background-color: #f59256;
+	}
 `
 
 export const InputFileWrap = styled.div`
