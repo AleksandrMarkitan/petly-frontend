@@ -192,6 +192,7 @@ export const RadioSexLabel = styled.label`
 	display: flex;
 	flex-direction: column;
 	gap: 12px;
+	cursor: pointer;
 
 	color: ${p => {
 		if (p.sex === p.value) {
@@ -200,6 +201,14 @@ export const RadioSexLabel = styled.label`
 
 		return "#000"
 	}};
+	
+	svg{
+		transition: transform 250ms linear;
+	}
+	
+	:hover svg, :focus svg{
+		transform: scale(1.2);
+	}
 	
 	@media (min-width: 768px) {
 		svg{
@@ -228,6 +237,10 @@ export const CitiesList = styled.ul`
 	border-right: 1px solid #F59256;
 	border-bottom: 1px solid #F59256;
 	border-radius: 10px;
+
+	scrollbar-track{
+		background-color: red;
+	}
 `
 
 export const CitiesItem = styled.li`
@@ -343,4 +356,10 @@ export const SubmitBtn = styled.button`
 	@media (min-width: 768px) {
 		width: 180px;
 	}
+`
+
+export const ClearBtn = styled.button`
+	position: absolute;
+	right: 10px;
+	bottom: 5px;
 `

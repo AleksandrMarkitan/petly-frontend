@@ -18,7 +18,7 @@ export const AddBtnMobile = styled.button`
 	font-size: 12px;
 	line-height: calc(16 / 12);
 	transition: transform 300ms linear;
-	z-index: 1000;
+	z-index: 1;
 
 	svg{
 		width: 21px;

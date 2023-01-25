@@ -8,34 +8,37 @@ import { ReactComponent as MaleIcon } from "../../icons/add_pet_modal/male.svg";
 import { ReactComponent as FemaleIcon } from "../../icons/add_pet_modal/female.svg";
 import { NextBtn } from "../CommonButtons/NextBtn/NextBtn";
 import { CancelBtn } from "../CommonButtons/CancelBtn/CancelBtn";
-import { Error, SubmitBtn, Title, Subtitle, FormStyled, RadioBtnWrap, LabelRadioBtn, InputRadio, InputFieldWrap, Label, InputField, BtnWrapper, SexRadioWrap, RadioSexLabel, LocationWrap, CitiesList, CitiesItem, InputFileWrap, InputFile, CommentWrap, Textarea, DateInput, PriceWrap } from "./ModalAddNotice.styled";
+import { ClearBtn, Error, SubmitBtn, Title, Subtitle, FormStyled, RadioBtnWrap, LabelRadioBtn, InputRadio, InputFieldWrap, Label, InputField, BtnWrapper, SexRadioWrap, RadioSexLabel, LocationWrap, CitiesList, CitiesItem, InputFileWrap, InputFile, CommentWrap, Textarea, DateInput, PriceWrap } from "./ModalAddNotice.styled";
 import { getCities } from "../../serveсes/getCities";
 import { useDispatch } from "react-redux";
 import { addNotice } from "../../redux/notices/noticesOperations";
+
+
+import { useMemo } from 'react';
+import debounce from 'lodash.debounce';
+import { ReactComponent as RemoveIcon } from "../../icons/remove-search-query-icon.svg";
+
 
 export const ModalAddNotice = ({ onClose }) => {
 	const dispatch = useDispatch();
 
 	const [category, setCategory] = useState("sell");
-	const [birthdate, setBirthdate] = useState("");
+	const [birthdate, setBirthdate] = useState(new Date());
 	const [sex, setSex] = useState("");
 	const [location, setLocation] = useState('');
 	const [imgURL, setImgURL] = useState("");
 
 	const [page, setPage] = useState(1);
 	const [title, setTitle] = useState("");
-	const [city, setCity] = useState('')
-	const [cities, setCities] = useState([]);
-	const [showCitiesList, setShowCitiesList] = useState(false);
+	const [name, setName] = useState('');
+	const [breed, setBreed] = useState('');
 	const [preview, setPreview] = useState("");
 
-	const validateTitle = (value) => {
-		setTitle(value)
-	}
+	const [cityQuery, setCityQuery] = useState("");
+	const [cities, setCities] = useState([]);
+	const [filteredCities, setFilteredCities] = useState([]);
 
 	useEffect(() => {
-		const query = city.split(',')[0].toLowerCase();
-
 		async function fetch() {
 			try {
 				const response = await getCities();
@@ -44,17 +47,46 @@ export const ModalAddNotice = ({ onClose }) => {
 					throw new Error();
 				}
 
-				const foundCities = response.filter(city => city.city.toLowerCase().includes(query))
-
-				setCities(foundCities)
+				setCities(response)
 
 			}
 			catch (error) {
 				console.log(error);
 			}
 		}
-		fetch()
-	}, [city])
+		fetch();
+
+		return () => {
+			debouncedChangeHandler.cancel();
+		}
+	}, [])
+
+	useEffect(() => {
+		const result = cities.filter((city) => {
+			return city.city.toLowerCase().includes(cityQuery.toLowerCase());
+		});
+		setFilteredCities(result)
+	}, [cityQuery, cities])
+
+	const cityHandler = (e) => {
+		setCityQuery(e.target.value);
+	}
+
+	const debouncedChangeHandler = useMemo(
+		() => debounce(cityHandler, 300)
+		, []);
+
+	const validateTitle = (value) => {
+		setTitle(value)
+	}
+
+	const validateName = (value) => {
+		setName(value)
+	}
+
+	const validateBreed = (value) => {
+		setBreed(value)
+	}
 
 	const radioBtnHandlder = e => {
 		switch (e.target.name) {
@@ -68,25 +100,11 @@ export const ModalAddNotice = ({ onClose }) => {
 		}
 	}
 
-	const textInputHandler = e => {
-		switch (e.target.name) {
-			case "city":
-				setCity(e.target.value);
-				break;
-			default: return;
-		}
-	}
-
 	const locationHandler = e => {
 		if (e.target.nodeName === "LI") {
 			setLocation(e.target.textContent);
-			setCity(e.target.textContent);
-			setShowCitiesList(!showCitiesList);
+			setCityQuery(e.target.textContent);
 		}
-	}
-
-	const showListHandler = () => {
-		setShowCitiesList(!showCitiesList)
 	}
 
 	const nextPage = () => {
@@ -121,9 +139,9 @@ export const ModalAddNotice = ({ onClose }) => {
 
 		data.append("title", title)
 		data.append("category", category)
-		data.append("price", price)
 		data.append("comments", comments)
 
+		price && data.append("price", price)
 		name && data.append("name", name)
 		birthdate && data.append("birthdate", birthdate)
 		breed && data.append("breed", breed)
@@ -163,6 +181,10 @@ export const ModalAddNotice = ({ onClose }) => {
 			.min(1, "Price has to be more than 0")
 	})
 
+	const clearLocation = () => {
+		setLocation("")
+	}
+
 	return <ModalWindow onClose={onClose} modalType={'addPet'}>
 		<Title>Add pet</Title>
 		<Subtitle>Fill the fields below, please.</Subtitle>
@@ -192,7 +214,7 @@ export const ModalAddNotice = ({ onClose }) => {
 							</Label>
 							<Label>
 								Pet's name
-								<InputField type="text" placeholder="Type name pet" name="name" />
+								<InputField type="text" placeholder="Type name pet" name="name" validate={validateName} />
 								{touched.name && errors.name && <Error>{errors.name}</Error>}
 							</Label>
 							<Label htmlFor="birth">
@@ -201,7 +223,7 @@ export const ModalAddNotice = ({ onClose }) => {
 							<DateInput inputProps={{ readOnly: true, id: "birth", placeholder: "Choose date" }} value={birthdate} onChange={birthdateHandler} timeFormat={false} closeOnSelect={true} dateFormat="DD.MM.YYYY" />
 							<Label>
 								Breed
-								<InputField type="text" placeholder="Type breed" name="breed" />
+								<InputField type="text" placeholder="Type breed" name="breed" validate={validateBreed} />
 								{touched.breed && errors.breed && <Error>{errors.breed}</Error>}
 							</Label>
 						</InputFieldWrap> </>}
@@ -222,9 +244,15 @@ export const ModalAddNotice = ({ onClose }) => {
 						<LocationWrap>
 							<Label>
 								Location
-								<InputField onClick={showListHandler} type="text" value={city} onChange={textInputHandler} name="city" placeholder="Type city" />
+								{location &&
+									<>
+										<InputField autoComplete="off" type="text" value={location} name="location" placeholder="Type city" />
+										<ClearBtn type="button" onClick={clearLocation}><RemoveIcon /></ClearBtn>
+									</>
+								}
+								{!location && <InputField autoComplete="off" type="text" onChange={debouncedChangeHandler} name="city" placeholder="Type city" />}
 							</Label>
-							{showCitiesList && <CitiesList onClick={locationHandler}>{cities.map(({ _id, city, admin_name }) => {
+							{cityQuery && filteredCities.length > 0 && <CitiesList onClick={locationHandler}>{filteredCities.map(({ _id, city, admin_name }) => {
 								return <CitiesItem key={_id}>{city}, {admin_name}</CitiesItem>
 							})}</CitiesList>}
 						</LocationWrap>
@@ -253,7 +281,7 @@ export const ModalAddNotice = ({ onClose }) => {
 					</>}
 					<BtnWrapper>
 						{page === 1 ?
-							(title.length >= 2 ? <NextBtn onClick={nextPage} /> : <NextBtn onClick={nextPage} disabled={true} />)
+							((title.length >= 2 && title.length <= 48) && (name.length === 0 || (name.length >= 2 && name.length <= 24)) && (breed.length === 0 || (breed.length >= 2 && breed.length <= 16)) ? <NextBtn onClick={nextPage} /> : <NextBtn onClick={nextPage} disabled={true} />)
 							:
 							<SubmitBtn type="submit">Done</SubmitBtn>
 						}
