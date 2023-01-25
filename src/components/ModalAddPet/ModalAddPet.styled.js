@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import Datetime from 'react-datetime';
+import 'react-datetime/css/react-datetime.css';
 import { Form, Field } from 'formik';
 
 export const Calendar = styled(Datetime)`
