@@ -5,11 +5,6 @@ export const Nav = ({ onClose }) => {
     <>
       <Ul>
         <li>
-          <NavLinkStyled to="/" onClick={onClose}>
-            Home
-          </NavLinkStyled>
-        </li>
-        <li>
           <NavLinkStyled to="/news" onClick={onClose}>
             News
           </NavLinkStyled>

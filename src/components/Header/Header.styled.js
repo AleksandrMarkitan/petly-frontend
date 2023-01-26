@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const HeaderStyled = styled.header`
   padding-top: 16px;
@@ -10,8 +10,4 @@ export const HeaderStyled = styled.header`
   @media (min-width: 1280px) {
     padding-top: 20px;
   }
-`;
-
-export const Div = styled.div`
-  display: flex;
 `;

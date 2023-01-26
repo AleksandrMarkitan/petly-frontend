@@ -4,7 +4,42 @@ import { FaUserCircle } from 'react-icons/fa';
 import { AuthBtn } from '../../CommonButtons/AuthBtn/AuthBtn.styled';
 import { NavLink } from 'react-router-dom';
 
-export const AccountBtn = styled(AuthBtn)``;
+export const AccountBtn = styled(AuthBtn)`
+  padding: 6px 37px;
+  background-color: rgba(245, 146, 86, 1);
+  color: rgba(255, 255, 255, 1);
+  :hover {
+    background-color: #ffffff;
+    color: #111111;
+  }
+  :hover div {
+    color: #f59256;
+  }
+  @media (min-width: 768px) {
+    padding: 9px 28px;
+    font-size: 16px;
+  }
+
+  div {
+    position: relative;
+    width: 17px;
+    height: 17px;
+
+    border-radius: 50%;
+    overflow: hidden;
+
+    @media (min-width: 768px) {
+      width: 23px;
+      height: 23px;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+`;
 
 export const UserCircle = styled(FaUserCircle)`
   width: 17px;
@@ -32,13 +67,18 @@ export const BtnAvatar = styled(NavLink)`
   span {
     display: block;
     position: absolute;
-    top: 50px;
+    top: 55px;
     left: -34px;
     transition: visibility 300ms cubic-bezier(0.42, 0, 1, 1),
       opacity 300ms cubic-bezier(0.42, 0, 1, 1);
-    pointer-events: none;
 
     @media (min-width: 768px) {
+      left: auto;
+      right: 54px;
+      top: 0px;
+    }
+    @media (min-width: 1280px) {
+      pointer-events: none;
       visibility: hidden;
       opacity: 0;
       left: auto;
@@ -48,49 +88,21 @@ export const BtnAvatar = styled(NavLink)`
   }
 `;
 
-export const DivAvatar = styled.div`
-  position: relative;
-  width: 44px;
-  height: 44px;
-  color: #f59256;
-  border-radius: 50%;
-  overflow: hidden;
-  outline: 5px solid rgba(245, 146, 86, 0.2);
-  :hover {
-    outline: 6px solid rgba(245, 146, 86, 0.3);
-  }
-
-  @media (min-width: 768px) {
-  }
-
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-`;
-
-export const UserCircleAvatar = styled(FaUserCircle)`
-  position: absolute;
-  top: -1px;
-  left: -1px;
-  width: 46px;
-  height: 46px;
-`;
-
 export const DivInfo = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 5px;
+  color: rgba(83, 83, 83, 1);
 
   @media (min-width: 768px) {
     align-items: end;
-    background-color: rgba(245, 146, 86, 0.3);
-
     padding: 5px;
+  }
+
+  @media (min-width: 1280px) {
+    background-color: rgba(245, 146, 86, 0.3);
     border-radius: 5px;
-    color: rgba(83, 83, 83, 1);
   }
 `;
 

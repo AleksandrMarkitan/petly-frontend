@@ -1,9 +1,12 @@
-import { LogoText, Span } from "./Logo.styled";
+import { NavLink } from 'react-router-dom';
+import { LogoText, Span } from './Logo.styled';
 
 export const Logo = () => {
   return (
-    <LogoText>
-      pe<Span>t</Span>ly
-    </LogoText>
+    <NavLink to="/">
+      <LogoText>
+        pe<Span>t</Span>ly
+      </LogoText>
+    </NavLink>
   );
 };
