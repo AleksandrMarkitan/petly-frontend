@@ -59,13 +59,11 @@ export const NoticeCategoryItem = ({ data }) => {
 
   return (
     <>
-      <Item >
+      <Item>
         <ImgWrap>
           <CategoryLabel>{category}</CategoryLabel>
           <Img src={imgURL} alt={name} />
-          <FavoriteBtn
-            favorite={isFavorite}
-            onClick={onChangeFavorite} />
+          <FavoriteBtn favorite={isFavorite} onClick={onChangeFavorite} />
         </ImgWrap>
         <Wrap>
           <WrapInner>
@@ -87,15 +85,21 @@ export const NoticeCategoryItem = ({ data }) => {
           </WrapInner>
           <ThumbBtn>
             <LearnMoreBtn onClick={closeModal} />
-            {currentUser.email === owner.email &&
-              <DeletePetNoticesBtn onDelete={deletePet} />}
+            {currentUser.email === owner.email && (
+              <DeletePetNoticesBtn onDelete={deletePet} />
+            )}
           </ThumbBtn>
         </Wrap>
       </Item>
-      {isModalOpen &&
+      {isModalOpen && (
         <ModalWindow onClose={closeModal}>
-          <ModalNotice data={data} />
-        </ModalWindow>}
+          <ModalNotice
+            data={data}
+            isFavorite={isFavorite}
+            onClickFavorite={onChangeFavorite}
+          />
+        </ModalWindow>
+      )}
     </>
   );
 };

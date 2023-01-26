@@ -4,18 +4,23 @@ import {
   BoxTitleList,
   BoxValue,
   Btn,
+  BtnAdd,
+  BtnIsAdded,
   Category,
   Comments,
   Heart,
   Img,
   ListOfValues,
+  TextAdded,
   ThumbImg,
   Title,
   TitleValue,
   Value,
-} from "./ModalNotice.styled";
+} from './ModalNotice.styled';
 
 export const ModalNotice = ({
+  isFavorite,
+  onClickFavorite,
   data: {
     title,
     category,
@@ -93,12 +98,22 @@ export const ModalNotice = ({
       </Comments>
 
       <BoxBtns>
-        <Btn type="button">
-          Add to
-          <span>
-            <Heart />
-          </span>
-        </Btn>
+        {!isFavorite ? (
+          <Btn type="button" onClick={onClickFavorite}>
+            Add to
+            <span>
+              <Heart />
+            </span>
+          </Btn>
+        ) : (
+          <BtnIsAdded type="button" onClick={onClickFavorite}>
+            Remove from
+            <span>
+              <Heart />
+            </span>
+          </BtnIsAdded>
+        )}
+
         <Btn type="button">Contact</Btn>
       </BoxBtns>
     </>

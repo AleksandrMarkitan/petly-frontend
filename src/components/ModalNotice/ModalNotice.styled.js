@@ -7,7 +7,6 @@ export const Box = styled.div`
   margin-bottom: 28px;
   @media (min-width: 768px) {
     display: flex;
-    gap: 20px;
   }
 `;
 
@@ -23,6 +22,7 @@ export const ThumbImg = styled.div`
     width: 288px;
     height: 328px;
     margin-bottom: 0;
+    margin-right: 20px;
   }
 `;
 
@@ -64,6 +64,7 @@ export const Title = styled.h2`
   @media (min-width: 768px) {
     font-size: 28px;
     line-height: 1.36;
+    width: 300px;
   }
 `;
 
@@ -71,6 +72,9 @@ export const ListOfValues = styled.dl``;
 
 export const BoxValue = styled.div`
   display: flex;
+  &:not(:last-child) {
+    padding-bottom: 8px;
+  }
 `;
 
 export const TitleValue = styled.dt`
@@ -158,6 +162,37 @@ export const Btn = styled(Button)`
   }
   :hover span {
     color: #fff;
+  }
+`;
+
+export const BtnIsAdded = styled(Button)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  font-size: 16px;
+  line-height: calc(22 / 16);
+  background-color: #f59256;
+  color: #fff;
+
+  :hover {
+    background-color: #fff;
+    color: #111111;
+  }
+  @media (min-width: 768px) {
+    width: auto;
+  }
+  span {
+    display: flex;
+    align-items: center;
+    color: #fff;
+
+    transition: color 400ms linear;
+  }
+  :hover span {
+    color: #f59256;
   }
 `;
 
