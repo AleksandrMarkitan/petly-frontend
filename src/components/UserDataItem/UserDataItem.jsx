@@ -36,7 +36,7 @@ export const UserDataItem = ({
 
     if (inputValue === value) {
       setInputActive(true);
-      setEditButtonActive(false);
+      setEditButtonActive('');
       return;
     }
   };
@@ -70,7 +70,6 @@ export const UserDataItem = ({
     }
     setInputActive(false);
   };
-
   return (
     <Div>
       <Title>{valueLabel}</Title>
@@ -85,7 +84,7 @@ export const UserDataItem = ({
         />
         {!inputActive && (
           <Button disabled={!editButtonActive} onClick={handleButtonUpdate}>
-            <EditTextBtnIcon changeColor={editButtonActive} />
+            <EditTextBtnIcon iseditbuttonactive={editButtonActive} />
           </Button>
         )}
         {inputActive && (

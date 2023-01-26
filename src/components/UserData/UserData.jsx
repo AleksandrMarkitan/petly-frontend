@@ -1,4 +1,3 @@
-//work v
 import { useRef, useState } from 'react';
 import { InputHidden } from './UserData.styled';
 import { UserDataItem } from '../UserDataItem/UserDataItem';
@@ -20,7 +19,7 @@ import { selectUser } from '../../redux/auth/authSelectors';
 export const UserData = () => {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
-  const [editButtonActive, setEditButtonActive] = useState(true);
+  const [editButtonActive, setEditButtonActive] = useState('active');
 
   const filePicker = useRef(null);
 

@@ -1,7 +1,9 @@
-import styled from "styled-components";
-import { AiFillHeart } from "react-icons/ai";
+//recovery
 
-import { Button } from "../CommonButtons/CategoryBtn/CategoryBtn.styled";
+import styled from 'styled-components';
+import { AiFillHeart } from 'react-icons/ai';
+
+import { Button } from '../CommonButtons/CategoryBtn/CategoryBtn.styled';
 
 export const Box = styled.div`
   margin-bottom: 28px;

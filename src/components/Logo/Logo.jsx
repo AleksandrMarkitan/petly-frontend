@@ -1,4 +1,5 @@
-import { LogoText, Span } from "./Logo.styled";
+//recovery
+import { LogoText, Span } from './Logo.styled';
 
 export const Logo = () => {
   return (

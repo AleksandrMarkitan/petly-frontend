@@ -76,7 +76,7 @@ export const EditTextBtnIcon = styled(HiPencil)`
   /* color: ${p => p.theme.colors.accent}; */
 
   color: ${p => {
-    if (p.changeColor) {
+    if (p.iseditbuttonactive) {
       return '#F59256';
     }
     return `${p => p.theme.colors.accent}`;
