@@ -18,6 +18,8 @@ export const AuthBtn = styled(NavLink)`
 
   &:hover {
     text-decoration: underline;
+    background-color: #f59256;
+    color: #fff;
   }
   &.active {
     background-color: #f59256;

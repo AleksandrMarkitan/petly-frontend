@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { InputHidden } from './UserData.styled';
 import { UserDataItem } from '../UserDataItem/UserDataItem';
 import { useDispatch, useSelector } from 'react-redux';
@@ -21,6 +21,7 @@ export const UserData = () => {
   const [editButtonActive, setEditButtonActive] = useState(true);
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
+
   const filePicker = useRef(null);
 
   const handleAvatar = async e => {

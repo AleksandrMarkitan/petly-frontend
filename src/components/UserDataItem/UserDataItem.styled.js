@@ -82,6 +82,7 @@ export const EditTextBtnIcon = styled(HiPencil)`
     }
     return `${p => p.theme.colors.accent}`;
   }};
+
   @media (min-width: 768px) {
     width: 20px;
     height: 20px;
