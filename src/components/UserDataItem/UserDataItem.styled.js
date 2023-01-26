@@ -22,6 +22,7 @@ export const Title = styled.label`
   }
 `;
 export const Block = styled.div`
+  position: relative;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -73,10 +74,10 @@ export const Button = styled.button`
 export const EditTextBtnIcon = styled(HiPencil)`
   width: 13px;
   height: 13px;
-  /* color: ${p => p.theme.colors.accent}; */
-
+  // color: ${p => p.theme.colors.accent};
   color: ${p => {
     if (p.changeColor) {
+      //return '#707070';
       return '#F59256';
     }
     return `${p => p.theme.colors.accent}`;
@@ -95,5 +96,20 @@ export const IconCheck = styled(BsCheckLg)`
   @media (min-width: 768px) {
     width: 17px;
     height: 13px;
+  }
+`;
+
+export const ErrorText = styled.p`
+  position: absolute;
+  bottom: -15px;
+  left: 18px;
+  margin: 0px;
+  font-size: 10px;
+  line-height: calc(1.5);
+  color: red;
+
+  @media (min-width: 768px) {
+    left: 12px;
+    //font-size: ${p => p.theme.fontSize.fs10};
   }
 `;

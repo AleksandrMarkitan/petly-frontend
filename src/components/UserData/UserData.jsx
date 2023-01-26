@@ -17,9 +17,9 @@ import { updateUserAvatar } from '../../redux/auth/authOperations';
 import { selectUser } from '../../redux/auth/authSelectors';
 
 export const UserData = () => {
+  const [editButtonActive, setEditButtonActive] = useState(true);
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
-  const [editButtonActive, setEditButtonActive] = useState(true);
 
   const filePicker = useRef(null);
 
@@ -39,12 +39,7 @@ export const UserData = () => {
   return (
     <UserBlock>
       <ImageContainer>
-        <form
-          action=""
-          id="avatar-add"
-          accept="image/jpeg, image/png"
-          encType="multipart/form-data"
-        >
+        <form action="" id="avatar-add" encType="multipart/form-data">
           <InputHidden>
             <input
               type="file"
@@ -58,7 +53,6 @@ export const UserData = () => {
             <ImageBox>
               <Img src={avatarURL} alt="avatar" />
             </ImageBox>
-            //  <img src={uploaded ? uploaded : avatarURL} alt="avatar" />
           )}
           <EditButton type="button" onClick={handlePick}>
             <IconEditImgBtn /> Edit photo
@@ -70,7 +64,7 @@ export const UserData = () => {
           <UserDataItem
             valueLabel="Name:"
             nameInput="name"
-            value={name}
+            userDataValue={name}
             setEditButtonActive={setEditButtonActive}
             editButtonActive={editButtonActive}
           />
@@ -79,7 +73,7 @@ export const UserData = () => {
           <UserDataItem
             valueLabel="Email:"
             nameInput="email"
-            value={email}
+            userDataValue={email}
             setEditButtonActive={setEditButtonActive}
             editButtonActive={editButtonActive}
           />
@@ -88,7 +82,7 @@ export const UserData = () => {
           <UserDataItem
             valueLabel="Birthday:"
             nameInput="birthday"
-            value={birthday}
+            userDataValue={birthday}
             setEditButtonActive={setEditButtonActive}
             editButtonActive={editButtonActive}
           />
@@ -97,7 +91,7 @@ export const UserData = () => {
           <UserDataItem
             valueLabel="Phone:"
             nameInput="phone"
-            value={phone}
+            userDataValue={phone}
             setEditButtonActive={setEditButtonActive}
             editButtonActive={editButtonActive}
           />
@@ -106,7 +100,7 @@ export const UserData = () => {
           <UserDataItem
             valueLabel="City:"
             nameInput="city"
-            value={city}
+            userDataValue={city}
             setEditButtonActive={setEditButtonActive}
             editButtonActive={editButtonActive}
           />
