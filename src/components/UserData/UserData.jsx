@@ -10,7 +10,7 @@ import {
   Img,
   ImageBox,
   EditButton,
-  UserCalendar,
+  //  UserCalendar,
 } from './UserData.styled';
 
 import { Logout } from '../Logout/Logout';
