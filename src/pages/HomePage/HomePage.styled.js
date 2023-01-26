@@ -17,9 +17,9 @@ import Union2x from "../../img/HomePage/Union@2x.png";
 
 export const Title = styled.h1`
   max-width: 280px;
-  fontsize: 32px;
-  lineheight: 1.38;
-  fontweight: 700;
+  font-size: 32px;
+  line-height: 1.38;
+  font-weight: 700;
   color: black;
   @media screen and (min-width: 768px) {
     max-width: 588px;
@@ -64,4 +64,6 @@ export const HomeSection = styled.section`
       (min-resolution: 192dpi),
       (min-resolution: 2dppx) {
       background-image: url(${portraitD2x}), url(${BgD2x}),
-        url(${Union2x});`;
+        url(${Union2x});}
+		}
+`

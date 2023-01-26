@@ -16,6 +16,7 @@ export const Button = styled.button`
   :focus {
     color: ${p => p.theme.colors.accent};
     transition: ${p => p.theme.transition.first};
+    transform: scale(1.1);
   }
 `;
 //padding: 8px 0;

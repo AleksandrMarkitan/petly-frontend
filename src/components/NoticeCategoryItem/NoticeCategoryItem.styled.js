@@ -1,38 +1,39 @@
 import styled from 'styled-components';
 
 export const Item = styled.li`
-border-radius: 2px;
-box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2),
-0px 1px 1px 0px rgba(0, 0, 0, 0.14),
-0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+  color: #111111;
+  box-shadow: 7px 4px 14px rgba(49, 21, 4, 0.07);
+  border-radius: 0px 0px 40px 40px;
+
+  &:not(:last-child) {
+    margin-bottom: 32px;
+  }
 `;
 
 export const Wrap = styled.div`
+  display: flex;
+  flex-direction: column;
 `;
 export const ImgWrap = styled.div`
   position: relative;
+  /* width: 100%; */
+  height: 288px;
 `;
 export const CategoryLabel = styled.p`
   position: absolute;
 	top: 20px;
 	left: 0;
   z-index: 1;
+
   padding: 6px 0;
   width: 158px;
   font-size: 12px;
   line-height: calc(16 / 12);
-  letter-spacing: 0.04em;
   text-align: center;
-  color: #111111;
+
   background: rgba(255, 255, 255, 0.6);
   backdrop-filter: blur(2px);
   border-radius: 0px 40px 40px 0px;
-
-  @media screen and (min-width: 768px) {
-    padding: 6px 0;
-    font-size: 12px;
-    line-height: calc(16 / 12);
-  }
 `;
 
 export const Img = styled.img`
@@ -48,26 +49,37 @@ export const Title = styled.h2`
   font-weight: 700;
   font-size: 28px;
   line-height: calc(38 / 28);
-  letter-spacing: -0.01em;
-  color: #111111;
+  /* letter-spacing: -0.01em; */
 `;
 
 export const Ul = styled.ul`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  padding-top: 20px;
+
   font-size: 16px;
   line-height: calc(22 / 16);
-  display: flex;
-  align-items: center;
-  text-align: center;
-  color: #111111;
 `;
 export const Li = styled.li`
+  display: flex;
 `;
 export const Lable = styled.p`
+  width: 90px;
 `;
 export const Text = styled.p`
 `;
 export const ThumbBtn = styled.div`
   display: flex;
-	/* justify-content: center; */
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
   gap: 12px;
+  padding-bottom: 12px;
+  /* flex-shrink: 0; */
+  /* flex-grow: 1; */
+  /* padding: 0 16px 12px; */
+  /* height: 100%; */
 `;

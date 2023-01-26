@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { HiTrash } from "react-icons/hi2";
+import styled from 'styled-components';
+import { HiTrash } from 'react-icons/hi2';
 
 export const DeleteBtn = styled.button`
   position: absolute;
@@ -18,6 +18,10 @@ export const DeleteBtn = styled.button`
   @media (min-width: 768px) {
     width: 32px;
     height: 32px;
+  }
+  :hover,
+  :focus {
+    transform: scale(1.1);
   }
 `;
 export const DelIcon = styled(HiTrash)`

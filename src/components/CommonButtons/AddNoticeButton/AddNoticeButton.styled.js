@@ -18,7 +18,7 @@ export const AddBtnMobile = styled.button`
 	font-size: 12px;
 	line-height: calc(16 / 12);
 	transition: transform 300ms linear;
-	z-index: 1000;
+	z-index: 1;
 
 	svg{
 		width: 21px;
@@ -32,10 +32,13 @@ export const AddBtnMobile = styled.button`
 
 export const AddBtn = styled.button`
 	display: flex;
-	width: 200px;
+	flex-shrink: 0;
 	gap: 12px;
+	padding: 0;
+	width: 129px;
 	align-items: center;
 	font-size: 20px;
+
 
 	span{
 		display: flex;
@@ -45,11 +48,16 @@ export const AddBtn = styled.button`
 		height: 44px;
 		background: #F59256;
 		border-radius: 50%;
+		transition: transform 250ms cubic-bezier(0.57, 0.21, 0.69, 1.25);
+		
+		:hover {
+		  transform: scale(1.15);
+		}
 		
 		svg{
 			fill: #fff;
 			width: 16px;
 			height: 16px;
-		}
-	}
+    }
+ }
 `

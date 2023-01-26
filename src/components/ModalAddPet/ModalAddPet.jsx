@@ -34,10 +34,11 @@ export const ModalAddPet = ({ onClose }) => {
   const [name, setName] = useState('');
   const [breed, setBreed] = useState('');
   const nameBreedRegexp = /^[a-zA-Z]{2,16}$/;
-  const commentRegexp = /^[A-Za-z0-9!?#$%^&_\-*]{8,120}$/;
+  const commentRegexp1 = /^[A-Za-z0-9!?#$%^&_\-*]{8,120}$/;
+  const commentRegexp = /^[a-z|A-Z|0-9!?#$%^&_\s\-*]{8,120}$/;
 
   const validDate = current => {
-    return current.isBefore(moment()) && current.isAfter('1999-12-31', 'day');
+    return current.isBefore(moment()) && current.isAfter('1970-12-31', 'day');
   };
 
   const validateName = value => {

@@ -153,9 +153,22 @@ export const InputField = styled(Field)`
 	color: rgba(27, 27, 27, 0.6);
 	background-color: #FDF7F2;
 	border: 1px solid rgba(245, 146, 86, 0.5);
-	border-radius: 40px;
 	outline: none;
 	transition: border-color 300ms linear;
+
+	border-radius: ${p => {
+		if (p.islistopen) {
+			return '20px 20px 0px 0px';
+		}
+		return '40px';
+
+	}};;
+  border-bottom: ${p => {
+		if (p.islistopen) {
+			return 'none';
+		}
+		return '1px solid rgba(245, 146, 86, 0.5)';
+	}};;
 
 	:focus{
 		border-color: #F59256;
@@ -192,6 +205,7 @@ export const RadioSexLabel = styled.label`
 	display: flex;
 	flex-direction: column;
 	gap: 12px;
+	cursor: pointer;
 
 	color: ${p => {
 		if (p.sex === p.value) {
@@ -200,6 +214,14 @@ export const RadioSexLabel = styled.label`
 
 		return "#000"
 	}};
+	
+	svg{
+		transition: transform 250ms linear;
+	}
+	
+	:hover svg, :focus svg{
+		transform: scale(1.2);
+	}
 	
 	@media (min-width: 768px) {
 		svg{
@@ -219,20 +241,49 @@ export const CitiesList = styled.ul`
 	left: 0;
 	top: 100%;
 	z-index: 5;
-	min-width: 100%;
-	max-height: 100px;
-	overflow: auto;
-	background-color: #fff;
-	padding: 12px;
-	border-left: 1px solid #F59256;
-	border-right: 1px solid #F59256;
-	border-bottom: 1px solid #F59256;
-	border-radius: 10px;
+	border-left: 1px solid #f59256;
+  border-right: 1px solid #f59256;
+  border-radius: 0 0 20px 20px;
+  border-bottom: 1px solid #f59256;
+
+  width: 100%;
+  height: 160px;
+  padding-top: 10px;
+  padding-left: 9px;
+  padding-right: 3px;
+  padding-bottom: 5px;
+
+  color: rgba(27, 27, 27, 0.8);
+  background-color: rgba(253, 247, 242, 0.2);
+  backdrop-filter: blur(10px);
+
+  overflow: auto;
+
+  &::-webkit-scrollbar-track, &::-moz-scrollbar-track {
+    margin-right: 20px;
+    background-color: (255, 255, 255, 0.2); /*Цвет скролла*/
+  }
+  &::-webkit-scrollbar-thumb, &::-moz-scrollbar-track {
+    border-radius: 5px; /*Закругление ползунка*/
+    background-color: #f59256; /*Цвет ползунка*/
+  }
+  &::-webkit-scrollbar, &::-moz-scrollbar-track {
+    width: 6px; /*Толщина скролла*/
+  }
+
+  scrollbar-color: (255, 255, 255, 0.2) #f59256; /*Цвет скролла, цвет ползунка*/
+  scrollbar-width: 6px; /*Толщина скролла thin, auto*/
 `
 
 export const CitiesItem = styled.li`
-	padding: 4px 0;
+	padding: 4px;
+	border-radius: 8px;
 	font-size: 12px;
+	transition: background-color 300ms linear;
+
+	:hover, :focus{
+		background-color: #f59256;
+	}
 `
 
 export const InputFileWrap = styled.div`
@@ -343,4 +394,10 @@ export const SubmitBtn = styled.button`
 	@media (min-width: 768px) {
 		width: 180px;
 	}
+`
+
+export const ClearBtn = styled.button`
+	position: absolute;
+	right: 10px;
+	bottom: 5px;
 `
