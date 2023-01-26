@@ -7,7 +7,6 @@ import {
   Button,
   EditTextBtnIcon,
   IconCheck,
-  EditTextBtnIconGrey,
   ErrorText,
 } from './UserDataItem.styled';
 import { useDispatch } from 'react-redux';
@@ -120,7 +119,7 @@ export const UserDataItem = ({
     }
     setInputActive(false);
   };
-
+  console.log(editButtonActive);
   return (
     <Div>
       <Title>{valueLabel}</Title>
@@ -141,7 +140,7 @@ export const UserDataItem = ({
             disabled={!editButtonActive}
             onClick={handleButtonUpdate}
           >
-            <EditTextBtnIcon changeColor={editButtonActive} />
+            <EditTextBtnIcon changecolor={editButtonActive.toString()} />
           </Button>
         )}
         {inputActive && (
