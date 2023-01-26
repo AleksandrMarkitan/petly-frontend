@@ -82,6 +82,7 @@ export const UserDataItem = ({
 
   const handleButtonUpdate = e => {
     e.preventDefault();
+
     if (inputValue === userDataValue) {
       setInputActive(true);
       setEditButtonActive(false);
@@ -140,7 +141,7 @@ export const UserDataItem = ({
             disabled={!editButtonActive}
             onClick={handleButtonUpdate}
           >
-            <EditTextBtnIcon changeColor={handleButtonUpdate} />
+            <EditTextBtnIcon changeColor={editButtonActive} />
           </Button>
         )}
         {inputActive && (
