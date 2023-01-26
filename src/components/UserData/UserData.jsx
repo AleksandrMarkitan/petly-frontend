@@ -15,7 +15,6 @@ import { Logout } from '../Logout/Logout';
 
 import { updateUserAvatar } from '../../redux/auth/authOperations';
 import { selectUser } from '../../redux/auth/authSelectors';
-import { useState } from 'react';
 
 export const UserData = () => {
   const [editButtonActive, setEditButtonActive] = useState(true);
