@@ -1,3 +1,4 @@
+//work v
 import { useRef, useState } from 'react';
 import { InputHidden } from './UserData.styled';
 import { UserDataItem } from '../UserDataItem/UserDataItem';
@@ -10,18 +11,26 @@ import {
   Img,
   ImageBox,
   EditButton,
+  //  UserCalendar,
 } from './UserData.styled';
+
 import { Logout } from '../Logout/Logout';
 
 import { updateUserAvatar } from '../../redux/auth/authOperations';
 import { selectUser } from '../../redux/auth/authSelectors';
 
 export const UserData = () => {
-  const dispatch = useDispatch();
   const user = useSelector(selectUser);
+  const dispatch = useDispatch();
+  const { name, email, birthday, phone, city, avatarURL } = user;
   const [editButtonActive, setEditButtonActive] = useState(true);
+  const [changeBirth, setChangeBirth] = useState(birthday);
 
   const filePicker = useRef(null);
+
+  // const birthdateHandler = e => {
+  //   setChangeBirth(e.format('DD.MM.YYYY'));
+  // };
 
   const handleAvatar = async e => {
     e.preventDefault();
@@ -35,16 +44,10 @@ export const UserData = () => {
     filePicker.current.click();
   };
 
-  const { name, email, birthday, phone, city, avatarURL } = user;
   return (
     <UserBlock>
       <ImageContainer>
-        <form
-          action=""
-          id="avatar-add"
-          accept="image/jpeg, image/png"
-          encType="multipart/form-data"
-        >
+        <form action="" id="avatar-add" encType="multipart/form-data">
           <InputHidden>
             <input
               type="file"
@@ -58,7 +61,6 @@ export const UserData = () => {
             <ImageBox>
               <Img src={avatarURL} alt="avatar" />
             </ImageBox>
-            //  <img src={uploaded ? uploaded : avatarURL} alt="avatar" />
           )}
           <EditButton type="button" onClick={handlePick}>
             <IconEditImgBtn /> Edit photo
@@ -70,7 +72,7 @@ export const UserData = () => {
           <UserDataItem
             valueLabel="Name:"
             nameInput="name"
-            value={name}
+            userDataValue={name}
             setEditButtonActive={setEditButtonActive}
             editButtonActive={editButtonActive}
           />
@@ -79,25 +81,47 @@ export const UserData = () => {
           <UserDataItem
             valueLabel="Email:"
             nameInput="email"
-            value={email}
+            userDataValue={email}
             setEditButtonActive={setEditButtonActive}
             editButtonActive={editButtonActive}
           />
         )}
         {birthday && (
+          // <UserDataItem
+          //   valueLabel="Birthday:"
+          //   nameInput="birthday"
+          //   userDataValue={birthday}
+          //   setEditButtonActive={setEditButtonActive}
+          //   editButtonActive={editButtonActive}
+          // />
           <UserDataItem
             valueLabel="Birthday:"
             nameInput="birthday"
-            value={birthday}
+            userDataValue={changeBirth}
             setEditButtonActive={setEditButtonActive}
             editButtonActive={editButtonActive}
           />
         )}
+        {/* <UserCalendar
+          inputProps={{
+            readOnly: true,
+            id: 'birth',
+            placeholder: 'Choose date',
+          }}
+          value={changeBirth}
+          onChange={birthdateHandler}
+          timeFormat={false}
+          closeOnSelect={true}
+          dateFormat="DD.MM.YYYY"
+          //input={true}
+          //open={false}
+          // isValidDate={validDate}
+        /> */}
         {phone && (
           <UserDataItem
             valueLabel="Phone:"
             nameInput="phone"
-            value={phone}
+            userDataValue={phone}
             setEditButtonActive={setEditButtonActive}
             editButtonActive={editButtonActive}
           />
@@ -106,7 +130,7 @@ export const UserData = () => {
           <UserDataItem
             valueLabel="City:"
             nameInput="city"
-            value={city}
+            userDataValue={city}
             setEditButtonActive={setEditButtonActive}
             editButtonActive={editButtonActive}
           />

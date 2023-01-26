@@ -1,7 +1,7 @@
-import styled from "styled-components";
-import { AiFillHeart } from "react-icons/ai";
+import styled from 'styled-components';
+import { AiFillHeart } from 'react-icons/ai';
 
-import { Button } from "../CommonButtons/CategoryBtn/CategoryBtn.styled";
+import { Button } from '../CommonButtons/CategoryBtn/CategoryBtn.styled';
 
 export const Box = styled.div`
   margin-bottom: 28px;
@@ -96,6 +96,13 @@ export const Value = styled.dd`
   @media (min-width: 768px) {
     font-size: 16px;
     line-height: calc(22 / 16);
+  }
+
+  a {
+    text-decoration: underline;
+    :hover {
+      color: #ff6101;
+    }
   }
 `;
 
