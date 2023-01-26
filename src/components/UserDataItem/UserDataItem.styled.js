@@ -81,12 +81,16 @@ export const EditTextBtnIcon = styled(HiPencil)`
   width: 13px;
   height: 13px;
   // color: ${p => p.theme.colors.accent};
-  color: ${p => {
-    if (p.changeColor) {
-      //return '#707070';
-      return '#F59256';
+  // color: ${p => (p.changecolor ? '#F59256' : p.theme.colors.accent)};
+
+  fill: ${p => {
+    if (p.changecolor === 'true') {
+      // return '#707070';
+      // return '#F59256';
+      return p.theme.colors.accent;
     }
-    return `${p => p.theme.colors.accent}`;
+    //return p.theme.colors.accent;
+    return '#707070';
   }};
 
   @media (min-width: 768px) {
