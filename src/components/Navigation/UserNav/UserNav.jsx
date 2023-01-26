@@ -20,7 +20,7 @@ export const UserNav = ({ onClose }) => {
         <div>
           {avatarURL ? <img src={avatarURL} alt="Account" /> : <UserCircle />}
         </div>
-        {name ? { name } : 'Account'}
+        {name ? name : 'Account'}
       </AccountBtn>
 
       {/* ------------Нова кнопка------------- */}
