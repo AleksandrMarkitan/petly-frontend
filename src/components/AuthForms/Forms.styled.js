@@ -1,11 +1,11 @@
-import { Link } from "react-router-dom";
-import styled from "styled-components";
-import { Form, Field } from "formik";
-import bgLoginDesc from "../../img/bgLoginDesc.png";
-import bgLoginTab from "../../img/bgLoginTab.png";
-import bgLoginMob from "../../img/bgLoginMob.png";
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+import { Form, Field } from 'formik';
+import bgLoginDesc from '../../img/bgLoginDesc.png';
+import bgLoginTab from '../../img/bgLoginTab.png';
+import bgLoginMob from '../../img/bgLoginMob.png';
 
-import { SectionTag } from "../CommonComponents/Section/Section.styled";
+import { SectionTag } from '../CommonComponents/Section/Section.styled';
 
 export const AuthSection = styled(SectionTag)`
   background-repeat: no-repeat;
@@ -63,7 +63,7 @@ export const Wrapper = styled.div`
 
 export const TitleAuth = styled.h2`
   text-align: center;
-  font-family: "Manrope";
+  font-family: 'Manrope';
   font-weight: 700;
   font-size: 24px;
   line-height: 33px;
@@ -98,6 +98,10 @@ export const Input = styled(Field)`
   border-radius: 40px;
   outline: none;
 
+  /* &:invalid {
+    border: red solid 3px;
+  } */
+
   @media screen and (min-width: 768px) {
     font-size: 18px;
     line-height: 25px;
@@ -119,10 +123,16 @@ export const Input = styled(Field)`
       line-height: 25px;
     }
   }
+  /* border-color: #f59256; */
 
-  &:hover,
+  /* &:hover, */
   &:focus {
-    border-color: #f59256;
+    border-color: ${p => {
+      if (p.test) {
+        return 'red';
+      }
+      return '#f59256';
+    }};
   }
 `;
 
@@ -131,7 +141,7 @@ export const Paragraph = styled.p`
   text-align: center;
 
   & span {
-    font-family: "Manrope";
+    font-family: 'Manrope';
     font-weight: 400;
     font-size: 12px;
     line-height: 16px;
@@ -141,7 +151,7 @@ export const Paragraph = styled.p`
 `;
 
 export const FormLink = styled(Link)`
-  font-family: "Manrope";
+  font-family: 'Manrope';
   font-weight: 400;
   font-size: 12px;
   line-height: 16px;
@@ -155,7 +165,7 @@ export const FormLink = styled(Link)`
 `;
 
 export const toastStyled = {
-  position: "top-right",
+  position: 'top-right',
   autoClose: 5000,
   pauseOnHover: true,
 };
