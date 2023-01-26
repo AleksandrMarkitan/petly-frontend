@@ -10,18 +10,26 @@ import {
   Img,
   ImageBox,
   EditButton,
+  UserCalendar,
 } from './UserData.styled';
+
 import { Logout } from '../Logout/Logout';
 
 import { updateUserAvatar } from '../../redux/auth/authOperations';
 import { selectUser } from '../../redux/auth/authSelectors';
 
 export const UserData = () => {
-  const [editButtonActive, setEditButtonActive] = useState(true);
-  const dispatch = useDispatch();
   const user = useSelector(selectUser);
+  const dispatch = useDispatch();
+  const { name, email, birthday, phone, city, avatarURL } = user;
+  const [editButtonActive, setEditButtonActive] = useState(true);
+  const [changeBirth, setChangeBirth] = useState(birthday);
 
   const filePicker = useRef(null);
+
+  // const birthdateHandler = e => {
+  //   setChangeBirth(e.format('DD.MM.YYYY'));
+  // };
 
   const handleAvatar = async e => {
     e.preventDefault();
@@ -35,7 +43,6 @@ export const UserData = () => {
     filePicker.current.click();
   };
 
-  const { name, email, birthday, phone, city, avatarURL } = user;
   return (
     <UserBlock>
       <ImageContainer>
@@ -79,14 +86,36 @@ export const UserData = () => {
           />
         )}
         {birthday && (
+          // <UserDataItem
+          //   valueLabel="Birthday:"
+          //   nameInput="birthday"
+          //   userDataValue={birthday}
+          //   setEditButtonActive={setEditButtonActive}
+          //   editButtonActive={editButtonActive}
+          // />
           <UserDataItem
             valueLabel="Birthday:"
             nameInput="birthday"
-            userDataValue={birthday}
+            userDataValue={changeBirth}
             setEditButtonActive={setEditButtonActive}
             editButtonActive={editButtonActive}
           />
         )}
+        {/* <UserCalendar
+          inputProps={{
+            readOnly: true,
+            id: 'birth',
+            placeholder: 'Choose date',
+          }}
+          value={changeBirth}
+          onChange={birthdateHandler}
+          timeFormat={false}
+          closeOnSelect={true}
+          dateFormat="DD.MM.YYYY"
+          //input={true}
+          //open={false}
+          // isValidDate={validDate}
+        /> */}
         {phone && (
           <UserDataItem
             valueLabel="Phone:"

@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import { HiPencil } from 'react-icons/hi';
 import { BsCheckLg } from 'react-icons/bs';
+import { Calendar } from '../ModalAddPet/ModalAddPet.styled';
+
 export const Div = styled.div`
   display: flex;
   align-items: center;
@@ -70,6 +72,10 @@ export const Button = styled.button`
     width: 32px;
     height: 32px;
   }
+  :hover,
+  :focus {
+    transform: scale(1.1);
+  }
 `;
 export const EditTextBtnIcon = styled(HiPencil)`
   width: 13px;
@@ -87,6 +93,15 @@ export const EditTextBtnIcon = styled(HiPencil)`
     width: 20px;
     height: 20px;
   }
+  /* :hover,
+  :focus {
+    transform: {
+    if (p.changeColor) {
+      //return '#707070';
+      return  scale(1.1);;
+    }
+  }
+  } */
 `;
 
 export const IconCheck = styled(BsCheckLg)`

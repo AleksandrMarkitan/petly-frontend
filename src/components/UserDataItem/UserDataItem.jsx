@@ -7,7 +7,6 @@ import {
   Button,
   EditTextBtnIcon,
   IconCheck,
-  EditTextBtnIconGrey,
   ErrorText,
 } from './UserDataItem.styled';
 import { useDispatch } from 'react-redux';
