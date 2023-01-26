@@ -242,6 +242,11 @@ export const List = styled.ul`
   @media (min-width: 1280px) {
     top: 20%;
   }
+  :hover {
+    color: ${p => p.theme.colors.accent};
+    transition: ${p => p.theme.transition.first};
+    cursor: pointer;
+  }
 `;
 export const Days = styled.div`
   display: flex;

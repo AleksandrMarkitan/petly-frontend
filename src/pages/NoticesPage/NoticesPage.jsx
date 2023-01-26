@@ -2,15 +2,15 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import {
-  selectNotices,
-  selectNoticesIsLoading,
-  // selectNoticesError,
-  // selectNoticesNotify,
+	selectNotices,
+	selectNoticesIsLoading,
+	// selectNoticesError,
+	// selectNoticesNotify,
 } from "../../redux/notices/noticesSelectors";
 import {
-  fetchNotices,
-  fetchFavorites,
-  fetchOwnerNotices,
+	fetchNotices,
+	fetchFavorites,
+	fetchOwnerNotices,
 } from "../../redux/notices/noticesOperations";
 import { SectionTitle } from "../../components/CommonComponents/SectionTitle/SectionTitle";
 import { NoticesCategoriesNav } from "../../components/NoticesCategoriesNav/NoticesCategoriesNav";
@@ -25,73 +25,73 @@ import { Notification } from "../../components/Notification/Notification";
 import { Loader } from "../../components/Loader/Loader";
 import { NOT_FOUND } from "../../helpers/constants";
 
-export const NoticesPage = () => {
-  const { route } = useParams();
+const NoticesPage = () => {
+	const { route } = useParams();
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
+	const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const [searchTitleQwery, setSearchTitleQwery] = useState("");
+	const [searchTitleQwery, setSearchTitleQwery] = useState("");
 
-  const notices = useSelector(selectNotices);
-  const isLoading = useSelector(selectNoticesIsLoading);
+	const notices = useSelector(selectNotices);
+	const isLoading = useSelector(selectNoticesIsLoading);
 
-  const dispatch = useDispatch();
+	const dispatch = useDispatch();
 
-  useEffect(() => {
+	useEffect(() => {
 
-    if (route === "favorite") {
-      if (searchTitleQwery !== "") {
-        dispatch(fetchFavorites({ qwery: searchTitleQwery }));
-      } else {
-        dispatch(fetchFavorites({}));
-      }
-    }
+		if (route === "favorite") {
+			if (searchTitleQwery !== "") {
+				dispatch(fetchFavorites({ qwery: searchTitleQwery }));
+			} else {
+				dispatch(fetchFavorites({}));
+			}
+		}
 
-    if (route === "owner") {
-      if (searchTitleQwery !== "") {
-        dispatch(fetchOwnerNotices({ qwery: searchTitleQwery }));
-      } else {
-        dispatch(fetchOwnerNotices({}));
-      }
-    }
+		if (route === "owner") {
+			if (searchTitleQwery !== "") {
+				dispatch(fetchOwnerNotices({ qwery: searchTitleQwery }));
+			} else {
+				dispatch(fetchOwnerNotices({}));
+			}
+		}
 
-    if (["sell", "lost-found", "in-good-hands"].includes(route)) {
-      if (searchTitleQwery !== "") {
-        dispatch(fetchNotices({ category: route, qwery: searchTitleQwery }));
-      } else {
-        dispatch(fetchNotices({ category: route }));
-      }
-    }
-  }, [dispatch, route, searchTitleQwery]);
+		if (["sell", "lost-found", "in-good-hands"].includes(route)) {
+			if (searchTitleQwery !== "") {
+				dispatch(fetchNotices({ category: route, qwery: searchTitleQwery }));
+			} else {
+				dispatch(fetchNotices({ category: route }));
+			}
+		}
+	}, [dispatch, route, searchTitleQwery]);
 
-  const closeModal = () => {
-    setIsModalOpen(!isModalOpen);
-  };
+	const closeModal = () => {
+		setIsModalOpen(!isModalOpen);
+	};
 
-  const onSearch = (searchQuery) => {
-    setSearchTitleQwery(searchQuery);
-  };
+	const onSearch = (searchQuery) => {
+		setSearchTitleQwery(searchQuery);
+	};
 
-  return (
-    <Section>
-      <Container>
-        <SectionTitle text={"Find your favorite pet"} />
-        <NoticesSearch onSearch={onSearch} />
-        {isLoading ? (
-          <Loader />
-        ) : (
-          <><MenuWrap>
-            <NoticesCategoriesNav />
-            <AddNoticeButton onClick={closeModal} />
-          </MenuWrap>
-            {notices.length > 0 ?
-              <NoticesCategoriesList data={notices} /> :
-              <Notification message={NOT_FOUND} />}
-          </>)}
-        {isModalOpen && <ModalAddNotice onClose={closeModal} />}
-      </Container>
-    </Section>
-  );
+	return (
+		<Section>
+			<Container>
+				<SectionTitle text={"Find your favorite pet"} />
+				<NoticesSearch onSearch={onSearch} />
+				{isLoading ? (
+					<Loader />
+				) : (
+					<><MenuWrap>
+						<NoticesCategoriesNav />
+						<AddNoticeButton onClick={closeModal} />
+					</MenuWrap>
+						{notices.length > 0 ?
+							<NoticesCategoriesList data={notices} /> :
+							<Notification message={NOT_FOUND} />}
+					</>)}
+				{isModalOpen && <ModalAddNotice onClose={closeModal} />}
+			</Container>
+		</Section>
+	);
 };
 
 export default NoticesPage;

@@ -1,18 +1,29 @@
-import { nanoid } from "nanoid";
-import { List, Button, Days, Hours, Dr } from "./OurFriends.styled";
-import { useState } from "react";
+import { nanoid } from 'nanoid';
+import { List, Button, Days, Hours, Dr } from './OurFriends.styled';
+import { useState } from 'react';
 export const WorkTime = ({ workDays }) => {
-  const days = ["MN: ", "TU: ", "WE: ", "TH: ", "FR: ", "SA: ", "SU: "];
+  const days = ['MN: ', 'TU: ', 'WE: ', 'TH: ', 'FR: ', 'SA: ', 'SU: '];
+  const currentDate = new Date();
+  const currentDay = currentDate.getDay();
+
   const [modalOpened, setModalOpened] = useState(false);
   const handleClick = () => {
     setModalOpened(!modalOpened);
   };
+  const indexUpdater = () => {
+    if (currentDay === 0) {
+      return 6;
+    }
+    return currentDay - 1;
+  };
   return (
     <>
       <Button type="click" onClick={handleClick}>
-        {workDays[0].from && workDays[0].to
-          ? `${workDays[0]?.from} - ${workDays[0]?.to}`
-          : "Closed"}
+        {workDays[indexUpdater()].from && workDays[indexUpdater()].to
+          ? `${workDays[indexUpdater()]?.from} - ${
+              workDays[indexUpdater()]?.to
+            }`
+          : 'Closed'}
       </Button>
 
       {modalOpened && (

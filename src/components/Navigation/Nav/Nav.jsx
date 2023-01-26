@@ -1,4 +1,4 @@
-import { NavLinkStyled, Ul } from "./Nav.styled";
+import { NavLinkStyled, Ul } from './Nav.styled';
 
 export const Nav = ({ onClose }) => {
   return (

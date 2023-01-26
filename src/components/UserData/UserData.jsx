@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { InputHidden } from './UserData.styled';
 import { UserDataItem } from '../UserDataItem/UserDataItem';
 import { useDispatch, useSelector } from 'react-redux';
@@ -17,6 +17,7 @@ import { updateUserAvatar } from '../../redux/auth/authOperations';
 import { selectUser } from '../../redux/auth/authSelectors';
 
 export const UserData = () => {
+  const [editButtonActive, setEditButtonActive] = useState(true);
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
 
@@ -43,6 +44,7 @@ export const UserData = () => {
             <input
               type="file"
               name="avatarURL"
+              accept="image/jpeg, image/png"
               onChange={handleAvatar}
               ref={filePicker}
             />
@@ -51,7 +53,6 @@ export const UserData = () => {
             <ImageBox>
               <Img src={avatarURL} alt="avatar" />
             </ImageBox>
-            //  <img src={uploaded ? uploaded : avatarURL} alt="avatar" />
           )}
           <EditButton type="button" onClick={handlePick}>
             <IconEditImgBtn /> Edit photo
@@ -60,75 +61,52 @@ export const UserData = () => {
       </ImageContainer>
       <Form>
         {name && (
-          <UserDataItem valueLabel="Name:" nameInput="name" value={name} />
+          <UserDataItem
+            valueLabel="Name:"
+            nameInput="name"
+            userDataValue={name}
+            setEditButtonActive={setEditButtonActive}
+            editButtonActive={editButtonActive}
+          />
         )}
         {email && (
-          <UserDataItem valueLabel="Email:" nameInput="email" value={email} />
+          <UserDataItem
+            valueLabel="Email:"
+            nameInput="email"
+            userDataValue={email}
+            setEditButtonActive={setEditButtonActive}
+            editButtonActive={editButtonActive}
+          />
         )}
         {birthday && (
           <UserDataItem
             valueLabel="Birthday:"
             nameInput="birthday"
-            value={birthday}
+            userDataValue={birthday}
+            setEditButtonActive={setEditButtonActive}
+            editButtonActive={editButtonActive}
           />
         )}
         {phone && (
-          <UserDataItem valueLabel="Phone:" nameInput="phone" value={phone} />
+          <UserDataItem
+            valueLabel="Phone:"
+            nameInput="phone"
+            userDataValue={phone}
+            setEditButtonActive={setEditButtonActive}
+            editButtonActive={editButtonActive}
+          />
         )}
         {city && (
-          <UserDataItem valueLabel="City:" nameInput="city" value={city} />
+          <UserDataItem
+            valueLabel="City:"
+            nameInput="city"
+            userDataValue={city}
+            setEditButtonActive={setEditButtonActive}
+            editButtonActive={editButtonActive}
+          />
         )}
       </Form>
       <Logout />
     </UserBlock>
   );
 };
-
-// <>
-// <WrapperDataUser>
-// <form action="" id="avatar-add" encType="multipart/form-data">
-//   <button type="button" onClick={handlePick}>
-//     Edit photo
-//   </button>
-//   <InputHidden>
-//     <input
-//       type="file"
-//       name="avatarURL"
-//       onChange={handleAvatar}
-//       ref={filePicker}
-//     />
-//   </InputHidden>
-//   {avatarURL && (
-//     <img src={avatarURL} alt="avatar" />
-//     // <img src={uploaded ? uploaded : avatarURL} alt="avatar" />
-//   )}
-// </form>
-
-// {name && (
-//   <UserDataItem valueLabel="Name:" nameInput="name" value={name} />
-// )}
-// {email && (
-//   <UserDataItem valueLabel="Email:" nameInput="email" value={email} />
-// )}
-// {birthday && (
-//   <UserDataItem
-//     valueLabel="Birthday:"
-//     nameInput="birthday"
-//     value={birthday}
-//   />
-// )}
-// {phone && (
-//   <UserDataItem valueLabel="Phone:" nameInput="phone" value={phone} />
-// )}
-// {city && (
-//   <UserDataItem valueLabel="City:" nameInput="city" value={city} />
-// )}
-// {
-//   /* <LogOut
-//         onClick={() => {
-//           dispatch(logout());
-//         }}
-//       /> */
-// }
-
-// </>

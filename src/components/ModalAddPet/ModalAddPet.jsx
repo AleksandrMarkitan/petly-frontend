@@ -1,231 +1,223 @@
-//import { ModalWindow } from "../CommonComponents/ModalWindow/ModalWindow";
-
-import { useEffect } from 'react';
-import { Formik, Form, Field } from 'formik';
+import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { ModalWindow } from '../CommonComponents/ModalWindow/ModalWindow';
+import moment from 'moment';
 import { CancelBtn } from '../CommonButtons/CancelBtn/CancelBtn';
 import { NextBtn } from '../CommonButtons/NextBtn/NextBtn';
 import { useDispatch } from 'react-redux';
-//import { addPet } from "../../redux/user/userOperations";
-
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { addPet } from '../../redux/user/userOperations';
 import { BsPlusLg } from 'react-icons/bs';
 import {
-  InputFileWrap,
-  InputFile,
-  FieldsWrapper,
-  Label,
-  BtnWrapper,
-  FormStyled,
-  SubmitBtn,
-  Error,
-  InputField,
-  CommentWrap,
-  Textarea,
-  Title,
-  DateInput,
-  InputFieldWrap,
+	InputFileWrap,
+	InputFile,
+	FieldsWrapper,
+	Label,
+	BtnWrapper,
+	FormStyled,
+	SubmitBtn,
+	Error,
+	InputField,
+	CommentWrap,
+	Textarea,
+	Title,
+	InputFieldWrap,
+	Calendar,
 } from './ModalAddPet.styled';
-import { getCities } from '../../serveсes/getCities';
-
-//import { Label } from '../AuthForms/Forms.styled';
-//import { InputHidden } from "./UserData.styled";
-//import { UserDataItem } from "../UserDataItem/UserDataItem";
 
 export const ModalAddPet = ({ onClose }) => {
-  const dispatch = useDispatch();
+	const dispatch = useDispatch();
+	const [selectedFile, setSelectedFile] = useState(null);
+	const [imgURL, setImgURL] = useState('');
+	const [preview, setPreview] = useState('');
+	const [birthdate, setBirthdate] = useState('');
+	const [page, setPage] = useState(1);
+	const [name, setName] = useState('');
+	const [breed, setBreed] = useState('');
+	const nameBreedRegexp = /^[a-zA-Z]{2,16}$/;
+	const commentRegexp = /^[A-Za-z0-9!?#$%^&_\-*]{8,120}$/;
 
-  // const [nextFormShow, setNextFormShow] = useState(false);
-  // const [backFormShow, setBackFormShow] = useState(true);
-  // const filePicker = useRef(null);
-  const [selectedFile, setSelectedFile] = useState(null);
-  const [imgURL, setImgURL] = useState('');
-  const [preview, setPreview] = useState('');
-  const [date, setDate] = useState('');
+	const validDate = current => {
+		return current.isBefore(moment()) && current.isAfter('1999-12-31', 'day');
+	};
 
-  const [page, setPage] = useState(1);
-  const [name, setName] = useState('');
+	const validateName = value => {
+		setName(value);
+	};
+	const validateBreed = value => {
+		setBreed(value);
+	};
+	const nextPage = () => {
+		setPage(prevState => prevState + 1);
+	};
 
-  const validateName = value => {
-    setName(value);
-  };
+	const prevPage = () => {
+		setPage(prevState => prevState - 1);
+	};
 
-  const nextPage = () => {
-    setPage(prevState => prevState + 1);
-  };
+	const inputFileHandler = e => {
+		const file = e.target.files[0];
 
-  const prevPage = () => {
-    setPage(prevState => prevState - 1);
-  };
+		setImgURL(file);
+		const reader = new FileReader();
 
-  const inputFileHandler = e => {
-    const file = e.target.files[0];
+		reader.onload = function (e) {
+			setPreview(e.target.result);
+		};
 
-    setImgURL(file);
-    const reader = new FileReader();
+		reader.readAsDataURL(file);
+		setSelectedFile(file);
+	};
 
-    reader.onload = function (e) {
-      setPreview(e.target.result);
-    };
+	const birthdateHandler = e => {
+		setBirthdate(e.format('DD.MM.YYYY'));
+	};
 
-    reader.readAsDataURL(file);
-    setSelectedFile(file);
-  };
+	const initialValues = {
+		name: '',
+		breed: '',
+		avatarURL: {},
+		comments: '',
+	};
 
-  const birthdateHandler = e => {
-    setDate(e.format('DD.MM.YYYY'));
-  };
+	const schema = Yup.object().shape({
+		name: Yup.string()
+			.min(2, 'Name must contain at least 2 symbol')
+			.max(16, 'Name must contain no more than 16 symbols')
+			.matches(nameBreedRegexp, 'Please, enter a valid name')
+			.required('Name is required'),
+		breed: Yup.string()
+			.min(2, 'Breed must contain at least 2 symbol')
+			.max(16, 'Breed must contain no more than 16 symbols')
+			.matches(nameBreedRegexp, 'Please, enter a valid breed')
+			.required('Breed is required'),
+		comments: Yup.string()
+			.min(8, 'Comment must contain at least 8 symbol')
+			.max(120, 'Comment must contain no more than 120 symbols')
+			.matches(commentRegexp, 'Please, enter a valid comment')
+			.required('Comment is required'),
+	});
 
-  const initialValues = {
-    name: '',
-    // date: '',
-    breed: '',
-    avatarURL: {},
-    comments: '',
-  };
+	const onAddPet = value => {
+		const { name, breed, comments } = value;
 
-  const schema = Yup.object().shape({
-    name: Yup.string()
-      .min(2, 'Too Short!')
-      .max(16, 'Too Long!')
-      .required('Required'),
-    breed: Yup.string()
-      .min(2, 'Too Short!')
-      .max(24, 'Too Long!')
-      .required('Required'),
-    comments: Yup.string()
-      .min(8, 'Too Short!')
-      .max(120, 'Too Long!')
-      .required('Required'),
-  });
+		const formData = new FormData();
 
-  const onAddPet = value => {
-    const { name, breed, comments } = value;
+		selectedFile && formData.append('avatarURL', selectedFile);
+		name && formData.append('name', name);
+		birthdate && formData.append('date', birthdate);
+		breed && formData.append('breed', breed);
+		comments && formData.append('comments', comments);
 
-    const formData = new FormData();
+		dispatch(addPet(formData));
+	};
 
-    selectedFile && formData.append('avatarURL', selectedFile);
-    name && formData.append('name', name);
-    date && formData.append('date', date);
-    breed && formData.append('breed', breed);
-    comments && formData.append('comments', comments);
-    console.log(date);
-    dispatch(addPet(formData));
-    //onClose();
-  };
+	return (
+		<>
+			<Title>Add pet</Title>
+			<Formik
+				initialValues={initialValues}
+				validationSchema={schema}
+				onSubmit={values => onAddPet(values)}
+				validateOnChange
+			>
+				{({ errors, touched }) => (
+					<FormStyled encType="multipart/form-data">
+						{page === 1 && (
+							<>
+								<InputFieldWrap>
+									<Label>
+										Pet's name
+										<InputField
+											type="text"
+											placeholder="Type name pet"
+											name="name"
+											validate={validateName}
+										/>
+										{touched.name && errors.name && (
+											<Error>{errors.name}</Error>
+										)}
+									</Label>
+									<Label htmlFor="birth">Date of birth</Label>
+									<Calendar
+										inputProps={{
+											readOnly: true,
+											id: 'birth',
+											placeholder: 'Choose date',
+										}}
+										value={birthdate}
+										onChange={birthdateHandler}
+										timeFormat={false}
+										closeOnSelect={true}
+										dateFormat="DD.MM.YYYY"
+										//input={true}
+										//open={false}
+										isValidDate={validDate}
+									/>
+									<Label>
+										Breed
+										<InputField
+											type="text"
+											placeholder="Type breed"
+											name="breed"
+											validate={validateBreed}
+										/>
+										{touched.breed && errors.breed && (
+											<Error>{errors.breed}</Error>
+										)}
+									</Label>
+								</InputFieldWrap>
+							</>
+						)}
 
-  return (
-    <>
-      {/* // <ModalWindow onClose={onClose} modalType={'addPet'}> */}
-      <Title>Add pet</Title>
-      <Formik
-        initialValues={initialValues}
-        validationSchema={schema}
-        onSubmit={values => onAddPet(values)}
-        validateOnChange
-        //     enableReinitialize
-      >
-        {({ errors, touched }) => (
-          <FormStyled encType="multipart/form-data">
-            {page === 1 && (
-              <>
-                <InputFieldWrap>
-                  <Label>
-                    Pet's name
-                    <InputField
-                      type="text"
-                      placeholder="Type name pet"
-                      name="name"
-                      validate={validateName}
-                    />
-                    {touched.name && errors.name && (
-                      <Error>{errors.name}</Error>
-                    )}
-                  </Label>
-                  <Label htmlFor="birth">Date of birth</Label>
-                  <DateInput
-                    inputProps={{
-                      readOnly: true,
-                      id: 'birth',
-                      placeholder: 'Choose date',
-                      // open: 'false',
-                      // name: 'date',
-                    }}
-                    value={date}
-                    onChange={birthdateHandler}
-                    timeFormat={false}
-                    closeOnSelect={true}
-                    dateFormat="DD.MM.YYYY"
-                  />
-                  <Label>
-                    Breed
-                    <InputField
-                      type="text"
-                      placeholder="Type breed"
-                      name="breed"
-                    />
-                    {touched.breed && errors.breed && (
-                      <Error>{errors.breed}</Error>
-                    )}
-                  </Label>
-                </InputFieldWrap>
-              </>
-            )}
+						{page === 2 && (
+							<>
+								<InputFileWrap>
+									<Label>
+										Add photo and some comments
+										{!preview && (
+											<span>
+												<BsPlusLg />
+											</span>
+										)}
+										{preview && <img src={preview} alt="Previev" />}
+										<InputFile
+											type="file"
+											accept="image/jpeg, image/png"
+											onChange={inputFileHandler}
+										/>
+									</Label>
+								</InputFileWrap>
 
-            {page === 2 && (
-              <>
-                <InputFileWrap>
-                  <Label>
-                    Add photo and some comments
-                    {!preview && (
-                      <span>
-                        <BsPlusLg />
-                      </span>
-                    )}
-                    {preview && <img src={preview} alt="Previev" />}
-                    <InputFile type="file" onChange={inputFileHandler} />
-                  </Label>
-                </InputFileWrap>
-
-                <CommentWrap>
-                  <Label>
-                    <div>
-                      Comments <span>*</span>
-                    </div>
-                    <InputField placeholder="Type comment" name="comments" />
-                    {touched.comments && errors.comments && (
-                      <Error>{errors.comments}</Error>
-                    )}
-                  </Label>
-                </CommentWrap>
-              </>
-            )}
-            <BtnWrapper>
-              {page === 1 ? (
-                name.length >= 2 ? (
-                  <NextBtn onClick={nextPage} />
-                ) : (
-                  <NextBtn onClick={nextPage} disabled={true} />
-                )
-              ) : (
-                <SubmitBtn type="submit">Done</SubmitBtn>
-              )}
-              {page === 1 ? (
-                <CancelBtn onClick={onClose} />
-              ) : (
-                <CancelBtn onClick={prevPage} text="Back" />
-              )}
-            </BtnWrapper>
-          </FormStyled>
-        )}
-      </Formik>
-      {/* </ModalWindow> */}
-      {/* )} */}
-    </>
-  );
-  {
-    /* </ModalWindow> */
-  }
+								<CommentWrap>
+									<Label>
+										<div>Comments</div>
+										<Textarea placeholder="Type comment" name="comments" />
+										{touched.comments && errors.comments && (
+											<Error>{errors.comments}</Error>
+										)}
+									</Label>
+								</CommentWrap>
+							</>
+						)}
+						<BtnWrapper>
+							{page === 1 ? (
+								(name.length >= 2) & (breed.length >= 2) ? (
+									<NextBtn onClick={nextPage} />
+								) : (
+									<NextBtn onClick={nextPage} disabled={true} />
+								)
+							) : (
+								<SubmitBtn type="submit">Done</SubmitBtn>
+							)}
+							{page === 1 ? (
+								<CancelBtn onClick={onClose} />
+							) : (
+								<CancelBtn onClick={prevPage} text="Back" />
+							)}
+						</BtnWrapper>
+					</FormStyled>
+				)}
+			</Formik>
+		</>
+	);
 };
