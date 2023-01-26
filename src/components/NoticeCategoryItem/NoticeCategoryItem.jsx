@@ -81,7 +81,8 @@ export const NoticeCategoryItem = ({ data }) => {
               </Li>
               <Li key={`${_id}+age`}>
                 <Lable>Age:</Lable>
-                <Text>{getAge(birthdate)}</Text>
+                <Text>{birthdate}</Text>
+                {/* <Text>{getAge(birthdate)}</Text> */}
               </Li>
             </Ul>
           </WrapInner>
