@@ -3,8 +3,9 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import { toastStyled } from '../../components/AuthForms/Forms.styled';
 
-const { REACT_APP_API_URL } = process.env;
-const BASE_URL = REACT_APP_API_URL;
+// const { REACT_APP_API_URL } = process.env;
+// const BASE_URL = REACT_APP_API_URL;
+const BASE_URL = "http://localhost:4000/api/v1"
 
 axios.defaults.baseURL = BASE_URL;
 
