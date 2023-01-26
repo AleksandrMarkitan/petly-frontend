@@ -46,5 +46,4 @@ export const Ul = styled.ul`
     margin-bottom: 0;
     margin-left: 80px;
   }
-
 `;
