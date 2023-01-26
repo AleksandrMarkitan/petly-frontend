@@ -6,10 +6,11 @@ import "react-datetime/css/react-datetime.css";
 export const Date = ({ inputProps, value, onChange, timeFormat, closeOnSelect, dateFormat }) => {
 
 	const onChangeHandler = e => {
-		onChange(e.format("DD.MM.YYYY"))
+		// const data = e.format("YYYY-MM-DD");
+		onChange(e._d)
 	}
 	const validDate = current => {
-		return current.isBefore(moment()) && current.isAfter('1999-12-31', 'day');
+		return current.isBefore(moment()) && current.isAfter('1970-01-01', 'day');
 	};
 
 	return <>
