@@ -98,17 +98,13 @@ export const PreTitle = styled.div`
     font-size: ${p => p.theme.fontSize.fs32};
   }
 `;
-export const Image = styled.img`
-  @media (min-width: 768px) {
-    width: 500px;
-  }
-`;
+export const Image = styled.img``;
 export const BoxItem = styled.div`
   display: flex;
   justify-content: center;
   gap: 25px;
-  margin-top: 25px;
 `;
 export const BoxImage = styled.div`
   display: flex;
+  justify-content: center;
 `;

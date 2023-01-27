@@ -38,7 +38,14 @@ export const Logout = () => {
         <ModalWindow onClose={closeModal}>
           <BoxLogOut>
             <PreTitle>
-              Are you sure you want to log out of your account?
+              <p>Are you sure you want to log out of your account?</p>
+              <BoxImage>
+                <Image
+                  src={modalLogoutImage}
+                  alt="modalLogoutImage"
+                  width={300}
+                />
+              </BoxImage>
               <BoxItem>
                 <Button type="button" onClick={closeModal}>
                   Cancel
@@ -49,13 +56,6 @@ export const Logout = () => {
                 </Button>
               </BoxItem>
             </PreTitle>
-            <BoxImage>
-              <Image
-                src={modalLogoutImage}
-                alt="modalLogoutImage"
-                width={300}
-              />
-            </BoxImage>
           </BoxLogOut>
         </ModalWindow>
       )}
