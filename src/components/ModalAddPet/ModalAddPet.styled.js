@@ -2,6 +2,11 @@ import styled from 'styled-components';
 import Datetime from 'react-datetime';
 import 'react-datetime/css/react-datetime.css';
 import { Form, Field } from 'formik';
+import { CommentField } from '../ModalAddNotice/CommentField/CommentField';
+
+export const CommentFieldAddPet = styled(CommentField)`
+  color: red;
+`;
 
 export const Calendar = styled(Datetime)`
   position: relative;
@@ -15,7 +20,7 @@ export const Calendar = styled(Datetime)`
     font-weight: 400;
     font-size: 14px;
     line-height: calc(19 / 14);
-    color: rgba(27, 27, 27, 0.6);
+    //color: rgba(27, 27, 27, 0.6);
     background-color: #fdf7f2;
     border: 1px solid rgba(245, 146, 86, 0.5);
     border-radius: 40px;
@@ -86,7 +91,7 @@ export const InputField = styled(Field)`
   font-weight: 400;
   font-size: 14px;
   line-height: calc(19 / 14);
-  color: rgba(27, 27, 27, 0.6);
+  // color: rgba(27, 27, 27, 0.6);
   background-color: #fdf7f2;
   border: 1px solid rgba(245, 146, 86, 0.5);
   border-radius: 40px;
@@ -209,10 +214,15 @@ export const FieldsWrapper = styled.div`
 //----------------------------------------------------------------
 export const Error = styled.div`
   position: absolute;
-  left: 0;
+  left: 14px;
   bottom: -20%;
   color: red;
-  font-size: 12px;
+  font-size: 10px;
+  @media (min-width: 768px) {
+    left: 16px;
+    font-size: 12px;
+    //font-size: ${p => p.theme.fontSize.fs10};
+  }
 `;
 //-----------
 export const SubmitBtn = styled.button`
