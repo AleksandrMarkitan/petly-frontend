@@ -94,7 +94,9 @@ export const NoticeCategoryItem = ({ data }) => {
       </Item>
       {isModalOpen &&
         <ModalWindow onClose={closeModal}>
-          <ModalNotice data={data} />
+          <ModalNotice
+            data={data}
+            onChangeFavorite={onChangeFavorite} />
         </ModalWindow>}
     </>
   );

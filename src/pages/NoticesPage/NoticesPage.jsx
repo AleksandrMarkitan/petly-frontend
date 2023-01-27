@@ -24,7 +24,6 @@ import { NoticesSearch } from "../../components/NoticesSearch/NoticesSearch";
 import { Notification } from "../../components/Notification/Notification";
 import { Loader } from "../../components/Loader/Loader";
 import { NOT_FOUND } from "../../helpers/constants";
-// import { help } from "../../helpers/dataFormat";
 
 const NoticesPage = () => {
 	const { route } = useParams();
@@ -80,7 +79,6 @@ const NoticesPage = () => {
 				<NoticesSearch onSearch={onSearch} />
 				<>
 					<MenuWrap>
-						{/* <AddNoticeButton onClick={help} /> */}
 						<NoticesCategoriesNav />
 						<AddNoticeButton onClick={closeModal} />
 					</MenuWrap>
