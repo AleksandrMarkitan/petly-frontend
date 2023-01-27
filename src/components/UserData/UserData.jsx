@@ -11,7 +11,7 @@ import {
   Img,
   ImageBox,
   EditButton,
-  //  UserCalendar,
+  UserCalendar,
 } from './UserData.styled';
 
 import { Logout } from '../Logout/Logout';
@@ -24,7 +24,8 @@ export const UserData = () => {
   const dispatch = useDispatch();
   const { name, email, birthday, phone, city, avatarURL } = user;
   const [editButtonActive, setEditButtonActive] = useState(true);
-  const [changeBirth, setChangeBirth] = useState(birthday);
+  // const [changeBirth, setChangeBirth] = useState(birthday);
+  // const [birthdate, setBirthdate] = useState('');
 
   const filePicker = useRef(null);
 
@@ -44,6 +45,7 @@ export const UserData = () => {
     filePicker.current.click();
   };
 
+  console.log(birthday);
   return (
     <UserBlock>
       <ImageContainer>
@@ -87,36 +89,15 @@ export const UserData = () => {
           />
         )}
         {birthday && (
-          // <UserDataItem
-          //   valueLabel="Birthday:"
-          //   nameInput="birthday"
-          //   userDataValue={birthday}
-          //   setEditButtonActive={setEditButtonActive}
-          //   editButtonActive={editButtonActive}
-          // />
           <UserDataItem
             valueLabel="Birthday:"
             nameInput="birthday"
-            userDataValue={changeBirth}
+            userDataValue={birthday}
+            //birthdateHandler={birthdateHandler}
             setEditButtonActive={setEditButtonActive}
             editButtonActive={editButtonActive}
           />
         )}
-        {/* <UserCalendar
-          inputProps={{
-            readOnly: true,
-            id: 'birth',
-            placeholder: 'Choose date',
-          }}
-          value={changeBirth}
-          onChange={birthdateHandler}
-          timeFormat={false}
-          closeOnSelect={true}
-          dateFormat="DD.MM.YYYY"
-          //input={true}
-          //open={false}
-          // isValidDate={validDate}
-        /> */}
         {phone && (
           <UserDataItem
             valueLabel="Phone:"
