@@ -1,12 +1,12 @@
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import moment from 'moment';
-import { CancelBtn } from '../CommonButtons/CancelBtn/CancelBtn';
-import { NextBtn } from '../CommonButtons/NextBtn/NextBtn';
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import { addPet } from '../../redux/user/userOperations';
 import { BsPlusLg } from 'react-icons/bs';
+import { CancelBtn } from '../CommonButtons/CancelBtn/CancelBtn';
+import { NextBtn } from '../CommonButtons/NextBtn/NextBtn';
 import {
   InputFileWrap,
   InputFile,
