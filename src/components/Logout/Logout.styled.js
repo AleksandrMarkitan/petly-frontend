@@ -96,6 +96,7 @@ export const PreTitle = styled.div`
   @media (min-width: 768px) {
     margin: 0px;
     font-size: ${p => p.theme.fontSize.fs32};
+    width: 500px;
   }
 `;
 export const Image = styled.img``;
@@ -107,4 +108,11 @@ export const BoxItem = styled.div`
 export const BoxImage = styled.div`
   display: flex;
   justify-content: center;
+`;
+export const Title = styled.p`
+  display: flex;
+  justify-content: center;
+  @media (min-width: 768px) {
+    margin-top: 15px;
+  }
 `;
