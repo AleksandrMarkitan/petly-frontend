@@ -13,7 +13,8 @@ import { BoxPet } from './UserPage.styled';
 const UserPage = () => {
   const user = useSelector(selectUser);
   const pets = useSelector(selectUserPets);
-
+  console.log(user);
+  console.log(pets);
   return (
     <UserPageContainer>
       <BoxUser>
