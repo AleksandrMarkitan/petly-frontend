@@ -1,12 +1,12 @@
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import moment from 'moment';
-import { CancelBtn } from '../CommonButtons/CancelBtn/CancelBtn';
-import { NextBtn } from '../CommonButtons/NextBtn/NextBtn';
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import { addPet } from '../../redux/user/userOperations';
 import { BsPlusLg } from 'react-icons/bs';
+import { CancelBtn } from '../CommonButtons/CancelBtn/CancelBtn';
+import { NextBtn } from '../CommonButtons/NextBtn/NextBtn';
 import {
   InputFileWrap,
   InputFile,
@@ -23,6 +23,7 @@ import {
   InputFieldWrap,
   Calendar,
 } from './ModalAddPet.styled';
+import { CommentField } from '../ModalAddPet/CommentField/CommentField';
 
 export const ModalAddPet = ({ onClose }) => {
   const dispatch = useDispatch();
@@ -110,6 +111,7 @@ export const ModalAddPet = ({ onClose }) => {
     comments && formData.append('comments', comments);
 
     dispatch(addPet(formData));
+    onClose();
   };
 
   return (
@@ -150,8 +152,6 @@ export const ModalAddPet = ({ onClose }) => {
                     timeFormat={false}
                     closeOnSelect={true}
                     dateFormat="DD.MM.YYYY"
-                    //input={true}
-                    //open={false}
                     isValidDate={validDate}
                   />
                   <Label>
@@ -189,7 +189,7 @@ export const ModalAddPet = ({ onClose }) => {
                   </Label>
                 </InputFileWrap>
 
-                <CommentWrap>
+                {/* <CommentWrap>
                   <Label>
                     <div>Comments</div>
                     <Textarea placeholder="Type comment" name="comments" />
@@ -197,7 +197,12 @@ export const ModalAddPet = ({ onClose }) => {
                       <Error>{errors.comments}</Error>
                     )}
                   </Label>
-                </CommentWrap>
+                </CommentWrap> */}
+                <CommentField
+                  touched={touched}
+                  errors={errors}
+                  name="comments"
+                />
               </>
             )}
             <BtnWrapper>
