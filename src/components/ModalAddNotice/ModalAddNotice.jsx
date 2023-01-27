@@ -1,20 +1,23 @@
 import { Formik } from "formik";
 import * as Yup from 'yup';
-import moment from 'moment';
-import debounce from 'lodash.debounce';
 import "react-datetime/css/react-datetime.css";
+import debounce from 'lodash.debounce';
 import { useEffect, useState, useMemo } from "react";
-import { BsPlusLg } from "react-icons/bs";
 import { ModalWindow } from "../CommonComponents/ModalWindow/ModalWindow";
-import { ReactComponent as MaleIcon } from "../../icons/add_pet_modal/male.svg";
-import { ReactComponent as FemaleIcon } from "../../icons/add_pet_modal/female.svg";
-import { ReactComponent as RemoveIcon } from "../../icons/remove-search-query-icon.svg";
 import { NextBtn } from "../CommonButtons/NextBtn/NextBtn";
 import { getCities } from "../../serveсes/getCities";
 import { useDispatch } from "react-redux";
 import { addNotice } from "../../redux/notices/noticesOperations";
 import { CancelBtn } from "../CommonButtons/CancelBtn/CancelBtn";
-import { ClearBtn, Error, SubmitBtn, Title, Subtitle, FormStyled, RadioBtnWrap, LabelRadioBtn, InputRadio, InputFieldWrap, Label, InputField, BtnWrapper, SexRadioWrap, RadioSexLabel, LocationWrap, CitiesList, CitiesItem, InputFileWrap, InputFile, CommentWrap, Textarea, DateInput, PriceWrap } from "./ModalAddNotice.styled";
+import { Label, Error, SubmitBtn, Title, Subtitle, FormStyled, InputFieldWrap, InputField, BtnWrapper, PriceWrap } from "./ModalAddNotice.styled";
+
+import { CategoryRadioBtns } from "./CategoryRadioBtns/CategoryRadioBtns";
+import { Date } from "./Date/Date";
+import { SexRadioBtns } from "./SexRadioBtns/SexRadioBtns";
+import { Location } from "./Location/Location";
+import { CommentField } from "./CommentField/CommentField";
+import { FileInput } from "./FileInput/FileInput";
+import { TextInput } from "./TextInput/TextInput";
 
 export const ModalAddNotice = ({ onClose }) => {
 	const dispatch = useDispatch();
@@ -35,9 +38,21 @@ export const ModalAddNotice = ({ onClose }) => {
 	const [cities, setCities] = useState([]);
 	const [filteredCities, setFilteredCities] = useState([]);
 
-	const validDate = current => {
-		return current.isBefore(moment()) && current.isAfter('1999-12-31', 'day');
-	};
+	const radioBtnHandlder = (value, type) => {
+		switch (type) {
+			case "category":
+				setCategory(value);
+				break;
+			case "sex":
+				setSex(value);
+				break;
+			default: return;
+		}
+	}
+
+	const birthdateHandler = value => {
+		setBirthdate(value)
+	}
 
 	useEffect(() => {
 		async function fetch() {
@@ -77,6 +92,15 @@ export const ModalAddNotice = ({ onClose }) => {
 		() => debounce(cityHandler, 300)
 		, []);
 
+	const locationHandler = value => {
+		setLocation(value);
+		setCityQuery("");
+	}
+
+	const clearLocation = () => {
+		setLocation("")
+	}
+
 	const validateTitle = (value) => {
 		setTitle(value)
 	}
@@ -89,25 +113,6 @@ export const ModalAddNotice = ({ onClose }) => {
 		setBreed(value)
 	}
 
-	const radioBtnHandlder = e => {
-		switch (e.target.name) {
-			case "category":
-				setCategory(e.target.value);
-				break;
-			case "sex":
-				setSex(e.target.value);
-				break;
-			default: return;
-		}
-	}
-
-	const locationHandler = e => {
-		if (e.target.nodeName === "LI") {
-			setLocation(e.target.textContent);
-			setCityQuery("");
-		}
-	}
-
 	const nextPage = () => {
 		setPage(prevState => prevState + 1)
 	}
@@ -116,9 +121,7 @@ export const ModalAddNotice = ({ onClose }) => {
 		setPage(prevState => prevState - 1)
 	}
 
-	const inputFileHandler = e => {
-		const file = e.target.files[0];
-
+	const inputFileHandler = file => {
 		setImgURL(file);
 		const reader = new FileReader();
 
@@ -127,10 +130,6 @@ export const ModalAddNotice = ({ onClose }) => {
 		};
 
 		reader.readAsDataURL(file);
-	}
-
-	const birthdateHandler = e => {
-		setBirthdate(e.format("DD.MM.YYYY"))
 	}
 
 	const submitForm = values => {
@@ -160,7 +159,6 @@ export const ModalAddNotice = ({ onClose }) => {
 		breed: "",
 		comments: "",
 		price: "",
-		location: ""
 	}
 
 	const schema = Yup.object().shape({
@@ -179,11 +177,15 @@ export const ModalAddNotice = ({ onClose }) => {
 			.max(120, 'Too Long!')
 			.required('Required'),
 		price: Yup.number()
-			.min(1, "Price has to be more than 0")
+			.min(1, "Price has to be more than 0"),
 	})
 
-	const clearLocation = () => {
-		setLocation("")
+	const stateMachine = {
+		page_1: page === 1,
+		page_2: page === 2,
+		priceIsTurnedOn: category === "sell",
+		nextButtonIsAbled: (title.length >= 2 && title.length <= 48) && (name.length === 0 || (name.length >= 2 && name.length <= 24)) && (breed.length === 0 || (breed.length >= 2 && breed.length <= 16)),
+		submitButtonIsAbled: (cityQuery && location) || (!cityQuery && !location)
 	}
 
 	return <ModalWindow onClose={onClose} modalType={'addPet'}>
@@ -192,99 +194,58 @@ export const ModalAddNotice = ({ onClose }) => {
 		<Formik initialValues={initialValues} validationSchema={schema} onSubmit={values => submitForm(values)} validateOnChange>
 			{({ errors, touched }) => (
 				<FormStyled encType="multipart/form-data">
-					{page === 1 && <>
-						<RadioBtnWrap>
-							<LabelRadioBtn category={category} value={"lost-found"}>
-								<InputRadio type="radio" name="category" value="lost-found" onChange={radioBtnHandlder} />
-								lost-found
-							</LabelRadioBtn>
-							<LabelRadioBtn category={category} value={"in-good-hands"}>
-								<InputRadio type="radio" name="category" value="in-good-hands" onChange={radioBtnHandlder} />
-								in good hands
-							</LabelRadioBtn>
-							<LabelRadioBtn category={category} value={"sell"}>
-								<InputRadio type="radio" name="category" value="sell" onChange={radioBtnHandlder} />
-								sell
-							</LabelRadioBtn>
-						</RadioBtnWrap>
+					{stateMachine.page_1 && <>
+						<CategoryRadioBtns onChange={radioBtnHandlder} category={category} />
 						<InputFieldWrap>
 							<Label>
 								<div>Title of ad <span>*</span></div>
-								<InputField type="text" placeholder="Type title" name="title" validate={validateTitle} />
+								<TextInput name="title" validate={validateTitle} placeholder="Type title" />
 								{touched.title && errors.title && <Error>{errors.title}</Error>}
 							</Label>
 							<Label>
 								Pet's name
-								<InputField type="text" placeholder="Type name pet" name="name" validate={validateName} />
+								<TextInput name="name" validate={validateName} placeholder="Type name pet" />
 								{touched.name && errors.name && <Error>{errors.name}</Error>}
 							</Label>
-							<Label htmlFor="birth">
-								Date of birth
-							</Label>
-							<DateInput isValidDate={validDate} inputProps={{ readOnly: true, id: "birth", placeholder: "Choose date" }} value={birthdate} onChange={birthdateHandler} timeFormat={false} closeOnSelect={true} dateFormat="DD.MM.YYYY" />
+							<Date inputProps={{ readOnly: true, id: "birth", placeholder: "Choose date" }} value={birthdate}
+								onChange={birthdateHandler}
+								timeFormat={false}
+								closeOnSelect={true}
+								dateFormat="DD.MM.YYYY"
+							/>
 							<Label>
 								Breed
-								<InputField type="text" placeholder="Type breed" name="breed" validate={validateBreed} />
+								<TextInput name="breed" validate={validateBreed} placeholder="Type breed" />
 								{touched.breed && errors.breed && <Error>{errors.breed}</Error>}
 							</Label>
 						</InputFieldWrap> </>}
-					{page === 2 && <>
-						<Label>The sex</Label>
-						<SexRadioWrap>
-							<RadioSexLabel sex={sex} value={"male"}>
-								<InputRadio type="radio" name="sex" value="male" onChange={radioBtnHandlder} />
-								<MaleIcon />
-								Male
-							</RadioSexLabel>
-							<RadioSexLabel sex={sex} value={"female"}>
-								<InputRadio type="radio" name="sex" value="female" onChange={radioBtnHandlder} />
-								<FemaleIcon />
-								Female
-							</RadioSexLabel>
-						</SexRadioWrap>
-						<LocationWrap>
-							<Label>
-								Location
-								{location &&
-									<>
-										<InputField autoComplete="off" type="text" value={location} name="location" placeholder="Type city" />
-										<ClearBtn type="button" onClick={clearLocation}><RemoveIcon /></ClearBtn>
-									</>
-								}
-								{!location && <InputField islistopen={cityQuery} autoComplete="off" type="text" onChange={debouncedChangeHandler} name="city" placeholder="Type city" />}
-							</Label>
-							{cityQuery && filteredCities.length > 0 && <CitiesList onClick={locationHandler}>{filteredCities.map(({ _id, city, admin_name }) => {
-								return <CitiesItem key={_id}>{city}, {admin_name}</CitiesItem>
-							})}</CitiesList>}
-						</LocationWrap>
-						{category === "sell" && <PriceWrap>
+					{stateMachine.page_2 && <>
+						<SexRadioBtns sex={sex} onChange={radioBtnHandlder} />
+						<Location location={location} clearField={clearLocation}
+							cityQuery={cityQuery}
+							onChange={debouncedChangeHandler}
+							filteredCities={filteredCities}
+							onCityClick={locationHandler}
+						/>
+						{stateMachine.priceIsTurnedOn && <PriceWrap>
 							<Label>
 								<div>Price <span>*</span></div>
-								<InputField name="price" type="text" placeholder="Type the price" required />
+								<InputField name="price" type="number" placeholder="Type the price" required />
 								{touched.price && errors.price && <Error>{errors.price}</Error>}
 							</Label>
 						</PriceWrap>}
-						<InputFileWrap>
-							<Label>
-								Load the pet’s image
-								{!preview && <span><BsPlusLg /></span>}
-								{preview && <img src={preview} alt="Previev" />}
-								<InputFile type="file" accept="image/jpeg, image/png" onChange={inputFileHandler} multiple />
-							</Label>
-						</InputFileWrap>
-						<CommentWrap>
-							<Label>
-								<div>Comments <span>*</span></div>
-								<InputField placeholder="Type comment" name="comments" />
-								{touched.comments && errors.comments && <Error>{errors.comments}</Error>}
-							</Label>
-						</CommentWrap>
+						<FileInput preview={preview} onAddImg={inputFileHandler} />
+						<CommentField touched={touched} errors={errors} name="comments" />
 					</>}
 					<BtnWrapper>
 						{page === 1 ?
-							((title.length >= 2 && title.length <= 48) && (name.length === 0 || (name.length >= 2 && name.length <= 24)) && (breed.length === 0 || (breed.length >= 2 && breed.length <= 16)) ? <NextBtn onClick={nextPage} /> : <NextBtn onClick={nextPage} disabled={true} />)
+							(stateMachine.nextButtonIsAbled
+								? <NextBtn onClick={nextPage} /> : <NextBtn onClick={nextPage} disabled={true} />)
 							:
-							<SubmitBtn type="submit">Done</SubmitBtn>
+							(stateMachine.submitButtonIsAbled ? <SubmitBtn type="submit">Done</SubmitBtn>
+								:
+								<SubmitBtn disabled type="submit">Done</SubmitBtn>
+							)
 						}
 						{page === 1 ?
 							<CancelBtn onClick={onClose} />

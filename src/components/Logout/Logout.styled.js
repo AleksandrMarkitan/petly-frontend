@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { HiArrowRightOnRectangle } from "react-icons/hi2";
+import styled from 'styled-components';
+import { HiArrowRightOnRectangle } from 'react-icons/hi2';
 
 export const LogOut = styled.button`
   display: flex;
@@ -25,6 +25,10 @@ export const LogOut = styled.button`
   @media (min-width: 1279px) {
     font-size: 16px;
     margin-top: 27px;
+  }
+  :hover,
+  :focus {
+    transform: scale(1.1);
   }
 `;
 export const LogOutIcon = styled(HiArrowRightOnRectangle)`
