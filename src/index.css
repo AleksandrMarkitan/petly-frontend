@@ -74,8 +74,8 @@ textarea {
 	outline: none;
 	transition: border-color 300ms linear;
 	resize: none;
+}
 
-	:focus {
-		border-color: #F59256;
-	}
+textarea:focus {
+	border-color: #F59256;
 }
