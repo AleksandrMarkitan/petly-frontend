@@ -14,9 +14,14 @@ const AGES_IN_WORDS = {
   'more 5 years': "more than five years",
 };
 
+// ==========  AUTHORIZED  ============
+
+const MUST_AUTHORIZED = "You need to be authorized to use this functionality.";
+
 // ==========  ============  ============
 
 export {
   NOT_FOUND,
   AGES_IN_WORDS,
+  MUST_AUTHORIZED,
 };
