@@ -4,14 +4,12 @@ import {
   BoxTitleList,
   BoxValue,
   Btn,
-  BtnAdd,
   BtnIsAdded,
   Category,
   Comments,
   Heart,
   Img,
   ListOfValues,
-  TextAdded,
   ThumbImg,
   Title,
   TitleValue,
@@ -106,12 +104,15 @@ export const ModalNotice = ({
             </span>
           </Btn>
         ) : (
-          <BtnIsAdded type="button" onClick={onClickFavorite}>
-            Remove from
-            <span>
-              <Heart />
-            </span>
-          </BtnIsAdded>
+          <div>
+            <p>Added to "Favorite ads"</p>
+            <BtnIsAdded type="button" onClick={onClickFavorite}>
+              Remove from
+              <span>
+                <Heart />
+              </span>
+            </BtnIsAdded>
+          </div>
         )}
 
         <Btn type="button">Contact</Btn>

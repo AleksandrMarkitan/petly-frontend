@@ -1,13 +1,17 @@
-import { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { selectUser, selectFavoriteNotices } from "../../redux/auth/authSelectors";
-import { deleteNotice } from "../../redux/notices/noticesOperations";
-import { updateFavoriteNotice } from "../../redux/auth/authOperations";
-import { FavoriteBtn } from "../CommonButtons/FavoriteBtn/FavoriteBtn";
-import { LearnMoreBtn } from "../CommonButtons/LearnMoreBtn/LearnMoreBtn";
+import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  selectUser,
+  selectFavoriteNotices,
+  selectToken,
+} from '../../redux/auth/authSelectors';
+import { deleteNotice } from '../../redux/notices/noticesOperations';
+import { updateFavoriteNotice } from '../../redux/auth/authOperations';
+import { FavoriteBtn } from '../CommonButtons/FavoriteBtn/FavoriteBtn';
+import { LearnMoreBtn } from '../CommonButtons/LearnMoreBtn/LearnMoreBtn';
 import { DeletePetNoticesBtn } from '../CommonButtons/DeletePetNoticesBtn/DeletePetNoticesBtn';
-import { ModalWindow } from "../CommonComponents/ModalWindow/ModalWindow";
-import { ModalNotice } from "../ModalNotice/ModalNotice";
+import { ModalWindow } from '../CommonComponents/ModalWindow/ModalWindow';
+import { ModalNotice } from '../ModalNotice/ModalNotice';
 import {
   Item,
   Wrap,
@@ -21,7 +25,7 @@ import {
   Lable,
   Text,
   ThumbBtn,
-} from "./NoticeCategoryItem.styled";
+} from './NoticeCategoryItem.styled';
 import { getAge } from '../../helpers/dateFormat';
 
 export const NoticeCategoryItem = ({ data }) => {
@@ -40,13 +44,18 @@ export const NoticeCategoryItem = ({ data }) => {
   const dispatch = useDispatch();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isShownAlert, setIsShownAlert] = useState(false);
 
   const currentUser = useSelector(selectUser);
-
+  const token = useSelector(selectToken);
   const favorites = useSelector(selectFavoriteNotices);
+
   const isFavorite = favorites.includes(_id);
+
   const onChangeFavorite = () => {
-    dispatch(updateFavoriteNotice({ noticeId: _id }));
+    token
+      ? dispatch(updateFavoriteNotice({ noticeId: _id }))
+      : setIsShownAlert(!isShownAlert);
   };
 
   const deletePet = () => {

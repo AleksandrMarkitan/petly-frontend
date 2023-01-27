@@ -132,6 +132,28 @@ export const BoxBtns = styled.div`
   flex-direction: column;
   gap: 12px;
 
+  div {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    @media (min-width: 768px) {
+      flex-direction: row;
+    }
+  }
+
+  p {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: calc(19 / 14);
+    color: #f59256;
+
+    @media (min-width: 768px) {
+      font-size: 16px;
+      line-height: calc(22 / 16);
+    }
+  }
+
   @media (min-width: 768px) {
     flex-direction: row;
     justify-content: end;
