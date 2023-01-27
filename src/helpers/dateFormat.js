@@ -3,22 +3,28 @@ import {
   formatDistanceToNowStrict,
   formatDuration,
   parse,
-  isDate
+  isDate,
 } from 'date-fns';
 import { AGES_IN_WORDS } from './constants';
 
-const dateInFormat = (date, dateInFormat) => format(date, dateInFormat); 
+const dateInFormat = (date, dateInFormat) => format(date, dateInFormat);
 
 const getAge = birthdate => {
+
+  const date = new Date(birthdate);
+
   if (birthdate) {
-    const pData = parseInFormat(birthdate, 'dd.mm.yyyy', new Date());
+
+    if (isDate(date)) return ageInWords(formatDistanceToNowStrict(date, { unit: 'year' }));
+
+    const pData = parseInFormat(date, 'dd.mm.yyyy', new Date());
+
     if (isDate(pData)) {
-      const age = formatDistanceToNowStrict(pData, {
-        unit: 'year'
-      });
+      const age = formatDistanceToNowStrict(pData, { unit: 'year' });
       return ageInWords(age);
     }
   }
+
   return '00.00.0000';
 }
 
@@ -38,5 +44,5 @@ export {
   dateInFormat,
   getAge,
   formatDurationInWords,
-  parseInFormat
+  parseInFormat,
 };

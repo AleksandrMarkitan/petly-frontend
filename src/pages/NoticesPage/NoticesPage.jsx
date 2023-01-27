@@ -24,6 +24,7 @@ import { NoticesSearch } from "../../components/NoticesSearch/NoticesSearch";
 import { Notification } from "../../components/Notification/Notification";
 import { Loader } from "../../components/Loader/Loader";
 import { NOT_FOUND } from "../../helpers/constants";
+// import { help } from "../../helpers/dataFormat";
 
 const NoticesPage = () => {
 	const { route } = useParams();
@@ -77,18 +78,18 @@ const NoticesPage = () => {
 			<Container>
 				<SectionTitle text={"Find your favorite pet"} />
 				<NoticesSearch onSearch={onSearch} />
-				{isLoading ? (
-					<Loader />
-				) : (
-					<><MenuWrap>
+				<>
+					<MenuWrap>
+						{/* <AddNoticeButton onClick={help} /> */}
 						<NoticesCategoriesNav />
 						<AddNoticeButton onClick={closeModal} />
 					</MenuWrap>
-						{notices.length > 0 ?
-							<NoticesCategoriesList data={notices} /> :
-							<Notification message={NOT_FOUND} />}
-					</>)}
+					{notices.length > 0 ?
+						<NoticesCategoriesList data={notices} /> :
+						!isLoading && <Notification message={NOT_FOUND} />}
+				</>
 				{isModalOpen && <ModalAddNotice onClose={closeModal} />}
+				{isLoading && <Loader />}
 			</Container>
 		</Section>
 	);
