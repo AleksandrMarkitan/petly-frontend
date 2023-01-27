@@ -17,6 +17,7 @@ export const Button = styled.button`
     color: ${p => p.theme.colors.accent};
     transition: ${p => p.theme.transition.first};
     transform: scale(1.1);
+    transition: transform 250ms linear;
   }
 `;
 //padding: 8px 0;

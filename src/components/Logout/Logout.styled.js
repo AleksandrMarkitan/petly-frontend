@@ -11,6 +11,12 @@ export const LogOut = styled.button`
   font-weight: 500;
   padding: 0px;
   margin-top: 42px;
+  :hover,
+  :focus {
+    transform: scale(1.1);
+    transition: transform 250ms linear;
+  }
+
   @media (min-width: 320px) and (max-width: 767px) {
     margin-left: auto;
   }
@@ -25,10 +31,6 @@ export const LogOut = styled.button`
   @media (min-width: 1279px) {
     font-size: 16px;
     margin-top: 27px;
-  }
-  :hover,
-  :focus {
-    transform: scale(1.1);
   }
 `;
 export const LogOutIcon = styled(HiArrowRightOnRectangle)`

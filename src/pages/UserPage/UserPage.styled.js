@@ -18,6 +18,12 @@ export const BtnBox = styled.div`
 
 export const BoxPet = styled.section`
   width: 100%;
+  @media (min-width: 768px) {
+    margin-left: 32px; //add
+  }
+  @media (min-width: 1280px) {
+    margin-left: 0px; //add
+  }
 `;
 
 export const BoxTitlePet = styled.div`
