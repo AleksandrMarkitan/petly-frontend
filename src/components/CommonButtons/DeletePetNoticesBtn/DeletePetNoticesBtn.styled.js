@@ -7,19 +7,23 @@ export const Button = styled.button`
   justify-content: center;
   width: 248px;
 	padding: 8px 0;
-	font-size: 16px;
+	font-size: ${p => p.theme.fontSize.fs16};
 	line-height: calc(22 / 16);
 	letter-spacing: 0.04em;
 	background-color: #FFFFFF;
-	border: 2px solid #F59256;
-	border-radius: 40px;
-	color: #F59256;
-	transition: color 250ms cubic-bezier(0.57, 0.21, 0.69, 1.25), background-color 250ms cubic-bezier(0.57, 0.21, 0.69, 1.25);
+	border: 2px solid ${p => p.theme.colors.accent};
+	border-radius: ${p => p.theme.borderRadius.br40};
+	color: ${p => p.theme.colors.accent};
+	transition: color fill ${p => p.theme.transition.first}, background-color fill ${p => p.theme.transition.first};
 
 	:hover, 
-	:focus{
+	:focus {
 		color: #FFFFFF;
-		background-color: #F59256;
+		background-color: ${p => p.theme.colors.accent};
+	}
+
+	&:hover svg {
+    fill: #FFFFFF;
 	}
 `;
 
@@ -27,11 +31,6 @@ export const DeleteIcon = styled(HiTrash)`
 	margin-left: 13px;
   width: 20px;
   height: 20px;
-	fill: #f59256;
-	transition: fill 250ms cubic-bezier(0.57, 0.21, 0.69, 1.25); 
-	  
-	:hover,
-  :focus {
-		fill: #FFFFFF;
-  }
+	fill: ${p => p.theme.colors.accent};
+	transition: fill ${p => p.theme.transition.first};
 `;

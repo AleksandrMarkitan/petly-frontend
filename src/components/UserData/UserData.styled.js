@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { HiCamera } from 'react-icons/hi2';
-//import { Calendar } from '../ModalAddPet/ModalAddPet.styled';
 import Datetime from 'react-datetime';
 import 'react-datetime/css/react-datetime.css';
 
@@ -47,6 +46,7 @@ export const EditButton = styled.button`
   :hover,
   :focus {
     transform: scale(1.1);
+    transition: transform 250ms linear;
   }
 `;
 export const ImageContainer = styled.div`
@@ -73,17 +73,19 @@ export const ImageBox = styled.div`
 `;
 
 export const UserPageContainer = styled.div`
+  margin-right: auto; //add
+  margin-left: auto; //add
   padding: 61px 20px 20px 20px;
   @media (min-width: 320px) {
     width: 320px;
   }
   @media (min-width: 768px) {
     width: 768px;
-    padding: 88px 32px 30px 32px;
+    padding: 88px 32px 30px 0px;
   }
   @media (min-width: 1280px) {
     display: flex;
-    padding: 58px 32px 40px 32px;
+    padding: 58px 32px 40px 0px; //fix
     width: 1280px;
   }
 `;
@@ -106,9 +108,10 @@ export const BoxTitleUser = styled.div`
   align-items: center;
   justify-content: space-between;
   margin-bottom: 18px;
-  margin-left: 32px;
+
   @media (min-width: 768px) {
     margin-bottom: 40px;
+    margin-left: 32px;
   }
   @media (min-width: 1280px) {
     margin-left: 16px;
@@ -133,28 +136,9 @@ export const UserCalendar = styled(Datetime)`
   position: relative;
   font-size: 16px;
   line-height: calc(22 / 16);
-  max-width: 100%;
+  // max-width: 100%;
 
   input {
-    /* width: 100%;
-    padding: 12px 20px 12px 14px;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: calc(19 / 14);
-    color: rgba(27, 27, 27, 0.6);
-    background-color: #fdf7f2;
-    border: 1px solid rgba(245, 146, 86, 0.5);
-    border-radius: 40px;
-    outline: none;
-    transition: border-color 300ms linear;
-
-
-    
-
-    :focus {
-      border-color: #f59256;
-    } */
-
     padding: 4px 18px;
     width: 159px;
     height: 24px;
@@ -169,25 +153,9 @@ export const UserCalendar = styled(Datetime)`
     border-radius: ${p => p.theme.borderRadius.br40};
     font-size: ${p => p.theme.fontSize.fs12};
     font-weight: ${p => p.theme.fontWeight.fw400};
-    :focus {
-      outline-color: ${p => p.theme.colors.inputOutline};
-    }
-  }
-  /* input {
-    padding: 4px 18px;
-    width: 159px;
-    height: 24px;
-    margin-right: 9px;
-    background-color: ${p =>
-    p.disabled
-      ? p.theme.colors.secondaryBackground
-      : p.theme.colors.mainBackground};
-    border: ${p => (p.disabled ? 'none' : p.theme.border.inputOutline)};
-    border-color: ${p => p.theme.colors.inputOutline};
-    color: ${p => p.theme.colors.mainText};
-    border-radius: ${p => p.theme.borderRadius.br40};
-    font-size: ${p => p.theme.fontSize.fs12};
-    font-weight: ${p => p.theme.fontWeight.fw400};
+    /* ::placeholder {
+      color: black;
+    } */
     :focus {
       outline-color: ${p => p.theme.colors.inputOutline};
     }
@@ -198,5 +166,5 @@ export const UserCalendar = styled(Datetime)`
       margin-right: 24px;
       font-size: ${p => p.theme.fontSize.fs18};
     }
-  } */
+  }
 `;
