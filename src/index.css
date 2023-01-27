@@ -78,10 +78,6 @@ textarea {
 
 textarea:focus {
 	border-color: #F59256;
-
-	:focus {
-		border-color: #F59256;
-	}
 }
 
 ::-webkit-scrollbar {
