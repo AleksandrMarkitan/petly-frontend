@@ -7,27 +7,27 @@ import { AddTitle, BtnBox, BoxTitlePet } from './PetsData.styled';
 import { TitleUser } from '../UserData/UserData.styled';
 
 export const PetsData = ({ pets }) => {
-	const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-	const closeModal = () => {
-		setIsModalOpen(!isModalOpen);
-	};
+  const closeModal = () => {
+    setIsModalOpen(!isModalOpen);
+  };
 
-	return (
-		<>
-			<BoxTitlePet>
-				<TitleUser>My pets:</TitleUser>{' '}
-				<BtnBox>
-					<AddTitle>Add pet</AddTitle>
-					<AddBtn closeModal={closeModal} />
-				</BtnBox>
-			</BoxTitlePet>
-			{isModalOpen && (
-				<ModalWindow onClose={closeModal} modalType={'addPet'}>
-					<ModalAddPet onClose={closeModal} />
-				</ModalWindow>
-			)}
-			{pets && <PetsList pets={pets} />}
-		</>
-	);
+  return (
+    <>
+      <BoxTitlePet>
+        <TitleUser>My pets:</TitleUser>
+        <BtnBox>
+          <AddTitle>Add pet</AddTitle>
+          <AddBtn closeModal={closeModal} />
+        </BtnBox>
+      </BoxTitlePet>
+      {isModalOpen && (
+        <ModalWindow onClose={closeModal} modalType={'addPet'}>
+          <ModalAddPet onClose={closeModal} />
+        </ModalWindow>
+      )}
+      {pets && <PetsList pets={pets} />}
+    </>
+  );
 };
