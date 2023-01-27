@@ -1,7 +1,11 @@
+import React from 'react';
 import { FormikWizard } from 'formik-wizard-form';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import * as yup from 'yup';
+// import Select from 'react-select';
+// import AsyncSelect from 'react-select/async';
+
 import { login, register } from '../../../redux/auth/authOperations';
 import { BackBtn, Button } from '../../CommonButtons/LoginBtn/LoginBtn.styled';
 import { Container } from '../../CommonComponents/Container/Container';
@@ -14,6 +18,14 @@ import {
 } from '../Forms.styled';
 import { StepOne } from './StepOne/StepOne';
 import { StepTwo } from './StepTwo/StepTwo';
+import { useState } from 'react';
+// import cities from '../../../data/cities.json';
+
+// const testCity = cities.map((item, idx) => ({
+//   value: idx,
+//   label: `${item.city}, ${item.admin_name}`,
+// }));
+// import { getCities } from '../../../serveсes/getCities';
 
 export const passwordRegexp = /^[A-Za-z0-9!?#$%^&_\-*]{7,32}$/;
 const nameRegexp = /^[a-zA-Z]{2,20}$/;
@@ -27,6 +39,8 @@ const reg = /^([A-Za-z-\s]{2,}),\s([A-Za-z-\s]{2,})$/;
 export const RegisterForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const [citiesTest, setCities] = useState('');
 
   const loginUser = values => {
     dispatch(login(values))
@@ -55,21 +69,21 @@ export const RegisterForm = () => {
       .string()
       .min(10, 'Password must consist of at least 10 symbols')
       .max(63)
-      .matches(emailRegexp, 'Please, enter a valid e-mail')
-      .required('E-mail is required'),
+      .matches(emailRegexp, 'Please, enter a valid e-mail'),
+    // .required('E-mail is required'),
     password: yup
       .string()
       .min(7, 'Password must consist of at least 7 symbols')
       .max(32, 'Password must contain no more than 32 symbols')
-      .matches(passwordRegexp, 'Please, enter a valid password')
-      .required('Password is required'),
+      .matches(passwordRegexp, 'Please, enter a valid password'),
+    // .required('Password is required'),
     confirmPassword: yup
       .string('Please, confirm your password')
       .oneOf(
         [yup.ref('password')],
         'This password doesn`t match the previous one'
-      )
-      .required('Password is required'),
+      ),
+    // .required('Password is required'),
   });
 
   const schemaStepTwo = yup.object({
@@ -81,11 +95,11 @@ export const RegisterForm = () => {
       .required('Name is required'),
     city: yup
       .string()
-      .max(50, 'Too long')
-      .matches(
-        reg,
-        'Please, enter a valid city. For example, Ivano-Frankivsk, Ivano-Frankivsk Oblast'
-      )
+      // .max(50, 'Too long')
+      // .matches(
+      //   reg,
+      //   'Please, enter a valid city. For example, Ivano-Frankivsk, Ivano-Frankivsk Oblast'
+      // )
       .required('City is required'),
     phone: yup
       .string()
@@ -100,6 +114,7 @@ export const RegisterForm = () => {
     { name, email, password, city, phone },
     { resetForm }
   ) => {
+    console.log('finished', name, city);
     const values = { email, password };
     dispatch(register({ name, email, password, city, phone })).then(resp => {
       if (resp.meta.requestStatus === 'fulfilled') {
@@ -110,45 +125,60 @@ export const RegisterForm = () => {
     resetForm();
   };
 
+  // const filterCities = inputValue => {
+  //   return testCity
+  //     .filter(i => i.label.toLowerCase().includes(inputValue.toLowerCase()))
+  //     .slice(0, 30);
+  // };
+
+  // const loadOptions = (inputValue, callback) => {
+  //   setTimeout(() => {
+  //     callback(filterCities(inputValue));
+  //   }, 500);
+  // };
+
   return (
-    <FormikWizard
-      initialValues={initialValues}
-      onSubmit={handleSubmit}
-      validateOnNext
-      activeStepIndex={0}
-      steps={[
-        {
-          component: StepOne,
-          validationSchema: schemaStepOne,
-        },
-        {
-          component: StepTwo,
-          validationSchema: schemaStepTwo,
-        },
-      ]}
-    >
-      {({ renderComponent, handlePrev, handleNext, isLastStep }) => (
-        <Container>
-          <Wrapper>
-            <TitleAuth>Registration</TitleAuth>
-            <FormCustom>
-              {renderComponent()}
-              <Button onClick={handleNext}>
-                {isLastStep ? 'Register' : 'Next'}
-              </Button>
-              {isLastStep && (
-                <BackBtn type="button" onClick={handlePrev}>
-                  Back
-                </BackBtn>
-              )}
-            </FormCustom>
-            <Paragraph>
-              <span>Already have an account? </span>
-              <FormLink to="/login">Login</FormLink>
-            </Paragraph>
-          </Wrapper>
-        </Container>
-      )}
-    </FormikWizard>
+    <>
+      <FormikWizard
+        initialValues={initialValues}
+        onSubmit={handleSubmit}
+        validateOnNext
+        activeStepIndex={0}
+        steps={[
+          {
+            component: StepOne,
+            validationSchema: schemaStepOne,
+          },
+          {
+            component: StepTwo,
+            validationSchema: schemaStepTwo,
+          },
+        ]}
+      >
+        {({ renderComponent, handlePrev, handleNext, isLastStep }) => (
+          <Container>
+            <Wrapper>
+              <TitleAuth>Registration</TitleAuth>
+              <FormCustom>
+                {renderComponent()}
+
+                <Button onClick={handleNext}>
+                  {isLastStep ? 'Register' : 'Next'}
+                </Button>
+                {isLastStep && (
+                  <BackBtn type="button" onClick={handlePrev}>
+                    Back
+                  </BackBtn>
+                )}
+              </FormCustom>
+              <Paragraph>
+                <span>Already have an account? </span>
+                <FormLink to="/login">Login</FormLink>
+              </Paragraph>
+            </Wrapper>
+          </Container>
+        )}
+      </FormikWizard>
+    </>
   );
 };
