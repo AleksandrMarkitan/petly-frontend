@@ -2,7 +2,7 @@ const theme = {
   colors: {
     accent: '#F59256',
     mainBackground: '#FDF7F2',
-    secondaryBackground: '#fff',
+    secondaryBackground: '#ffffff',
     mainText: '#111111',
     searchText: '#535353',
     navText: '#181C27',
@@ -35,12 +35,14 @@ const theme = {
     fs20: '20px',
     fs24: '24px',
     fs28: '28px',
+    fs32: '32px',
     fs48: '48px',
     fs68: '68px',
   },
   fontWeight: {
     fw400: '400',
     fw500: '500',
+    fw600: '600',
     fw700: '700',
   },
 

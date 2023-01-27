@@ -8,7 +8,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import { ThemeProvider } from 'styled-components';
-import theme from './components/utils/theme';
+import theme from './utils/theme';
 
 import { App } from './components/App';
 import './index.css';

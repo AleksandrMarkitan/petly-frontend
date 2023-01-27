@@ -1,7 +1,5 @@
 import styled from "styled-components";
-import { Form, Field } from 'formik';
-
-// Common
+import { Form } from 'formik';
 
 export const Label = styled.label`
 	position: relative;
@@ -30,7 +28,6 @@ export const Error = styled.div`
 	color: red;
 	font-size: 12px;
 `
-// common
 
 export const Title = styled.h3`
 	font-size: 24px;
@@ -77,37 +74,6 @@ export const InputFieldWrap = styled.div`
 	}
 `
 
-export const InputField = styled(Field)`
-	padding: 12px 20px 12px 14px;
-	font-weight: 400;
-	font-size: 14px;
-	line-height: calc(19 / 14);
-	color: rgba(27, 27, 27, 0.6);
-	background-color: #FDF7F2;
-	border: 1px solid rgba(245, 146, 86, 0.5);
-	outline: none;
-	transition: border-color 300ms linear;
-	appearance: textfield;
-
-	border-radius: ${p => {
-		if (p.islistopen) {
-			return '20px 20px 0px 0px';
-		}
-		return '40px';
-
-	}};;
-  border-bottom: ${p => {
-		if (p.islistopen) {
-			return 'none';
-		}
-		return '1px solid rgba(245, 146, 86, 0.5)';
-	}};;
-
-	:focus{
-		border-color: #F59256;
-	}
-`
-
 export const BtnWrapper = styled.div`
 	margin-top: 40px;
 	display: flex;
@@ -122,32 +88,3 @@ export const BtnWrapper = styled.div`
 	}
 `
 
-export const PriceWrap = styled.div`
-	margin-top: 16px;
-
-	@media (min-width: 768px) {
-		margin-top: 28px;
-	}
-`
-
-export const SubmitBtn = styled.button`
-	padding: 8px 0;
-	width: 100%;
-	font-size: 16px;
-	line-height: calc(22 / 16);
-	letter-spacing: 0.04em;
-	color: #FFFFFF;
-	background-color: #F59256;
-	border: 2px solid #F59256;
-	border-radius: 40px;
-	transition: color 300ms linear, background-color 300ms linear;
-
-	:hover, :focus{
-		color: #F59256;
-		background-color: #fff;
-	}
-
-	@media (min-width: 768px) {
-		width: 180px;
-	}
-`

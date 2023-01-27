@@ -6,7 +6,6 @@ import "react-datetime/css/react-datetime.css";
 export const Date = ({ inputProps, value, onChange, timeFormat, closeOnSelect, dateFormat }) => {
 
 	const onChangeHandler = e => {
-		// const data = e.format("YYYY-MM-DD");
 		onChange(e._d)
 	}
 	const validDate = current => {

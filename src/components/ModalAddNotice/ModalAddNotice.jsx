@@ -1,16 +1,17 @@
+// Libraries
 import { Formik } from "formik";
 import * as Yup from 'yup';
 import "react-datetime/css/react-datetime.css";
 import debounce from 'lodash.debounce';
 import { useEffect, useState, useMemo } from "react";
+import { useDispatch } from "react-redux";
+
+// Common components
 import { ModalWindow } from "../CommonComponents/ModalWindow/ModalWindow";
 import { NextBtn } from "../CommonButtons/NextBtn/NextBtn";
-import { getCities } from "../../serveсes/getCities";
-import { useDispatch } from "react-redux";
-import { addNotice } from "../../redux/notices/noticesOperations";
 import { CancelBtn } from "../CommonButtons/CancelBtn/CancelBtn";
-import { Label, Error, SubmitBtn, Title, Subtitle, FormStyled, InputFieldWrap, InputField, BtnWrapper, PriceWrap } from "./ModalAddNotice.styled";
 
+// The modal`s components
 import { CategoryRadioBtns } from "./CategoryRadioBtns/CategoryRadioBtns";
 import { Date } from "./Date/Date";
 import { SexRadioBtns } from "./SexRadioBtns/SexRadioBtns";
@@ -18,6 +19,15 @@ import { Location } from "./Location/Location";
 import { CommentField } from "./CommentField/CommentField";
 import { FileInput } from "./FileInput/FileInput";
 import { TextInput } from "./TextInput/TextInput";
+import { PriceField } from "./PriceField/PriceField";
+
+// Functions
+import { addNotice } from "../../redux/notices/noticesOperations";
+import { getCities } from "../../serveсes/getCities";
+
+// Styles
+import { Label, Error, Title, Subtitle, FormStyled, InputFieldWrap, BtnWrapper } from "./ModalAddNotice.styled";
+
 
 export const ModalAddNotice = ({ onClose }) => {
 	const dispatch = useDispatch();
@@ -27,6 +37,7 @@ export const ModalAddNotice = ({ onClose }) => {
 	const [sex, setSex] = useState("");
 	const [location, setLocation] = useState('');
 	const [imgURL, setImgURL] = useState("");
+	const [comments, setComments] = useState('');
 
 	const [page, setPage] = useState(1);
 	const [title, setTitle] = useState("");
@@ -37,6 +48,11 @@ export const ModalAddNotice = ({ onClose }) => {
 	const [cityQuery, setCityQuery] = useState("");
 	const [cities, setCities] = useState([]);
 	const [filteredCities, setFilteredCities] = useState([]);
+	const [showCities, setShowCities] = useState(false);
+
+	const showListHandler = value => {
+		setShowCities(value)
+	}
 
 	const radioBtnHandlder = (value, type) => {
 		switch (type) {
@@ -113,6 +129,9 @@ export const ModalAddNotice = ({ onClose }) => {
 		setBreed(value)
 	}
 
+	const validateComents = (value) => {
+		setComments(value)
+	}
 	const nextPage = () => {
 		setPage(prevState => prevState + 1)
 	}
@@ -185,10 +204,10 @@ export const ModalAddNotice = ({ onClose }) => {
 		page_2: page === 2,
 		priceIsTurnedOn: category === "sell",
 		nextButtonIsAbled: (title.length >= 2 && title.length <= 48) && (name.length === 0 || (name.length >= 2 && name.length <= 24)) && (breed.length === 0 || (breed.length >= 2 && breed.length <= 16)),
-		submitButtonIsAbled: (cityQuery && location) || (!cityQuery && !location)
+		submitButtonIsAbled: (!cityQuery && location) || (!cityQuery && !location) && (comments.length >= 8 && comments.length <= 120),
 	}
 
-	return <ModalWindow onClose={onClose} modalType={'addPet'}>
+	return <ModalWindow onClose={onClose} modalType={'addPet'} closeInnerList={showListHandler}>
 		<Title>Add pet</Title>
 		<Subtitle>Fill the fields below, please.</Subtitle>
 		<Formik initialValues={initialValues} validationSchema={schema} onSubmit={values => submitForm(values)} validateOnChange>
@@ -226,28 +245,27 @@ export const ModalAddNotice = ({ onClose }) => {
 							onChange={debouncedChangeHandler}
 							filteredCities={filteredCities}
 							onCityClick={locationHandler}
+							onInputClick={showListHandler}
+							showCities={showCities}
 						/>
-						{stateMachine.priceIsTurnedOn && <PriceWrap>
-							<Label>
-								<div>Price <span>*</span></div>
-								<InputField name="price" type="number" placeholder="Type the price" required />
-								{touched.price && errors.price && <Error>{errors.price}</Error>}
-							</Label>
-						</PriceWrap>}
+						{stateMachine.priceIsTurnedOn &&
+							<PriceField name="price" placeholder="Type the price" required={true} min="1" touched={touched} errors={errors} />
+						}
 						<FileInput preview={preview} onAddImg={inputFileHandler} />
-						<CommentField touched={touched} errors={errors} name="comments" />
+						<CommentField touched={touched} errors={errors} name="comments" validate={validateComents} />
 					</>}
 					<BtnWrapper>
-						{page === 1 ?
+						{stateMachine.page_1 ?
 							(stateMachine.nextButtonIsAbled
 								? <NextBtn onClick={nextPage} /> : <NextBtn onClick={nextPage} disabled={true} />)
 							:
-							(stateMachine.submitButtonIsAbled ? <SubmitBtn type="submit">Done</SubmitBtn>
+							(stateMachine.submitButtonIsAbled ?
+								<NextBtn type="submit" text="Done" />
 								:
-								<SubmitBtn disabled type="submit">Done</SubmitBtn>
+								<NextBtn type="submit" text="Done" disabled={true} />
 							)
 						}
-						{page === 1 ?
+						{stateMachine.page_1 ?
 							<CancelBtn onClick={onClose} />
 							:
 							<CancelBtn onClick={prevPage} text="Back" />
