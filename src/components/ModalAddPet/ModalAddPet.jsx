@@ -111,6 +111,7 @@ export const ModalAddPet = ({ onClose }) => {
     comments && formData.append('comments', comments);
 
     dispatch(addPet(formData));
+    onClose();
   };
 
   return (
@@ -151,8 +152,6 @@ export const ModalAddPet = ({ onClose }) => {
                     timeFormat={false}
                     closeOnSelect={true}
                     dateFormat="DD.MM.YYYY"
-                    //input={true}
-                    //open={false}
                     isValidDate={validDate}
                   />
                   <Label>
