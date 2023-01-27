@@ -45,7 +45,7 @@ export const App = () => {
 		dispatch(fetchCurrentUser());
 	}, [dispatch]);
 
-	return isFetchingCurrentUser || isLoading ? (
+	return isFetchingCurrentUser ? (
 		<Loader />
 	) : (
 		<Routes>
