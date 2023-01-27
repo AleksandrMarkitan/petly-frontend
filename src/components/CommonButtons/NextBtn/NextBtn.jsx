@@ -2,8 +2,10 @@ import { Button } from "./NextBtn.styled";
 
 export const NextBtn = ({ onClick, type = "button", text = "Next", disabled = false }) => {
 
-	const clickHandler = e => {
-		e.preventDefault();
+	const clickHandler = () => {
+		if (!onClick) {
+			return
+		}
 		onClick();
 	}
 
