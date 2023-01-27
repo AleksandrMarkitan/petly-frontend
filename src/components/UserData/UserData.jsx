@@ -45,7 +45,7 @@ export const UserData = () => {
     filePicker.current.click();
   };
 
-  console.log(birthday);
+  //console.log(birthday);
   return (
     <UserBlock>
       <ImageContainer>

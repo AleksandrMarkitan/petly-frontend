@@ -95,13 +95,13 @@ export const UserDataItem = ({
   //'Phone number must be in the format +380xxxxxxxxxxx'
   const handleButtonUpdate = e => {
     e.preventDefault();
-    console.log(inputValue);
-    console.log(inputName);
-    console.log(birthdate);
+    // console.log(inputValue);
+    // console.log(inputName);
+    // console.log(birthdate);
 
     if (inputName === 'birthday') {
       setBirthActive(true);
-      console.log(999);
+      // console.log(999);
     }
     if (inputValue === userDataValue) {
       setInputActive(true);

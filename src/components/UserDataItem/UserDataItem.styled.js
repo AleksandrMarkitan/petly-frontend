@@ -17,13 +17,12 @@ export const Div = styled.div`
 `;
 export const Title = styled.label`
   width: 64px;
-  font-size: ${p => p.theme.fontSize.fs20};
+  font-size: ${p => p.theme.fontSize.fs12};
   font-weight: ${p => p.theme.fontWeight.fw500};
 
   @media (min-width: 768px) {
     width: 107px;
-    /* font-size: ${p => p.theme.fontSize.fs18}; */
-    font-size: ${p => p.theme.fontSize.fs28};
+    font-size: ${p => p.theme.fontSize.fs18};
   }
 `;
 export const Block = styled.div`
