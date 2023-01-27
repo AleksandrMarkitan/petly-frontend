@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { AiFillHeart } from 'react-icons/ai';
 
-import { Button } from '../CommonButtons/CategoryBtn/CategoryBtn.styled';
+import { Button } from '../../CommonButtons/CategoryBtn/CategoryBtn.styled';
 
 export const Box = styled.div`
   margin-bottom: 28px;
@@ -135,6 +135,7 @@ export const BoxBtns = styled.div`
   div {
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 12px;
 
     @media (min-width: 768px) {

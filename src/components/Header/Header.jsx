@@ -1,4 +1,3 @@
-import { Alert } from '../CommonComponents/Alert/Alert';
 import { Container } from '../CommonComponents/Container/Container';
 import { Navigation } from '../Navigation/Navigation';
 
@@ -9,7 +8,6 @@ export const Header = () => {
     <HeaderStyled>
       <Container>
         <Navigation />
-        <Alert />
       </Container>
     </HeaderStyled>
   );

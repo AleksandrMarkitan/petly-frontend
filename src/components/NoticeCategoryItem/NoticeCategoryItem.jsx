@@ -11,7 +11,7 @@ import { FavoriteBtn } from '../CommonButtons/FavoriteBtn/FavoriteBtn';
 import { LearnMoreBtn } from '../CommonButtons/LearnMoreBtn/LearnMoreBtn';
 import { DeletePetNoticesBtn } from '../CommonButtons/DeletePetNoticesBtn/DeletePetNoticesBtn';
 import { ModalWindow } from '../CommonComponents/ModalWindow/ModalWindow';
-import { ModalNotice } from '../ModalNotice/ModalNotice';
+import { ModalNotice } from './ModalNotice/ModalNotice';
 import {
   Item,
   Wrap,
@@ -27,6 +27,7 @@ import {
   ThumbBtn,
 } from './NoticeCategoryItem.styled';
 import { getAge } from '../../helpers/dateFormat';
+import { Alert } from './Alert/Alert';
 
 export const NoticeCategoryItem = ({ data }) => {
   const {
@@ -55,7 +56,7 @@ export const NoticeCategoryItem = ({ data }) => {
   const onChangeFavorite = () => {
     token
       ? dispatch(updateFavoriteNotice({ noticeId: _id }))
-      : setIsShownAlert(!isShownAlert);
+      : setIsShownAlert(true);
   };
 
   const deletePet = () => {
@@ -66,6 +67,10 @@ export const NoticeCategoryItem = ({ data }) => {
     setIsModalOpen(!isModalOpen);
   };
 
+  const closeAlert = () => {
+    setIsShownAlert(!isShownAlert);
+  };
+
   return (
     <>
       <Item>
@@ -73,6 +78,7 @@ export const NoticeCategoryItem = ({ data }) => {
           <CategoryLabel>{category}</CategoryLabel>
           <Img src={imgURL} alt={name} />
           <FavoriteBtn favorite={isFavorite} onClick={onChangeFavorite} />
+          {isShownAlert && <Alert onClose={closeAlert} />}
         </ImgWrap>
         <Wrap>
           <WrapInner>
