@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import moment from 'moment';
 import {
   Div,
   Title,
@@ -11,19 +12,25 @@ import {
 } from './UserDataItem.styled';
 import { useDispatch } from 'react-redux';
 import { updateUserData } from '../../redux/auth/authOperations';
+import { UserCalendar } from '../UserData/UserData.styled';
 
 export const UserDataItem = ({
   valueLabel,
   userDataValue,
   nameInput,
+  changeBirth,
   setEditButtonActive,
   editButtonActive,
+  birthday,
 }) => {
+  console.log(editButtonActive);
   const dispatch = useDispatch();
   const prevValue = userDataValue;
   const [inputValue, setInputValue] = useState(userDataValue);
   const [inputName, setInputName] = useState(nameInput);
   const [inputActive, setInputActive] = useState(false);
+  const [birthActive, setBirthActive] = useState(false);
+  const [birthdate, setBirthdate] = useState(birthday);
 
   const [inputDirty, setInputDirty] = useState(false);
   const [inputError, setInputError] = useState('');
@@ -35,6 +42,15 @@ export const UserDataItem = ({
   const phoneRegexp = /^\+\d{12}$/;
   const emailRegexp =
     /^[^-]{1}[A-Za-z0-9._-]{2,}@[^-]{1}[A-Za-z0-9.-]{2,}\.[A-Za-z]{2,4}$/;
+
+  //console.log(birthday);
+  const birthdateHandler = e => {
+    setBirthdate(e.format('DD.MM.YYYY'));
+  };
+  //----------- это временное решение
+  const validDate = current => {
+    return current.isBefore(moment()) && current.isAfter('1920-12-31', 'day');
+  };
 
   const blurHandler = () => {
     setInputDirty(true);
@@ -78,18 +94,29 @@ export const UserDataItem = ({
   };
   //'Name must be between 2 and 20 letters'
   //'Phone number must be in the format +380xxxxxxxxxxx'
-
   const handleButtonUpdate = e => {
     e.preventDefault();
+    // console.log(inputValue);
+    // console.log(inputName);
+    // console.log(birthdate);
 
+    if (inputName === 'birthday') {
+      setBirthActive(true);
+      // console.log(999);
+    }
     if (inputValue === userDataValue) {
       setInputActive(true);
       setEditButtonActive(false);
       return;
     }
   };
+  //console.log();
   const handleButtonSubmit = e => {
     e.preventDefault();
+    //console.log(Date.parse(birthdate));
+    // if (birthdate) {
+    //   dispatch(updateUserData({ birthday: birthdate }));
+    // }
     if (inputValue === prevValue) {
       setInputActive(false);
       setEditButtonActive(true);
@@ -98,6 +125,12 @@ export const UserDataItem = ({
     if (inputError) {
       return;
     }
+
+    if (birthdate) {
+      dispatch(updateUserData({ birthday: birthdate }));
+      return;
+    }
+
     switch (inputName) {
       case 'name':
         dispatch(updateUserData({ name: inputValue }));
@@ -105,9 +138,9 @@ export const UserDataItem = ({
       case 'email':
         dispatch(updateUserData({ email: inputValue }));
         break;
-      case 'birthday':
-        dispatch(updateUserData({ birthday: inputValue }));
-        break;
+      //   case 'birthday':
+      //     dispatch(updateUserData({ birthday: birthdate }));
+      //     break;
       case 'phone':
         dispatch(updateUserData({ phone: inputValue }));
         break;
@@ -118,26 +151,46 @@ export const UserDataItem = ({
         return;
     }
     setInputActive(false);
+    setEditButtonActive(true);
   };
-  console.log(editButtonActive);
+
   return (
     <Div>
       <Title>{valueLabel}</Title>
       <Block>
-        <Input
-          type="text"
-          name={nameInput}
-          value={inputValue}
-          onChange={handleChange}
-          readOnly={!inputActive ? true : false}
-          disabled={!inputActive}
-          onBlur={blurHandler}
-        />
+        {birthActive ? (
+          <UserCalendar
+            inputProps={{
+              readOnly: true,
+              id: 'birth',
+              //placeholder: `${inputValue}`,
+              name: 'birthday',
+            }}
+            value={`${birthdate ? birthdate : inputValue}`}
+            onChange={birthdateHandler}
+            timeFormat={false}
+            closeOnSelect={true}
+            dateFormat="DD.MM.YYYY"
+            // name="birthday"
+            isValidDate={validDate}
+          />
+        ) : (
+          <Input
+            type="text"
+            name={nameInput}
+            value={inputValue}
+            onChange={handleChange}
+            readOnly={!inputActive ? true : false}
+            disabled={!inputActive}
+            onBlur={blurHandler}
+          />
+        )}
         {inputDirty && inputError && <ErrorText>{inputError}</ErrorText>}
         {!inputActive && (
           <Button
             type="button"
             disabled={!editButtonActive}
+            //disabled={inputError}
             onClick={handleButtonUpdate}
           >
             <EditTextBtnIcon changecolor={editButtonActive.toString()} />

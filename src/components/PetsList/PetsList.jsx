@@ -7,9 +7,6 @@ export const PetsList = ({ pets }) => {
 
   const deletePetItem = id => {
     dispatch(deletePet(id));
-    // const onDelete = () => {
-    //   dispatch(logout());
-    // };
   };
 
   return (

@@ -1,5 +1,7 @@
-import axios from "axios";
-import { createAsyncThunk } from "@reduxjs/toolkit";
+import axios from 'axios';
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import { toast } from 'react-toastify';
+//import { toastStyled } from '../../components/AuthForms/Forms.styled';
 //axios.defaults.baseURL = "https://pets-support-backend.onrender.com/api/v1";
 
 // const { REACT_APP_API_URL } = process.env;
@@ -47,27 +49,27 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 // );
 
 export const addPet = createAsyncThunk(
-	"pets/addPet",
-	async (pet, { rejectWithValue }) => {
-		pet && console.log(123, pet);
-		console.log(pet);
-		try {
-			const { data } = await axios.post("/pets", pet);
-			return data;
-		} catch (error) {
-			return rejectWithValue(error.message);
-		}
-	}
+  'pets/addPet',
+  async (pet, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.post('/pets', pet);
+      return data;
+    } catch (error) {
+      toast.error(error.message);
+      return rejectWithValue(error.message);
+    }
+  }
 );
 
 export const deletePet = createAsyncThunk(
-	"pets/deletePet",
-	async (id, { rejectWithValue }) => {
-		try {
-			await axios.delete(`/pets/${id}`);
-			return id;
-		} catch (error) {
-			return rejectWithValue(error.message);
-		}
-	}
+  'pets/deletePet',
+  async (id, { rejectWithValue }) => {
+    try {
+      await axios.delete(`/pets/${id}`);
+      return id;
+    } catch (error) {
+      toast.error(error.message);
+      return rejectWithValue(error.message);
+    }
+  }
 );
