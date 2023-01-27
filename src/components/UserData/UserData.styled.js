@@ -46,6 +46,7 @@ export const EditButton = styled.button`
   :hover,
   :focus {
     transform: scale(1.1);
+    transition: transform 250ms linear;
   }
 `;
 export const ImageContainer = styled.div`

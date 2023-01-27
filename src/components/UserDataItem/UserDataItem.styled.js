@@ -78,6 +78,7 @@ export const Button = styled.button`
   :hover,
   :focus {
     transform: scale(1.1);
+    transition: transform 250ms linear;
   }
 `;
 export const EditTextBtnIcon = styled(HiPencil)`
