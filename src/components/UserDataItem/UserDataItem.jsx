@@ -23,6 +23,7 @@ export const UserDataItem = ({
   editButtonActive,
   birthday,
 }) => {
+  console.log(editButtonActive);
   const dispatch = useDispatch();
   const prevValue = userDataValue;
   const [inputValue, setInputValue] = useState(userDataValue);
@@ -113,15 +114,20 @@ export const UserDataItem = ({
   const handleButtonSubmit = e => {
     e.preventDefault();
     //console.log(Date.parse(birthdate));
-    if (birthdate) {
-      dispatch(updateUserData({ birthday: birthdate }));
-    }
+    // if (birthdate) {
+    //   dispatch(updateUserData({ birthday: birthdate }));
+    // }
     if (inputValue === prevValue) {
       setInputActive(false);
       setEditButtonActive(true);
       return;
     }
     if (inputError) {
+      return;
+    }
+
+    if (birthdate) {
+      dispatch(updateUserData({ birthday: birthdate }));
       return;
     }
 
@@ -145,6 +151,7 @@ export const UserDataItem = ({
         return;
     }
     setInputActive(false);
+    setEditButtonActive(true);
   };
 
   return (
@@ -183,6 +190,7 @@ export const UserDataItem = ({
           <Button
             type="button"
             disabled={!editButtonActive}
+            //disabled={inputError}
             onClick={handleButtonUpdate}
           >
             <EditTextBtnIcon changecolor={editButtonActive.toString()} />
