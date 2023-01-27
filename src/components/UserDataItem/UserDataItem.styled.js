@@ -6,6 +6,7 @@ import { Calendar } from '../ModalAddPet/ModalAddPet.styled';
 export const Div = styled.div`
   display: flex;
   align-items: center;
+  //margin-left: 0;
   &:not(:last-child) {
     margin-bottom: 12px;
     @media (min-width: 768px) {
@@ -16,11 +17,13 @@ export const Div = styled.div`
 `;
 export const Title = styled.label`
   width: 64px;
-  font-size: ${p => p.theme.fontSize.fs12};
+  font-size: ${p => p.theme.fontSize.fs20};
   font-weight: ${p => p.theme.fontWeight.fw500};
+
   @media (min-width: 768px) {
     width: 107px;
-    font-size: ${p => p.theme.fontSize.fs18};
+    /* font-size: ${p => p.theme.fontSize.fs18}; */
+    font-size: ${p => p.theme.fontSize.fs28};
   }
 `;
 export const Block = styled.div`

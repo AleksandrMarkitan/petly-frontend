@@ -72,17 +72,19 @@ export const ImageBox = styled.div`
 `;
 
 export const UserPageContainer = styled.div`
+  margin-right: auto; //add
+  margin-left: auto; //add
   padding: 61px 20px 20px 20px;
   @media (min-width: 320px) {
     width: 320px;
   }
   @media (min-width: 768px) {
     width: 768px;
-    padding: 88px 32px 30px 32px;
+    padding: 88px 32px 30px 0px;
   }
   @media (min-width: 1280px) {
     display: flex;
-    padding: 58px 32px 40px 32px;
+    padding: 58px 32px 40px 0px; //fix
     width: 1280px;
   }
 `;
@@ -105,9 +107,10 @@ export const BoxTitleUser = styled.div`
   align-items: center;
   justify-content: space-between;
   margin-bottom: 18px;
-  margin-left: 32px;
+
   @media (min-width: 768px) {
     margin-bottom: 40px;
+    margin-left: 32px;
   }
   @media (min-width: 1280px) {
     margin-left: 16px;
