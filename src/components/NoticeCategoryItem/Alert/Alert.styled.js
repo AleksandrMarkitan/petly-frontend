@@ -26,6 +26,7 @@ export const Box = styled.div`
   justify-content: space-between;
   box-shadow: 7px 4px 14px rgba(0, 0, 0, 0.5);
   text-align: center;
+  overflow: hidden;
 
   h2 {
     background-color: #f59256;
