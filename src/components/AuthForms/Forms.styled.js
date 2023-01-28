@@ -1,76 +1,31 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { Form, Field } from 'formik';
+import AsyncSelect from 'react-select/async';
+
 import bgLoginDesc from '../../img/bgLoginDesc.png';
 import bgLoginTab from '../../img/bgLoginTab.png';
 import bgLoginMob from '../../img/bgLoginMob.png';
 
 import { SectionTag } from '../CommonComponents/Section/Section.styled';
 
-// export const Drop = styled(DropdownList)`
-//   width: 100%;
-//   padding: 14px 10px 13px 32px;
-//   font-weight: 400;
-//   font-size: 14px;
-//   line-height: 19px;
-//   letter-spacing: 0.04em;
-//   color: rgba(17, 17, 17, 0.6);
-//   background: #fdf7f2;
-//   border: 1px solid rgba(245, 146, 86, 0.5);
-//   border-radius: 40px;
-//   outline: none;
+export const CitySelect = styled(AsyncSelect)`
+  width: 100%;
+  padding: 14px 10px 13px 32px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 19px;
+  letter-spacing: 0.04em;
+  color: rgba(17, 17, 17, 0.6);
+  background: #fdf7f2;
+  border: 1px solid rgba(245, 146, 86, 0.5);
+  border-radius: 40px;
+  outline: none;
 
-//   & .rw-widget-picker {
-//     background-color: transparent;
-//     border: none;
-//     box-shadow: none;
-//   }
-
-//   & .rw-widget-input {
-//     color: aqua;
-//   }
-
-//   & .rw-picker-caret {
-//     color: inherit;
-//   }
-
-//   /* &:invalid {
-//     border: red solid 3px;
-//   } */
-
-//   @media screen and (min-width: 768px) {
-//     font-size: 18px;
-//     line-height: 25px;
-//   }
-
-//   font-weight: 400;
-//   font-size: 18px;
-//   line-height: 25px;
-
-//   ::placeholder {
-//     font-weight: 400;
-//     font-size: 14px;
-//     line-height: 19px;
-//     letter-spacing: 0.04em;
-//     color: rgba(17, 17, 17, 0.6);
-
-//     @media screen and (min-width: 768px) {
-//       font-size: 18px;
-//       line-height: 25px;
-//     }
-//   }
-//   /* border-color: #f59256; */
-
-//   /* &:hover, */
-//   &:focus {
-//     border-color: ${p => {
-//       if (p.test) {
-//         return 'red';
-//       }
-//       return '#f59256';
-//     }};
-//   }
-// `;
+  &:focus {
+    border-color: red;
+  }
+`;
 
 export const AuthSection = styled(SectionTag)`
   background-repeat: no-repeat;
@@ -157,15 +112,13 @@ export const Input = styled(Field)`
   font-size: 14px;
   line-height: 19px;
   letter-spacing: 0.04em;
-  color: rgba(17, 17, 17, 0.6);
+  color: #111111;
+
+  /* color: rgba(17, 17, 17, 0.6); */
   background: #fdf7f2;
   border: 1px solid rgba(245, 146, 86, 0.5);
   border-radius: 40px;
   outline: none;
-
-  /* &:invalid {
-    border: red solid 3px;
-  } */
 
   @media screen and (min-width: 768px) {
     font-size: 18px;
@@ -192,12 +145,7 @@ export const Input = styled(Field)`
 
   /* &:hover, */
   &:focus {
-    border-color: ${p => {
-      if (p.test) {
-        return 'red';
-      }
-      return '#f59256';
-    }};
+    border-color: '#f59256';
   }
 `;
 

@@ -52,16 +52,11 @@ export const LoginForm = () => {
 
   const handleSubmit = (values, { resetForm }) => {
     dispatch(login(values)).then(resp => {
-      // console.log(resp);
       if (resp.meta.requestStatus === 'fulfilled') {
         navigate('/user', { replace: true });
-        // resetForm();
       }
-      if (resp.meta.requestStatus === 'rejected') {
-        // initialValues = values;
-        console.log('values', values);
-        // console.log('initial', initialValues);
-      }
+
+      resetForm();
       return;
     });
     // .catch(err => {
