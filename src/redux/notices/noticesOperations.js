@@ -1,12 +1,14 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
+
+import { DEFAULT_LIMIT } from '../../helpers/constants';
 // "http://localhost:4000/api/v1"
 // отримання оголошень по категоріям
 export const fetchNotices = createAsyncThunk(
-  "notices/fetchNotices",
+  'notices/fetchNotices',
 
   async (
-    { category, qwery = "", page = 1, limit = 0 },
+    { category, qwery = '', page = 1, limit = DEFAULT_LIMIT },
     { rejectWithValue }
   ) => {
     try {
@@ -22,7 +24,7 @@ export const fetchNotices = createAsyncThunk(
 
 // отримання одного оголошення
 export const fetchOneNotice = createAsyncThunk(
-  "notices/fetchOneNotice",
+  'notices/fetchOneNotice',
 
   async ({ noticeId }, { rejectWithValue }) => {
     try {
@@ -36,9 +38,12 @@ export const fetchOneNotice = createAsyncThunk(
 
 // отримання оголошень авторизованого користувача доданих ним же в обрані
 export const fetchFavorites = createAsyncThunk(
-  "notices/fetchFavorites",
+  'notices/fetchFavorites',
 
-  async ({ qwery="",page = 1, limit = 0 }, { rejectWithValue }) => {
+  async (
+    { qwery = '', page = 1, limit = DEFAULT_LIMIT },
+    { rejectWithValue }
+  ) => {
     try {
       const { data } = await axios(
         `/notices/favorites?page=${page}&limit=${limit}&qwery=${qwery}`
@@ -52,7 +57,7 @@ export const fetchFavorites = createAsyncThunk(
 
 // додавання оголошень відповідно до обраної категорії
 export const addNotice = createAsyncThunk(
-  "notices/addNotice",
+  'notices/addNotice',
 
   async (newNotice, { rejectWithValue }) => {
     try {
@@ -66,9 +71,12 @@ export const addNotice = createAsyncThunk(
 
 // отримання оголошень авторизованого користувача створених цим же користувачем
 export const fetchOwnerNotices = createAsyncThunk(
-  "notices/fetchOwnerNotices",
+  'notices/fetchOwnerNotices',
 
-  async ({qwery="", page = 1, limit = 0 }, { rejectWithValue }) => {
+  async (
+    { qwery = '', page = 1, limit = DEFAULT_LIMIT },
+    { rejectWithValue }
+  ) => {
     try {
       const { data } = await axios(
         `/notices/owner?page=${page}&limit=${limit}&qwery=${qwery}`
@@ -82,7 +90,7 @@ export const fetchOwnerNotices = createAsyncThunk(
 
 //  видалення оголошення авторизованого користувача створеного цим же користувачем
 export const deleteNotice = createAsyncThunk(
-  "notices/deleteNotice",
+  'notices/deleteNotice',
 
   async ({ noticeId }, { rejectWithValue }) => {
     try {

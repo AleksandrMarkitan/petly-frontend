@@ -20,6 +20,16 @@ const AGES_IN_WORDS = {
 const MUST_AUTHORIZED = 'You must be authorized to use this functionality!';
 const MUST_AUTHORIZED_QUESTION = 'Do you want to go to Login Form?';
 
+// ==========  FETCH NOTICES  ============
+
+const DEFAULT_LIMIT = 0;
+
 // ==========  ============  ============
 
-export { NOT_FOUND, AGES_IN_WORDS, MUST_AUTHORIZED, MUST_AUTHORIZED_QUESTION };
+export {
+  NOT_FOUND,
+  AGES_IN_WORDS,
+  MUST_AUTHORIZED,
+  MUST_AUTHORIZED_QUESTION,
+  DEFAULT_LIMIT,
+};
