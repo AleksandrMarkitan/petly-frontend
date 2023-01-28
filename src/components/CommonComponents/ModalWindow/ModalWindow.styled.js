@@ -67,6 +67,11 @@ export const CloseBtn = styled.button`
   border-radius: 50%;
   background-color: #fdf7f2;
   backdrop-filter: blur(2px);
+  transition: background-color 300ms linear;
+
+  :hover, :focus{
+	background-color: #F59256;
+  }
 
   svg {
     width: 28px;
