@@ -22,6 +22,7 @@ export const DeleteBtn = styled.button`
   :hover,
   :focus {
     transform: scale(1.1);
+    transition: transform 250ms linear;
   }
 `;
 export const DelIcon = styled(HiTrash)`

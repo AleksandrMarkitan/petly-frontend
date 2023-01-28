@@ -77,18 +77,17 @@ const NoticesPage = () => {
 			<Container>
 				<SectionTitle text={"Find your favorite pet"} />
 				<NoticesSearch onSearch={onSearch} />
-				{isLoading ? (
-					<Loader />
-				) : (
-					<><MenuWrap>
+				<>
+					<MenuWrap>
 						<NoticesCategoriesNav />
 						<AddNoticeButton onClick={closeModal} />
 					</MenuWrap>
-						{notices.length > 0 ?
-							<NoticesCategoriesList data={notices} /> :
-							<Notification message={NOT_FOUND} />}
-					</>)}
+					{notices.length > 0 ?
+						<NoticesCategoriesList route={route} data={notices} /> :
+						!isLoading && <Notification message={NOT_FOUND} />}
+				</>
 				{isModalOpen && <ModalAddNotice onClose={closeModal} />}
+				{isLoading && <Loader />}
 			</Container>
 		</Section>
 	);

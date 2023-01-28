@@ -1,12 +1,12 @@
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import moment from 'moment';
-import { CancelBtn } from '../CommonButtons/CancelBtn/CancelBtn';
-import { NextBtn } from '../CommonButtons/NextBtn/NextBtn';
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import { addPet } from '../../redux/user/userOperations';
 import { BsPlusLg } from 'react-icons/bs';
+import { CancelBtn } from '../CommonButtons/CancelBtn/CancelBtn';
+import { NextBtn } from '../CommonButtons/NextBtn/NextBtn';
 import {
   InputFileWrap,
   InputFile,
@@ -23,6 +23,7 @@ import {
   InputFieldWrap,
   Calendar,
 } from './ModalAddPet.styled';
+import { CommentField } from '../ModalAddPet/CommentField/CommentField';
 
 export const ModalAddPet = ({ onClose }) => {
   const dispatch = useDispatch();
@@ -33,7 +34,8 @@ export const ModalAddPet = ({ onClose }) => {
   const [page, setPage] = useState(1);
   const [name, setName] = useState('');
   const [breed, setBreed] = useState('');
-  const nameBreedRegexp = /^[a-zA-Z]{2,16}$/;
+  const nameRegexp = /^[a-zA-Z]{2,16}$/;
+  const breedRegexp = /^[a-zA-Z]{2,16}$/;
   const commentRegexp1 = /^[A-Za-z0-9!?#$%^&_\-*]{8,120}$/;
   const commentRegexp = /^[a-z|A-Z|0-9!?#$%^&_\s\-*]{8,120}$/;
 
@@ -84,17 +86,17 @@ export const ModalAddPet = ({ onClose }) => {
     name: Yup.string()
       .min(2, 'Name must contain at least 2 symbol')
       .max(16, 'Name must contain no more than 16 symbols')
-      .matches(nameBreedRegexp, 'Please, enter a valid name')
+      // .matches(nameBreedRegexp, 'Please, enter a valid name')
       .required('Name is required'),
     breed: Yup.string()
       .min(2, 'Breed must contain at least 2 symbol')
       .max(16, 'Breed must contain no more than 16 symbols')
-      .matches(nameBreedRegexp, 'Please, enter a valid breed')
+      //.matches(nameBreedRegexp, 'Please, enter a valid breed')
       .required('Breed is required'),
     comments: Yup.string()
       .min(8, 'Comment must contain at least 8 symbol')
       .max(120, 'Comment must contain no more than 120 symbols')
-      .matches(commentRegexp, 'Please, enter a valid comment')
+      .matches(commentRegexp, 'Please, enter a valid comment') //???? matches - надо ли ?
       .required('Comment is required'),
   });
 
@@ -110,6 +112,7 @@ export const ModalAddPet = ({ onClose }) => {
     comments && formData.append('comments', comments);
 
     dispatch(addPet(formData));
+    onClose();
   };
 
   return (
@@ -150,8 +153,6 @@ export const ModalAddPet = ({ onClose }) => {
                     timeFormat={false}
                     closeOnSelect={true}
                     dateFormat="DD.MM.YYYY"
-                    //input={true}
-                    //open={false}
                     isValidDate={validDate}
                   />
                   <Label>
@@ -189,7 +190,7 @@ export const ModalAddPet = ({ onClose }) => {
                   </Label>
                 </InputFileWrap>
 
-                <CommentWrap>
+                {/* <CommentWrap>
                   <Label>
                     <div>Comments</div>
                     <Textarea placeholder="Type comment" name="comments" />
@@ -197,7 +198,12 @@ export const ModalAddPet = ({ onClose }) => {
                       <Error>{errors.comments}</Error>
                     )}
                   </Label>
-                </CommentWrap>
+                </CommentWrap> */}
+                <CommentField
+                  touched={touched}
+                  errors={errors}
+                  name="comments"
+                />
               </>
             )}
             <BtnWrapper>

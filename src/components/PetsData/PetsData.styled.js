@@ -9,7 +9,9 @@ export const FieldsWrapper = styled.div`
 `;
 
 export const BoxPet = styled.section`
-  width: 100%;
+  /* margin-left: 32px; */
+  //width: 100%;
+  margin: 0 32px;
 `;
 
 export const BoxTitlePet = styled.div`
@@ -18,7 +20,12 @@ export const BoxTitlePet = styled.div`
   align-items: center;
   margin-bottom: 26px;
   @media (min-width: 768px) {
-    margin-bottom: 24px;
+    //margin-bottom: 24px;
+    margin-right: 32px; //add
+  }
+  @media (min-width: 1280px) {
+    //margin-bottom: 24px;
+    margin-right: 0px; //add
   }
 `;
 export const AddTitle = styled.p`

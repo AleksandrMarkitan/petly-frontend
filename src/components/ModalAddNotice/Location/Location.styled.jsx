@@ -5,7 +5,7 @@ export const LocationWrap = styled.div`
 	margin-top: 32px;
 `
 export const InputField = styled.input`
-	padding: 12px 20px 12px 14px;
+	padding: 12px 45px 12px 14px;
 	font-weight: 400;
 	font-size: 14px;
 	line-height: calc(19 / 14);
@@ -64,15 +64,15 @@ export const CitiesList = styled.ul`
 
   overflow: auto;
 
-  &::-webkit-scrollbar-track, &::-moz-scrollbar-track {
+  &::-webkit-scrollbar-track {
     margin-right: 20px;
     background-color: (255, 255, 255, 0.2); /*Цвет скролла*/
   }
-  &::-webkit-scrollbar-thumb, &::-moz-scrollbar-track {
+  &::-webkit-scrollbar-thumb {
     border-radius: 5px; /*Закругление ползунка*/
     background-color: #f59256; /*Цвет ползунка*/
   }
-  &::-webkit-scrollbar, &::-moz-scrollbar-track {
+  &::-webkit-scrollbar {
     width: 6px; /*Толщина скролла*/
   }
 
@@ -85,6 +85,7 @@ export const CitiesItem = styled.li`
 	border-radius: 8px;
 	font-size: 12px;
 	transition: background-color 300ms linear;
+	cursor: pointer;
 
 	:hover, :focus{
 		background-color: #f59256;

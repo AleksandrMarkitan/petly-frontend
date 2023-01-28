@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Spinner = styled.div`
   position: absolute;
@@ -9,5 +9,5 @@ export const Spinner = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  backdrop-filter: invert(5%);
+  backdrop-filter: invert(15%);
 `;
