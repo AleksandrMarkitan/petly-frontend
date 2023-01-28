@@ -30,6 +30,7 @@ export const UserDataItem = ({
   const [inputName, setInputName] = useState(nameInput);
   const [inputActive, setInputActive] = useState(false);
   const [birthActive, setBirthActive] = useState(false);
+  const [cityActive, setCityActive] = useState(false);
   const [birthdate, setBirthdate] = useState(birthday);
 
   const [inputDirty, setInputDirty] = useState(false);
@@ -94,6 +95,7 @@ export const UserDataItem = ({
   };
   //'Name must be between 2 and 20 letters'
   //'Phone number must be in the format +380xxxxxxxxxxx'
+
   const handleButtonUpdate = e => {
     e.preventDefault();
     // console.log(inputValue);
@@ -102,7 +104,11 @@ export const UserDataItem = ({
 
     if (inputName === 'birthday') {
       setBirthActive(true);
-      // console.log(999);
+    }
+    if (inputName === 'city') {
+      setCityActive(true);
+      console.log(999);
+      console.log(cityActive);
     }
     if (inputValue === userDataValue) {
       setInputActive(true);
@@ -114,9 +120,8 @@ export const UserDataItem = ({
   const handleButtonSubmit = e => {
     e.preventDefault();
     //console.log(Date.parse(birthdate));
-    // if (birthdate) {
-    //   dispatch(updateUserData({ birthday: birthdate }));
-    // }
+    birthdate && dispatch(updateUserData({ birthday: birthdate }));
+
     if (inputValue === prevValue) {
       setInputActive(false);
       setEditButtonActive(true);
@@ -126,10 +131,10 @@ export const UserDataItem = ({
       return;
     }
 
-    if (birthdate) {
-      dispatch(updateUserData({ birthday: birthdate }));
-      return;
-    }
+    // if (birthdate) {
+    //   dispatch(updateUserData({ birthday: birthdate }));
+    //   return;
+    // }
 
     switch (inputName) {
       case 'name':
