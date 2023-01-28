@@ -1,11 +1,11 @@
-import { Input, Label } from "../../Forms.styled";
-import { FormError } from "../../LoginForm/LoginForm";
+import { Input, Label } from '../../Forms.styled';
+import { FormError } from '../../LoginForm/LoginForm';
 
 export const StepOne = () => {
   return (
     <>
       <Label>
-        <Input name="email" type="text" placeholder="Email" required />
+        <Input name="email" type="text" placeholder="Email" />
         <FormError name="email" />
       </Label>
       <Label>
@@ -13,7 +13,7 @@ export const StepOne = () => {
           name="password"
           type="password"
           placeholder="Password"
-          required
+          //   required
         />
         <FormError name="password" />
       </Label>
@@ -22,7 +22,7 @@ export const StepOne = () => {
           name="confirmPassword"
           type="password"
           placeholder="Confirm password"
-          required
+          //   required
         />
         <FormError name="confirmPassword" />
       </Label>
