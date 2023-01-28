@@ -12,9 +12,7 @@ export const NavStyled = styled.nav`
   transform: translateX(50%);
   box-shadow: 7px 4px 14px rgba(0, 0, 0, 0.11);
   border-radius: 20px;
-
-  margin-left: auto;
-  margin-right: auto;
+  margin: 5px auto;
 
   @media (min-width: 768px) {
     padding: 24px 32px;
