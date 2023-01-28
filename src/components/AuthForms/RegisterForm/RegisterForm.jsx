@@ -20,9 +20,7 @@ export const passwordRegexp = /^[A-Za-z0-9!?#$%^&_\-*]{7,32}$/;
 export const nameRegexp = /^[a-zA-Z]{2,20}$/;
 export const phoneRegexp = /^\+380\d{9}$/;
 export const emailRegexp =
-  /^[^-._]{1}[A-Za-z0-9._-]{1,}@[^-._]{1}[A-Za-z0-9.-]{0,}\.[A-Za-z]{1,4}$/;
-
-// const reg = /^([A-Za-z-\s]{2,}),\s([A-Za-z-\s]{2,})$/;
+  /^[^-._]{1}[A-Za-z0-9._-]{1,}@[^-._]{1}[A-Za-z0-9.-]{0,}\.[A-Za-z]{2,4}$/;
 
 export const RegisterForm = () => {
   const dispatch = useDispatch();

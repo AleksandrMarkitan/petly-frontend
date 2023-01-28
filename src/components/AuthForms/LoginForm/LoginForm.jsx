@@ -34,7 +34,8 @@ export const LoginForm = () => {
   const validationSchema = yup.object({
     email: yup
       .string()
-      .max(63)
+      .min(10, 'Email must consist of at least 10 symbols')
+      .max(63, 'Email must contain no more than 63 symbols')
       .matches(emailRegexp, 'Please, enter a valid e-mail')
       .required('E-mail is required'),
     password: yup
@@ -59,9 +60,6 @@ export const LoginForm = () => {
       resetForm();
       return;
     });
-    // .catch(err => {
-    //   initialValues = values;
-    // });
   };
 
   return (

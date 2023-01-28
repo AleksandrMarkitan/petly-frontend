@@ -80,9 +80,9 @@ export const StepTwo = ({
 
               colors: {
                 ...theme.colors,
-                primary25: 'rgba(245, 146, 86, 0.5)',
+                primary25: 'rgba(245, 146, 86, 0.5)', // фон ховера опций
                 primary: '#f59256',
-                neutral0: '#fdf7f2',
+                neutral0: '#fdf7f2', // фон списка опций
                 neutral80: '#111111',
                 neutral50: 'rgba(17, 17, 17, 0.6)', // текст плейсхолдера
 
@@ -98,11 +98,8 @@ export const StepTwo = ({
 
                 // neutral90: '#ff2828',
 
-                // primary50: '#ff2828',
-                // primary25: '#ff2828',
-                // neutral0: '#ff2828',
-                // neutral5: '#ff2828',
-                // neutral10: '#ff2828',
+                neutral5: '#283eff',
+                neutral10: '#ff28a5',
 
                 // neutral90: '#ff2828',
                 // neutral90: '#ff2828',
