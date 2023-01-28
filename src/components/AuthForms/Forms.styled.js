@@ -28,6 +28,7 @@ export const CitySelect = styled(AsyncSelect)`
 `;
 
 export const AuthSection = styled(SectionTag)`
+  min-height: calc(100vh - 58px);
   background-repeat: no-repeat;
   background-image: url(${bgLoginMob});
   background-position: center bottom;
@@ -41,6 +42,7 @@ export const AuthSection = styled(SectionTag)`
     padding-top: 168px;
     padding-bottom: 250px;
     background-image: url(${bgLoginTab});
+    min-height: calc(100vh - 75px);
   }
 
   @media screen and (min-width: 1280px) {
