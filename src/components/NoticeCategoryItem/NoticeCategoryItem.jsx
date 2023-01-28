@@ -1,11 +1,19 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+
 import {
   selectUser,
   selectFavoriteNotices,
   selectToken,
 } from '../../redux/auth/authSelectors';
-import { deleteNotice } from '../../redux/notices/noticesOperations';
+import {
+  selectOneNotice,
+  selectNoticesIsLoading,
+} from '../../redux/notices/noticesSelectors';
+import {
+  deleteNotice,
+  fetchOneNotice,
+} from '../../redux/notices/noticesOperations';
 import { updateFavoriteNotice } from '../../redux/auth/authOperations';
 import { FavoriteBtn } from '../CommonButtons/FavoriteBtn/FavoriteBtn';
 import { LearnMoreBtn } from '../CommonButtons/LearnMoreBtn/LearnMoreBtn';
@@ -50,6 +58,8 @@ export const NoticeCategoryItem = ({ data }) => {
   const currentUser = useSelector(selectUser);
   const token = useSelector(selectToken);
   const favorites = useSelector(selectFavoriteNotices);
+  const dataDetail = useSelector(selectOneNotice);
+  const isLoading = useSelector(selectNoticesIsLoading);
 
   const isFavorite = favorites.includes(_id);
 
@@ -65,6 +75,10 @@ export const NoticeCategoryItem = ({ data }) => {
 
   const closeModal = () => {
     setIsModalOpen(!isModalOpen);
+  };
+  const openModal = () => {
+    dispatch(fetchOneNotice({ noticeId: _id }));
+    setIsModalOpen(true);
   };
 
   const closeAlert = () => {
@@ -99,17 +113,17 @@ export const NoticeCategoryItem = ({ data }) => {
             </Ul>
           </WrapInner>
           <ThumbBtn>
-            <LearnMoreBtn onClick={closeModal} />
+            <LearnMoreBtn onClick={openModal} />
             {currentUser.email === owner.email && (
               <DeletePetNoticesBtn onDelete={deletePet} />
             )}
           </ThumbBtn>
         </Wrap>
       </Item>
-      {isModalOpen && (
+      {isModalOpen && !isLoading && (
         <ModalWindow onClose={closeModal}>
           <ModalNotice
-            data={data}
+            data={dataDetail}
             isFavorite={isFavorite}
             onClickFavorite={onChangeFavorite}
           />
