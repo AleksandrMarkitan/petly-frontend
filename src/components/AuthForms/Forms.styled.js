@@ -29,12 +29,13 @@ export const CitySelect = styled(AsyncSelect)`
 
 export const AuthSection = styled(SectionTag)`
   background-repeat: no-repeat;
-  background-position: bottom;
   background-image: url(${bgLoginMob});
-
+  background-position: center bottom;
+  background-size: contain;
+  /* 
   @media screen and (max-width: 767px) {
     height: 100vh;
-  }
+  } */
 
   @media screen and (min-width: 768px) {
     padding-top: 168px;
