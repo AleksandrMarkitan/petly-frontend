@@ -88,8 +88,7 @@ export const fetchCurrentUser = createAsyncThunk(
 
 export const updateUserData = createAsyncThunk(
   'users/update',
-  async ({ name, email, birthday, phone, city, pets }, { rejectWithValue }) => {
-    //avatarURL && console.log(123, avatarURL);
+  async ({ name, email, birthday, phone, city }, { rejectWithValue }) => {
     try {
       const { data } = await axios.patch('/users/update', {
         name,
@@ -97,7 +96,6 @@ export const updateUserData = createAsyncThunk(
         birthday,
         phone,
         city,
-        pets,
       });
       return data;
     } catch (error) {
@@ -110,7 +108,6 @@ export const updateUserData = createAsyncThunk(
 export const updateUserAvatar = createAsyncThunk(
   'users/updateAvatar',
   async ({ avatarURL }, { rejectWithValue }) => {
-    avatarURL && console.log(123, avatarURL);
     try {
       const { data } = await axios.patch('/users/update', avatarURL);
       return data;
