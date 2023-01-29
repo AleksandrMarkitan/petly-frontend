@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { Form, Field } from 'formik';
-import AsyncSelect from 'react-select/async';
 
 import bgLoginDesc from '../../img/bgLoginDesc.png';
 import bgLoginTab from '../../img/bgLoginTab.png';
@@ -22,24 +21,6 @@ export const Icon = styled.span`
     width: inherit;
     height: inherit;
     fill: rgba(17, 17, 17, 0.6);
-  }
-`;
-
-export const CitySelect = styled(AsyncSelect)`
-  width: 100%;
-  padding: 14px 10px 13px 32px;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 19px;
-  letter-spacing: 0.04em;
-  color: rgba(17, 17, 17, 0.6);
-  background: #fdf7f2;
-  border: 1px solid rgba(245, 146, 86, 0.5);
-  border-radius: 40px;
-  outline: none;
-
-  &:focus {
-    border-color: red;
   }
 `;
 
