@@ -25,6 +25,9 @@ import { Notification } from "../../components/Notification/Notification";
 import { Loader } from "../../components/Loader/Loader";
 import { NOT_FOUND } from "../../helpers/constants";
 
+import { selectIsAuth } from "../../redux/auth/authSelectors";
+import { IsNotAuthModal } from "../../components/CommonComponents/IsNotAuthModal/IsNotAuthModal";
+
 const NoticesPage = () => {
 	const { route } = useParams();
 
@@ -34,6 +37,7 @@ const NoticesPage = () => {
 
 	const notices = useSelector(selectNotices);
 	const isLoading = useSelector(selectNoticesIsLoading);
+	const isAuth = useSelector(selectIsAuth);
 
 	const dispatch = useDispatch();
 
@@ -88,7 +92,8 @@ const NoticesPage = () => {
 						<NoticesCategoriesList route={route} data={notices} /> :
 						!isLoading && <Notification message={NOT_FOUND} />}
 				</>
-				{isModalOpen && <ModalAddNotice onClose={closeModal} />}
+				{isModalOpen && isAuth && <ModalAddNotice onClose={closeModal} />}
+				{isModalOpen && !isAuth && <IsNotAuthModal onClose={closeModal} text="Let`s login or registration to add notice." />}
 				{isLoading && <Loader />}
 			</Container>
 		</Section>
