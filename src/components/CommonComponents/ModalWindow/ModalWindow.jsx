@@ -25,6 +25,10 @@ export const ModalWindow = ({ children, onClose, modalType, closeInnerList }) =>
 	}
 
 	const closeInnerHandler = (e) => {
+		if (!closeInnerList) {
+			return;
+		}
+
 		if (e.target === e.currentTarget) {
 			closeInnerList();
 		}
