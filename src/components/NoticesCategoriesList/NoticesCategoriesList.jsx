@@ -1,7 +1,9 @@
 import { NoticeCategoryItem } from '../../components/NoticeCategoryItem/NoticeCategoryItem';
+import { ScrollUpBtn } from '../CommonButtons/ScrollUpBtn/ScrollUpBtn';
 import { List } from './NoticesCategoriesList.styled';
 
 export const NoticesCategoriesList = ({ data, route }) => {
+
   return (
     <>
       <List>
@@ -16,12 +18,7 @@ export const NoticesCategoriesList = ({ data, route }) => {
             <NoticeCategoryItem key={item._id} data={item} />
           ))}
       </List>
+      <ScrollUpBtn />
     </>
-    // <>
-    //   <List>
-    //     {data.map((item) =>
-    //       <NoticeCategoryItem key={item._id} data={item} />)}
-    //   </List>
-    // </>
   );
 };
