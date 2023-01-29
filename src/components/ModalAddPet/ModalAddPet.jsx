@@ -10,39 +10,34 @@ import { NextBtn } from '../CommonButtons/NextBtn/NextBtn';
 import {
   InputFileWrap,
   InputFile,
-  FieldsWrapper,
   Label,
   BtnWrapper,
   FormStyled,
-  SubmitBtn,
   Error,
-  ErrorText,
   InputField,
-  CommentWrap,
-  Textarea,
   Title,
   InputFieldWrap,
   Calendar,
   ErrorDate,
+  ErrorAvatar,
 } from './ModalAddPet.styled';
 import { CommentField } from '../ModalAddPet/CommentField/CommentField';
 
 export const ModalAddPet = ({ onClose }) => {
   const dispatch = useDispatch();
   const [selectedFile, setSelectedFile] = useState(null);
-  const [imgURL, setImgURL] = useState('');
   const [preview, setPreview] = useState('');
   const [birthdate, setBirthdate] = useState('');
   const [page, setPage] = useState(1);
   const [name, setName] = useState('');
   const [breed, setBreed] = useState('');
   const [comments, setComments] = useState('');
+  const [inputDirty, setInputDirty] = useState(false);
   const [inputDateError, setInputDateError] = useState(
     'Date of birth is required'
   );
-  const [inputAvatarError, setInputAvatarError] = useState('Photo is required');
-  const [inputDirty, setInputDirty] = useState(false);
-  const commentRegexp = /^[a-z|A-Z|0-9!?#$%;:,^&_\s\-*]{8,120}$/;
+  const inputAvatarError = 'Photo is required';
+  const breedRegexp = /^[a-zA-Zа-яА-Я-`'іІїЇ]*$/;
 
   const validDate = current => {
     return current.isBefore(moment()) && current.isAfter('1969-12-31', 'day');
@@ -69,7 +64,7 @@ export const ModalAddPet = ({ onClose }) => {
   const inputFileHandler = e => {
     const file = e.target.files[0];
 
-    setImgURL(file);
+    setSelectedFile(file);
     const reader = new FileReader();
 
     reader.onload = function (e) {
@@ -77,7 +72,6 @@ export const ModalAddPet = ({ onClose }) => {
     };
 
     reader.readAsDataURL(file);
-    setSelectedFile(file);
   };
 
   const birthdateHandler = e => {
@@ -105,14 +99,12 @@ export const ModalAddPet = ({ onClose }) => {
     breed: Yup.string()
       .min(2, 'Breed must contain at least 2 symbol')
       .max(16, 'Breed must contain no more than 16 symbols')
-      //.matches(nameBreedRegexp, 'Please, enter a valid breed')
+      .matches(breedRegexp, 'Please, enter a valid breed')
       .required('Breed is required'),
     comments: Yup.string()
       .min(8, 'Comment must contain at least 8 symbol')
       .max(120, 'Comment must contain no more than 120 symbols')
-      .matches(commentRegexp, 'Please, enter a valid comment') //???? matches - надо ли ?
       .required('Comment is required'),
-    //birthdate: Yup.string().required('Date is required'),
   });
 
   const onAddPet = value => {
@@ -120,11 +112,11 @@ export const ModalAddPet = ({ onClose }) => {
 
     const formData = new FormData();
 
-    selectedFile && formData.append('avatarURL', selectedFile);
-    name && formData.append('name', name);
-    birthdate && formData.append('date', birthdate);
-    breed && formData.append('breed', breed);
-    comments && formData.append('comments', comments);
+    formData.append('avatarURL', selectedFile);
+    formData.append('name', name);
+    formData.append('date', birthdate);
+    formData.append('breed', breed);
+    formData.append('comments', comments);
 
     dispatch(addPet(formData));
     onClose();
@@ -163,10 +155,7 @@ export const ModalAddPet = ({ onClose }) => {
                       id: 'birth',
                       placeholder: 'Type date of birth',
                       required: true,
-                      //pattern:
-                      //'/^(?:0[1-9]|[12][0-9]|3[01])[.](?:0[1-9]|1[012])[.](?:19d{2}|20[01][0-9]|2020)\b$/',
                       onBlur: blurHandler,
-                      //validate: `${validDate}`,
                     }}
                     value={birthdate}
                     onChange={birthdateHandler}
@@ -174,7 +163,6 @@ export const ModalAddPet = ({ onClose }) => {
                     closeOnSelect={true}
                     dateFormat="DD.MM.YYYY"
                     isValidDate={validDate}
-                    // onBlur={blurHandler}
                   />
                   {inputDirty && <ErrorDate>{inputDateError}</ErrorDate>}
 
@@ -210,7 +198,7 @@ export const ModalAddPet = ({ onClose }) => {
                       accept="image/jpeg, image/png"
                       onChange={inputFileHandler}
                     />
-                    {!preview && <Error>{inputAvatarError}</Error>}
+                    {!preview && <ErrorAvatar>{inputAvatarError}</ErrorAvatar>}
                   </Label>
                 </InputFileWrap>
                 <CommentField
