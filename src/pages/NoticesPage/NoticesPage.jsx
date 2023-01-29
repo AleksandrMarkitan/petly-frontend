@@ -10,7 +10,6 @@ import {
 	// selectNoticesError,
 	// selectNoticesNotify,
 } from "../../redux/notices/noticesSelectors";
-import { updateFavoriteNotice } from "../../redux/auth/authOperations";
 import {
 	fetchNotices,
 	fetchFavorites,

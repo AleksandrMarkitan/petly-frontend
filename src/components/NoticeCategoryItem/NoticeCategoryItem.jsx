@@ -98,7 +98,10 @@ export const NoticeCategoryItem = ({ data }) => {
         <ImgWrap>
           <CategoryLabel>{category}</CategoryLabel>
           <Img src={imgURL} alt={name} loading="lazy" />
-          <FavoriteBtn favorite={isFavorite} onClick={onChangeFavorite} />
+          <FavoriteBtn
+            favorite={isFavorite}
+            allowedToChange={token ? true : false}
+            onClick={onChangeFavorite} />
           {isShownAlert &&
             <Alert
               textInfo={MUST_AUTHORIZED}
