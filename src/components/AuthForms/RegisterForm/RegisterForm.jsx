@@ -79,10 +79,7 @@ export const RegisterForm = () => {
     city: yup.string().required('City is required'),
     phone: yup
       .string()
-      .length(
-        13,
-        'The number of symbols in the field is insufficient or exceeded'
-      )
+      .min(13, 'Insufficient number of symbols entered')
       .matches(
         phoneRegexp,
         'Please, enter the phone number in the format +380xxxxxxxxxxx'
@@ -95,14 +92,12 @@ export const RegisterForm = () => {
     { resetForm }
   ) => {
     const values = { email, password };
-
     dispatch(register({ name, email, password, city, phone })).then(resp => {
       if (resp.meta.requestStatus === 'fulfilled') {
         loginUser(values);
+        resetForm();
       }
     });
-    resetForm();
-    return;
   };
 
   return (
@@ -134,7 +129,7 @@ export const RegisterForm = () => {
                   <Button onClick={handleNext}>Next</Button>
                 ) : (
                   <>
-                    <Button onClick={handleNext}>Register</Button>
+                    <Button>Register</Button>
                     <BackBtn type="button" onClick={handlePrev}>
                       Back
                     </BackBtn>
