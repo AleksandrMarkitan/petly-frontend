@@ -35,7 +35,11 @@ import {
   ThumbBtn,
 } from './NoticeCategoryItem.styled';
 import { getAge } from '../../helpers/dateFormat';
-import { Alert } from './Alert/Alert';
+import { Alert } from '../../components/CommonComponents/Alert/Alert';
+import {
+  MUST_AUTHORIZED,
+  MUST_AUTHORIZED_QUESTION,
+} from '../../helpers/constants';
 
 export const NoticeCategoryItem = ({ data }) => {
   const {
@@ -85,14 +89,21 @@ export const NoticeCategoryItem = ({ data }) => {
     setIsShownAlert(!isShownAlert);
   };
 
+  const age = getAge(birthdate);
+
   return (
+
     <>
       <Item>
         <ImgWrap>
           <CategoryLabel>{category}</CategoryLabel>
-          <Img src={imgURL} alt={name} />
+          <Img src={imgURL} alt={name} loading="lazy" />
           <FavoriteBtn favorite={isFavorite} onClick={onChangeFavorite} />
-          {isShownAlert && <Alert onClose={closeAlert} />}
+          {isShownAlert &&
+            <Alert
+              textInfo={MUST_AUTHORIZED}
+              textQuestion={MUST_AUTHORIZED_QUESTION}
+              onClose={closeAlert} />}
         </ImgWrap>
         <Wrap>
           <WrapInner>
@@ -108,7 +119,7 @@ export const NoticeCategoryItem = ({ data }) => {
               </Li>
               <Li key={`${_id}+age`}>
                 <Lable>Age:</Lable>
-                <Text>{getAge(birthdate)}</Text>
+                <Text>{age}</Text>
               </Li>
             </Ul>
           </WrapInner>
@@ -126,6 +137,8 @@ export const NoticeCategoryItem = ({ data }) => {
             data={dataDetail}
             isFavorite={isFavorite}
             onClickFavorite={onChangeFavorite}
+          // data={{ ...data, birthdate: age }}
+          // onChangeFavorite={onChangeFavorite} />
           />
         </ModalWindow>
       )}

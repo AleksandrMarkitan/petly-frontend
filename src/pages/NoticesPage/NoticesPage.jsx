@@ -2,11 +2,15 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import {
+	selectToken,
+} from '../../redux/auth/authSelectors';
+import {
 	selectNotices,
 	selectNoticesIsLoading,
 	// selectNoticesError,
 	// selectNoticesNotify,
 } from "../../redux/notices/noticesSelectors";
+import { updateFavoriteNotice } from "../../redux/auth/authOperations";
 import {
 	fetchNotices,
 	fetchFavorites,
@@ -23,7 +27,12 @@ import { MenuWrap } from "./NoticesPage.styled";
 import { NoticesSearch } from "../../components/NoticesSearch/NoticesSearch";
 import { Notification } from "../../components/Notification/Notification";
 import { Loader } from "../../components/Loader/Loader";
-import { NOT_FOUND } from "../../helpers/constants";
+import {
+	NOT_FOUND,
+	MUST_AUTHORIZED,
+	MUST_AUTHORIZED_QUESTION,
+} from "../../helpers/constants";
+import { Alert } from '../../components/CommonComponents/Alert/Alert';
 
 const NoticesPage = () => {
 	const { route } = useParams();
@@ -32,8 +41,12 @@ const NoticesPage = () => {
 
 	const [searchTitleQwery, setSearchTitleQwery] = useState("");
 
+	const token = useSelector(selectToken);
+
 	const notices = useSelector(selectNotices);
 	const isLoading = useSelector(selectNoticesIsLoading);
+
+	const [isShownAlert, setIsShownAlert] = useState(false);
 
 	const dispatch = useDispatch();
 
@@ -65,11 +78,15 @@ const NoticesPage = () => {
 	}, [dispatch, route, searchTitleQwery]);
 
 	const closeModal = () => {
-		setIsModalOpen(!isModalOpen);
+		token ? setIsModalOpen(!isModalOpen) : setIsShownAlert(true);
 	};
 
 	const onSearch = (searchQuery) => {
 		setSearchTitleQwery(searchQuery);
+	};
+
+	const closeAlert = () => {
+		setIsShownAlert(!isShownAlert);
 	};
 
 	return (
@@ -83,10 +100,17 @@ const NoticesPage = () => {
 						<AddNoticeButton onClick={closeModal} />
 					</MenuWrap>
 					{notices.length > 0 ?
-						<NoticesCategoriesList route={route} data={notices} /> :
+						<NoticesCategoriesList
+							route={route}
+							data={notices} /> :
 						!isLoading && <Notification message={NOT_FOUND} />}
 				</>
 				{isModalOpen && <ModalAddNotice onClose={closeModal} />}
+				{isShownAlert &&
+					<Alert
+						textInfo={MUST_AUTHORIZED}
+						textQuestion={MUST_AUTHORIZED_QUESTION}
+						onClose={closeAlert} />}
 				{isLoading && <Loader />}
 			</Container>
 		</Section>
