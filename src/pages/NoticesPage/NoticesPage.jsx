@@ -2,27 +2,39 @@ import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import {
-  selectNotices,
-  selectNoticesIsLoading,
-  // selectNoticesError,
-  // selectNoticesNotify,
-} from '../../redux/notices/noticesSelectors';
+	selectToken,
+} from '../../redux/auth/authSelectors';
 import {
-  fetchNotices,
-} from '../../redux/notices/noticesOperations';
-import { clearNotices } from '../../redux/notices/noticesSlice';
-import { SectionTitle } from '../../components/CommonComponents/SectionTitle/SectionTitle';
-import { NoticesCategoriesNav } from '../../components/NoticesCategoriesNav/NoticesCategoriesNav';
-import { Section } from '../../components/CommonComponents/Section/Section';
-import { Container } from '../../components/CommonComponents/Container/Container';
-import { AddNoticeButton } from '../../components/CommonButtons/AddNoticeButton/AddNoticeButton';
-import { NoticesCategoriesList } from '../../components/NoticesCategoriesList/NoticesCategoriesList';
-import { ModalAddNotice } from '../../components/ModalAddNotice/ModalAddNotice';
-import { MenuWrap } from './NoticesPage.styled';
-import { NoticesSearch } from '../../components/NoticesSearch/NoticesSearch';
-import { Notification } from '../../components/Notification/Notification';
-import { Loader } from '../../components/Loader/Loader';
-import { NOT_FOUND } from '../../helpers/constants';
+	selectNotices,
+	selectNoticesIsLoading,
+	// selectNoticesError,
+	// selectNoticesNotify,
+} from "../../redux/notices/noticesSelectors";
+import {
+	fetchNotices,
+	fetchFavorites,
+	fetchOwnerNotices,
+} from "../../redux/notices/noticesOperations";
+import { SectionTitle } from "../../components/CommonComponents/SectionTitle/SectionTitle";
+import { NoticesCategoriesNav } from "../../components/NoticesCategoriesNav/NoticesCategoriesNav";
+import { Section } from "../../components/CommonComponents/Section/Section";
+import { Container } from "../../components/CommonComponents/Container/Container";
+import { AddNoticeButton } from "../../components/CommonButtons/AddNoticeButton/AddNoticeButton";
+import { NoticesCategoriesList } from "../../components/NoticesCategoriesList/NoticesCategoriesList";
+import { ModalAddNotice } from "../../components/ModalAddNotice/ModalAddNotice";
+import { MenuWrap } from "./NoticesPage.styled";
+import { NoticesSearch } from "../../components/NoticesSearch/NoticesSearch";
+import { Notification } from "../../components/Notification/Notification";
+import { Loader } from "../../components/Loader/Loader";
+import {
+	NOT_FOUND,
+	MUST_AUTHORIZED,
+	MUST_AUTHORIZED_QUESTION,
+} from "../../helpers/constants";
+import { Alert } from '../../components/CommonComponents/Alert/Alert';
+
+import { selectIsAuth } from "../../redux/auth/authSelectors";
+import { IsNotAuthModal } from "../../components/CommonComponents/IsNotAuthModal/IsNotAuthModal";
 
 const NoticesPage = () => {
   const { route } = useParams();
@@ -31,8 +43,13 @@ const NoticesPage = () => {
 
   const [searchTitleQwery, setSearchTitleQwery] = useState('');
 
-  const notices = useSelector(selectNotices);
-  const isLoading = useSelector(selectNoticesIsLoading);
+	const token = useSelector(selectToken);
+
+	const notices = useSelector(selectNotices);
+	const isLoading = useSelector(selectNoticesIsLoading);
+	const isAuth = useSelector(selectIsAuth);
+
+	const [isShownAlert, setIsShownAlert] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -43,37 +60,47 @@ const NoticesPage = () => {
       dispatch(fetchNotices({ category: route }));
     }
     return () => dispatch(clearNotices([]));
-  }, [dispatch, route, searchTitleQwery]);
+  }, [dispatch, route, searchTitleQwery]);  
 
-  const closeModal = () => {
-    setIsModalOpen(!isModalOpen);
-  };
+	const closeModal = () => {
+		token ? setIsModalOpen(!isModalOpen) : setIsShownAlert(true);
+	};
 
-  const onSearch = searchQuery => {
-    setSearchTitleQwery(searchQuery);
-  };
+	const onSearch = (searchQuery) => {
+		setSearchTitleQwery(searchQuery);
+	};
 
-  return (
-    <Section>
-      <Container>
-        <SectionTitle text={'Find your favorite pet'} />
-        <NoticesSearch onSearch={onSearch} />
-        <>
-          <MenuWrap>
-            <NoticesCategoriesNav />
-            <AddNoticeButton onClick={closeModal} />
-          </MenuWrap>
-          {notices.length > 0 ? (
-            <NoticesCategoriesList route={route} data={notices} />
-          ) : (
-            !isLoading && <Notification message={NOT_FOUND} />
-          )}
-        </>
-        {isModalOpen && <ModalAddNotice onClose={closeModal} />}
-        {isLoading && <Loader />}
-      </Container>
-    </Section>
-  );
+	const closeAlert = () => {
+		setIsShownAlert(!isShownAlert);
+	};
+
+	return (
+		<Section>
+			<Container>
+				<SectionTitle text={"Find your favorite pet"} />
+				<NoticesSearch onSearch={onSearch} />
+				<>
+					<MenuWrap>
+						<NoticesCategoriesNav />
+						<AddNoticeButton onClick={closeModal} />
+					</MenuWrap>
+					{notices.length > 0 ?
+						<NoticesCategoriesList
+							route={route}
+							data={notices} /> :
+						!isLoading && <Notification message={NOT_FOUND} />}
+				</>
+				{isModalOpen && isAuth && <ModalAddNotice onClose={closeModal} />}
+				{isModalOpen && !isAuth && <IsNotAuthModal onClose={closeModal} text="Let`s login or registration to add notice." />}
+				{isShownAlert &&
+					<Alert
+						textInfo={MUST_AUTHORIZED}
+						textQuestion={MUST_AUTHORIZED_QUESTION}
+						onClose={closeAlert} />}
+				{isLoading && <Loader />}
+			</Container>
+		</Section>
+	);
 };
 
 export default NoticesPage;

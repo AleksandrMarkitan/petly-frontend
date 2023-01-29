@@ -25,6 +25,7 @@ export const DeleteBtn = styled.button`
     transition: transform 250ms linear;
   }
 `;
+
 export const DelIcon = styled(HiTrash)`
   width: 22px;
   height: 22px;
