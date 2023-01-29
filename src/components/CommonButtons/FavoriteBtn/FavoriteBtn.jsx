@@ -2,12 +2,14 @@ import { useState } from "react"
 import { ReactComponent as Favorite } from "../../../icons/favorite.svg"
 import { Button } from "./FavoriteBtn.styled"
 
-export const FavoriteBtn = ({ favorite, onClick = () => { } }) => {
+export const FavoriteBtn = ({ favorite, allowedToChange, onClick = () => { } }) => {
 
 	const [isFavorite, setIsFavorite] = useState(favorite);
 
 	const favoriteHandler = () => {
-		setIsFavorite(!isFavorite);
+		if (allowedToChange) {
+			setIsFavorite(!isFavorite);
+		}
 		onClick();
 	}
 	return (

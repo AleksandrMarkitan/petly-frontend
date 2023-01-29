@@ -8,10 +8,10 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import { ThemeProvider } from 'styled-components';
-import theme from './utils/theme';
 
 import { App } from './components/App';
 import './index.css';
+import theme from './utils/theme';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

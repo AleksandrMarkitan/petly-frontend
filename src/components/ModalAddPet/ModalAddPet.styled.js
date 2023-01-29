@@ -91,7 +91,6 @@ export const InputField = styled(Field)`
   font-weight: 400;
   font-size: 14px;
   line-height: calc(19 / 14);
-  // color: rgba(27, 27, 27, 0.6);
   background-color: #fdf7f2;
   border: 1px solid rgba(245, 146, 86, 0.5);
   border-radius: 40px;
@@ -131,7 +130,6 @@ export const InputFileWrap = styled.div`
   label {
     display: flex;
     justify-content: center;
-    /* display: inline-block; */
     font-size: 16px;
   }
 
@@ -221,10 +219,35 @@ export const Error = styled.div`
   @media (min-width: 768px) {
     left: 16px;
     font-size: 12px;
-    //font-size: ${p => p.theme.fontSize.fs10};
   }
 `;
-//-----------
+
+export const ErrorDate = styled.div`
+  position: absolute;
+  left: 36px;
+  bottom: 46%;
+  color: red;
+  font-size: 10px;
+  @media (min-width: 768px) {
+    left: 95px;
+    bottom: 38%;
+    font-size: 12px;
+  }
+`;
+
+export const ErrorAvatar = styled.div`
+  position: absolute;
+  left: 63px;
+  bottom: -16%;
+  color: red;
+  font-size: 10px;
+  @media (min-width: 768px) {
+    left: 50px;
+    bottom: -9%;
+    font-size: 12px;
+  }
+`;
+
 export const SubmitBtn = styled.button`
   padding: 8px 0;
   width: 100%;
