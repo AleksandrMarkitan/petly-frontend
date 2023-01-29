@@ -328,9 +328,9 @@ export const ModalAddNotice = ({ onClose }) => {
                   <NextBtn onClick={nextPage} disabled={true} />
                 )
               ) : stateMachine.submitButtonIsAbled ? (
-                <NextBtn type="submit" text="Done" disabled={true} />
-              ) : (
                 <NextBtn type="submit" text="Done" />
+              ) : (
+                <NextBtn type="submit" text="Done" disabled={true} />
               )}
               {stateMachine.page_1 ? (
                 <CancelBtn onClick={onClose} />
