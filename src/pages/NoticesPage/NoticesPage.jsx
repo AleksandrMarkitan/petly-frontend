@@ -62,6 +62,8 @@ const NoticesPage = () => {
 				dispatch(fetchNotices({ category: route }));
 			}
 		}
+
+
 	}, [dispatch, route, searchTitleQwery]);
 
 	const closeModal = () => {
