@@ -2,15 +2,21 @@ import styled from 'styled-components';
 import { BsPlusLg } from 'react-icons/bs';
 export const BtnPlusLg = styled(BsPlusLg)`
   color: ${p => p.theme.colors.secondaryBackground};
+  position: absolute;
+  top: 12px;
+  left: 12px;
 `;
 export const Button = styled.button`
   width: 40px;
   height: 40px;
 
   background-color: ${p => p.theme.colors.accent};
+  position: relative;
   justify-content: center;
   border-radius: 50%;
-  transition: color 300ms linear;
+  padding: 0;
+  align-items: center;
+  font-size: 16px;
 
   :hover,
   :focus {
@@ -20,9 +26,3 @@ export const Button = styled.button`
     transition: transform 250ms linear;
   }
 `;
-//padding: 8px 0;
-// font-size: 20px;
-//   line-height: calc(27 / 20);
-//   letter-spacing: 0.04em;
-// border: 2px solid #f59256;
-//#111111
