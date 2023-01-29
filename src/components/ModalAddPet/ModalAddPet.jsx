@@ -37,7 +37,8 @@ export const ModalAddPet = ({ onClose }) => {
     'Date of birth is required'
   );
   const inputAvatarError = 'Photo is required';
-  const breedRegexp = /^[a-zA-Zа-яА-Я-`'іІїЇ]*$/;
+  //const breedRegexp = /^[a-zA-Zа-яА-Я-іІїЇ\s]*$/;
+  const nameBreedRegexp = /^[A-zА-я-іІїЇєЄ\s]+$/;
 
   const validDate = current => {
     return current.isBefore(moment()) && current.isAfter('1969-12-31', 'day');
@@ -49,7 +50,7 @@ export const ModalAddPet = ({ onClose }) => {
   const validateBreed = value => {
     setBreed(value);
   };
-  const validateComents = value => {
+  const validateComments = value => {
     setComments(value);
   };
 
@@ -89,17 +90,17 @@ export const ModalAddPet = ({ onClose }) => {
     avatarURL: {},
     comments: '',
   };
-
+  console.log(comments);
   const schema = Yup.object().shape({
     name: Yup.string()
       .min(2, 'Name must contain at least 2 symbol')
       .max(16, 'Name must contain no more than 16 symbols')
-      // .matches(nameBreedRegexp, 'Please, enter a valid name')
+      .matches(nameBreedRegexp, 'Please, enter only letters')
       .required('Name is required'),
     breed: Yup.string()
       .min(2, 'Breed must contain at least 2 symbol')
       .max(16, 'Breed must contain no more than 16 symbols')
-      .matches(breedRegexp, 'Please, enter a valid breed')
+      .matches(nameBreedRegexp, 'Please, enter only letters')
       .required('Breed is required'),
     comments: Yup.string()
       .min(8, 'Comment must contain at least 8 symbol')
@@ -120,6 +121,20 @@ export const ModalAddPet = ({ onClose }) => {
 
     dispatch(addPet(formData));
     onClose();
+  };
+
+  const stateMachine = {
+    page_1: page === 1,
+    page_2: page === 2,
+    // priceIsTurnedOn: category === 'sell',
+    nextButtonIsAbled:
+      name.length >= 2 &&
+      name.length <= 16 &&
+      breed.length >= 2 &&
+      breed.length <= 16 &&
+      birthdate,
+    submitButtonIsAbled:
+      preview && comments.length >= 8 && comments.length <= 120,
   };
 
   return (
@@ -205,12 +220,12 @@ export const ModalAddPet = ({ onClose }) => {
                   touched={touched}
                   errors={errors}
                   name="comments"
-                  validate={validateComents}
+                  validate={validateComments}
                 />
               </>
             )}
             <BtnWrapper>
-              {page === 1 ? (
+              {/* {page === 1 ? (
                 (name.length >= 2) &
                 (breed.length >= 2) &
                 (birthdate.length >= 2) ? (
@@ -225,6 +240,22 @@ export const ModalAddPet = ({ onClose }) => {
                 <NextBtn type="submit" text="Done" />
               )}
               {page === 1 ? (
+                <CancelBtn onClick={onClose} />
+              ) : (
+                <CancelBtn onClick={prevPage} text="Back" />
+              )} */}
+              {stateMachine.page_1 ? (
+                stateMachine.nextButtonIsAbled ? (
+                  <NextBtn onClick={nextPage} />
+                ) : (
+                  <NextBtn onClick={nextPage} disabled={true} />
+                )
+              ) : stateMachine.submitButtonIsAbled ? (
+                <NextBtn type="submit" text="Done" />
+              ) : (
+                <NextBtn type="submit" text="Done" disabled={true} />
+              )}
+              {stateMachine.page_1 ? (
                 <CancelBtn onClick={onClose} />
               ) : (
                 <CancelBtn onClick={prevPage} text="Back" />
