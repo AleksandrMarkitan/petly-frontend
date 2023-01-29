@@ -1,25 +1,48 @@
-import { Link } from "react-router-dom";
-import styled from "styled-components";
-import { Form, Field } from "formik";
-import bgLoginDesc from "../../img/bgLoginDesc.png";
-import bgLoginTab from "../../img/bgLoginTab.png";
-import bgLoginMob from "../../img/bgLoginMob.png";
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+import { Form, Field } from 'formik';
+import AsyncSelect from 'react-select/async';
 
-import { SectionTag } from "../CommonComponents/Section/Section.styled";
+import bgLoginDesc from '../../img/bgLoginDesc.png';
+import bgLoginTab from '../../img/bgLoginTab.png';
+import bgLoginMob from '../../img/bgLoginMob.png';
+
+import { SectionTag } from '../CommonComponents/Section/Section.styled';
+
+export const CitySelect = styled(AsyncSelect)`
+  width: 100%;
+  padding: 14px 10px 13px 32px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 19px;
+  letter-spacing: 0.04em;
+  color: rgba(17, 17, 17, 0.6);
+  background: #fdf7f2;
+  border: 1px solid rgba(245, 146, 86, 0.5);
+  border-radius: 40px;
+  outline: none;
+
+  &:focus {
+    border-color: red;
+  }
+`;
 
 export const AuthSection = styled(SectionTag)`
+  min-height: calc(100vh - 58px);
   background-repeat: no-repeat;
-  background-position: bottom;
   background-image: url(${bgLoginMob});
-
+  background-position: center bottom;
+  background-size: contain;
+  /* 
   @media screen and (max-width: 767px) {
     height: 100vh;
-  }
+  } */
 
   @media screen and (min-width: 768px) {
     padding-top: 168px;
     padding-bottom: 250px;
     background-image: url(${bgLoginTab});
+    min-height: calc(100vh - 75px);
   }
 
   @media screen and (min-width: 1280px) {
@@ -63,7 +86,7 @@ export const Wrapper = styled.div`
 
 export const TitleAuth = styled.h2`
   text-align: center;
-  font-family: "Manrope";
+  font-family: 'Manrope';
   font-weight: 700;
   font-size: 24px;
   line-height: 33px;
@@ -92,7 +115,9 @@ export const Input = styled(Field)`
   font-size: 14px;
   line-height: 19px;
   letter-spacing: 0.04em;
-  color: rgba(17, 17, 17, 0.6);
+  color: #111111;
+
+  /* color: rgba(17, 17, 17, 0.6); */
   background: #fdf7f2;
   border: 1px solid rgba(245, 146, 86, 0.5);
   border-radius: 40px;
@@ -119,10 +144,11 @@ export const Input = styled(Field)`
       line-height: 25px;
     }
   }
+  /* border-color: #f59256; */
 
-  &:hover,
+  /* &:hover, */
   &:focus {
-    border-color: #f59256;
+    border-color: '#f59256';
   }
 `;
 
@@ -131,7 +157,7 @@ export const Paragraph = styled.p`
   text-align: center;
 
   & span {
-    font-family: "Manrope";
+    font-family: 'Manrope';
     font-weight: 400;
     font-size: 12px;
     line-height: 16px;
@@ -141,7 +167,7 @@ export const Paragraph = styled.p`
 `;
 
 export const FormLink = styled(Link)`
-  font-family: "Manrope";
+  font-family: 'Manrope';
   font-weight: 400;
   font-size: 12px;
   line-height: 16px;
@@ -155,7 +181,7 @@ export const FormLink = styled(Link)`
 `;
 
 export const toastStyled = {
-  position: "top-right",
+  position: 'top-right',
   autoClose: 5000,
   pauseOnHover: true,
 };

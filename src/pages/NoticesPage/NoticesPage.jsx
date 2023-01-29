@@ -85,7 +85,7 @@ const NoticesPage = () => {
 						<AddNoticeButton onClick={closeModal} />
 					</MenuWrap>
 					{notices.length > 0 ?
-						<NoticesCategoriesList data={notices} /> :
+						<NoticesCategoriesList route={route} data={notices} /> :
 						!isLoading && <Notification message={NOT_FOUND} />}
 				</>
 				{isModalOpen && <ModalAddNotice onClose={closeModal} />}

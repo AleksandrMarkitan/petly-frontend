@@ -23,7 +23,6 @@ export const UserDataItem = ({
   editButtonActive,
   birthday,
 }) => {
-  console.log(editButtonActive);
   const dispatch = useDispatch();
   const prevValue = userDataValue;
   const [inputValue, setInputValue] = useState(userDataValue);
@@ -42,7 +41,9 @@ export const UserDataItem = ({
   const phoneRegexp = /^\+\d{12}$/;
   const emailRegexp =
     /^[^-]{1}[A-Za-z0-9._-]{2,}@[^-]{1}[A-Za-z0-9.-]{2,}\.[A-Za-z]{2,4}$/;
-
+  //const birthRegexp = /^\d{2}\.\d{2}\.\d{4}$/;
+  const birthdayRegexp =
+    /^(?:0[1-9]|[12][0-9]|3[01])[.](?:0[1-9]|1[012])[.](?:19\d{2}|20[01][0-9]|2020)\b$/;
   //console.log(birthday);
   const birthdateHandler = e => {
     setBirthdate(e.format('DD.MM.YYYY'));
@@ -90,20 +91,27 @@ export const UserDataItem = ({
           setInputError('');
         }
         break;
+      case 'birthday':
+        if (!birthdayRegexp.test(String(evt.target.value).toLowerCase())) {
+          setInputError('Date must be between 1920-2021');
+        } else {
+          setInputError('');
+        }
+        break;
     }
   };
   //'Name must be between 2 and 20 letters'
   //'Phone number must be in the format +380xxxxxxxxxxx'
   const handleButtonUpdate = e => {
     e.preventDefault();
-    // console.log(inputValue);
-    // console.log(inputName);
-    // console.log(birthdate);
+    console.log(inputValue);
+    console.log(inputName);
+    console.log(birthdate);
 
-    if (inputName === 'birthday') {
-      setBirthActive(true);
-      // console.log(999);
-    }
+    // if (inputName === 'birthday') {
+    //   setBirthActive(true);
+    //   console.log(999);
+    // }
     if (inputValue === userDataValue) {
       setInputActive(true);
       setEditButtonActive(false);
@@ -114,20 +122,20 @@ export const UserDataItem = ({
   const handleButtonSubmit = e => {
     e.preventDefault();
     //console.log(Date.parse(birthdate));
-    // if (birthdate) {
-    //   dispatch(updateUserData({ birthday: birthdate }));
+    // if (birthActive) {
+    //   dispatch(updateUserData({ birthday: inputValue }));
+    //   // setBirthdate(birthday);
+    //   setBirthActive(false);
+    //   //useState(birthday);
+    //   // setBirthdate(birthday);
     // }
+
     if (inputValue === prevValue) {
       setInputActive(false);
       setEditButtonActive(true);
       return;
     }
     if (inputError) {
-      return;
-    }
-
-    if (birthdate) {
-      dispatch(updateUserData({ birthday: birthdate }));
       return;
     }
 
@@ -138,9 +146,9 @@ export const UserDataItem = ({
       case 'email':
         dispatch(updateUserData({ email: inputValue }));
         break;
-      //   case 'birthday':
-      //     dispatch(updateUserData({ birthday: birthdate }));
-      //     break;
+      case 'birthday':
+        dispatch(updateUserData({ birthday: inputValue }));
+        break;
       case 'phone':
         dispatch(updateUserData({ phone: inputValue }));
         break;
@@ -150,6 +158,7 @@ export const UserDataItem = ({
       default:
         return;
     }
+
     setInputActive(false);
     setEditButtonActive(true);
   };
@@ -158,7 +167,7 @@ export const UserDataItem = ({
     <Div>
       <Title>{valueLabel}</Title>
       <Block>
-        {birthActive ? (
+        {/* {birthActive ? (
           <UserCalendar
             inputProps={{
               readOnly: true,
@@ -166,7 +175,8 @@ export const UserDataItem = ({
               //placeholder: `${inputValue}`,
               name: 'birthday',
             }}
-            value={`${birthdate ? birthdate : inputValue}`}
+            //value={`${birthdate ? birthdate : inputValue}`}
+            value={inputValue}
             onChange={birthdateHandler}
             timeFormat={false}
             closeOnSelect={true}
@@ -174,23 +184,22 @@ export const UserDataItem = ({
             // name="birthday"
             isValidDate={validDate}
           />
-        ) : (
-          <Input
-            type="text"
-            name={nameInput}
-            value={inputValue}
-            onChange={handleChange}
-            readOnly={!inputActive ? true : false}
-            disabled={!inputActive}
-            onBlur={blurHandler}
-          />
-        )}
+        ) : ( */}
+        <Input
+          type="text"
+          name={nameInput}
+          value={inputValue}
+          onChange={handleChange}
+          readOnly={!inputActive ? true : false}
+          disabled={!inputActive}
+          onBlur={blurHandler}
+        />
+        {/* )} */}
         {inputDirty && inputError && <ErrorText>{inputError}</ErrorText>}
         {!inputActive && (
           <Button
             type="button"
             disabled={!editButtonActive}
-            //disabled={inputError}
             onClick={handleButtonUpdate}
           >
             <EditTextBtnIcon changecolor={editButtonActive.toString()} />

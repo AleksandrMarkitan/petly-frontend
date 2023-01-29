@@ -10,6 +10,7 @@ import {
   BoxImage,
   Image,
   PetIcon,
+  Title,
 } from './Logout.styled';
 
 import { useState } from 'react';
@@ -38,7 +39,7 @@ export const Logout = () => {
         <ModalWindow onClose={closeModal}>
           <BoxLogOut>
             <PreTitle>
-              <p>Are you sure you want to log out of your account?</p>
+              <Title>Are you sure you want to log out of your account?</Title>
               <BoxImage>
                 <Image
                   src={modalLogoutImage}
