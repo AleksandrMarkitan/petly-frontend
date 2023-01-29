@@ -17,9 +17,9 @@ export const Box = styled.div`
   transform: translateX(-50%) translateY(-50%);
   width: 640px;
   height: 300px;
-  border: 3px solid #f59256;
+  border: ${p => p.theme.border.main};
   border-radius: 20px;
-  background-color: #fff;
+  background-color: ${p => p.theme.colors.secondaryBackground};
   padding-bottom: 30px;
   display: flex;
   flex-direction: column;
@@ -29,7 +29,7 @@ export const Box = styled.div`
   overflow: hidden;
 
   h2 {
-    background-color: #f59256;
+    background-color: ${p => p.theme.colors.accent};
     color: #fff;
     padding: 10px;
     width: 100%;
