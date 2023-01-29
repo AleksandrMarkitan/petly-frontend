@@ -11,10 +11,9 @@ import {
 	// selectNoticesNotify,
 } from "../../redux/notices/noticesSelectors";
 import {
-	fetchNotices,
-	fetchFavorites,
-	fetchOwnerNotices,
+	fetchNotices,	
 } from "../../redux/notices/noticesOperations";
+import { clearNotices } from '../../redux/notices/noticesSlice';
 import { SectionTitle } from "../../components/CommonComponents/SectionTitle/SectionTitle";
 import { NoticesCategoriesNav } from "../../components/NoticesCategoriesNav/NoticesCategoriesNav";
 import { Section } from "../../components/CommonComponents/Section/Section";
