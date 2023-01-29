@@ -1,7 +1,19 @@
-import { Input, Label } from '../../Forms.styled';
+import { useState } from 'react';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { Icon, Input, Label } from '../../Forms.styled';
 import { FormError } from '../../LoginForm/LoginForm';
 
 export const StepOne = () => {
+  const [passwordShown, setPasswordShown] = useState(false);
+  const [confirmPasswordShown, setConfirmPasswordShown] = useState(false);
+
+  const togglePassword = () => {
+    setPasswordShown(!passwordShown);
+  };
+
+  const toggleConfirmPassword = () => {
+    setConfirmPasswordShown(!confirmPasswordShown);
+  };
   return (
     <>
       <Label>
@@ -11,19 +23,23 @@ export const StepOne = () => {
       <Label>
         <Input
           name="password"
-          type="password"
+          type={passwordShown ? 'text' : 'password'}
           placeholder="Password"
-          //   required
         />
+        <Icon onClick={togglePassword}>
+          {passwordShown ? <FaEye /> : <FaEyeSlash />}
+        </Icon>
         <FormError name="password" />
       </Label>
       <Label>
         <Input
           name="confirmPassword"
-          type="password"
+          type={confirmPasswordShown ? 'text' : 'password'}
           placeholder="Confirm password"
-          //   required
         />
+        <Icon onClick={toggleConfirmPassword}>
+          {confirmPasswordShown ? <FaEye /> : <FaEyeSlash />}
+        </Icon>
         <FormError name="confirmPassword" />
       </Label>
     </>
