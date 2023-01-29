@@ -9,8 +9,8 @@ import {
 } from "../../redux/notices/noticesSelectors";
 import {
 	fetchNotices,
-	fetchFavorites,
-	fetchOwnerNotices,
+	// fetchFavorites,
+	// fetchOwnerNotices,
 } from "../../redux/notices/noticesOperations";
 import { SectionTitle } from "../../components/CommonComponents/SectionTitle/SectionTitle";
 import { NoticesCategoriesNav } from "../../components/NoticesCategoriesNav/NoticesCategoriesNav";
@@ -37,31 +37,13 @@ const NoticesPage = () => {
 
 	const dispatch = useDispatch();
 
-	useEffect(() => {
-
-		if (route === "favorite") {
-			if (searchTitleQwery !== "") {
-				dispatch(fetchFavorites({ qwery: searchTitleQwery }));
-			} else {
-				dispatch(fetchFavorites({}));
-			}
-		}
-
-		if (route === "owner") {
-			if (searchTitleQwery !== "") {
-				dispatch(fetchOwnerNotices({ qwery: searchTitleQwery }));
-			} else {
-				dispatch(fetchOwnerNotices({}));
-			}
-		}
-
-		if (["sell", "lost-found", "in-good-hands"].includes(route)) {
+	useEffect(() => {	
 			if (searchTitleQwery !== "") {
 				dispatch(fetchNotices({ category: route, qwery: searchTitleQwery }));
 			} else {
 				dispatch(fetchNotices({ category: route }));
 			}
-		}
+		
 	}, [dispatch, route, searchTitleQwery]);
 
 	const closeModal = () => {

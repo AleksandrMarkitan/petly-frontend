@@ -2,9 +2,9 @@ import { createSlice } from "@reduxjs/toolkit";
 import {
   fetchNotices,
   fetchOneNotice,
-  fetchFavorites,
+  // fetchFavorites,
   addNotice,
-  fetchOwnerNotices,
+  // fetchOwnerNotices,
   deleteNotice,
 } from "./noticesOperations";
 
@@ -27,7 +27,7 @@ const noticesSlice = createSlice({
       state.notifyNotices = null;
     },
     [fetchNotices.fulfilled]: (state, { payload }) => {
-      state.notices = payload;
+      state.notices = payload.notices;
       state.isLoading = false;
     },
     [fetchNotices.rejected]: (state, { payload }) => {
@@ -79,34 +79,34 @@ const noticesSlice = createSlice({
       state.isLoading = false;
     },
     // отримання оголошень авторизованого користувача доданих ним же в обрані
-    [fetchFavorites.pending]: (state) => {
-      state.isLoading = true;
-      state.error = null;
-      state.notifyNotices = null;
-    },
-    [fetchFavorites.fulfilled]: (state, { payload }) => {
-      state.notices = payload;
-      state.isLoading = false;
-    },
-    [fetchFavorites.rejected]: (state, { payload }) => {
-      state.error = payload;
-      state.isLoading = false;
-    },
+    // [fetchFavorites.pending]: (state) => {
+    //   state.isLoading = true;
+    //   state.error = null;
+    //   state.notifyNotices = null;
+    // },
+    // [fetchFavorites.fulfilled]: (state, { payload }) => {
+    //   state.notices = payload;
+    //   state.isLoading = false;
+    // },
+    // [fetchFavorites.rejected]: (state, { payload }) => {
+    //   state.error = payload;
+    //   state.isLoading = false;
+    // },
 
     // отримання оголошень авторизованого користувача створених цим же користувачем
-    [fetchOwnerNotices.pending]: (state) => {
-      state.isLoading = true;
-      state.error = null;
-      state.notifyNotices = null;
-    },
-    [fetchOwnerNotices.fulfilled]: (state, { payload }) => {
-      state.notices = payload;
-      state.isLoading = false;
-    },
-    [fetchOwnerNotices.rejected]: (state, { payload }) => {
-      state.error = payload;
-      state.isLoading = false;
-    },
+    // [fetchOwnerNotices.pending]: (state) => {
+    //   state.isLoading = true;
+    //   state.error = null;
+    //   state.notifyNotices = null;
+    // },
+    // [fetchOwnerNotices.fulfilled]: (state, { payload }) => {
+    //   state.notices = payload;
+    //   state.isLoading = false;
+    // },
+    // [fetchOwnerNotices.rejected]: (state, { payload }) => {
+    //   state.error = payload;
+    //   state.isLoading = false;
+    // },
   },
 });
 
