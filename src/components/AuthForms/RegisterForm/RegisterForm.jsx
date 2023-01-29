@@ -90,7 +90,10 @@ export const RegisterForm = () => {
       .required('Phone is required'),
   });
 
-  const handleSubmit = ({ name, email, password, city, phone }) => {
+  const handleSubmit = (
+    { name, email, password, city, phone },
+    { resetForm }
+  ) => {
     const values = { email, password };
 
     dispatch(register({ name, email, password, city, phone })).then(resp => {
@@ -98,7 +101,7 @@ export const RegisterForm = () => {
         loginUser(values);
       }
     });
-
+    resetForm();
     return;
   };
 
