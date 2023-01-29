@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import {
 	selectToken,
 } from '../../redux/auth/authSelectors';
@@ -11,10 +11,9 @@ import {
 	// selectNoticesNotify,
 } from "../../redux/notices/noticesSelectors";
 import {
-	fetchNotices,
-	fetchFavorites,
-	fetchOwnerNotices,
+	fetchNotices,	
 } from "../../redux/notices/noticesOperations";
+import { clearNotices } from '../../redux/notices/noticesSlice';
 import { SectionTitle } from "../../components/CommonComponents/SectionTitle/SectionTitle";
 import { NoticesCategoriesNav } from "../../components/NoticesCategoriesNav/NoticesCategoriesNav";
 import { Section } from "../../components/CommonComponents/Section/Section";
@@ -37,11 +36,11 @@ import { selectIsAuth } from "../../redux/auth/authSelectors";
 import { IsNotAuthModal } from "../../components/CommonComponents/IsNotAuthModal/IsNotAuthModal";
 
 const NoticesPage = () => {
-	const { route } = useParams();
+  const { route } = useParams();
 
-	const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-	const [searchTitleQwery, setSearchTitleQwery] = useState("");
+  const [searchTitleQwery, setSearchTitleQwery] = useState('');
 
 	const token = useSelector(selectToken);
 
@@ -51,36 +50,16 @@ const NoticesPage = () => {
 
 	const [isShownAlert, setIsShownAlert] = useState(false);
 
-	const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-	useEffect(() => {
-
-		if (route === "favorite") {
-			if (searchTitleQwery !== "") {
-				dispatch(fetchFavorites({ qwery: searchTitleQwery }));
-			} else {
-				dispatch(fetchFavorites({}));
-			}
-		}
-
-		if (route === "owner") {
-			if (searchTitleQwery !== "") {
-				dispatch(fetchOwnerNotices({ qwery: searchTitleQwery }));
-			} else {
-				dispatch(fetchOwnerNotices({}));
-			}
-		}
-
-		if (["sell", "lost-found", "in-good-hands"].includes(route)) {
-			if (searchTitleQwery !== "") {
-				dispatch(fetchNotices({ category: route, qwery: searchTitleQwery }));
-			} else {
-				dispatch(fetchNotices({ category: route }));
-			}
-		}
-
-
-	}, [dispatch, route, searchTitleQwery]);
+  useEffect(() => {
+    if (searchTitleQwery !== '') {
+      dispatch(fetchNotices({ category: route, qwery: searchTitleQwery }));
+    } else {
+      dispatch(fetchNotices({ category: route }));
+    }
+    return () => dispatch(clearNotices([]));
+  }, [dispatch, route, searchTitleQwery]);  
 
 	const closeModal = () => {
 		token ? setIsModalOpen(!isModalOpen) : setIsShownAlert(true);

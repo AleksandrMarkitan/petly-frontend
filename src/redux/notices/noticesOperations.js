@@ -13,9 +13,9 @@ export const fetchNotices = createAsyncThunk(
   ) => {
     try {
       const { data } = await axios(
-        `/notices?category=${category}&page=${page}&limit=${limit}&qwery=${qwery}`
+        `/notices/${category}?page=${page}&limit=${limit}&qwery=${qwery}`
       );
-      return data.notices;
+      return data;
     } catch (error) {
       return rejectWithValue(error.message);
     }
@@ -28,27 +28,8 @@ export const fetchOneNotice = createAsyncThunk(
 
   async ({ noticeId }, { rejectWithValue }) => {
     try {
-      const { data } = await axios(`/notices/${noticeId}`);
+      const { data } = await axios(`/notices/notice/${noticeId}`);
       return data;
-    } catch (error) {
-      return rejectWithValue(error.message);
-    }
-  }
-);
-
-// отримання оголошень авторизованого користувача доданих ним же в обрані
-export const fetchFavorites = createAsyncThunk(
-  'notices/fetchFavorites',
-
-  async (
-    { qwery = '', page = 1, limit = DEFAULT_LIMIT },
-    { rejectWithValue }
-  ) => {
-    try {
-      const { data } = await axios(
-        `/notices/favorites?page=${page}&limit=${limit}&qwery=${qwery}`
-      );
-      return data.notices;
     } catch (error) {
       return rejectWithValue(error.message);
     }
@@ -63,25 +44,6 @@ export const addNotice = createAsyncThunk(
     try {
       const { data } = await axios.post(`/notices`, newNotice);
       return data;
-    } catch (error) {
-      return rejectWithValue(error.message);
-    }
-  }
-);
-
-// отримання оголошень авторизованого користувача створених цим же користувачем
-export const fetchOwnerNotices = createAsyncThunk(
-  'notices/fetchOwnerNotices',
-
-  async (
-    { qwery = '', page = 1, limit = DEFAULT_LIMIT },
-    { rejectWithValue }
-  ) => {
-    try {
-      const { data } = await axios(
-        `/notices/owner?page=${page}&limit=${limit}&qwery=${qwery}`
-      );
-      return data.notices;
     } catch (error) {
       return rejectWithValue(error.message);
     }

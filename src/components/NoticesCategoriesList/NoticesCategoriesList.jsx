@@ -7,7 +7,7 @@ export const NoticesCategoriesList = ({ data, route }) => {
   return (
     <>
       <List>
-        {data
+        {[...data].reverse()
           .filter(
             item =>
               item.category === route ||
