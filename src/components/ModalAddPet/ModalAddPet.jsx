@@ -10,37 +10,37 @@ import { NextBtn } from '../CommonButtons/NextBtn/NextBtn';
 import {
   InputFileWrap,
   InputFile,
-  FieldsWrapper,
   Label,
   BtnWrapper,
   FormStyled,
-  SubmitBtn,
   Error,
   InputField,
-  CommentWrap,
-  Textarea,
   Title,
   InputFieldWrap,
   Calendar,
+  ErrorDate,
+  ErrorAvatar,
 } from './ModalAddPet.styled';
 import { CommentField } from '../ModalAddPet/CommentField/CommentField';
 
 export const ModalAddPet = ({ onClose }) => {
   const dispatch = useDispatch();
   const [selectedFile, setSelectedFile] = useState(null);
-  const [imgURL, setImgURL] = useState('');
   const [preview, setPreview] = useState('');
   const [birthdate, setBirthdate] = useState('');
   const [page, setPage] = useState(1);
   const [name, setName] = useState('');
   const [breed, setBreed] = useState('');
-  const nameRegexp = /^[a-zA-Z]{2,16}$/;
-  const breedRegexp = /^[a-zA-Z]{2,16}$/;
-  const commentRegexp1 = /^[A-Za-z0-9!?#$%^&_\-*]{8,120}$/;
-  const commentRegexp = /^[a-z|A-Z|0-9!?#$%^&_\s\-*]{8,120}$/;
+  const [comments, setComments] = useState('');
+  const [inputDirty, setInputDirty] = useState(false);
+  const [inputDateError, setInputDateError] = useState(
+    'Date of birth is required'
+  );
+  const inputAvatarError = 'Photo is required';
+  const breedRegexp = /^[a-zA-Zа-яА-Я-`'іІїЇ]*$/;
 
   const validDate = current => {
-    return current.isBefore(moment()) && current.isAfter('1970-12-31', 'day');
+    return current.isBefore(moment()) && current.isAfter('1969-12-31', 'day');
   };
 
   const validateName = value => {
@@ -49,6 +49,10 @@ export const ModalAddPet = ({ onClose }) => {
   const validateBreed = value => {
     setBreed(value);
   };
+  const validateComents = value => {
+    setComments(value);
+  };
+
   const nextPage = () => {
     setPage(prevState => prevState + 1);
   };
@@ -60,7 +64,7 @@ export const ModalAddPet = ({ onClose }) => {
   const inputFileHandler = e => {
     const file = e.target.files[0];
 
-    setImgURL(file);
+    setSelectedFile(file);
     const reader = new FileReader();
 
     reader.onload = function (e) {
@@ -68,11 +72,15 @@ export const ModalAddPet = ({ onClose }) => {
     };
 
     reader.readAsDataURL(file);
-    setSelectedFile(file);
   };
 
   const birthdateHandler = e => {
     setBirthdate(e.format('DD.MM.YYYY'));
+    setInputDateError('');
+  };
+
+  const blurHandler = () => {
+    setInputDirty(true);
   };
 
   const initialValues = {
@@ -91,12 +99,11 @@ export const ModalAddPet = ({ onClose }) => {
     breed: Yup.string()
       .min(2, 'Breed must contain at least 2 symbol')
       .max(16, 'Breed must contain no more than 16 symbols')
-      //.matches(nameBreedRegexp, 'Please, enter a valid breed')
+      .matches(breedRegexp, 'Please, enter a valid breed')
       .required('Breed is required'),
     comments: Yup.string()
       .min(8, 'Comment must contain at least 8 symbol')
       .max(120, 'Comment must contain no more than 120 symbols')
-      .matches(commentRegexp, 'Please, enter a valid comment') //???? matches - надо ли ?
       .required('Comment is required'),
   });
 
@@ -105,11 +112,11 @@ export const ModalAddPet = ({ onClose }) => {
 
     const formData = new FormData();
 
-    selectedFile && formData.append('avatarURL', selectedFile);
-    name && formData.append('name', name);
-    birthdate && formData.append('date', birthdate);
-    breed && formData.append('breed', breed);
-    comments && formData.append('comments', comments);
+    formData.append('avatarURL', selectedFile);
+    formData.append('name', name);
+    formData.append('date', birthdate);
+    formData.append('breed', breed);
+    formData.append('comments', comments);
 
     dispatch(addPet(formData));
     onClose();
@@ -146,7 +153,9 @@ export const ModalAddPet = ({ onClose }) => {
                     inputProps={{
                       readOnly: true,
                       id: 'birth',
-                      placeholder: 'Choose date',
+                      placeholder: 'Type date of birth',
+                      required: true,
+                      onBlur: blurHandler,
                     }}
                     value={birthdate}
                     onChange={birthdateHandler}
@@ -155,6 +164,8 @@ export const ModalAddPet = ({ onClose }) => {
                     dateFormat="DD.MM.YYYY"
                     isValidDate={validDate}
                   />
+                  {inputDirty && <ErrorDate>{inputDateError}</ErrorDate>}
+
                   <Label>
                     Breed
                     <InputField
@@ -187,34 +198,31 @@ export const ModalAddPet = ({ onClose }) => {
                       accept="image/jpeg, image/png"
                       onChange={inputFileHandler}
                     />
+                    {!preview && <ErrorAvatar>{inputAvatarError}</ErrorAvatar>}
                   </Label>
                 </InputFileWrap>
-
-                {/* <CommentWrap>
-                  <Label>
-                    <div>Comments</div>
-                    <Textarea placeholder="Type comment" name="comments" />
-                    {touched.comments && errors.comments && (
-                      <Error>{errors.comments}</Error>
-                    )}
-                  </Label>
-                </CommentWrap> */}
                 <CommentField
                   touched={touched}
                   errors={errors}
                   name="comments"
+                  validate={validateComents}
                 />
               </>
             )}
             <BtnWrapper>
               {page === 1 ? (
-                (name.length >= 2) & (breed.length >= 2) ? (
+                (name.length >= 2) &
+                (breed.length >= 2) &
+                (birthdate.length >= 2) ? (
                   <NextBtn onClick={nextPage} />
                 ) : (
                   <NextBtn onClick={nextPage} disabled={true} />
                 )
+              ) : (comments.length >= 8 && comments.length <= 120) ||
+                !preview ? (
+                <NextBtn type="submit" text="Done" disabled={true} />
               ) : (
-                <SubmitBtn type="submit">Done</SubmitBtn>
+                <NextBtn type="submit" text="Done" />
               )}
               {page === 1 ? (
                 <CancelBtn onClick={onClose} />

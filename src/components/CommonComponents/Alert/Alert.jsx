@@ -1,18 +1,14 @@
-import {
-  MUST_AUTHORIZED,
-  MUST_AUTHORIZED_QUESTION,
-} from '../../../helpers/constants';
 import { BackDropAlert, Box, Btn, BtnOK } from './Alert.styled';
 
-export const Alert = ({ onClose }) => {
+export const Alert = ({ textInfo, textQuestion, onClose }) => {
   return (
     <BackDropAlert>
       <Box>
         <h2>Доброго вечора! Ми з України!</h2>
         <p>
-          <b>{MUST_AUTHORIZED}</b>
+          <b>{textInfo}</b>
         </p>
-        <p>{MUST_AUTHORIZED_QUESTION}</p>
+        <p>{textQuestion}</p>
         <div>
           <BtnOK to="/login" onClick={onClose}>
             OK
