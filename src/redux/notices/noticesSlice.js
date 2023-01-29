@@ -81,8 +81,11 @@ const noticesSlice = createSlice({
     clearNotices(state, { payload }) {
       state.notices = payload;
     },
+    changeFavotitesNotices(state, { payload }) {
+      state.notices = state.notices.filter(notice => notice._id !== payload);
+    },
   },
 });
 
 export default noticesSlice.reducer;
-export const { clearNotices } = noticesSlice.actions;
+export const { clearNotices, changeFavotitesNotices } = noticesSlice.actions;
