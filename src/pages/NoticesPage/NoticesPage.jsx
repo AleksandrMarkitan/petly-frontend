@@ -33,6 +33,9 @@ import {
 } from "../../helpers/constants";
 import { Alert } from '../../components/CommonComponents/Alert/Alert';
 
+import { selectIsAuth } from "../../redux/auth/authSelectors";
+import { IsNotAuthModal } from "../../components/CommonComponents/IsNotAuthModal/IsNotAuthModal";
+
 const NoticesPage = () => {
 	const { route } = useParams();
 
@@ -44,6 +47,7 @@ const NoticesPage = () => {
 
 	const notices = useSelector(selectNotices);
 	const isLoading = useSelector(selectNoticesIsLoading);
+	const isAuth = useSelector(selectIsAuth);
 
 	const [isShownAlert, setIsShownAlert] = useState(false);
 
@@ -106,7 +110,8 @@ const NoticesPage = () => {
 							data={notices} /> :
 						!isLoading && <Notification message={NOT_FOUND} />}
 				</>
-				{isModalOpen && <ModalAddNotice onClose={closeModal} />}
+				{isModalOpen && isAuth && <ModalAddNotice onClose={closeModal} />}
+				{isModalOpen && !isAuth && <IsNotAuthModal onClose={closeModal} text="Let`s login or registration to add notice." />}
 				{isShownAlert &&
 					<Alert
 						textInfo={MUST_AUTHORIZED}
