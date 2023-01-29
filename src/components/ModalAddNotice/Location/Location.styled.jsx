@@ -58,9 +58,8 @@ export const CitiesList = styled.ul`
   padding-right: 3px;
   padding-bottom: 5px;
 
-  color: rgba(27, 27, 27, 0.8);
-  background-color: rgba(253, 247, 242, 0.2);
-  backdrop-filter: blur(10px);
+  color: rgba(27, 27, 27);
+  background-color: rgb(253, 247, 242);
 
   overflow: auto;
 
