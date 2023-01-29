@@ -9,6 +9,22 @@ import bgLoginMob from '../../img/bgLoginMob.png';
 
 import { SectionTag } from '../CommonComponents/Section/Section.styled';
 
+export const Icon = styled.span`
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+
+  svg {
+    width: inherit;
+    height: inherit;
+    fill: rgba(17, 17, 17, 0.6);
+  }
+`;
+
 export const CitySelect = styled(AsyncSelect)`
   width: 100%;
   padding: 14px 10px 13px 32px;
