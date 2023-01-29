@@ -224,6 +224,37 @@ export const Error = styled.div`
     //font-size: ${p => p.theme.fontSize.fs10};
   }
 `;
+
+export const ErrorDate = styled.div`
+  position: absolute;
+  left: 36px;
+  bottom: 46%;
+  //bottom: 20px;
+  color: red;
+  font-size: 10px;
+  @media (min-width: 768px) {
+    left: 95px;
+    bottom: 38%;
+    //left: 16px;
+    font-size: 12px;
+    //font-size: ${p => p.theme.fontSize.fs10};
+  }
+`;
+
+// export const ErrorText = styled.p`
+//   position: absolute;
+//   bottom: -15px;
+//   left: 18px;
+//   margin: 0px;
+//   font-size: 10px;
+//   line-height: calc(1.5);
+//   color: red;
+
+//   @media (min-width: 768px) {
+//     left: 12px;
+//     //font-size: ${p => p.theme.fontSize.fs10};
+//   }
+// `;
 //-----------
 export const SubmitBtn = styled.button`
   padding: 8px 0;

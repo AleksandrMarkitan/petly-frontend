@@ -12,6 +12,7 @@ export const LogOut = styled.button`
   font-weight: ${p => p.theme.fontWeight.fw600};
   padding: 0px;
   margin-top: 42px;
+  width: max-content;
   :hover,
   :focus {
     transform: scale(1.1);
