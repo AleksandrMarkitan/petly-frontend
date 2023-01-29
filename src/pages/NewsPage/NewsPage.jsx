@@ -13,8 +13,6 @@ const NewsPage = () => {
 	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
-		//  setIsLoading(true);
-
 		async function fetch() {
 			try {
 				const response = await getNews({});
@@ -67,13 +65,14 @@ const NewsPage = () => {
 						<NewsList news={news} />
 					</>
 				)}
+
 				{news.length === 0 && !isLoading && (
 					<div style={{ textAlign: 'center' }}>
-						Новин за вашим запитом не знайдено.
+						There are not news according to your query. Try again.
 					</div>
 				)}
 			</Container>
-		</Section>
+		</Section >
 	);
 };
 
