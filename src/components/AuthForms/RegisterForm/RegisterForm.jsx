@@ -58,12 +58,12 @@ export const RegisterForm = () => {
       .matches(passwordRegexp, 'Please, enter a valid password')
       .required('Password is required'),
     confirmPassword: yup
-      .string('Please, confirm your password')
+      .string()
       .oneOf(
         [yup.ref('password')],
         'This password doesn`t match the previous one'
       )
-      .required('Password is required'),
+      .required('Please, confirm your password'),
   });
 
   const schemaStepTwo = yup.object({
@@ -95,13 +95,14 @@ export const RegisterForm = () => {
     { resetForm }
   ) => {
     const values = { email, password };
+
     dispatch(register({ name, email, password, city, phone })).then(resp => {
       if (resp.meta.requestStatus === 'fulfilled') {
         loginUser(values);
       }
     });
-
     resetForm();
+    return;
   };
 
   return (

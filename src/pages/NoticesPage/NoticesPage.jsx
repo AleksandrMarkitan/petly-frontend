@@ -11,7 +11,7 @@ import {
 	// selectNoticesNotify,
 } from "../../redux/notices/noticesSelectors";
 import {
-	fetchNotices,	
+	fetchNotices,
 } from "../../redux/notices/noticesOperations";
 import { clearNotices } from '../../redux/notices/noticesSlice';
 import { SectionTitle } from "../../components/CommonComponents/SectionTitle/SectionTitle";
@@ -30,47 +30,38 @@ import {
 	MUST_AUTHORIZED,
 	MUST_AUTHORIZED_QUESTION,
 } from "../../helpers/constants";
-import { Alert } from '../../components/CommonComponents/Alert/Alert';
 
 import { selectIsAuth } from "../../redux/auth/authSelectors";
-import { IsNotAuthModal } from "../../components/CommonComponents/IsNotAuthModal/IsNotAuthModal";
+import { WarningMessage } from '../../components/CommonComponents/WarningMessage/WarningMessage';
 
 const NoticesPage = () => {
-  const { route } = useParams();
+	const { route } = useParams();
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
+	const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const [searchTitleQwery, setSearchTitleQwery] = useState('');
-
-	const token = useSelector(selectToken);
+	const [searchTitleQwery, setSearchTitleQwery] = useState('');
 
 	const notices = useSelector(selectNotices);
 	const isLoading = useSelector(selectNoticesIsLoading);
 	const isAuth = useSelector(selectIsAuth);
 
-	const [isShownAlert, setIsShownAlert] = useState(false);
+	const dispatch = useDispatch();
 
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (searchTitleQwery !== '') {
-      dispatch(fetchNotices({ category: route, qwery: searchTitleQwery }));
-    } else {
-      dispatch(fetchNotices({ category: route }));
-    }
-    return () => dispatch(clearNotices([]));
-  }, [dispatch, route, searchTitleQwery]);  
+	useEffect(() => {
+		if (searchTitleQwery !== '') {
+			dispatch(fetchNotices({ category: route, qwery: searchTitleQwery }));
+		} else {
+			dispatch(fetchNotices({ category: route }));
+		}
+		return () => dispatch(clearNotices([]));
+	}, [dispatch, route, searchTitleQwery]);
 
 	const closeModal = () => {
-		token ? setIsModalOpen(!isModalOpen) : setIsShownAlert(true);
+		setIsModalOpen(!isModalOpen)
 	};
 
 	const onSearch = (searchQuery) => {
 		setSearchTitleQwery(searchQuery);
-	};
-
-	const closeAlert = () => {
-		setIsShownAlert(!isShownAlert);
 	};
 
 	return (
@@ -90,12 +81,7 @@ const NoticesPage = () => {
 						!isLoading && <Notification message={NOT_FOUND} />}
 				</>
 				{isModalOpen && isAuth && <ModalAddNotice onClose={closeModal} />}
-				{isModalOpen && !isAuth && <IsNotAuthModal onClose={closeModal} text="Let`s login or registration to add notice." />}
-				{isShownAlert &&
-					<Alert
-						textInfo={MUST_AUTHORIZED}
-						textQuestion={MUST_AUTHORIZED_QUESTION}
-						onClose={closeAlert} />}
+				{isModalOpen && !isAuth && <WarningMessage onClose={closeModal} type="auth" title="Unauthorized" text="Let`s login or registration to add notice." />}
 				{isLoading && <Loader />}
 			</Container>
 		</Section>

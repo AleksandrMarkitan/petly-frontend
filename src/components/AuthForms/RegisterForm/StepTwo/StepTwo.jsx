@@ -8,7 +8,7 @@ export const StepTwo = ({
   setFieldTouched,
   setFieldError,
   setFieldValue,
-  values,
+  values: { city, name, phone },
 }) => {
   const NAME_INPUT_CITY = 'city';
 
@@ -36,14 +36,14 @@ export const StepTwo = ({
       callback(filterCities(inputValue));
     }, 300);
   };
-  const valueCity = listCity.find(({ label }) => label === values.city);
+  const valueCity = listCity.find(({ label }) => label === city);
 
   const noOptionsMessage = () => 'Sorry, your city was not found';
 
   return (
     <>
       <Label>
-        <Input name="name" placeholder="Name" />
+        <Input name="name" placeholder="Name" value={name} />
         <FormError name="name" />
       </Label>
       <Label>
@@ -125,7 +125,7 @@ export const StepTwo = ({
         <FormError name={NAME_INPUT_CITY} />
       </Label>
       <Label>
-        <Input name="phone" placeholder="Mobile phone" />
+        <Input name="phone" placeholder="Mobile phone" value={phone} />
         <FormError name="phone" />
       </Label>
     </>
