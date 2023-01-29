@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 import {
   fetchNotices,
   fetchOneNotice,
@@ -6,7 +6,7 @@ import {
   addNotice,
   fetchOwnerNotices,
   deleteNotice,
-} from "./noticesOperations";
+} from './noticesOperations';
 
 const initialState = {
   notices: [],
@@ -17,11 +17,11 @@ const initialState = {
 };
 
 const noticesSlice = createSlice({
-  name: "notices",
+  name: 'notices',
   initialState,
   extraReducers: {
     // отримання оголошень по категоріям
-    [fetchNotices.pending]: (state) => {
+    [fetchNotices.pending]: state => {
       state.isLoading = true;
       state.error = null;
       state.notifyNotices = null;
@@ -35,7 +35,7 @@ const noticesSlice = createSlice({
       state.isLoading = false;
     },
     // отримання одного оголошення
-    [fetchOneNotice.pending]: (state) => {
+    [fetchOneNotice.pending]: state => {
       state.isLoading = true;
       state.error = null;
       state.notifyNotices = null;
@@ -49,14 +49,14 @@ const noticesSlice = createSlice({
       state.isLoading = false;
     },
     // додавання оголошень відповідно до обраної категорії
-    [addNotice.pending]: (state) => {
+    [addNotice.pending]: state => {
       state.isLoading = true;
       state.error = null;
       state.notifyNotices = null;
     },
     [addNotice.fulfilled]: (state, { payload }) => {
       state.notices.push(payload);
-      state.notifyNotices = "Notice was successfully added!";
+      state.notifyNotices = 'Notice was successfully added!';
       state.isLoading = false;
     },
     [addNotice.rejected]: (state, { payload }) => {
@@ -64,14 +64,14 @@ const noticesSlice = createSlice({
       state.isLoading = false;
     },
     //  видалення оголошення авторизованого користувача створеного цим же користувачем
-    [deleteNotice.pending]: (state) => {
+    [deleteNotice.pending]: state => {
       state.isLoading = true;
       state.error = null;
       state.notifyNotices = null;
     },
     [deleteNotice.fulfilled]: (state, { payload }) => {
       state.notices = state.notices.filter(({ _id }) => _id !== payload);
-      state.notifyNotices = "Notice was successfully deleted!";
+      state.notifyNotices = 'Notice was successfully deleted!';
       state.isLoading = false;
     },
     [deleteNotice.rejected]: (state, { payload }) => {
@@ -79,7 +79,7 @@ const noticesSlice = createSlice({
       state.isLoading = false;
     },
     // отримання оголошень авторизованого користувача доданих ним же в обрані
-    [fetchFavorites.pending]: (state) => {
+    [fetchFavorites.pending]: state => {
       state.isLoading = true;
       state.error = null;
       state.notifyNotices = null;
@@ -94,7 +94,7 @@ const noticesSlice = createSlice({
     },
 
     // отримання оголошень авторизованого користувача створених цим же користувачем
-    [fetchOwnerNotices.pending]: (state) => {
+    [fetchOwnerNotices.pending]: state => {
       state.isLoading = true;
       state.error = null;
       state.notifyNotices = null;
