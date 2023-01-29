@@ -20,6 +20,10 @@ const AGES_IN_WORDS = {
 const MUST_AUTHORIZED = 'You must be authorized to use this functionality!';
 const MUST_AUTHORIZED_QUESTION = 'Do you want to go to Login Form?';
 
+// ==========  QUESTION  ============
+
+const CONFIRMATION_DELETE = 'Do you really want to remove the ad?';
+
 // ==========  FETCH NOTICES  ============
 
 const DEFAULT_LIMIT = 0;
@@ -32,4 +36,5 @@ export {
   MUST_AUTHORIZED,
   MUST_AUTHORIZED_QUESTION,
   DEFAULT_LIMIT,
+  CONFIRMATION_DELETE,
 };

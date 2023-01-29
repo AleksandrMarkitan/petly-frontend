@@ -22,7 +22,8 @@ export const Button = styled.button`
 		background-color: ${p => p.theme.colors.accent};
 	}
 
-	&:hover svg {
+	&:hover svg,
+	&:focus svg {
     fill: #FFFFFF;
 	}
 `;

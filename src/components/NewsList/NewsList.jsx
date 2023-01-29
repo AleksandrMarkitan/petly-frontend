@@ -1,4 +1,5 @@
 import EllipsisText from "react-ellipsis-text";
+import { ScrollUpBtn } from "../CommonButtons/ScrollUpBtn/ScrollUpBtn";
 import { List, ListItem, NewsTitle, Description, AdditionalInfo, Date, Link, Wrapper } from "./NewsList.styled"
 
 export const NewsList = ({ news }) => {
@@ -7,7 +8,7 @@ export const NewsList = ({ news }) => {
 		return date.split('-').reverse().join("/")
 	}
 
-	return <List>
+	return <><List>
 		{news.map(({ _id, title, description, date, url }) => <ListItem key={_id}>
 			<Wrapper>
 				<NewsTitle>
@@ -21,4 +22,6 @@ export const NewsList = ({ news }) => {
 			</Wrapper>
 		</ListItem>)}
 	</List>
+		<ScrollUpBtn />
+	</>
 }
