@@ -62,6 +62,12 @@ export const Title = styled.h3`
     font-size:  ${p => p.theme.fontSize.fs20};
     line-height: calc(27 / 20);
   }
+   :hover,
+  :focus {
+    cursor: pointer;
+    color: red;
+    transition: ${p => p.theme.transition.first};
+  }
 `;
 export const Wrapper = styled.div`
   display: flex;
@@ -189,7 +195,7 @@ export const Email = styled.li`
     font-size: ${p => p.theme.fontSize.fs16};
     line-height: calc(22 / 16);
   }
-  :hover {
+  :hover a {
     color: ${p => p.theme.colors.accent};
     cursor: pointer;
     transition: ${p => p.theme.transition.first};
