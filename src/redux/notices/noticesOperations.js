@@ -36,22 +36,6 @@ export const fetchOneNotice = createAsyncThunk(
   }
 );
 
-// отримання оголошень авторизованого користувача доданих ним же в обрані
-// export const fetchFavorites = createAsyncThunk(
-//   "notices/fetchFavorites",
-
-//   async ({ qwery="",page = 1, limit = 0 }, { rejectWithValue }) => {
-//     try {
-//       const { data } = await axios(
-//         `/notices/favorites?page=${page}&limit=${limit}&qwery=${qwery}`
-//       );
-//       return data.notices;
-//     } catch (error) {
-//       return rejectWithValue(error.message);
-//     }
-//   }
-// );
-
 // додавання оголошень відповідно до обраної категорії
 export const addNotice = createAsyncThunk(
   'notices/addNotice',
@@ -65,22 +49,6 @@ export const addNotice = createAsyncThunk(
     }
   }
 );
-
-// отримання оголошень авторизованого користувача створених цим же користувачем
-// export const fetchOwnerNotices = createAsyncThunk(
-//   "notices/fetchOwnerNotices",
-
-//   async ({qwery="", page = 1, limit = 0 }, { rejectWithValue }) => {
-//     try {
-//       const { data } = await axios(
-//         `/notices/owner?page=${page}&limit=${limit}&qwery=${qwery}`
-//       );
-//       return data.notices;
-//     } catch (error) {
-//       return rejectWithValue(error.message);
-//     }
-//   }
-// );
 
 //  видалення оголошення авторизованого користувача створеного цим же користувачем
 export const deleteNotice = createAsyncThunk(

@@ -2,9 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import {
   fetchNotices,
   fetchOneNotice,
-  // fetchFavorites,
   addNotice,
-  // fetchOwnerNotices,
   deleteNotice,
 } from './noticesOperations';
 
@@ -78,36 +76,13 @@ const noticesSlice = createSlice({
       state.error = payload;
       state.isLoading = false;
     },
-    // отримання оголошень авторизованого користувача доданих ним же в обрані
-    // [fetchFavorites.pending]: (state) => {
-    //   state.isLoading = true;
-    //   state.error = null;
-    //   state.notifyNotices = null;
-    // },
-    // [fetchFavorites.fulfilled]: (state, { payload }) => {
-    //   state.notices = payload;
-    //   state.isLoading = false;
-    // },
-    // [fetchFavorites.rejected]: (state, { payload }) => {
-    //   state.error = payload;
-    //   state.isLoading = false;
-    // },
-
-    // отримання оголошень авторизованого користувача створених цим же користувачем
-    // [fetchOwnerNotices.pending]: (state) => {
-    //   state.isLoading = true;
-    //   state.error = null;
-    //   state.notifyNotices = null;
-    // },
-    // [fetchOwnerNotices.fulfilled]: (state, { payload }) => {
-    //   state.notices = payload;
-    //   state.isLoading = false;
-    // },
-    // [fetchOwnerNotices.rejected]: (state, { payload }) => {
-    //   state.error = payload;
-    //   state.isLoading = false;
-    // },
+  },
+  reducers: {
+    clearNotices(state, { payload }) {
+      state.notices = payload;
+    },
   },
 });
 
 export default noticesSlice.reducer;
+export const { clearNotices } = noticesSlice.actions;
