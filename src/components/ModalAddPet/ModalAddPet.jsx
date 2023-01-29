@@ -225,36 +225,19 @@ export const ModalAddPet = ({ onClose }) => {
               </>
             )}
             <BtnWrapper>
-              {/* {page === 1 ? (
-                (name.length >= 2) &
-                (breed.length >= 2) &
-                (birthdate.length >= 2) ? (
-                  <NextBtn onClick={nextPage} />
-                ) : (
-                  <NextBtn onClick={nextPage} disabled={true} />
-                )
-              ) : (comments.length >= 8 && comments.length <= 120) ||
-                !preview ? (
-                <NextBtn type="submit" text="Done" disabled={true} />
-              ) : (
+              {stateMachine.page_1 && stateMachine.nextButtonIsAbled && (
+                <NextBtn onClick={nextPage} />
+              )}
+              {stateMachine.page_1 && !stateMachine.nextButtonIsAbled && (
+                <NextBtn onClick={nextPage} disabled={true} />
+              )}
+              {stateMachine.page_2 && stateMachine.submitButtonIsAbled && (
                 <NextBtn type="submit" text="Done" />
               )}
-              {page === 1 ? (
-                <CancelBtn onClick={onClose} />
-              ) : (
-                <CancelBtn onClick={prevPage} text="Back" />
-              )} */}
-              {stateMachine.page_1 ? (
-                stateMachine.nextButtonIsAbled ? (
-                  <NextBtn onClick={nextPage} />
-                ) : (
-                  <NextBtn onClick={nextPage} disabled={true} />
-                )
-              ) : stateMachine.submitButtonIsAbled ? (
-                <NextBtn type="submit" text="Done" />
-              ) : (
+              {stateMachine.page_2 && !stateMachine.submitButtonIsAbled && (
                 <NextBtn type="submit" text="Done" disabled={true} />
               )}
+
               {stateMachine.page_1 ? (
                 <CancelBtn onClick={onClose} />
               ) : (
