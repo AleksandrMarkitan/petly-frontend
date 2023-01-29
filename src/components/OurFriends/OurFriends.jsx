@@ -11,6 +11,7 @@ import {
   Container,
   Img,
   Time,
+  Link,
 } from './OurFriends.styled';
 import { WorkTime } from './WorkTime';
 import image from '../../img/cat.png';
@@ -32,9 +33,9 @@ export const OurFriendsList = ({ friends }) => {
           <ListItem key={_id}>
             <Title>
               <span>
-                <a href={url} target="_blank" rel="noreferrer">
+                <Link href={url} target="_blank" rel="noreferrer">
                   {title}
-                </a>
+                </Link>
               </span>
             </Title>
 

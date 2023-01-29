@@ -265,3 +265,22 @@ export const Dr = styled.div`
 export const Hours = styled.p`
   display: block;
 `;
+export const Link = styled.a`
+  position: relative;
+  color: #f59256;
+
+  ::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 1px;
+    background-color: #f59256;
+    transition: width 300ms linear;
+  }
+
+  :hover::after {
+    width: 100%;
+  }
+`;
