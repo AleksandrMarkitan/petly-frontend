@@ -208,7 +208,8 @@ export const ModalAddNotice = ({ onClose }) => {
 			(name.length === 0 || (name.length >= 2 && name.length <= 24)) &&
 			(breed.length === 0 || (breed.length >= 2 && breed.length <= 16)),
 		submitButtonIsAbled:
-			(!cityQuery && location) ||
+			(!cityQuery && location && comments.length >= 8 &&
+				comments.length <= 120) ||
 			(!cityQuery &&
 				!location &&
 				comments.length >= 8 &&
