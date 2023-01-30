@@ -1,9 +1,12 @@
 import { DeleteBtn, DelIcon } from "./DeletePetBtn.styled";
 
-export const DeletePetBtn = ({ onDelete = () => {} }) => {
-  return (
-    <DeleteBtn type="button" onClick={onDelete}>
-      <DelIcon />
-    </DeleteBtn>
-  );
+export const DeletePetBtn = ({ onClick }) => {
+	const clickHandler = () => {
+		onClick()
+	}
+	return (
+		<DeleteBtn type="button" onClick={clickHandler}>
+			<DelIcon />
+		</DeleteBtn>
+	);
 };
