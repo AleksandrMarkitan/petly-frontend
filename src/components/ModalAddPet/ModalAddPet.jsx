@@ -1,12 +1,15 @@
-import { Formik } from 'formik';
-import * as Yup from 'yup';
-import moment from 'moment';
+import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
-import { addPet } from '../../redux/user/userOperations';
 import { BsPlusLg } from 'react-icons/bs';
+import { Formik } from 'formik';
+import * as Yup from 'yup';
+
+import { addPet } from '../../redux/user/userOperations';
 import { CancelBtn } from '../CommonButtons/CancelBtn/CancelBtn';
 import { NextBtn } from '../CommonButtons/NextBtn/NextBtn';
+import { CommentField } from '../ModalAddPet/CommentField/CommentField';
+
 import {
   InputFileWrap,
   InputFile,
@@ -21,27 +24,27 @@ import {
   ErrorDate,
   ErrorAvatar,
 } from './ModalAddPet.styled';
-import { CommentField } from '../ModalAddPet/CommentField/CommentField';
 
 export const ModalAddPet = ({ onClose }) => {
   const dispatch = useDispatch();
-  const [selectedFile, setSelectedFile] = useState(null);
-  const [preview, setPreview] = useState('');
-  const [birthdate, setBirthdate] = useState('');
-  const [page, setPage] = useState(1);
+
   const [name, setName] = useState('');
+  const [birthdate, setBirthdate] = useState('');
   const [breed, setBreed] = useState('');
+  const [preview, setPreview] = useState('');
   const [comments, setComments] = useState('');
+
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [page, setPage] = useState(1);
   const [inputDirty, setInputDirty] = useState(false);
   const [inputDateError, setInputDateError] = useState(
     'Date of birth is required'
   );
   const inputAvatarError = 'Photo is required';
-  //const breedRegexp = /^[a-zA-Zа-яА-Я-іІїЇ\s]*$/;
   const nameBreedRegexp = /^[A-zА-я-іІїЇєЄ\s]+$/;
 
   const validDate = current => {
-    return current.isBefore(moment()) && current.isAfter('1969-12-31', 'day');
+    return current.isBefore(new Date()) && current.isAfter('1969-12-31', 'day');
   };
 
   const validateName = value => {
@@ -90,7 +93,7 @@ export const ModalAddPet = ({ onClose }) => {
     avatarURL: {},
     comments: '',
   };
-  console.log(comments);
+
   const schema = Yup.object().shape({
     name: Yup.string()
       .min(2, 'Name must contain at least 2 symbol')
@@ -126,7 +129,6 @@ export const ModalAddPet = ({ onClose }) => {
   const stateMachine = {
     page_1: page === 1,
     page_2: page === 2,
-    // priceIsTurnedOn: category === 'sell',
     nextButtonIsAbled:
       name.length >= 2 &&
       name.length <= 16 &&
@@ -249,4 +251,8 @@ export const ModalAddPet = ({ onClose }) => {
       </Formik>
     </>
   );
+};
+
+ModalAddPet.propTypes = {
+  onClose: PropTypes.func.isRequired,
 };

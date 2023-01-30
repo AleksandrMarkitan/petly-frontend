@@ -45,30 +45,30 @@ export const ModalNotice = ({
   return (
     <>
       <ModalWindow onClose={onClose}>
-      <Box>
-        <ThumbImg>
-          <Img src={imgURL} alt={name} />
-          <Category>{category}</Category>
-        </ThumbImg>
+        <Box>
+          <ThumbImg>
+            <Img src={imgURL} alt={name} />
+            <Category>{category}</Category>
+          </ThumbImg>
 
-        <BoxTitleList>
-          <Title>{title}</Title>
+          <BoxTitleList>
+            <Title>{title}</Title>
 
-          <ListOfValues>
-            <BoxValue>
-              <TitleValue>Name:</TitleValue>
-              <Value>{name}</Value>
-            </BoxValue>
-            <BoxValue>
-              <TitleValue>Birthday:</TitleValue>
+            <ListOfValues>
+              <BoxValue>
+                <TitleValue>Name:</TitleValue>
+                <Value>{name}</Value>
+              </BoxValue>
+              <BoxValue>
+                <TitleValue>Birthday:</TitleValue>
                 <Value>{birthdateFormat}</Value>
-            </BoxValue>
-            <BoxValue>
-              <TitleValue>Breed:</TitleValue>
-              <Value>{breed}</Value>
-            </BoxValue>
-            <BoxValue>
-              <TitleValue>Place:</TitleValue>
+              </BoxValue>
+              <BoxValue>
+                <TitleValue>Breed:</TitleValue>
+                <Value>{breed}</Value>
+              </BoxValue>
+              <BoxValue>
+                <TitleValue>Place:</TitleValue>
                 <Value>
                   <a href={hrefLocation}
                     target="_blank"
@@ -76,62 +76,62 @@ export const ModalNotice = ({
                     {location}
                   </a>
                 </Value>
-            </BoxValue>
-            <BoxValue>
-              <TitleValue>The sex:</TitleValue>
-              <Value>{sex}</Value>
-            </BoxValue>
-            <BoxValue>
-              <TitleValue>Email:</TitleValue>
-              <Value>
-                <a href={hrefMail}>{email}</a>
-              </Value>
-            </BoxValue>
-            <BoxValue>
-              <TitleValue>Phone:</TitleValue>
-              <Value>
-                <a href={hrefTel}>{phone}</a>
-              </Value>
-            </BoxValue>
-            {price && (
-              <BoxValue>
-                <TitleValue>Sell:</TitleValue>
-                  <Value>{price}&#36;</Value>
               </BoxValue>
-            )}
-          </ListOfValues>
-        </BoxTitleList>
-      </Box>
+              <BoxValue>
+                <TitleValue>The sex:</TitleValue>
+                <Value>{sex}</Value>
+              </BoxValue>
+              <BoxValue>
+                <TitleValue>Email:</TitleValue>
+                <Value>
+                  <a href={hrefMail}>{email}</a>
+                </Value>
+              </BoxValue>
+              <BoxValue>
+                <TitleValue>Phone:</TitleValue>
+                <Value>
+                  <a href={hrefTel}>{phone}</a>
+                </Value>
+              </BoxValue>
+              {price && (
+                <BoxValue>
+                  <TitleValue>Sell:</TitleValue>
+                  <Value>{price}&#36;</Value>
+                </BoxValue>
+              )}
+            </ListOfValues>
+          </BoxTitleList>
+        </Box>
 
-      <Comments>
-        <b>Comments: </b>
-        {comments}
-      </Comments>
+        <Comments>
+          <b>Comments: </b>
+          {comments}
+        </Comments>
 
-      <BoxBtns>
-        {!isFavorite ? (
-          <Btn type="button" onClick={onClickFavorite}>
-            Add to
-            <span>
-              <Heart />
-            </span>
-          </Btn>
-        ) : (
-          <div>
-            <p>Added to "Favorite ads"</p>
-            <BtnIsAdded type="button" onClick={onClickFavorite}>
-              Remove from
+        <BoxBtns>
+          {!isFavorite ? (
+            <Btn type="button" onClick={onClickFavorite}>
+              Add to
               <span>
                 <Heart />
               </span>
-            </BtnIsAdded>
-          </div>
-        )}
+            </Btn>
+          ) : (
+            <div>
+              <p>Added to "Favorite ads"</p>
+              <BtnIsAdded type="button" onClick={onClickFavorite}>
+                Remove from
+                <span>
+                  <Heart />
+                </span>
+              </BtnIsAdded>
+            </div>
+          )}
 
           <a href={hrefTel}>
             <Btn type="button">Contact</Btn>
           </a>
-      </BoxBtns>
+        </BoxBtns>
       </ModalWindow>
     </>
   );

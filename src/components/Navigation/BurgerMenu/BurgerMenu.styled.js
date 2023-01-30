@@ -6,17 +6,14 @@ export const NavStyled = styled.nav`
   background-color: rgba(253, 247, 242, 1);
   z-index: 50;
   padding: 16px 20px;
-  width: 320px;
+  width: 100%;
   top: 0;
-  right: 50%;
-  transform: translateX(50%);
+  right: 0;
   box-shadow: 7px 4px 14px rgba(0, 0, 0, 0.11);
   border-radius: 20px;
-  margin: 5px auto;
 
   @media (min-width: 768px) {
     padding: 24px 32px;
-    width: 748px;
   }
 `;
 
