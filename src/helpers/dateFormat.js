@@ -39,10 +39,15 @@ const getAge = birthdate => {
 
 const formatDurationInWords = date => formatDuration(date);
 
-const parseInFormat = (date, dateInFormat, referenceDate) => parse(date, dateInFormat, referenceDate);
+const parseInFormat = (birthdate, dateInFormat, referenceDate) => {
+
+  const date = new Date(birthdate);
+
+  return parse(date, dateInFormat, referenceDate);
+}
 
 const ageInWords = age => {
-  if (+age[0] > 5) {
+  if (+age.split(' ')[0] > 5) {
     age = 'more 5 years';
   }
   return AGES_IN_WORDS[age];
