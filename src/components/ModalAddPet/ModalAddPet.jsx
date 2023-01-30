@@ -37,6 +37,7 @@ export const ModalAddPet = ({ onClose }) => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [page, setPage] = useState(1);
   const [inputDirty, setInputDirty] = useState(false);
+  const [inputDirtyFile, setInputDirtyFile] = useState(false);
   const [inputDateError, setInputDateError] = useState(
     'Date of birth is required'
   );
@@ -85,6 +86,10 @@ export const ModalAddPet = ({ onClose }) => {
 
   const blurHandler = () => {
     setInputDirty(true);
+  };
+
+  const blurHandlerFile = () => {
+    setInputDirtyFile(true);
   };
 
   const initialValues = {
@@ -214,8 +219,11 @@ export const ModalAddPet = ({ onClose }) => {
                       type="file"
                       accept="image/jpeg, image/png"
                       onChange={inputFileHandler}
+                      focusOut={blurHandlerFile}
                     />
-                    {!preview && <ErrorAvatar>{inputAvatarError}</ErrorAvatar>}
+                    {!preview && blurHandlerFile && (
+                      <ErrorAvatar>{inputAvatarError}</ErrorAvatar>
+                    )}
                   </Label>
                 </InputFileWrap>
                 <CommentField
