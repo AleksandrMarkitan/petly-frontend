@@ -7,7 +7,6 @@ export const Item = styled.li`
   color: #111111;
   box-shadow: 7px 4px 14px rgba(49, 21, 4, 0.07);
   border-radius: 0px 0px 40px 40px;
-
   overflow-wrap: break-word;
 
   @media screen and (max-width: 767.98px) {
@@ -61,12 +60,7 @@ export const Title = styled.h2`
   font-weight: 700;
   font-size: 28px;
   line-height: calc(38 / 28);
-  /* letter-spacing: -0.01em; */
   flex-grow: 1;
-  /* white-space: nowrap; 
-  overflow: hidden; 
-  text-overflow: ellipsis; */
-  /* overflow-wrap: break-word; */
 `;
 
 export const Ul = styled.ul`
@@ -87,7 +81,6 @@ export const Lable = styled.p`
 `;
 export const Text = styled.p`
   @media screen and (min-width: 768px) {
-    /* max-width: 100%; */
   }
 `;
 export const ThumbBtn = styled.div`

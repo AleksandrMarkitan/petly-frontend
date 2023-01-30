@@ -15,7 +15,7 @@ export const NoticesCategoriesList = ({ data, route }) => {
               route === 'favorite'
           )
           .map(item => (
-            <NoticeCategoryItem key={item._id} data={item} />
+            <NoticeCategoryItem key={item._id} data={item} route={route} />
           ))}
       </List>
       <ScrollUpBtn />

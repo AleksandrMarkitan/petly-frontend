@@ -15,8 +15,11 @@ import {
   TitleValue,
   Value,
 } from './ModalNotice.styled';
+import { dateInFormat } from '../../../helpers/dateFormat';
+import { ModalWindow } from '../../CommonComponents/ModalWindow/ModalWindow';
 
 export const ModalNotice = ({
+  onClose,
   isFavorite,
   onClickFavorite,
   data: {
@@ -35,90 +38,101 @@ export const ModalNotice = ({
 }) => {
   const hrefMail = `mailto:${email}`;
   const hrefTel = `tel:${phone}`; /*Format: +380991111111 */
+  const hrefLocation = `https://www.google.com/maps?q=${location}`;
+
+  const birthdateFormat = dateInFormat(birthdate, 'dd.MM.yyyy');
 
   return (
     <>
-      <Box>
-        <ThumbImg>
-          <Img src={imgURL} alt={name} />
-          <Category>{category}</Category>
-        </ThumbImg>
+      <ModalWindow onClose={onClose}>
+        <Box>
+          <ThumbImg>
+            <Img src={imgURL} alt={name} />
+            <Category>{category}</Category>
+          </ThumbImg>
 
-        <BoxTitleList>
-          <Title>{title}</Title>
+          <BoxTitleList>
+            <Title>{title}</Title>
 
-          <ListOfValues>
-            <BoxValue>
-              <TitleValue>Name:</TitleValue>
-              <Value>{name}</Value>
-            </BoxValue>
-            <BoxValue>
-              <TitleValue>Birthday:</TitleValue>
-              <Value>{birthdate}</Value>
-            </BoxValue>
-            <BoxValue>
-              <TitleValue>Breed:</TitleValue>
-              <Value>{breed}</Value>
-            </BoxValue>
-            <BoxValue>
-              <TitleValue>Place:</TitleValue>
-              <Value>{location}</Value>
-            </BoxValue>
-            <BoxValue>
-              <TitleValue>The sex:</TitleValue>
-              <Value>{sex}</Value>
-            </BoxValue>
-            <BoxValue>
-              <TitleValue>Email:</TitleValue>
-              <Value>
-                <a href={hrefMail}>{email}</a>
-              </Value>
-            </BoxValue>
-            <BoxValue>
-              <TitleValue>Phone:</TitleValue>
-              <Value>
-                <a href={hrefTel}>{phone}</a>
-              </Value>
-            </BoxValue>
-            {price && (
+            <ListOfValues>
               <BoxValue>
-                <TitleValue>Sell:</TitleValue>
-                <Value>{price}&#36;</Value>
+                <TitleValue>Name:</TitleValue>
+                <Value>{name}</Value>
               </BoxValue>
-            )}
-          </ListOfValues>
-        </BoxTitleList>
-      </Box>
+              <BoxValue>
+                <TitleValue>Birthday:</TitleValue>
+                <Value>{birthdateFormat}</Value>
+              </BoxValue>
+              <BoxValue>
+                <TitleValue>Breed:</TitleValue>
+                <Value>{breed}</Value>
+              </BoxValue>
+              <BoxValue>
+                <TitleValue>Place:</TitleValue>
+                <Value>
+                  <a href={hrefLocation}
+                    target="_blank"
+                    rel="noopener nofollow noreferrer" >
+                    {location}
+                  </a>
+                </Value>
+              </BoxValue>
+              <BoxValue>
+                <TitleValue>The sex:</TitleValue>
+                <Value>{sex}</Value>
+              </BoxValue>
+              <BoxValue>
+                <TitleValue>Email:</TitleValue>
+                <Value>
+                  <a href={hrefMail}>{email}</a>
+                </Value>
+              </BoxValue>
+              <BoxValue>
+                <TitleValue>Phone:</TitleValue>
+                <Value>
+                  <a href={hrefTel}>{phone}</a>
+                </Value>
+              </BoxValue>
+              {price && (
+                <BoxValue>
+                  <TitleValue>Sell:</TitleValue>
+                  <Value>{price}&#36;</Value>
+                </BoxValue>
+              )}
+            </ListOfValues>
+          </BoxTitleList>
+        </Box>
 
-      <Comments>
-        <b>Comments: </b>
-        {comments}
-      </Comments>
+        <Comments>
+          <b>Comments: </b>
+          {comments}
+        </Comments>
 
-      <BoxBtns>
-        {!isFavorite ? (
-          <Btn type="button" onClick={onClickFavorite}>
-            Add to
-            <span>
-              <Heart />
-            </span>
-          </Btn>
-        ) : (
-          <div>
-            <p>Added to "Favorite ads"</p>
-            <BtnIsAdded type="button" onClick={onClickFavorite}>
-              Remove from
+        <BoxBtns>
+          {!isFavorite ? (
+            <Btn type="button" onClick={onClickFavorite}>
+              Add to
               <span>
                 <Heart />
               </span>
-            </BtnIsAdded>
-          </div>
-        )}
+            </Btn>
+          ) : (
+            <div>
+              <p>Added to "Favorite ads"</p>
+              <BtnIsAdded type="button" onClick={onClickFavorite}>
+                Remove from
+                <span>
+                  <Heart />
+                </span>
+              </BtnIsAdded>
+            </div>
+          )}
 
-        <a href={hrefTel}>
-          <Btn type="button">Contact</Btn>
-        </a>
-      </BoxBtns>
+          <a href={hrefTel}>
+            <Btn type="button">Contact</Btn>
+          </a>
+        </BoxBtns>
+      </ModalWindow>
     </>
   );
 };

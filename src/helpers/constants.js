@@ -20,13 +20,23 @@ const AGES_IN_WORDS = {
 const MUST_AUTHORIZED = 'You must be authorized to use this functionality!';
 const MUST_AUTHORIZED_QUESTION = 'Do you want to go to Login Form?';
 
+const MUST_AUTHORIZED_TO_FAVORITES = 'Sign in or register to add to favorites.';
+
 // ==========  QUESTION  ============
 
-const CONFIRMATION_DELETE = 'Do you really want to remove the ad?';
+const CONFIRMATION_DELETE = 'Are you sure you want to remove this ad?';
 
 // ==========  FETCH NOTICES  ============
 
 const DEFAULT_LIMIT = 0;
+
+// ==========  CATEGORIES NOTICES  ============
+
+const CATEGORIES_NOTICES = {
+  'sell': 'sell',
+  'lost-found': 'lost/found',
+  'in-good-hands': 'in good hands',
+};
 
 // ==========  ============  ============
 
@@ -35,6 +45,8 @@ export {
   AGES_IN_WORDS,
   MUST_AUTHORIZED,
   MUST_AUTHORIZED_QUESTION,
+  MUST_AUTHORIZED_TO_FAVORITES,
   DEFAULT_LIMIT,
   CONFIRMATION_DELETE,
+  CATEGORIES_NOTICES
 };

@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { ReactComponent as Favorite } from '../../../icons/favorite.svg';
 import { Button } from './FavoriteBtn.styled';
 
