@@ -67,7 +67,7 @@ const NoticesPage = () => {
 						<NoticesCategoriesNav />
 						<AddNoticeButton onClick={closeModal} />
 					</MenuWrap>
-					{notices.length > 0 ?
+					{notices?.length > 0 ?
 						<NoticesCategoriesList
 							route={route}
 							data={notices} /> :
