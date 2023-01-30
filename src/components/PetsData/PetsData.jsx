@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { AddBtn } from '../CommonButtons/AddBtn/AddBtn';
 import { PetsList } from '../PetsList/PetsList';
 import { ModalWindow } from '../CommonComponents/ModalWindow/ModalWindow';
@@ -19,7 +20,7 @@ export const PetsData = ({ pets }) => {
   const closeModal = () => {
     setIsModalOpen(!isModalOpen);
   };
-  console.log(pets.length);
+  //console.log(pets.length);
   return (
     <>
       <BoxTitlePet>
@@ -48,4 +49,8 @@ export const PetsData = ({ pets }) => {
       )}
     </>
   );
+};
+
+PetsList.propTypes = {
+  pets: PropTypes.array.isRequired,
 };
