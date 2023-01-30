@@ -1,4 +1,14 @@
+import PropTypes from 'prop-types';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+
+import { updateUserData } from '../../redux/auth/authOperations';
+import {
+  emailRegexp,
+  nameRegexp,
+  phoneRegexp,
+} from '../AuthForms/RegisterForm/RegisterForm';
+
 import {
   Div,
   Title,
@@ -9,22 +19,13 @@ import {
   IconCheck,
   ErrorText,
 } from './UserDataItem.styled';
-import { useDispatch } from 'react-redux';
-import { updateUserData } from '../../redux/auth/authOperations';
-import {
-  emailRegexp,
-  nameRegexp,
-  phoneRegexp,
-} from '../AuthForms/RegisterForm/RegisterForm';
 
 export const UserDataItem = ({
   valueLabel,
   userDataValue,
   nameInput,
-  changeBirth,
   setEditButtonActive,
   editButtonActive,
-  birthday,
 }) => {
   const dispatch = useDispatch();
   const prevValue = userDataValue;
@@ -38,7 +39,7 @@ export const UserDataItem = ({
     /^(([a-zA-Zа-яА-Я`'іІїЇ]([-]?)){1,})([^-,?,\s,.,0-9,!])+(,)+((\s?[a-zA-Zа-яА-Я`'іІїЇ](([-]?){0,1})){1,})([^-,?,.,\s,0-9,!])$/;
 
   const birthdayRegexp =
-    /^(?:0[1-9]|[12][0-9]|3[01])[.](?:0[1-9]|1[012])[.](?:19\d{2}|20[01][0-9]|2019)\b$/;
+    /^(?:0[1-9]|[12][0-9]|3[01])[.](?:0[1-9]|1[012])[.](?:19\d{2}|30[01][0-9]|2007)\b$/;
 
   const blurHandler = () => {
     setInputDirty(true);
@@ -80,11 +81,13 @@ export const UserDataItem = ({
         break;
       case 'birthday':
         if (!birthdayRegexp.test(String(evt.target.value).toLowerCase())) {
-          setInputError('Date must be between 1920-2020');
+          setInputError('Date must be between 1930-2007');
         } else {
           setInputError('');
         }
         break;
+      default:
+        return;
     }
   };
 
@@ -169,4 +172,12 @@ export const UserDataItem = ({
       </Block>
     </Div>
   );
+};
+
+UserDataItem.propTypes = {
+  valueLabel: PropTypes.string.isRequired,
+  userDataValue: PropTypes.string.isRequired,
+  nameInput: PropTypes.string.isRequired,
+  setEditButtonActive: PropTypes.func.isRequired,
+  editButtonActive: PropTypes.bool.isRequired,
 };

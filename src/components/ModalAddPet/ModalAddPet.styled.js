@@ -20,7 +20,6 @@ export const Calendar = styled(Datetime)`
     font-weight: 400;
     font-size: 14px;
     line-height: calc(19 / 14);
-    //color: rgba(27, 27, 27, 0.6);
     background-color: #fdf7f2;
     border: 1px solid rgba(245, 146, 86, 0.5);
     border-radius: 40px;
@@ -29,6 +28,10 @@ export const Calendar = styled(Datetime)`
 
     :focus {
       border-color: #f59256;
+    }
+
+    @media (min-width: 768px) {
+      font-size: 16px;
     }
   }
 `;
@@ -99,6 +102,9 @@ export const InputField = styled(Field)`
 
   :focus {
     border-color: #f59256;
+  }
+  @media (min-width: 768px) {
+    font-size: 16px;
   }
 `;
 
