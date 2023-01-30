@@ -1,6 +1,8 @@
 import { useDispatch } from 'react-redux';
+import { useState } from 'react';
 import { Formik, ErrorMessage } from 'formik';
 import * as yup from 'yup';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { login } from '../../../redux/auth/authOperations';
 
@@ -13,7 +15,8 @@ import {
   FormCustom,
   ErrorText,
   Label,
-} from '../../AuthForms/Forms.styled';
+  Icon,
+} from '../Forms.styled';
 import { LoginBtn } from '../../CommonButtons/LoginBtn/LoginBtn';
 import { Container } from '../../CommonComponents/Container/Container';
 import { emailRegexp, passwordRegexp } from '../RegisterForm/RegisterForm';
@@ -30,6 +33,7 @@ export const FormError = ({ name }) => {
 export const LoginForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [passwordShown, setPasswordShown] = useState(false);
 
   const validationSchema = yup.object({
     email: yup
@@ -51,15 +55,17 @@ export const LoginForm = () => {
     password: '',
   };
 
-  const handleSubmit = (values, { resetForm }) => {
+  const handleSubmit = values => {
     dispatch(login(values)).then(resp => {
       if (resp.meta.requestStatus === 'fulfilled') {
         navigate('/user', { replace: true });
       }
-
-      resetForm();
       return;
     });
+  };
+
+  const togglePassword = () => {
+    setPasswordShown(!passwordShown);
   };
 
   return (
@@ -71,24 +77,21 @@ export const LoginForm = () => {
           onSubmit={handleSubmit}
           validationSchema={validationSchema}
         >
-          {({ errors }) => (
+          {() => (
             <FormCustom>
               <Label>
-                <Input
-                  test={errors.email}
-                  name="email"
-                  type="text"
-                  placeholder="Email"
-                />
+                <Input name="email" type="text" placeholder="Email" />
                 <FormError name="email" />
               </Label>
               <Label>
                 <Input
-                  test={errors.password}
                   name="password"
-                  type="password"
+                  type={passwordShown ? 'text' : 'password'}
                   placeholder="Password"
                 />
+                <Icon onClick={togglePassword}>
+                  {passwordShown ? <FaEye /> : <FaEyeSlash />}
+                </Icon>
                 <FormError name="password" />
               </Label>
               <LoginBtn text={'Login'} />

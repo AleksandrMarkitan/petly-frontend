@@ -9,8 +9,6 @@ export const FieldsWrapper = styled.div`
 `;
 
 export const BoxPet = styled.section`
-  /* margin-left: 32px; */
-  //width: 100%;
   margin: 0 32px;
 `;
 
@@ -20,11 +18,9 @@ export const BoxTitlePet = styled.div`
   align-items: center;
   margin-bottom: 26px;
   @media (min-width: 768px) {
-    //margin-bottom: 24px;
     margin-right: 32px; //add
   }
   @media (min-width: 1280px) {
-    //margin-bottom: 24px;
     margin-right: 0px; //add
   }
 `;
@@ -41,4 +37,27 @@ export const BtnBox = styled.div`
   @media (min-width: 1280px) {
     display: inline-flex;
   }
+`;
+
+export const BoxMessage = styled.div`
+  display: flex;
+  justify-content: center;
+  padding-left: 45px;
+  padding-right: 45px;
+`;
+
+export const Message = styled.h3`
+  padding-top: 10px;
+  display: inline-flex;
+  font-weight: ${p => p.theme.fontWeight.fw500};
+  font-size: ${p => p.theme.fontSize.fs16};
+  @media (min-width: 768px) {
+    padding-top: 50px;
+    font-size: ${p => p.theme.fontSize.fs24};
+  }
+`;
+
+export const BoxImage = styled.div`
+  display: flex;
+  justify-content: center;
 `;
