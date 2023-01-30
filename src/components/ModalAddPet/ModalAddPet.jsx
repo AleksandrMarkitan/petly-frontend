@@ -143,7 +143,7 @@ export const ModalAddPet = ({ onClose }) => {
 			birthdate,
 		submitButtonIsAbled:
 			preview && comments.length >= 8 && comments.length <= 120,
-		avatarErrorIsShown: !preview && blurHandlerFile,
+		avatarErrorIsShown: !preview && inputDirtyFile,
 	};
 
 	return (
@@ -221,7 +221,7 @@ export const ModalAddPet = ({ onClose }) => {
 											type="file"
 											accept="image/jpeg, image/png"
 											onChange={inputFileHandler}
-											focusOut={blurHandlerFile}
+											onClick={blurHandlerFile}
 										/>
 										{stateMachine.avatarErrorIsShown && <ErrorAvatar>{inputAvatarError}</ErrorAvatar>}
 									</Label>
