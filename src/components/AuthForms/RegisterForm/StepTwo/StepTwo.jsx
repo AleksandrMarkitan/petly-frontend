@@ -8,10 +8,9 @@ export const StepTwo = ({
   setFieldTouched,
   setFieldError,
   setFieldValue,
-  values: { city, name, phone },
+  values: { city },
 }) => {
   const NAME_INPUT_CITY = 'city';
-
   const handleChange = evt => {
     setFieldTouched(NAME_INPUT_CITY);
 
@@ -39,11 +38,10 @@ export const StepTwo = ({
   const valueCity = listCity.find(({ label }) => label === city);
 
   const noOptionsMessage = () => 'Sorry, your city was not found';
-
   return (
     <>
       <Label>
-        <Input name="name" placeholder="Name" value={name} />
+        <Input name="name" placeholder="Name" />
         <FormError name="name" />
       </Label>
       <Label>
@@ -60,11 +58,7 @@ export const StepTwo = ({
                 lineHeight: '25px',
                 letterSpacing: '0.04em',
                 fontFamily: 'Manrope',
-
-                // borderWidth: '1px',
                 borderWidth: state.isFocused ? '1px' : '1px',
-
-                // color: '#111111',
                 outline: 'none',
                 borderColor: state.isFocused
                   ? '#f59256'
@@ -87,27 +81,13 @@ export const StepTwo = ({
                 neutral50: 'rgba(17, 17, 17, 0.6)', // текст плейсхолдера
 
                 neutral20: 'rgba(245, 146, 86, 0.5)', // стрелочка
-                // neutral20: 'rgba(56, 255, 156, 0.849)',
-
                 neutral40: '#f59256',
 
                 neutral30: '#f59256', // hover
-
                 neutral60: '#c28813', // active стрелочки
                 neutral70: '#fffb1b',
-
-                // neutral90: '#ff2828',
-
                 neutral5: '#283eff',
                 neutral10: '#ff28a5',
-
-                // neutral90: '#ff2828',
-                // neutral90: '#ff2828',
-                // neutral90: '#ff2828',
-                // neutral90: '#ff2828',
-                // neutral90: '#ff2828',
-
-                // neutral80: 'rgba(17, 17, 17, 0.6)',
               },
             };
           }}
@@ -125,7 +105,7 @@ export const StepTwo = ({
         <FormError name={NAME_INPUT_CITY} />
       </Label>
       <Label>
-        <Input name="phone" placeholder="Mobile phone" value={phone} />
+        <Input name="phone" placeholder="Mobile phone" maxLength="13" />
         <FormError name="phone" />
       </Label>
     </>
