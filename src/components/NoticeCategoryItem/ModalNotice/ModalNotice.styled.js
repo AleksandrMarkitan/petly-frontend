@@ -172,8 +172,6 @@ export const Btn = styled(Button)`
   font-size: 16px;
   line-height: calc(22 / 16);
 
-  :hover {
-  }
   @media (min-width: 768px) {
     width: 160px;
   }

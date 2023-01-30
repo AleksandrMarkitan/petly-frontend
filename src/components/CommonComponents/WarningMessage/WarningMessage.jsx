@@ -2,7 +2,7 @@ import { ModalWindow } from "../ModalWindow/ModalWindow"
 import { CancelBtn } from "../../CommonButtons/CancelBtn/CancelBtn"
 import { Text, Wrap, StyledLink, Title, Button } from "./WarningMessage.styled"
 
-export const WarningMessage = ({ onClose, text, title, type, approveFunk }) => {
+export const WarningMessage = ({ onClose, text, title, type, approveFunk = () => { } }) => {
 
 	const clickHandler = () => {
 		approveFunk();

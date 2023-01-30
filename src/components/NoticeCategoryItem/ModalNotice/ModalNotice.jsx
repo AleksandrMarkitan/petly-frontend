@@ -15,8 +15,11 @@ import {
   TitleValue,
   Value,
 } from './ModalNotice.styled';
+import { dateInFormat } from '../../../helpers/dateFormat';
+import { ModalWindow } from '../../CommonComponents/ModalWindow/ModalWindow';
 
 export const ModalNotice = ({
+  onClose,
   isFavorite,
   onClickFavorite,
   data: {
@@ -35,9 +38,13 @@ export const ModalNotice = ({
 }) => {
   const hrefMail = `mailto:${email}`;
   const hrefTel = `tel:${phone}`; /*Format: +380991111111 */
+  const hrefLocation = `https://www.google.com/maps?q=${location}`;
+
+  const birthdateFormat = dateInFormat(birthdate, 'dd.MM.yyyy');
 
   return (
     <>
+      <ModalWindow onClose={onClose}>
       <Box>
         <ThumbImg>
           <Img src={imgURL} alt={name} />
@@ -54,7 +61,7 @@ export const ModalNotice = ({
             </BoxValue>
             <BoxValue>
               <TitleValue>Birthday:</TitleValue>
-              <Value>{birthdate}</Value>
+                <Value>{birthdateFormat}</Value>
             </BoxValue>
             <BoxValue>
               <TitleValue>Breed:</TitleValue>
@@ -62,7 +69,13 @@ export const ModalNotice = ({
             </BoxValue>
             <BoxValue>
               <TitleValue>Place:</TitleValue>
-              <Value>{location}</Value>
+                <Value>
+                  <a href={hrefLocation}
+                    target="_blank"
+                    rel="noopener nofollow noreferrer" >
+                    {location}
+                  </a>
+                </Value>
             </BoxValue>
             <BoxValue>
               <TitleValue>The sex:</TitleValue>
@@ -83,7 +96,7 @@ export const ModalNotice = ({
             {price && (
               <BoxValue>
                 <TitleValue>Sell:</TitleValue>
-                <Value>{price}</Value>
+                  <Value>{price}&#36;</Value>
               </BoxValue>
             )}
           </ListOfValues>
@@ -115,8 +128,11 @@ export const ModalNotice = ({
           </div>
         )}
 
-        <Btn type="button">Contact</Btn>
+          <a href={hrefTel}>
+            <Btn type="button">Contact</Btn>
+          </a>
       </BoxBtns>
+      </ModalWindow>
     </>
   );
 };

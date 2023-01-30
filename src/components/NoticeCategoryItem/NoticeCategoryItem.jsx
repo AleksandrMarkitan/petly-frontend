@@ -1,10 +1,9 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-
 import {
 	selectUser,
+	selectIsAuth,
 	selectFavoriteNotices,
-	selectToken,
 } from '../../redux/auth/authSelectors';
 import {
 	selectOneNotice,
@@ -14,11 +13,11 @@ import {
 	deleteNotice,
 	fetchOneNotice,
 } from '../../redux/notices/noticesOperations';
+import { changeFavotitesNotices } from '../../redux/notices/noticesSlice';
 import { updateFavoriteNotice } from '../../redux/auth/authOperations';
 import { FavoriteBtn } from '../CommonButtons/FavoriteBtn/FavoriteBtn';
 import { LearnMoreBtn } from '../CommonButtons/LearnMoreBtn/LearnMoreBtn';
 import { DeletePetNoticesBtn } from '../CommonButtons/DeletePetNoticesBtn/DeletePetNoticesBtn';
-import { ModalWindow } from '../CommonComponents/ModalWindow/ModalWindow';
 import { ModalNotice } from './ModalNotice/ModalNotice';
 import {
 	Item,
@@ -35,13 +34,15 @@ import {
 	ThumbBtn,
 } from './NoticeCategoryItem.styled';
 import { getAge } from '../../helpers/dateFormat';
-import { Alert } from '../../components/CommonComponents/Alert/Alert';
+// import { Alert } from '../../components/CommonComponents/Alert/Alert';
+import { WarningMessage } from '../../components/CommonComponents/WarningMessage/WarningMessage';
 import {
-	MUST_AUTHORIZED,
-	MUST_AUTHORIZED_QUESTION,
+	MUST_AUTHORIZED_TO_FAVORITES,
+	CONFIRMATION_DELETE,
+	CATEGORIES_NOTICES,
 } from '../../helpers/constants';
 
-export const NoticeCategoryItem = ({ data }) => {
+export const NoticeCategoryItem = ({ data, route }) => {
 	const {
 		_id,
 		title,
@@ -58,9 +59,10 @@ export const NoticeCategoryItem = ({ data }) => {
 
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [isShownAlert, setIsShownAlert] = useState(false);
+	const [isShownConfirmationDelete, setIsShownConfirmationDelete] = useState(false);
 
 	const currentUser = useSelector(selectUser);
-	const token = useSelector(selectToken);
+	const isAuth = useSelector(selectIsAuth);
 	const favorites = useSelector(selectFavoriteNotices);
 	const dataDetail = useSelector(selectOneNotice);
 	const isLoading = useSelector(selectNoticesIsLoading);
@@ -68,9 +70,14 @@ export const NoticeCategoryItem = ({ data }) => {
 	const isFavorite = favorites.includes(_id);
 
 	const onChangeFavorite = () => {
-		token
-			? dispatch(updateFavoriteNotice({ noticeId: _id }))
-			: setIsShownAlert(true);
+		if (isAuth) {
+			dispatch(updateFavoriteNotice({ noticeId: _id }));
+			if (route === 'favorite') {
+				dispatch(changeFavotitesNotices(_id));
+			}
+		} else {
+			setIsShownAlert(true)
+		};
 	};
 
 	const deletePet = () => {
@@ -80,6 +87,7 @@ export const NoticeCategoryItem = ({ data }) => {
 	const closeModal = () => {
 		setIsModalOpen(!isModalOpen);
 	};
+
 	const openModal = () => {
 		dispatch(fetchOneNotice({ noticeId: _id }));
 		setIsModalOpen(true);
@@ -89,24 +97,21 @@ export const NoticeCategoryItem = ({ data }) => {
 		setIsShownAlert(!isShownAlert);
 	};
 
+	const closeConfirmationDelete = () => {
+		setIsShownConfirmationDelete(!isShownConfirmationDelete);
+	};
+
 	const age = getAge(birthdate);
 
 	return (
-
 		<>
 			<Item>
 				<ImgWrap>
-					<CategoryLabel>{category}</CategoryLabel>
+					<CategoryLabel>{CATEGORIES_NOTICES[category]}</CategoryLabel>
 					<Img src={imgURL} alt={name} loading="lazy" />
 					<FavoriteBtn
 						favorite={isFavorite}
-						allowedToChange={token ? true : false}
 						onClick={onChangeFavorite} />
-					{isShownAlert &&
-						<Alert
-							textInfo={MUST_AUTHORIZED}
-							textQuestion={MUST_AUTHORIZED_QUESTION}
-							onClose={closeAlert} />}
 				</ImgWrap>
 				<Wrap>
 					<WrapInner>
@@ -129,22 +134,29 @@ export const NoticeCategoryItem = ({ data }) => {
 					<ThumbBtn>
 						<LearnMoreBtn onClick={openModal} />
 						{currentUser.email === owner.email && (
-							<DeletePetNoticesBtn onDelete={deletePet} />
+							<DeletePetNoticesBtn onClick={closeConfirmationDelete} />
 						)}
 					</ThumbBtn>
 				</Wrap>
 			</Item>
-			{isModalOpen && !isLoading && (
-				<ModalWindow onClose={closeModal}>
-					<ModalNotice
-						data={dataDetail}
-						isFavorite={isFavorite}
-						onClickFavorite={onChangeFavorite}
-					// data={{ ...data, birthdate: age }}
-					// onChangeFavorite={onChangeFavorite} />
-					/>
-				</ModalWindow>
-			)}
+			{isModalOpen && !isLoading &&
+				<ModalNotice
+				onClose={closeModal}
+				data={dataDetail}
+				isFavorite={isFavorite}
+					onClickFavorite={onChangeFavorite} />}
+			{isShownAlert && !isAuth &&
+				<WarningMessage
+					onClose={closeAlert}
+					type="auth"
+					title="Unauthorized"
+					text={MUST_AUTHORIZED_TO_FAVORITES} />}
+			{isShownConfirmationDelete &&
+				<WarningMessage
+					onClose={closeConfirmationDelete}
+					type="approve"
+					text={CONFIRMATION_DELETE}
+					approveFunk={deletePet} />}
 		</>
-	);
+	)
 };
