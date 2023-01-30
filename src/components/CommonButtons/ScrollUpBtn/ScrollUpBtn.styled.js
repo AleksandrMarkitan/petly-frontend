@@ -8,19 +8,18 @@ export const Button = styled.button`
   background-color: transparent;
   position: fixed;
   bottom: 10px;
-  left: 10px;
+  right: 20px;
   z-index: 20;
+  background-color: #ffffff;
   border-radius: 50%;
   transition: box-shadow ${p => p.theme.transition.first};
   
 	@media screen and(min-width: 768px) {
   	bottom: 15px;
-  	left: 15px;
   }
 
   @media screen and(min-width: 1280px) {
    	bottom: 20px;
-   	left: 20px;
   }
 
   svg {

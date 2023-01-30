@@ -5,6 +5,7 @@ export const Item = styled.li`
   flex-direction: column;
   height: 100%;
   color: #111111;
+  background-color: #ffffff;
   box-shadow: 7px 4px 14px rgba(49, 21, 4, 0.07);
   border-radius: 0px 0px 40px 40px;
   overflow-wrap: break-word;
@@ -60,7 +61,8 @@ export const Title = styled.h2`
   font-weight: 700;
   font-size: 28px;
   line-height: calc(38 / 28);
-  flex-grow: 1;
+  height: 76px;
+  overflow: hidden; 
 `;
 
 export const Ul = styled.ul`
