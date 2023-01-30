@@ -10,8 +10,9 @@ export const Button = styled.button`
   bottom: 10px;
   right: 20px;
   z-index: 20;
-  background-color: #ffffff;
+  background-color: rgba(255,255,255,0.7);
   border-radius: 50%;
+  border: 1px solid ${p => p.theme.colors.accent};
   transition: box-shadow ${p => p.theme.transition.first};
   
 	@media screen and(min-width: 768px) {
