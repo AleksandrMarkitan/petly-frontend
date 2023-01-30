@@ -22,10 +22,7 @@ import { Notification } from "../../components/Notification/Notification";
 import { Loader } from "../../components/Loader/Loader";
 import {
 	NOT_FOUND,
-	MUST_AUTHORIZED,
-	MUST_AUTHORIZED_QUESTION,
 } from "../../helpers/constants";
-import { Alert } from '../../components/CommonComponents/Alert/Alert';
 import { selectIsAuth } from "../../redux/auth/authSelectors";
 import { WarningMessage } from '../../components/CommonComponents/WarningMessage/WarningMessage';
 
@@ -80,8 +77,7 @@ const NoticesPage = () => {
 				{isModalOpen && !isAuth && <WarningMessage onClose={closeModal} type="auth" title="Unauthorized" text="Let`s login or registration to add notice." />}
 				{isLoading && <Loader />}
 			</Container>
-		</Section>
-	);
+		</Section>);
 };
 
 export default NoticesPage;
