@@ -83,7 +83,7 @@ export const ModalNotice = ({
             {price && (
               <BoxValue>
                 <TitleValue>Sell:</TitleValue>
-                <Value>{price}</Value>
+                <Value>{price}&#36;</Value>
               </BoxValue>
             )}
           </ListOfValues>
@@ -115,7 +115,9 @@ export const ModalNotice = ({
           </div>
         )}
 
-        <Btn type="button">Contact</Btn>
+        <a href={hrefTel}>
+          <Btn type="button">Contact</Btn>
+        </a>
       </BoxBtns>
     </>
   );
