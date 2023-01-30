@@ -219,9 +219,9 @@ export const ModalAddPet = ({ onClose }) => {
                       type="file"
                       accept="image/jpeg, image/png"
                       onChange={inputFileHandler}
-                      focusOut={blurHandlerFile}
+                      onBlur={blurHandlerFile}
                     />
-                    {!preview && blurHandlerFile && (
+                    {!preview && inputDirtyFile && (
                       <ErrorAvatar>{inputAvatarError}</ErrorAvatar>
                     )}
                   </Label>
