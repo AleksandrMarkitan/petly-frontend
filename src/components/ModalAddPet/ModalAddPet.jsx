@@ -37,17 +37,13 @@ export const ModalAddPet = ({ onClose }) => {
 	const [selectedFile, setSelectedFile] = useState(null);
 	const [page, setPage] = useState(1);
 	const [inputDirty, setInputDirty] = useState(false);
+	const [inputDirtyFile, setInputDirtyFile] = useState(false);
 	const [inputDateError, setInputDateError] = useState(
 		'Date of birth is required'
 	);
-	const [inputFileClick, setInputFileClicked] = useState(false)
 
 	const inputAvatarError = 'Photo is required';
 	const nameBreedRegexp = /^[A-zА-я-іІїЇєЄ\s]+$/;
-
-	const isInputFileClicked = () => {
-		setInputFileClicked(true)
-	}
 
 	const validDate = current => {
 		return current.isBefore(new Date()) && current.isAfter('1969-12-31', 'day');
@@ -91,6 +87,10 @@ export const ModalAddPet = ({ onClose }) => {
 
 	const blurHandler = () => {
 		setInputDirty(true);
+	};
+
+	const blurHandlerFile = () => {
+		setInputDirtyFile(true);
 	};
 
 	const initialValues = {
@@ -143,7 +143,7 @@ export const ModalAddPet = ({ onClose }) => {
 			birthdate,
 		submitButtonIsAbled:
 			preview && comments.length >= 8 && comments.length <= 120,
-		avatarErrorIsShown: !preview && inputFileClick,
+		avatarErrorIsShown: !preview && blurHandlerFile,
 	};
 
 	return (
@@ -221,7 +221,7 @@ export const ModalAddPet = ({ onClose }) => {
 											type="file"
 											accept="image/jpeg, image/png"
 											onChange={inputFileHandler}
-											onClick={isInputFileClicked}
+											focusOut={blurHandlerFile}
 										/>
 										{stateMachine.avatarErrorIsShown && <ErrorAvatar>{inputAvatarError}</ErrorAvatar>}
 									</Label>
