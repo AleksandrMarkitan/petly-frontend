@@ -1,9 +1,9 @@
 import { Button, DeleteIcon } from "./DeletePetNoticesBtn.styled";
 
-export const DeletePetNoticesBtn = ({ onDelete = () => { } }) => {
+export const DeletePetNoticesBtn = ({ onClick = () => { } }) => {
 
   return (
-    <Button type="button" onClick={onDelete}>
+    <Button type="button" onClick={onClick}>
       Delete
       <DeleteIcon />
     </Button>

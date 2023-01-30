@@ -58,12 +58,12 @@ export const RegisterForm = () => {
       .matches(passwordRegexp, 'Please, enter a valid password')
       .required('Password is required'),
     confirmPassword: yup
-      .string('Please, confirm your password')
+      .string()
       .oneOf(
         [yup.ref('password')],
         'This password doesn`t match the previous one'
       )
-      .required('Password is required'),
+      .required('Please, confirm your password'),
   });
 
   const schemaStepTwo = yup.object({
@@ -79,10 +79,7 @@ export const RegisterForm = () => {
     city: yup.string().required('City is required'),
     phone: yup
       .string()
-      .length(
-        13,
-        'The number of symbols in the field is insufficient or exceeded'
-      )
+      .min(13, 'Insufficient number of symbols entered')
       .matches(
         phoneRegexp,
         'Please, enter the phone number in the format +380xxxxxxxxxxx'
@@ -98,10 +95,9 @@ export const RegisterForm = () => {
     dispatch(register({ name, email, password, city, phone })).then(resp => {
       if (resp.meta.requestStatus === 'fulfilled') {
         loginUser(values);
+        resetForm();
       }
     });
-
-    resetForm();
   };
 
   return (
@@ -133,7 +129,7 @@ export const RegisterForm = () => {
                   <Button onClick={handleNext}>Next</Button>
                 ) : (
                   <>
-                    <Button onClick={handleNext}>Register</Button>
+                    <Button>Register</Button>
                     <BackBtn type="button" onClick={handlePrev}>
                       Back
                     </BackBtn>

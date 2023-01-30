@@ -8,20 +8,19 @@ export const Button = styled.button`
   background-color: transparent;
   position: fixed;
   bottom: 10px;
-  right: 10px;
+  left: 10px;
   z-index: 20;
-	fill: #f59256;
   border-radius: 50%;
-
+  transition: box-shadow ${p => p.theme.transition.first};
   
 	@media screen and(min-width: 768px) {
   	bottom: 15px;
-  	right: 15px;
+  	left: 15px;
   }
 
   @media screen and(min-width: 1280px) {
    	bottom: 20px;
-   	right: 20px;
+   	left: 20px;
   }
 
   svg {
@@ -45,19 +44,16 @@ export const Button = styled.button`
   }
 
   :hover {
-		fill: #f59256;
  	  box-shadow: 0px 0px 15px 5px ${p => p.theme.colors.accent};
-	} 
+	}
 `
 export const ChevronUp = styled(HiChevronUp)`
   width: 22px;
   height: 22px;
   fill: rgba(17, 17, 17, 0.6);
+
   @media (min-width: 768px) {
     width: 24px;
     height: 24px;
-  }
-  :hover {
-    fill: #f59256;
   }
 `;

@@ -1,8 +1,10 @@
-import { Button, BtnPlusLg } from "./AddBtn.styled";
+import { Button, BtnPlusLg } from './AddBtn.styled';
 export const AddBtn = ({ closeModal }) => {
   return (
     <Button type="button" onClick={closeModal}>
-      <BtnPlusLg />
+      <span>
+        <BtnPlusLg />
+      </span>
     </Button>
   );
 };

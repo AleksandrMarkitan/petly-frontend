@@ -14,7 +14,7 @@ export const Button = styled.button`
 	border: 2px solid ${p => p.theme.colors.accent};
 	border-radius: ${p => p.theme.borderRadius.br40};
 	color: ${p => p.theme.colors.accent};
-	transition: color fill ${p => p.theme.transition.first}, background-color fill ${p => p.theme.transition.first};
+	transition: color ${p => p.theme.transition.first}, background-color ${p => p.theme.transition.first}, fill ${p => p.theme.transition.first};
 
 	:hover, 
 	:focus {

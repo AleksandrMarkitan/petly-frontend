@@ -2,13 +2,8 @@ import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import {
-	selectToken,
-} from '../../redux/auth/authSelectors';
-import {
 	selectNotices,
 	selectNoticesIsLoading,
-	// selectNoticesError,
-	// selectNoticesNotify,
 } from "../../redux/notices/noticesSelectors";
 import {
 	fetchNotices,
@@ -30,7 +25,7 @@ import {
 	MUST_AUTHORIZED,
 	MUST_AUTHORIZED_QUESTION,
 } from "../../helpers/constants";
-
+import { Alert } from '../../components/CommonComponents/Alert/Alert';
 import { selectIsAuth } from "../../redux/auth/authSelectors";
 import { WarningMessage } from '../../components/CommonComponents/WarningMessage/WarningMessage';
 
@@ -57,7 +52,8 @@ const NoticesPage = () => {
 	}, [dispatch, route, searchTitleQwery]);
 
 	const closeModal = () => {
-		setIsModalOpen(!isModalOpen)
+		setIsModalOpen(!isModalOpen);
+		// isAuth ? setIsModalOpen(!isModalOpen) : setIsShownAlert(true);
 	};
 
 	const onSearch = (searchQuery) => {

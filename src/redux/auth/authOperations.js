@@ -26,7 +26,7 @@ export const register = createAsyncThunk(
       return data;
     } catch (error) {
       if (error.response.status === 409) {
-        toast.error('User with such email already exists!', toastStyled);
+        toast.error('Email already is used!', toastStyled);
       } else {
         toast.error('Validation error.', toastStyled);
       }
@@ -45,9 +45,9 @@ export const login = createAsyncThunk(
       return data;
     } catch (error) {
       if (error.response.status === 404) {
-        toast.error('User with such email not found!', toastStyled);
+        toast.error('Email not found!', toastStyled);
       } else if (error.response.status === 401) {
-        toast.error('Email or password is wrong!', toastStyled);
+        toast.error('Wrong email or password!', toastStyled);
       } else {
         toast.error('Validation error!', toastStyled);
       }

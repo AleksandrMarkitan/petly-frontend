@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useMedia } from 'react-use';
 import { useSelector } from 'react-redux';
 import { selectToken } from '../../redux/auth/authSelectors';
-import { BtnMenu } from './BtnBurgerMenu/BtnBurgerMenu';
+import { BtnMenu } from '../CommonButtons/BtnBurgerMenu/BtnBurgerMenu';
 import { AuthNav } from './AuthNav/AuthNav';
 import { BurgerMenu } from './BurgerMenu/BurgerMenu';
 import { Nav } from './Nav/Nav';

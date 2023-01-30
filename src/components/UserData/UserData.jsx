@@ -1,4 +1,3 @@
-//work v
 import { useRef, useState } from 'react';
 import { InputHidden } from './UserData.styled';
 import { UserDataItem } from '../UserDataItem/UserDataItem';
@@ -11,7 +10,6 @@ import {
   Img,
   ImageBox,
   EditButton,
-  UserCalendar,
 } from './UserData.styled';
 
 import { Logout } from '../Logout/Logout';
@@ -24,14 +22,7 @@ export const UserData = () => {
   const dispatch = useDispatch();
   const { name, email, birthday, phone, city, avatarURL } = user;
   const [editButtonActive, setEditButtonActive] = useState(true);
-  // const [changeBirth, setChangeBirth] = useState(birthday);
-  // const [birthdate, setBirthdate] = useState('');
-
   const filePicker = useRef(null);
-
-  // const birthdateHandler = e => {
-  //   setChangeBirth(e.format('DD.MM.YYYY'));
-  // };
 
   const handleAvatar = async e => {
     e.preventDefault();
@@ -45,7 +36,6 @@ export const UserData = () => {
     filePicker.current.click();
   };
 
-  //console.log(birthday);
   return (
     <UserBlock>
       <ImageContainer>
@@ -93,7 +83,6 @@ export const UserData = () => {
             valueLabel="Birthday:"
             nameInput="birthday"
             userDataValue={birthday}
-            //birthdateHandler={birthdateHandler}
             setEditButtonActive={setEditButtonActive}
             editButtonActive={editButtonActive}
           />

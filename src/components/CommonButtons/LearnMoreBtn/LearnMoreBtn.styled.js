@@ -10,8 +10,8 @@ export const Button = styled.button`
 	border: 2px solid #F59256;
 	border-radius: 40px;
 	color: #F59256;
-	transition: color 250ms cubic-bezier(0.57, 0.21, 0.69, 1.25), 
-	background-color 250ms cubic-bezier(0.57, 0.21, 0.69, 1.25);
+	transition: color ${p => p.theme.transition.first}, 
+	background-color ${p => p.theme.transition.first};
 
 	:hover, 
 	:focus{

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { deletePet } from '../../redux/user/userOperations';
 import { DeletePetBtn } from '../../../src/components/CommonButtons/DeletePetBtn/DeletePetBtn';
@@ -36,3 +37,6 @@ export const PetsList = ({ pets }) => {
 	);
 };
 
+PetsList.propTypes = {
+	pets: PropTypes.array.isRequired,
+};
